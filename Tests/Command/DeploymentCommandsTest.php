@@ -7,13 +7,17 @@ use Guzzle\Http\CookieJar\ArrayCookieJar;
 use Guzzle\Http\Message\Response;
 
 /**
- * test case.
+ * WHERE_I_LEFT_OFF: Still need to implement deployments update, probably need to start creating models as well!
  */
 class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	
 	protected $_client;
 	
 	protected $_testTs;
+	
+	protected $_deploymentId;
+	
+	protected $_deploymentHref;
 	
 	/**
 	 * Prepares the environment before running a test.
@@ -26,14 +30,23 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 		$this->_client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');
 		$login_cmd = $this->_client->getCommand('login', array('email' => $_SERVER['EMAIL'], 'password' => $_SERVER['PASSWORD']));
 		$login_resp = $login_cmd->execute();
+		
+		$deployment = $this->createDeployment("Guzzle_Test_$this->_testTs", "This'll stick around for a bit");
+		$regex = ',https://my.rightscale.com/api/acct/[0-9]+/deployments/([0-9]+),';
+		$location_header = $deployment->getHeader('Location');
+		$matches = array();
+		preg_match($regex, $location_header, $matches);
+		$this->_deploymentId = $matches[1];
+		$this->_deploymentHref = $location_header;
 	}
 	
 	/**
 	 * Cleans up the environment after running a test.
 	 */
 	protected function tearDown() {
-		// TODO Auto-generated LoginCommandTest::tearDown()
-		
+		$cmd = $this->_client->getCommand('deployment_destroy', array('id' => $this->_deploymentId));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();		
 
 		parent::tearDown ();
 	}
@@ -70,7 +83,7 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 		
 		$this->assertEquals(1, preg_match($regex, $location_header, $matches));
 		
-		$cmd = $this->_client->getCommand('deployment_delete', array('id' => $matches[1]));
+		$cmd = $this->_client->getCommand('deployment_destroy', array('id' => $matches[1]));
 		$response = $cmd->execute();
 		$result = $cmd->getResult();
 		
@@ -95,38 +108,41 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 		$this->assertEquals(1, count($depl_result->deployment));
 	}
 	
-	public function testCanGetDeploymentById() {
-		$depl_cmd = $this->_client->getCommand('deployments', array('filter' => 'nickname=Default'));
-		$depl_resp = $depl_cmd->execute();
-		$depl_result = $depl_cmd->getResult();
-		
-		$href = $depl_result->deployment[0]->href;
-		$matches = array();
-		preg_match(",https://my.rightscale.com/api/acct/[0-9]+/deployments/(.+),", $href, $matches);
-		
-		$depl_by_id_cmd = $this->_client->getCommand('deployment', array('id' => $matches[1]));
+	public function testCanGetDeploymentById() {		
+		$depl_by_id_cmd = $this->_client->getCommand('deployment', array('id' => $this->_deploymentId));
 		$depl_by_id_resp = $depl_by_id_cmd->execute();
 		$depl_by_id_result = $depl_by_id_cmd->getResult();
 		
 		$this->assertInstanceOf('SimpleXMLElement', $depl_by_id_result);
-		$this->assertEquals('Default', $depl_by_id_result->nickname);
+		$this->assertEquals("Guzzle_Test_$this->_testTs", $depl_by_id_result->nickname);
 	}
 	
-	public function testCanGetDeploymentByIdWithServerSettings() {
-		$depl_cmd = $this->_client->getCommand('deployments', array('filter' => 'nickname=Default'));
-		$depl_resp = $depl_cmd->execute();
-		$depl_result = $depl_cmd->getResult();
-		
-		$href = $depl_result->deployment[0]->href;
-		$matches = array();
-		preg_match(",https://my.rightscale.com/api/acct/[0-9]+/deployments/(.+),", $href, $matches);
-		
-		$depl_by_id_cmd = $this->_client->getCommand('deployment', array('id' => $matches[1], 'server_settings' => 'true'));
+	public function testCanGetDeploymentByIdWithServerSettings() {		
+		$depl_by_id_cmd = $this->_client->getCommand('deployment', array('id' => $this->_deploymentId, 'server_settings' => 'true'));
 		$depl_by_id_resp = $depl_by_id_cmd->execute();
 		$depl_by_id_result = $depl_by_id_cmd->getResult();
 		
 		$this->assertInstanceOf('SimpleXMLElement', $depl_by_id_result);
-		$this->assertEquals('Default', $depl_by_id_result->nickname);
+		$this->assertEquals("Guzzle_Test_$this->_testTs", $depl_by_id_result->nickname);
+		// TODO Not actually testing for servers with server settings, since no servers have been added
+	}
+	
+	public function testCanUpdateDeploymentDescriptionById() {
+		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deploymentId));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+		
+		$this->assertEquals("This'll stick around for a bit", $result->description);
+				
+		$cmd = $this->_client->getCommand('deployment_update', array('id' => $this->_deploymentId, 'description' => 'foobarbaz', 'href' => $this->_deploymentHref));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+
+		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deploymentId));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+		
+		$this->assertEquals('foobarbaz', $result->description);
 	}
 	
 	public function testVersion() {

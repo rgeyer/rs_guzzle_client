@@ -15,6 +15,7 @@
 namespace Guzzle\Rs\Command;
 
 use Guzzle\Service\Command\AbstractCommand;
+use Guzzle\Http\QueryString;
 
 /**
  * A generic command which hacks together the right path and adds
@@ -27,7 +28,7 @@ use Guzzle\Service\Command\AbstractCommand;
  */
 class DefaultCommand extends AbstractCommand {
 
-	protected function build() {
+	protected function build() {		
 		$disposable = array('path' => null, 'method' => null, 'headers' => null);
 		$remainder = array_diff_key($this->getAll(), $disposable);
 		
@@ -37,9 +38,7 @@ class DefaultCommand extends AbstractCommand {
 		
 		// Take the remaining ones and see if they match any tokens in the path string
 		foreach($remainder as $key => $value) {
-			if (strstr($path, "{{$key}}")) {
-				$path = str_replace("{{$key}}", $value, $path);
-			} else {
+			if (!strstr($path, $value)) {
 				if(is_array($value))
 				{
 					foreach($value as $ary_value) {
@@ -63,6 +62,9 @@ class DefaultCommand extends AbstractCommand {
 				break;
 			case 'DELETE':
 				$this->request = $this->client->delete('/api/acct/{{acct_num}}/' . $path);
+				break;
+			case 'PUT':				
+				$this->request = $this->client->put('/api/acct/{{acct_num}}/' . $path, null, json_encode(array('deployment' => $post_fields)));				
 				break; 
 		}		
 		
