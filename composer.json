@@ -1,7 +1,7 @@
 {
-    "name": "guzzle-rs-1_0",
+    "name": "guzzle-rs",
     "type": "library",
-    "description": "Guzzle RightScale 1.0",
+    "description": "Guzzle RightScale",
     "keywords": ["Guzzle"],
     "version": "1.0.0",
     "authors": [
