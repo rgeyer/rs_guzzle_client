@@ -4,6 +4,12 @@
         <!-- Change the following value to the path of your Guzzle installation
           -- e.g. /Users/michael/projects/guzzle -->
         <server name="GUZZLE" value="/path/to/guzzle" />
+        <!-- Change to your RightScale acount # -->
+        <server name="ACCT_NUM" value="" />
+        <!-- Change to your RightScale account email -->
+        <server name="EMAIL" value="" />
+        <!-- Change to your RightScale account password -->
+        <server name="PASSWORD" value="" />
     </php>
     <testsuites>
         <testsuite name="guzzle-service-guzzle-rs-1_0">

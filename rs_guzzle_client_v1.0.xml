@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client>
+  <commands>    
+    <command name="deployments" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Get a list of all deployments in the account</doc>
+      <param name="path" type="string" doc="Path of request" static="deployments" />
+      <param name="method" type="string" static="GET" />
+      <param name="filter" doc="An array of filters in the form 'attribute_name=|&lt;&gt;attribute_value'" required="false" />
+    </command>
+    
+    <command name="deployment" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Get a deployment by it's id</doc>
+      <param name="path" type="string" static="deployments/{{id}}" />      
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="string" />
+    </command>
+    
+    <command name="deployment_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a new deployment</doc>
+      <param name="path" type="string" static="deployments" />      
+      <param name="method" type="string" static="POST" />
+      <param name="deployment[nickname]" type="string" required="true" />
+      <param name="deployment[description]" type="string" required="true" />
+    </command>
+    
+    <command name="deployment_delete" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete a deployment by it's id</doc>
+      <param name="path" type="string" static="deployments/{{id}}" />      
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" />
+    </command>
+    
+  </commands>
+</client>

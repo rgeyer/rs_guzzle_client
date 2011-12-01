@@ -1,0 +1,5 @@
+rs_guzzle_client is a PHP Guzzle REST API client library for the RightScale API.
+
+Support is available for both the v1.0 and v1.5 API.
+
+ 

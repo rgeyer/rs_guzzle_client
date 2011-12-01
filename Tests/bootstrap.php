@@ -26,6 +26,10 @@ spl_autoload_register(function($class) {
 // Create a service builder to use in the unit tests
 \Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\ServiceBuilder::factory(array(
     'test.guzzle-rs-1_0' => array(
-        'class' => 'Guzzle\Rs\RightScaleClient'
+        'class' 	=> 'Guzzle\Rs\RightScaleClient',
+    		'params' 	=> array(
+	    		'acct_num' 	=> $_SERVER['ACCT_NUM'],
+    			'version'		=> '1.0'
+    		)
     )
 )));
