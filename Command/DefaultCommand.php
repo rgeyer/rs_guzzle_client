@@ -38,12 +38,16 @@ class DefaultCommand extends AbstractCommand {
 		
 		// Take the remaining ones and see if they match any tokens in the path string
 		foreach($remainder as $key => $value) {
-			if (!strstr($path, $value)) {
+			if (!strstr($path, (is_array($value) ? ' ' : $value))) {
 				if(is_array($value))
 				{
-					foreach($value as $ary_value) {
+					foreach($value as $ary_key => $ary_value) {												
 						$query_str .= $key . "%5B%5D=$ary_value&";
-						$post_fields[$key . "[]"] = $ary_value;
+						if(is_int($ary_key)) {
+							$post_fields[$key . "[]"] = $ary_value;
+						} else {
+							$post_fields[$key . "[$ary_key]"] = $ary_value;
+						}
 					}
 				} else {
 					$query_str .= "$key=$value&";
@@ -51,6 +55,9 @@ class DefaultCommand extends AbstractCommand {
 				}
 			}
 		}
+		
+		// Weed out path stuff one more time for put requests
+		#$remainder = array_diff_key($this->getAll(), $disposable);
 		
 		switch ($this->get('method')) {
 			case 'GET':
@@ -63,8 +70,12 @@ class DefaultCommand extends AbstractCommand {
 			case 'DELETE':
 				$this->request = $this->client->delete('/api/acct/{{acct_num}}/' . $path);
 				break;
-			case 'PUT':				
-				$this->request = $this->client->put('/api/acct/{{acct_num}}/' . $path, null, json_encode(array('deployment' => $post_fields)));				
+			case 'PUT':
+				$body = new QueryString();
+				$body->merge($post_fields);
+				$body->setPrefix('');				
+				$this->request = $this->client->put('/api/acct/{{acct_num}}/' . $path, null, $body);
+				$this->request->setHeader('Content-Type', 'application/x-www-form-urlencoded');				
 				break; 
 		}		
 		

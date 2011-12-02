@@ -37,11 +37,32 @@
       <param name="path" type="string" static="deployments/{{id}}" />      
       <param name="method" type="string" static="PUT" />
       <param name="id" type="string" required="true" />
-      <param name="href" type="string" required="true" />
-      <param name="nickname" type="string" required="false" />
-      <param name="description" type="string" required="false" />
-      <param name="default_vpc_subnet_href" type="string" required="false" />
-      <param name="default_ec2_availability_zone" type="string" required="false" />
+      <param name="deployment[nickname]" type="string" required="false" />
+      <param name="deployment[description]" type="string" required="false" />
+      <param name="deployment[default_vpc_subnet_href]" type="string" required="false" />
+      <param name="deployment[default_ec2_availability_zone]" type="string" required="false" />
+      <param name="deployment[parameters]" type="array" requred="false" />
+    </command>
+    
+    <command name="deployment_duplicate" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Duplicate/clone a deployment by it's id</doc>
+      <param name="path" type="string" static="deployments/{{id}}/duplicate" />      
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" />
+    </command>
+    
+    <command name="deployment_start_all" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Start all servers in a deployment</doc>
+      <param name="path" type="string" static="deployments/{{id}}/start_all" />      
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="true" />
+    </command>
+    
+    <command name="deployment_stop_all" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Start all servers in a deployment</doc>
+      <param name="path" type="string" static="deployments/{{id}}/stop_all" />      
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="true" />
     </command>
     
   </commands>

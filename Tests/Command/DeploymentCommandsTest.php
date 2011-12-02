@@ -6,9 +6,6 @@ use Guzzle\Http\Plugin\CookiePlugin;
 use Guzzle\Http\CookieJar\ArrayCookieJar;
 use Guzzle\Http\Message\Response;
 
-/**
- * WHERE_I_LEFT_OFF: Still need to implement deployments update, probably need to start creating models as well!
- */
 class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	
 	protected $_client;
@@ -18,6 +15,8 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	protected $_deploymentId;
 	
 	protected $_deploymentHref;
+	
+	protected $_deploymentXml;
 	
 	/**
 	 * Prepares the environment before running a test.
@@ -38,6 +37,7 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 		preg_match($regex, $location_header, $matches);
 		$this->_deploymentId = $matches[1];
 		$this->_deploymentHref = $location_header;
+		$this->_deploymentXml = $deployment;
 	}
 	
 	/**
@@ -127,14 +127,17 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 		// TODO Not actually testing for servers with server settings, since no servers have been added
 	}
 	
-	public function testCanUpdateDeploymentDescriptionById() {
+	public function testCanUpdateDeploymentDescription() {
 		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deploymentId));
 		$resp = $cmd->execute();
 		$result = $cmd->getResult();
 		
 		$this->assertEquals("This'll stick around for a bit", $result->description);
 				
-		$cmd = $this->_client->getCommand('deployment_update', array('id' => $this->_deploymentId, 'description' => 'foobarbaz', 'href' => $this->_deploymentHref));
+		$cmd = $this->_client->getCommand('deployment_update', array('id' => $this->_deploymentId,
+				'deployment[description]' => 'foobarbaz'
+			)
+		);
 		$resp = $cmd->execute();
 		$result = $cmd->getResult();
 
@@ -143,6 +146,59 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 		$result = $cmd->getResult();
 		
 		$this->assertEquals('foobarbaz', $result->description);
+	}
+	
+	public function testCanUpdateDeploymentParameters() {
+		$cmd = $this->_client->getCommand('deployment_update', array('id' => $this->_deploymentId,
+				'deployment[parameters]' => array(
+						'APPLICATION' => 'text:foo',
+						'LB_HOSTNAME' => 'text:bar'
+				)
+			)
+		);
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+		
+		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deploymentId));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+		
+		// Can't get parameters, so no exception thrown is as good as it gets.
+	}
+	
+	public function testCanDuplicateDeploymentById() {
+		$cmd = $this->_client->getCommand('deployment_duplicate', array('id' => $this->_deploymentId));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+		
+		$regex = ',https://my.rightscale.com/api/acct/[0-9]+/deployments/([0-9]+),';
+		$location_header = $result->getHeader('Location');
+		$matches = array();
+		$this->assertEquals(1, preg_match($regex, $location_header, $matches));
+		
+		$cmd = $this->_client->getCommand('deployment_destroy', array('id' => $matches[1]));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+	}
+	
+	public function testCanStartAllServers() {
+		$cmd = $this->_client->getCommand('deployment_start_all', array('id' => $this->_deploymentId));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+		
+		$this->assertEquals(201, $result->getStatusCode());
+	}
+	
+	public function testCanStopAllServers() {
+		$cmd = $this->_client->getCommand('deployment_stop_all', array('id' => $this->_deploymentId));
+		$resp = $cmd->execute();
+		$result = $cmd->getResult();
+		
+		$this->assertEquals(201, $result->getStatusCode());
+	}
+	
+	public function testStartAllServersReturns500WhenServersCanNotBeStarted() {
+		$this->markTestIncomplete("Need to create a deployment, add servers, but leave inputs blank");
 	}
 	
 	public function testVersion() {
