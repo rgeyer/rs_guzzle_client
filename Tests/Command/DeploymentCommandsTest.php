@@ -2,10 +2,6 @@
 
 namespace Guzzle\Rs\Tests\Command;
 
-use Guzzle\Http\Plugin\CookiePlugin;
-use Guzzle\Http\CookieJar\ArrayCookieJar;
-use Guzzle\Http\Message\Response;
-
 class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	
 	protected $_client;
@@ -200,27 +196,6 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	public function testStartAllServersReturns500WhenServersCanNotBeStarted() {
 		$this->markTestIncomplete("Need to create a deployment, add servers, but leave inputs blank");
 	}
-	
-	public function testVersion() {
-		$client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');
-		$this->assertEquals('1.0', $client->getVersion());
-	}
-	
-// 	public function testCookieStuffWorks() {
-// 		$cookieJar = new ArrayCookieJar();
-// 		$cookiePlugin = new CookiePlugin($cookieJar);		
-		
-// 		$headerAry = array(
-// 			'Set-Cookie' => 'rs_gbl=eNotkNtugkAURX-lOc-Mcc4IDCRN6qVVEbWoiZcXM8CoEC4tF0GM_15I-r7WTvZ6ggAT4gco4OdgPqHMZQbmACnjLwUKD0zKEDWdYx8VCPyWZhdDcwcaJ9TlSCiVlBi6MAhFRpmPjPmaaPcK-e9yddC57TysDpEc74JkldVpVDmu7genhMaj6cS-l8PL2vo93Azk9VagdsvQJqvNkqv6p_9TUqvZuSQIKS-3RRq4RUnqxh7dxuy8P9jTxna-5dyrrGa2H6j7taXLBZmGI1x-DaNZVaF3vudqyP1IHzZOHp7jZTxZJGtsDkdyXGja_uEjwXq-uchtcHL4e5ek7pIkIm6vwOYhkrepfLR9FBCel5ZJASbDvqEqIGMRRC2UtVDv2kEfWXC9FbknItnz0hherz-gCW7u; domain=.rightscale.com; path=/; HttpOnly'/*,
-// 			'Set-Cookie' => '_session_id=c02425707d0c9c18608fe7b021bf98dc; path=/; Secure; HttpOnly'*/
-// 				); 
-		
-// 		$response = new Response(204, $headerAry, "body");
-		
-// 		$cookiePlugin->extractCookies($response);
-		
-// 		print_r($cookieJar->getCookies('my.rightscale.com'));		
-// 	}
 
 }
 
