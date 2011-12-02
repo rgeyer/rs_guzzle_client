@@ -2,11 +2,10 @@
 
 namespace Guzzle\Rs\Tests\Command;
 
-class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
-	
-	protected $_client;
-	
-	protected $_testTs;
+use Guzzle\Rs\Tests\Common\RequestFactory;
+use Guzzle\Rs\Tests\Common\ClientCommandsBase;
+
+class DeploymentCommandsTest extends ClientCommandsBase {
 	
 	protected $_deploymentId;
 	
@@ -18,15 +17,8 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	 * Prepares the environment before running a test.
 	 */
 	protected function setUp() {
-		parent::setUp ();
-		
-		$this->_testTs = time();
-		
-		$this->_client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');
-		$login_cmd = $this->_client->getCommand('login', array('email' => $_SERVER['EMAIL'], 'password' => $_SERVER['PASSWORD']));
-		$login_resp = $login_cmd->execute();
-		
-		$deployment = $this->createDeployment("Guzzle_Test_$this->_testTs", "This'll stick around for a bit");
+		parent::setUp ();		
+		$deployment = RequestFactory::createDeployment($this->_client, "Guzzle_Test_$this->_testTs", "This'll stick around for a bit");
 		$regex = ',https://my.rightscale.com/api/acct/[0-9]+/deployments/([0-9]+),';
 		$location_header = $deployment->getHeader('Location');
 		$matches = array();
@@ -47,31 +39,8 @@ class DeploymentCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 		parent::tearDown ();
 	}
 	
-	protected function createDeployment($nickname, $description, $default_vpc_subnet = null, $default_ec2_az = null) {
-		$param_ary = array('deployment[nickname]' => $nickname, 'deployment[description]' => $description);
-		
-		if($default_vpc_subnet) {
-			$param_ary['deployment[default_vpc_subnet_href]'] = $default_vpc_subnet;
-		}
-		
-		if($default_ec2_az) { $param_ary['deployment[default_ec2_availability_zone]'] = $default_ec2_az; }
-		
-		$cmd = $this->_client->getCommand('deployment_create', $param_ary);		
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
-		
-		return $result;
-	}
-	
-	/**
-	 * Constructs the test case.
-	 */
-	public function __construct() {
-		// TODO Auto-generated constructor
-	}
-	
 	public function testCanCreateAndDeleteOneDeployment() {
-		$result = $this->createDeployment("Guzzle Integration Test_" . $this->_testTs, "Testingz");
+		$result = RequestFactory::createDeployment($this->_client, "Guzzle Integration Test_" . $this->_testTs, "Testingz");
 		
 		$regex = ',https://my.rightscale.com/api/acct/[0-9]+/deployments/([0-9]+),';
 		$location_header = $result->getHeader('Location');
