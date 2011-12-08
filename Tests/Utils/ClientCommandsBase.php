@@ -12,7 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Guzzle\Rs\Tests\Common;
+namespace Guzzle\Rs\Tests\Utils;
+
+use Guzzle\Rs\Common\ClientFactory;
 
 
 class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
@@ -26,9 +28,7 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 		
 		$this->_testTs = time();
 		
-		$this->_client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');
-		$login_cmd = $this->_client->getCommand('login', array('email' => $_SERVER['EMAIL'], 'password' => $_SERVER['PASSWORD']));
-		$login_resp = $login_cmd->execute();
+		$this->_client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');		
 	}
 }
 

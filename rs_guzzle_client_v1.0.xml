@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <client>
-  <commands>    
+  <commands>
+  
+    <!-- Start Deployments -->    
     <command name="deployments" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Get a list of all deployments in the account</doc>
-      <param name="path" type="string" doc="Path of request" static="deployments" />
+      <param name="path" type="string" doc="Path of request" static="deployments{{output_format}}" />
       <param name="method" type="string" static="GET" />
       <param name="filter" doc="An array of filters in the form 'attribute_name=|&lt;&gt;attribute_value'" required="false" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" />
     </command>
     
     <command name="deployment" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Get a deployment by it's id</doc>
-      <param name="path" type="string" static="deployments/{{id}}" />      
+      <param name="path" type="string" static="deployments/{{id}}{{output_format}}" />      
       <param name="method" type="string" static="GET" />
-      <param name="id" type="string" />
+      <param name="id" type="integer" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Deployment" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" />
     </command>
     
-    <command name="deployment_create" class="Guzzle.Rs.Command.DefaultCommand">
+    <command name="deployments_create" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Create a new deployment</doc>
       <param name="path" type="string" static="deployments" />      
       <param name="method" type="string" static="POST" />
@@ -23,20 +28,21 @@
       <param name="deployment[description]" type="string" required="true" />
       <param name="deployment[default_vpc_subnet_href]" type="string" required="false" />
       <param name="deployment[default_ec2_availability_zone]" type="string" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Deployment" />
     </command>
     
-    <command name="deployment_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+    <command name="deployments_destroy" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Delete a deployment by it's id</doc>
       <param name="path" type="string" static="deployments/{{id}}" />      
       <param name="method" type="string" static="DELETE" />
-      <param name="id" type="string" />
+      <param name="id" type="integer" />
     </command>
     
-    <command name="deployment_update" class="Guzzle.Rs.Command.DefaultCommand">
+    <command name="deployments_update" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Update an existing deployment by it's id</doc>
       <param name="path" type="string" static="deployments/{{id}}" />      
       <param name="method" type="string" static="PUT" />
-      <param name="id" type="string" required="true" />
+      <param name="id" type="integer" required="true" />
       <param name="deployment[nickname]" type="string" required="false" />
       <param name="deployment[description]" type="string" required="false" />
       <param name="deployment[default_vpc_subnet_href]" type="string" required="false" />
@@ -44,25 +50,102 @@
       <param name="deployment[parameters]" type="array" requred="false" />
     </command>
     
-    <command name="deployment_duplicate" class="Guzzle.Rs.Command.DefaultCommand">
+    <command name="deployments_duplicate" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Duplicate/clone a deployment by it's id</doc>
       <param name="path" type="string" static="deployments/{{id}}/duplicate" />      
       <param name="method" type="string" static="POST" />
-      <param name="id" type="string" />
+      <param name="id" type="integer" />
     </command>
     
-    <command name="deployment_start_all" class="Guzzle.Rs.Command.DefaultCommand">
+    <command name="deployments_start_all" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Start all servers in a deployment</doc>
       <param name="path" type="string" static="deployments/{{id}}/start_all" />      
       <param name="method" type="string" static="POST" />
-      <param name="id" type="string" required="true" />
+      <param name="id" type="integer" required="true" />
     </command>
     
-    <command name="deployment_stop_all" class="Guzzle.Rs.Command.DefaultCommand">
+    <command name="deployments_stop_all" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Start all servers in a deployment</doc>
       <param name="path" type="string" static="deployments/{{id}}/stop_all" />      
       <param name="method" type="string" static="POST" />
-      <param name="id" type="string" required="true" />
+      <param name="id" type="integer" required="true" />
+    </command>
+    
+    <!-- Start SSH Keys -->
+    <command name="ec2_ssh_keys_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a new SSH Key</doc>
+      <param name="path" type="string" static="ec2_ssh_keys" />
+      <param name="method" type="string" static="POST" />
+      <param name="ec2_ssh_key[aws_key_name]" type="string" required="true" />
+      <param name="cloud_id" type="integer" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\SshKey" />
+    </command>
+    
+    <command name="ec2_ssh_keys_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Destroy an SSH Key</doc>
+      <param name="path" type="string" static="ec2_ssh_keys/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" />
+    </command>
+    
+    <command name="ec2_ssh_key" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show an SSH Key</doc>
+      <param name="path" type="string" static="ec2_ssh_keys/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\SshKey" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" />
+    </command>
+    
+    <!-- Start Security Groups -->
+    <command name="ec2_security_groups_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a new security group</doc>
+      <param name="path" type="string" static="ec2_security_groups" />
+      <param name="method" type="string" static="POST" />
+      <param name="ec2_security_group[aws_group_name]" type="string" required="true" />
+      <param name="ec2_security_group[aws_description]" type="string" required="true" />
+      <param name="cloud_id" type="integer" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\SecurityGroup" />
+    </command>
+    
+    <command name="ec2_security_groups_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Destroy a Security Group</doc>
+      <param name="path" type="string" static="ec2_security_groups/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" />
+    </command>
+    
+    <command name="ec2_security_group" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Destroy a Security Group</doc>
+      <param name="path" type="string" static="ec2_security_groups/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\SecurityGroup" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" />
+    </command>
+    
+    <!-- Start ServerTemplates -->
+    <command name="server_templates" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all ServerTemplates</doc>
+      <param name="path" type="string" static="server_templates{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" />      
+    </command>
+    
+    <!-- Start MultiCloudImages -->
+    <command name="multi_cloud_images" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all MultiCloudImages</doc>
+      <param name="path" type="string" static="multi_cloud_images{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" />      
+    </command>
+    
+    <command name="multi_cloud_image" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show a MultiCloudImage</doc>
+      <param name="path" type="string" static="multi_cloud_images/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" />      
     </command>
     
   </commands>

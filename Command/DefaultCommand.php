@@ -28,8 +28,12 @@ use Guzzle\Http\QueryString;
  */
 class DefaultCommand extends AbstractCommand {
 
+	/**
+	 * (non-PHPdoc)
+	 * @see Guzzle\Service\Command.AbstractCommand::build()
+	 */
 	protected function build() {		
-		$disposable = array('path' => null, 'method' => null, 'headers' => null);
+		$disposable = array('path' => null, 'method' => null, 'headers' => null, 'return_class' => null);
 		$remainder = array_diff_key($this->getAll(), $disposable);
 		
 		$path = $this->get('path');
@@ -38,7 +42,7 @@ class DefaultCommand extends AbstractCommand {
 		
 		// Take the remaining ones and see if they match any tokens in the path string
 		foreach($remainder as $key => $value) {
-			if (!strstr($path, (is_array($value) ? ' ' : $value))) {
+			if (empty($value) || !strstr($path, (is_array($value) ? ' ' : $value))) {
 				if(is_array($value))
 				{
 					foreach($value as $ary_key => $ary_value) {												
@@ -55,9 +59,6 @@ class DefaultCommand extends AbstractCommand {
 				}
 			}
 		}
-		
-		// Weed out path stuff one more time for put requests
-		#$remainder = array_diff_key($this->getAll(), $disposable);
 		
 		switch ($this->get('method')) {
 			case 'GET':
@@ -77,9 +78,25 @@ class DefaultCommand extends AbstractCommand {
 				$this->request = $this->client->put('/api/acct/{{acct_num}}/' . $path, null, $body);
 				$this->request->setHeader('Content-Type', 'application/x-www-form-urlencoded');				
 				break; 
-		}		
+		}
 		
 		$this->request->setHeader('X-API-VERSION', $this->client->getVersion());
+	}
+	
+	/**
+	 * Gets the result of a concrete command
+	 * (non-PHPdoc)
+	 * @see Guzzle\Service\Command.AbstractCommand::getResult()
+	 * 
+	 * @return mixed A Guzzle Response unless a return_class was specified in the XML dynamic commands definition
+	 */
+	public function getResult() {
+		$result = parent::getResult();
+		if($this->get('return_class')) {
+			$classname = $this->get('return_class'); 
+			$result = new $classname($result);
+		}
+		return $result;
 	}
 	
 }

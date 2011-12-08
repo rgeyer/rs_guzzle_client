@@ -1,5 +1,200 @@
 rs_guzzle_client is a PHP Guzzle REST API client library for the RightScale API.
 
-Support is available for both the v1.0 and v1.5 API.
+Support is available for v1.0 of the API and v1.5 support is coming soon!
 
- 
+
+Completeness (1.0);
+
+alert_spec_subjects:
+  Commands:
+    create:
+  Model:     
+
+alert_specs:
+  Commands:
+    show:
+    index:
+    create:
+    update:
+    destroy:
+  Model:
+  
+audit_entries:
+  Commands:
+    show:
+  Model:
+  
+component_ec2_ebs_volumes:
+  Commands:
+    create:
+    destroy:
+  Model:
+
+servers:
+  Commands:
+    show:
+    index:
+    create:
+    update:
+    destroy:
+    start:
+    start_ebs:
+    stop:
+    stop_ebs:
+    reboot:
+    run_script:
+    run_executable:
+    attach_volume:
+    settings:
+    get_sketchy_data:
+    current/show:
+    current/update:
+    current/settings:
+    alert_specs:
+    monitoring:
+    monitoring/graph-name:
+  Model:
+  
+credentials:
+  Commands:
+    show:
+    index:
+    create:
+    update:
+    destroy:
+  Model:
+
+deployments:
+  Commands:
+    show: 100%
+    index: 100%
+    create: 100%
+    update: 100%
+    destroy: 100%
+    duplicate: 100%
+    start_all: 100%
+    stop_all: 100%
+  Model: 100%
+  
+ec2_ebs_snapshots:
+  Commands:
+    show:
+    index:
+    create:
+    update:
+    destroy:
+  Model:
+  
+ec2_ebs_volumes:
+  Commands:
+    show:
+    index:
+    create:
+    update:
+    destroy:
+  Model:
+
+ec2_elastic_ips:
+  Commands:
+    show:
+    index:
+    create:
+    destroy:
+  Model:
+
+ec2_security_groups:
+  Commands:
+    show: 100%
+    index:
+    create: 100%
+    update:
+    destroy:
+  Model:
+  
+server_arrays:
+  Commands:
+    show:
+    index:
+    create:
+    update:
+    destroy:
+    terminate_all:
+    launch:
+    run_script_on_all:
+    instances:
+  Model:
+  
+ec2_ssh_keys:
+  Commands:
+    show: 100%
+    create: 100%
+    destroy: 100%
+  Model: 100%
+  
+macros:
+  Commands:
+    show:
+    index:
+    create:
+    update:
+    destroy:
+  Model:
+
+multi_cloud_images:
+  Commands:
+    show: 100%
+    index: 100%
+  Model: 100%
+  
+right_scripts:
+  Commands:
+    show:
+    index:
+  Model:
+  
+s3_bucket:
+  Commands:
+    create:
+    destroy:
+  Model:
+  
+server_templates:
+  Commands:
+    show:
+    index: 100%
+    create:
+    update:
+    destroy:
+    executables:
+    alert_specs:
+  Model:
+  
+sqs_queues:
+  Commands:
+    show:
+    index:
+    create:
+    destroy:
+  Model:
+  
+statuses:
+  Commands:
+    show:
+  Model:
+  
+tags:
+  Commands:
+    search:
+    set:
+    unset:
+    taggable_resources:
+  Model:
+  
+vpc_dhcp_option:
+  Commands:
+    show:
+    index:
+    create:
+    update:
+    destroy:
+  Model:     

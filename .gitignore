@@ -3,3 +3,5 @@
 .settings
 *.placeholder
 phpunit.xml
+docs
+test_reports

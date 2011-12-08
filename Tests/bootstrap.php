@@ -29,7 +29,13 @@ spl_autoload_register(function($class) {
         'class' 	=> 'Guzzle\Rs\RightScaleClient',
     		'params' 	=> array(
 	    		'acct_num' 	=> $_SERVER['ACCT_NUM'],
+    			'email'			=> $_SERVER['EMAIL'],
+    			'password'	=> $_SERVER['PASSWORD'],
     			'version'		=> '1.0'
     		)
     )
 )));
+
+\Guzzle\Rs\Common\ClientFactory::setCredentials($_SERVER['ACCT_NUM'], $_SERVER['EMAIL'], $_SERVER['PASSWORD']);
+
+date_default_timezone_set('America/Los_Angeles');

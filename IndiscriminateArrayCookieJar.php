@@ -34,7 +34,7 @@ use Guzzle\Http\CookieJar\ArrayCookieJar;
 class IndiscriminateArrayCookieJar extends ArrayCookieJar {
 	
 	public function getCookies($domain = null, $path = null, $name = null, $skipDiscardable = false, $skipExpired = true) {
-		return parent::getCookies();
+		return parent::getCookies(null, null, null, false, $skipExpired);
 	}
 
 }

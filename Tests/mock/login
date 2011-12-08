@@ -1,0 +1,10 @@
+HTTP/1.1 204 No Content
+Server: nginx/0.7.67
+Date: Fri, 02 Dec 2011 23:49:11 GMT
+Connection: keep-alive
+Status: 204
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 29
+Set-Cookie: rs_gbl=eNotkNlugkAYRl-l-a_BMGwyJE0q4IYKKphS7nAYWWTAshjR-O6FpPfnfMl3XhCBDqwHDuIG9Bd0Da1Bl0UkaW8OWgI6kkRRU_FUQRxk8UBLZ0KnsSjzKJYFHiGKeCzhmEeihCSMVIqoMOy19N-dqnh0h3mY793cYfx1nxon3yqz4Ft7LpSZEz8VDRvUwkXD2169kRkKRCPZhvk9sYpLdq61_n5P3TneOjtSP8OFs46XXncQcv94m2mrygiPTc4ks3B69ntJ5XV29Uwzs03rx7dMQz10udffVnmwI6p9yix3vQvafmlXMa_66TahQrAXXTw3H6vQtM6b6-eY5DEmKSM2XIFjH5UfS9oPfTiICKm6sgVdEgWscEBZlBUDVA_QJBmhrzpL0rYhUUEnpGLwfv8BhJBu2w%3D%3D; domain=.rightscale.com; path=/; HttpOnly
+Set-Cookie: _session_id=10f442aa69046988119864d417291298; path=/; Secure; HttpOnly
+Cache-Control: no-cache

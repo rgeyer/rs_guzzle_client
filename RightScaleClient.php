@@ -29,7 +29,13 @@ class RightScaleClient extends Client {
 	
 	protected $acct_num;
 	
+	protected $email;
+	
+	protected $password;
+	
 	protected $version;
+	
+	protected $cookieJar;
 	
 	/**
 	 * Factory method to create a new RightScaleClient
@@ -46,7 +52,12 @@ class RightScaleClient extends Client {
 		$required = array ('acct_num', 'base_url', 'version');
 		$config = Inspector::prepareConfig ( $config, $default, $required );
 		
-		$client = new self ( $config->get( 'base_url' ), $config->get('acct_num'), $config->get('version'));
+		$client = new self ( $config->get( 'base_url' ),
+			$config->get('acct_num'),
+			$config->get('email'),
+			$config->get('password'),
+			$config->get('version')
+		);
 		$client->setConfig ( $config );
 		
 		// Add the XML service description to the client
@@ -55,7 +66,8 @@ class RightScaleClient extends Client {
 		$client->setDescription($builder->build());
 
 		// Keep them cookies
-		$client->getEventManager()->attach(new CookiePlugin(new IndiscriminateArrayCookieJar()));
+		$client->cookieJar = new IndiscriminateArrayCookieJar(); 
+		$client->getEventManager()->attach(new CookiePlugin($client->cookieJar));
 		
 		// Retry 50x responses
 		$client->getEventManager()->attach(new ExponentialBackoffPlugin());
@@ -68,14 +80,43 @@ class RightScaleClient extends Client {
 	 * @param unknown_type $base_url
 	 * @param unknown_type $acct_num
 	 */
-	public function __construct($base_url, $acct_num, $version) {
+	public function __construct($base_url, $acct_num, $email, $password, $version) {
 		parent::__construct($base_url);
 		
 		$this->acct_num = $acct_num;
-		$this->version = $version;	
+		$this->email 		= $email;
+		$this->password = $password;
+		$this->version 	= $version;	
 	}
 	
 	public function getVersion() {
 		return $this->version;
+	}
+	
+	/**
+	 * @return IndiscriminateArrayCookieJar
+	 */
+	public function getCookieJar() {
+		return $this->cookieJar;
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see Guzzle\Service.Client::getCommand()
+	 * 
+	 * @return CommandInterface
+	 */
+	public function getCommand($name, array $args = array()) {
+		$cookies = $this->cookieJar->getCookies(null,null,null,false,true);
+		
+		// No login cookies, or they're expired
+		if(count($cookies) == 0) {
+			$request = $this->get('/api/acct/{{acct_num}}/login');
+			$request->setAuth($this->email, $this->password);
+			$request->setHeader('X-API-VERSION', $this->version);
+			$request->send();						
+		}
+
+		return parent::getCommand($name, $args);
 	}
 }

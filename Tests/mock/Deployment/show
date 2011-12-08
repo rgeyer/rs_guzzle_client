@@ -1,0 +1,40 @@
+HTTP/1.1 200 OK
+Server: nginx/0.7.67
+Date: Sun, 04 Dec 2011 23:04:12 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 238
+Set-Cookie: _session_id=62f060d955df1f3767a3175a067fa1c8; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment>
+  <created-at type="datetime">2011-01-24T18:14:10Z</created-at>
+  <description>Description</description>
+  <nickname>Nickname</nickname>
+  <updated-at type="datetime">2011-07-21T21:59:46Z</updated-at>
+  <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+  <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+  <servers type="array">
+    <server type="Server">
+      <created-at type="datetime">2011-05-09T20:33:11Z</created-at>
+      <nickname>Server</nickname>
+      <updated-at type="datetime">2011-06-01T17:55:49Z</updated-at>
+      <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+      <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+      <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+      <state>operational</state>
+      <server-type>ec2</server-type>
+      <current-instance-href>https://my.rightscale.com/api/acct/12345/ec2_instances/12345</current-instance-href>
+<tags type="array"/>
+    </server>
+  </servers>
+  <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+</deployment>
