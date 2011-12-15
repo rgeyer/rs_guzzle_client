@@ -60,8 +60,7 @@ class RightScaleClient extends Client {
 		);
 		$client->setConfig ( $config );
 		
-		// Add the XML service description to the client
-		// Uncomment the following two lines to use an XML service description		
+		// Add the XML service description to the client		
 		$builder = new XmlDescriptionBuilder(__DIR__ . DIRECTORY_SEPARATOR . 'rs_guzzle_client_v'. $client->getVersion() . '.xml');
 		$client->setDescription($builder->build());
 

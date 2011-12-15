@@ -15,25 +15,19 @@
 namespace Guzzle\Rs\Model;
 
 use Guzzle\Rs\Model\ModelBase;
-use BadMethodCallException;
 
-class SecurityGroup extends ModelBase {
+class Server extends ModelBase {
 	
 	public function __construct($mixed = null) {
-		$this->_path = 'ec2_security_group';
-		$this->_required_params = array('ec2_security_group[aws_group_name]' => null, 'ec2_security_group[aws_description]' => null);
-		$this->_optional_params = array('cloud_id' => function($value, $params) { return intval($value); });		
-		$this->_base_params = array(
-			// BUG aws_owner is only returned for json responses, not xml!
-			'aws_owner' => null,			
-			'aws_perms' => function($value, $params) { return $value; }
+		$this->_path = 'server';
+		$this->_required_params = array(
+			'server[nickname]' => null,
+			'server[ec2_ssh_key_href]' => null,
+			'server[ec2_security_groups_href]' => function($value, $params) { return $value; }
 		);
+		$this->_optional_params = array('server[server_template_href]' => null, 'server[deployment_href]' => null);
 		
 		parent::__construct($mixed);
-	}
-	
-	public function duplicate() {
-		throw new BadMethodCallException($this->_path . " does not implement a duplicate method");
 	}
 
 }

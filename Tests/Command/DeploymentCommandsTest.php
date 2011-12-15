@@ -24,131 +24,177 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 	 * Cleans up the environment after running a test.
 	 */
 	protected function tearDown() {
-		$cmd = $this->_client->getCommand('deployments_destroy', array('id' => $this->_deployment->id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$result = $this->executeCommand('deployments_destroy', array('id' => $this->_deployment->id));
 
 		parent::tearDown ();
 	}
 	
-	public function testCanCreateAndDeleteOneDeployment() {		
-		$result = new Deployment();
-		$result->nickname = "Guzzle Integration Test_" . $this->_testTs;
-		$result->description = "Testingz";
-		$result->create();
+	public function testCanCreateAndDeleteOneDeployment() {
+		$command = null;		
+		$result = $this->executeCommand('deployments_create', array(
+			'deployment[nickname]' => "Guzzle Integration Test_" . $this->_testTs,
+			'deployment[description]' => 'Testingz'),
+			&$command				
+		);
 		
-		$cmd = $this->_client->getCommand('deployments_destroy', array('id' => $result->id));
-		$response = $cmd->execute();
-		$result = $cmd->getResult();
+		$this->assertEquals(201, $command->getResponse()->getStatusCode());
+		$this->assertNotNull($command->getResponse()->getHeader('Location'));
+		
+		$result = $this->executeCommand('deployments_destroy', array('id' => $result->id));
 		
 		$this->assertEquals(200, $result->getStatusCode());
 	}
 	
-	public function testCanGetAllDeployments() {				
-		$depl_cmd = $this->_client->getCommand('deployments');		
-		$depl_resp = $depl_cmd->execute();
-		$depl_result = $depl_cmd->getResult();
+	public function testCanGetAllDeploymentsJson() {				
+		$depl = $this->executeCommand('deployments');
 		
-		$json_obj = json_decode($depl_result->getBody(true));
+		$json_obj = json_decode($depl->getBody(true));
 		
+		$this->assertEquals(200, $depl->getStatusCode());
 		$this->assertNotNull($json_obj);
 		$this->assertGreaterThan(0, count($json_obj));
 	}
 	
+	public function testCanGetAllDeploymentsXml() {
+		$command = null;				
+		$depl = $this->executeCommand('deployments', array('output_format' => '.xml'), &$command);
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$this->assertNotNull($depl);
+		$this->assertInstanceOf('SimpleXMLElement', $depl);
+		$this->assertGreaterThan(0, count($depl));
+	}
+	
 	public function testCanGetDeploymentsWithOneFilter() {
-		$depl_cmd = $this->_client->getCommand('deployments', array('filter' => "nickname=Guzzle_Test_$this->_testTs"));		
-		$depl_resp = $depl_cmd->execute();
-		$depl_result = $depl_cmd->getResult();
+		$command = null;
+		$depl_result = $this->executeCommand('deployments',
+			array('filter' => "nickname=Guzzle_Test_$this->_testTs"),
+			&$command,
+			'with_one_filter'
+		);
 		
 		$json_obj = json_decode($depl_result->getBody(true));
 		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$this->assertNotNull($json_obj);
 		$this->assertEquals(1, count($json_obj));
 	}
 	
-	public function testCanGetDeploymentById() {		
-		$depl_by_id_cmd = $this->_client->getCommand('deployment', array('id' => $this->_deployment->id));
-		$depl_by_id_resp = $depl_by_id_cmd->execute();
-		$depl_by_id_result = $depl_by_id_cmd->getResult();
+	public function testCanGetDeploymentByIdJson() {
+		$command = null;		
+		$depl_by_id_result = $this->executeCommand('deployment', array('id' => $this->_deployment->id), &$command);
 		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$this->assertInstanceOf('Guzzle\Rs\Model\Deployment', $depl_by_id_result);
 		$this->assertEquals("Guzzle_Test_$this->_testTs", $depl_by_id_result->nickname);
 	}
 	
-	public function testCanGetDeploymentByIdWithServerSettings() {		
-		$depl_by_id_cmd = $this->_client->getCommand('deployment', array('id' => $this->_deployment->id, 'server_settings' => 'true'));
-		$depl_by_id_resp = $depl_by_id_cmd->execute();
-		$depl_by_id_result = $depl_by_id_cmd->getResult();
+	public function testCanGetDeploymentByIdXml() {
+		$command = null;		
+		$depl_by_id_result = $this->executeCommand('deployment', array('id' => $this->_deployment->id, 'output_format' => '.xml'), &$command);
 		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$this->assertInstanceOf('Guzzle\Rs\Model\Deployment', $depl_by_id_result);
+		$this->assertEquals("Guzzle_Test_$this->_testTs", $depl_by_id_result->nickname);
+	}
+	
+	public function testCanGetDeploymentByIdWithServerSettingsJson() {
+		$command = null;		
+		$depl_by_id_result = $this->executeCommand('deployment',
+			array('id' => $this->_deployment->id, 'server_settings' => 'true'),
+			&$command,
+			'with_server_settings'
+		);
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());		
+		$this->assertInstanceOf('Guzzle\Rs\Model\Deployment', $depl_by_id_result);
+		$this->assertEquals("Guzzle_Test_$this->_testTs", $depl_by_id_result->nickname);
+		// TODO Not actually testing for servers with server settings, since no servers have been added
+	}
+	
+	public function testCanGetDeploymentByIdWithServerSettingsXml() {
+		$command = null;		
+		$depl_by_id_result = $this->executeCommand('deployment',
+			array('id' => $this->_deployment->id, 'server_settings' => 'true', 'output_format' => '.xml'),
+			&$command,
+			'with_server_settings'
+		);
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());		
 		$this->assertInstanceOf('Guzzle\Rs\Model\Deployment', $depl_by_id_result);
 		$this->assertEquals("Guzzle_Test_$this->_testTs", $depl_by_id_result->nickname);
 		// TODO Not actually testing for servers with server settings, since no servers have been added
 	}
 	
 	public function testCanUpdateDeploymentDescription() {
-		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deployment->id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
-		
+		$command = null;
+		$result = $this->executeCommand('deployment', array('id' => $this->_deployment->id), &$command);
+				
 		$this->assertEquals("This'll stick around for a bit", $result->description);
 				
-		$cmd = $this->_client->getCommand('deployments_update', array('id' => $this->_deployment->id,
+		$result = $this->executeCommand('deployments_update', array('id' => $this->_deployment->id,
 				'deployment[description]' => 'foobarbaz'
-			)
+			),
+			&$command,
+			'description'
 		);
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		
+		$this->assertEquals(204, $result->getStatusCode());
+		$this->assertEmpty($result->getBody(true));
 
-		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deployment->id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$result = $this->executeCommand('deployment', array('id' => $this->_deployment->id));
 		
 		$this->assertEquals('foobarbaz', $result->description);
 	}
 	
-	public function testCanNotUpdateDeploymentDefaultAZ() {		
-		$cmd = $this->_client->getCommand('deployments_update', array('id' => $this->_deployment->id, 'deployment[default-ec2-availability-zone]' => 'us-east-1a'));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+	public function testCanNotUpdateDeploymentDefaultAZ() {
+		$command = null;		
+		$cmd = $this->executeCommand('deployments_update',
+			array('id' => $this->_deployment->id, 'deployment[default-ec2-availability-zone]' => 'us-east-1a'),
+			&$command,
+			'default_az'
+		);
 		
 		// This is the success response, indicating that the field was updated
-		$this->assertEquals(204, $result->getStatusCode());
+		$this->assertEquals(204, $command->getResponse()->getStatusCode());
 		
-		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deployment->id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$result = $this->executeCommand('deployment', array('id' => $this->_deployment->id));
 		
 		// This should equal 'us-east-1a' as set above, but it's unchanged.
 		$this->assertEquals('', strval($result->default_ec2_availability_zone));
 	}
 	
-	public function testCanNotUpdateDefaultVpcHref() {		
-		$cmd = $this->_client->getCommand('deployments_update', array('id' => $this->_deployment->id, 'deployment[default-vpc-subnet-href]' => 'https://foo.bar'));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+	public function testCanNotUpdateDefaultVpcHref() {
+		$command = null;		
+		$cmd = $this->executeCommand('deployments_update',
+			array('id' => $this->_deployment->id, 'deployment[default-vpc-subnet-href]' => 'https://foo.bar'),
+			&$command,
+			'default_vpc_href'
+		);
 		
 		// This is the success response, indicating that the field was updated.
 		// There should also be some validation that checks for the href existing, and belonging to a VPC subnet
-		$this->assertEquals(204, $result->getStatusCode());
+		$this->assertEquals(204, $command->getResponse()->getStatusCode());
 		
-		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deployment->id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$result = $this->executeCommand('deployment', array('id' => $this->_deployment->id));
 		
 		// This should equal 'https://foo.bar' as set above, but it's unchanged.
 		$this->assertEquals('', strval($result->default_vpc_subnet_href));
 	}
 	
 	public function testCanUpdateDeploymentParameters() {
-		$cmd = $this->_client->getCommand('deployments_update', array('id' => $this->_deployment->id,
+		$command = null;
+		$cmd = $this->executeCommand('deployments_update', array('id' => $this->_deployment->id,
 				'deployment[parameters]' => array(
 						'APPLICATION' => 'text:foo',
 						'LB_HOSTNAME' => 'text:bar'
 				)
-			)
+			),
+			&$command,
+			'parameters'
 		);
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		
+		$this->assertEquals(204, $command->getResponse()->getStatusCode());
 		
 		$cmd = $this->_client->getCommand('deployment', array('id' => $this->_deployment->id));
 		$resp = $cmd->execute();
@@ -158,9 +204,7 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 	}
 	
 	public function testCanDuplicateDeploymentById() {
-		$cmd = $this->_client->getCommand('deployments_duplicate', array('id' => $this->_deployment->id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$result = $this->executeCommand('deployments_duplicate', array('id' => $this->_deployment->id));
 		
 		$this->assertEquals(201, $result->getStatusCode());
 		
@@ -175,17 +219,13 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 	}
 	
 	public function testCanStartAllServers() {
-		$cmd = $this->_client->getCommand('deployments_start_all', array('id' => $this->_deployment->id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$result = $this->executeCommand('deployments_start_all', array('id' => $this->_deployment->id));
 		
 		$this->assertEquals(201, $result->getStatusCode());
 	}
 	
 	public function testCanStopAllServers() {
-		$cmd = $this->_client->getCommand('deployments_stop_all', array('id' => $this->_deployment->id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$result = $this->executeCommand('deployments_stop_all', array('id' => $this->_deployment->id));
 		
 		$this->assertEquals(201, $result->getStatusCode());
 	}

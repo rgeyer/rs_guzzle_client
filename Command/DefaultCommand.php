@@ -32,31 +32,36 @@ class DefaultCommand extends AbstractCommand {
 	 * (non-PHPdoc)
 	 * @see Guzzle\Service\Command.AbstractCommand::build()
 	 */
-	protected function build() {		
+	protected function build() {				
 		$disposable = array('path' => null, 'method' => null, 'headers' => null, 'return_class' => null);
+		$args = $this->getApiCommand()->getArgs();
+		foreach($args as $arg) {
+			if($arg->get('location') && $arg->get('location') == 'path') {
+				$disposable += array($arg->get('name') => null);
+			}
+		}
+		
 		$remainder = array_diff_key($this->getAll(), $disposable);
 		
 		$path = $this->get('path');
-		$query_str = '?';
+		$query_str = new QueryString();
 		$post_fields = array();
 		
 		// Take the remaining ones and see if they match any tokens in the path string
 		foreach($remainder as $key => $value) {
-			if (empty($value) || !strstr($path, (is_array($value) ? ' ' : $value))) {
-				if(is_array($value))
-				{
-					foreach($value as $ary_key => $ary_value) {												
-						$query_str .= $key . "%5B%5D=$ary_value&";
-						if(is_int($ary_key)) {
-							$post_fields[$key . "[]"] = $ary_value;
-						} else {
-							$post_fields[$key . "[$ary_key]"] = $ary_value;
-						}
+			if(empty($value)) { continue; }
+			if(is_array($value)) {
+				foreach($value as $ary_key => $ary_value) {												
+					$query_str->add($key . "%5B%5D", $ary_value);
+					if(is_int($ary_key)) {
+						$post_fields[$key . "[]"] = $ary_value;
+					} else {
+						$post_fields[$key . "[$ary_key]"] = $ary_value;
 					}
-				} else {
-					$query_str .= "$key=$value&";
-					$post_fields[$key] = $value;
 				}
+			} else {
+				$query_str->add($key, $value);
+				$post_fields[$key] = $value;
 			}
 		}
 		
@@ -76,7 +81,7 @@ class DefaultCommand extends AbstractCommand {
 				$body->merge($post_fields);
 				$body->setPrefix('');				
 				$this->request = $this->client->put('/api/acct/{{acct_num}}/' . $path, null, $body);
-				$this->request->setHeader('Content-Type', 'application/x-www-form-urlencoded');				
+				$this->request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
 				break; 
 		}
 		
@@ -96,7 +101,7 @@ class DefaultCommand extends AbstractCommand {
 			$classname = $this->get('return_class'); 
 			$result = new $classname($result);
 		}
-		return $result;
+		return $result;		
 	}
 	
 }

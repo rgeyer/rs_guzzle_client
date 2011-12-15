@@ -41,11 +41,11 @@ abstract class ModelBase {
 	// Protected attributes with public accessors
 	protected $_params = array();
 	protected $_client;	
-	protected $_response;
+	protected $_last_command;
 	
 	/* ---------------------------- Overrides ---------------------------- */
 	
-	public function __construct($mixed = null) {
+	public function __construct($mixed = null) {		
 		$this->_client = ClientFactory::getClient();
 		
 		if(!$this->_path_for_regex) {
@@ -125,8 +125,8 @@ abstract class ModelBase {
 		$this->_client = $client;
 	}
 	
-	public function getResponse() {
-		return $this->_response;
+	public function getLastCommand() {
+		return $this->_last_command;
 	}
 	
 	/* ----------------------------- Actions ----------------------------- */
@@ -209,10 +209,9 @@ abstract class ModelBase {
 	protected function initialize($mixed) {
 								
 		if(is_a($mixed, 'Guzzle\Http\Message\Response')) {			
-			$this->href = $mixed->getHeader('Location');			
-			$this->_response = $mixed;
+			$this->href = $mixed->getHeader('Location');
 			
-			$json_obj = json_decode($this->_response->getBody(true));
+			$json_obj = json_decode($mixed->getBody(true));
 			if($json_obj) {
 				$this->_castInputParametersWithClosure($json_obj);
 			}			
@@ -244,11 +243,10 @@ abstract class ModelBase {
 	}
 	
 	protected function executeCommand($command, array $params = array()) {
-		$cmd = $this->_client->getCommand($command, $params);
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$this->_last_command = $this->_client->getCommand($command, $params);
+		$this->_last_command->execute();
 		
-		return $result;		
+		return $this->_last_command->getResult();		
 	}
 	
 	/* ------------------------ Private Utilities ------------------------ */

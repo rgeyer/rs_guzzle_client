@@ -5,8 +5,9 @@ namespace Guzzle\Rs\Tests\Command;
 use Guzzle\Http\Plugin\CookiePlugin;
 use Guzzle\Http\CookieJar\ArrayCookieJar;
 use Guzzle\Http\Message\Response;
+use Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
-class AuthenticationCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+class AuthenticationCommandsTest extends ClientCommandsBase {
 	
 	public function testCookieJarIsRFC2109Compliant() {
 		$cookieJar = new ArrayCookieJar();

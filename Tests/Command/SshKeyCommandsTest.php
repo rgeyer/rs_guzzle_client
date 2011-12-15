@@ -2,7 +2,6 @@
 
 namespace Guzzle\Rs\Tests\Command;
 
-use Guzzle\Rs\Tests\Utils\RequestFactory;
 use Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
 class SshKeyCommandsTest extends ClientCommandsBase {
@@ -12,23 +11,19 @@ class SshKeyCommandsTest extends ClientCommandsBase {
 	protected function setUp() {
 		parent::setUp();
 		
-		$key = RequestFactory::createSshKey($this->_client, "Guzzle_Test_$this->_testTs");
+		$key = $this->executeCommand('ec2_ssh_keys_create', array('ec2_ssh_key[aws_key_name]' => "Guzzle_Test_$this->_testTs"));
 		
 		$this->_ssh_key_id = $key->id;
 	}
 	
 	protected function tearDown() {		
-		$cmd = $this->_client->getCommand('ec2_ssh_keys_destroy', array('id' => $this->_ssh_key_id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$this->executeCommand('ec2_ssh_keys_destroy', array('id' => $this->_ssh_key_id));
 
 		parent::tearDown();
 	}
 	
 	public function testCanShowAKey() {
-		$cmd = $this->_client->getCommand('ec2_ssh_key', array('id' => $this->_ssh_key_id));
-		$resp = $cmd->execute();
-		$result = $cmd->getResult();
+		$result = $this->executeCommand('ec2_ssh_key', array('id' => $this->_ssh_key_id));
 				
 		$this->assertEquals("Guzzle_Test_$this->_testTs", $result->aws_key_name);
 	}

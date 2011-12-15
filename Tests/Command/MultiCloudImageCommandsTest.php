@@ -15,17 +15,29 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
 		$mci = new MultiCloudImage();
 		$list = $mci->index();
 		
-		#$this->assertGreaterThan(0, $list);
-		
 		$this->mci_id = $list[0]->id;		
 	}
 	
-	public function testCanGetMCIById() {
-		$mci = new MultiCloudImage();
-		$mci->find_by_id($this->mci_id);
+	public function testCanGetMCIByIdJson() {
+		$command = null;
+		$mci = $this->executeCommand('multi_cloud_image', array('id' => $this->mci_id), &$command);
 		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());		
 		$this->assertNotNull($mci);
 		$this->assertEquals($this->mci_id, $mci->id);
+	}
+	
+	public function testCanGetMCIByIdXml() {
+		$command = null;
+		$mci = $this->executeCommand('multi_cloud_image', array('id' => $this->mci_id, 'output_format' => '.xml'), &$command);
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$this->assertNotNull($mci);
+		$this->assertEquals($this->mci_id, $mci->id);
+	}
+	
+	public function testCanListAllMCIsJson() {
+		
 	}
 	
 }

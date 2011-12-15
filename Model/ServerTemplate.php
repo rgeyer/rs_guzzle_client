@@ -32,7 +32,7 @@ class ServerTemplate extends ModelBase {
 		$this->_path = 'server_template';
 		$this->_required_params = array(
 			'server_template[nickname]' => null,
-			// TODO write a closure which checks 
+			// TODO write a closure which checks for this, an MCI model, or a proper combination of other params. 
 			'server_template[multi_cloud_image_href]' => null
 		);
 		

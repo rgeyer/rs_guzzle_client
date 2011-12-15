@@ -34,9 +34,9 @@ servers:
   Commands:
     show:
     index:
-    create:
+    create: 50%
     update:
-    destroy:
+    destroy: 100%
     start:
     start_ebs:
     stop:
@@ -105,10 +105,10 @@ ec2_elastic_ips:
 ec2_security_groups:
   Commands:
     show: 100%
-    index:
+    index: 100%
     create: 100%
-    update:
-    destroy:
+    update: 100%
+    destroy: 100%
   Model:
   
 server_arrays:
