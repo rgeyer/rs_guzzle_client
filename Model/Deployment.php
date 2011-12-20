@@ -35,10 +35,10 @@ class Deployment extends ModelBase {
 	 */
 	public function __construct($mixed = null) {
 		$this->_path = 'deployment';
-		$this->_required_params = array('deployment[nickname]' => null);
-		$this->_optional_params = array('deployment[description]' => null, 'deployment[default_vpc_subnet_href]' => null, 'deployment[default_ec2_availability_zone]' => null);
+		$this->_required_params = array('deployment[nickname]' => $this->castToString());
+		$this->_optional_params = array('deployment[description]' => $this->castToString(), 'deployment[default_vpc_subnet_href]' => $this->castToString(), 'deployment[default_ec2_availability_zone]' => $this->castToString());
 		// TODO Where null is now, a closure which "does the right thing" for servers should be inserted.
-		$this->_base_params = array('servers' => null);
+		$this->_base_params = array('servers' => $this->castToString());
 		
 		parent::__construct($mixed);
 	}

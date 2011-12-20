@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Tue, 20 Dec 2011 02:33:11 GMT
+Content-Type: text/javascript; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 518
+Set-Cookie: _session_id=1e46931f2e79835e3974e9e43d2d2dd7; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+{"parameters":[{"value":"text:localhost","name":"mail_postfix/db_host"},{"value":"text:mysql curl fileinfo gd","name":"php5/module_list"},{"value":"text:","name":"mail_postfix/s3_bucket"},{"value":"text:prefork","name":"web_apache/mpm"},{"value":"text:blank","name":"rjg_utils/aio_ebs_snapshot_id"},{"value":"text:","name":"app_wordpress/s3_bucket"},{"value":"text:root@localhost","name":"web_apache/contact"},{"value":"text:UTC","name":"rs_utils/timezone"},{"value":"text:","name":"web_apache/aliases"},{"value":"text:","name":"mail_postfix/backup_prefix"},{"value":"text:","name":"gitosis/backup_prefix"},{"value":"text:","name":"db/admin/password"},{"value":"text:7","name":"mail_postfix/backup_history_to_keep"},{"value":"text:postfix","name":"mail_postfix/db_name"},{"value":"text:","name":"aws/secret_access_key"},{"value":"text:sshd crond","name":"rs_utils/process_list"},{"value":"text:","name":"rightscale/servers/sketchy/hostname"},{"value":"text:","name":"web_apache/vhost_fqdn"},{"value":"text:/mnt/gitosis-home","name":"gitosis/gitosis_home"},{"value":"text:","name":"aws/access_key_id"},{"value":"text:","name":"rightscale/servers/sketchy/identifier"},{"value":"text:","name":"rightscale/servers/lumberjack/hostname"},{"value":"text:","name":"gitosis/gitosis_key"},{"value":"text:","name":"db/admin/user"},{"value":"text:1.11.1","name":"zendframework/version"},{"value":"text:","name":"gitosis/s3_bucket"},{"value":"text:","name":"rightscale/instance_uuid"},{"value":"text:","name":"mail_postfix/db_pass"},{"value":"text:7","name":"gitosis/backup_history_to_keep"},{"value":"text:","name":"rs_utils/private_ssh_key"},{"value":"text:","name":"rightscale/servers/lumberjack/identifier"},{"value":"text:","name":"rjg_utils/aio_ebs_size_in_gb"},{"value":"text:/mnt","name":"rjg_utils/aio_ebs_mountpoint"},{"value":"text:","name":"web_apache/vhost_aliases"},{"value":"text:postfix","name":"mail_postfix/db_user"},{"value":"text:7","name":"app_wordpress/backup_history_to_keep"},{"value":"text:shared","name":"db_mysql/server_usage"},{"value":"text:","name":"app_wordpress/db_pass"},{"value":"text:7","name":"rjg_utils/aio_ebs_snapshots_to_keep"},{"value":"text:","name":"rjg_utils/rs_instance_uuid"}],"current_instance_href":null,"server_type":"ec2","tags":[],"href":"https://my.rightscale.com/api/acct/12345/servers/12345","state":"stopped","created_at":"2011/12/20 02:33:10 +0000","server_template_href":"https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345","deployment_href":"https://my.rightscale.com/api/acct/12345/deployments/12345","nickname":"Guzzle_Test_1324348385","updated_at":"2011/12/20 02:33:10 +0000"}

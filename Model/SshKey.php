@@ -22,9 +22,9 @@ class SshKey extends ModelBase {
 	
 	public function __construct($mixed = null) {		
 		$this->_path = 'ec2_ssh_key';
-		$this->_required_params = array('ec2_ssh_key[aws_key_name]' => null);
-		$this->_optional_params = array('cloud_id' => function($value, $params) { return intval($value); } );
-		$this->_base_params = array('aws_fingerprint' => null, 'aws_material' => null);
+		$this->_required_params = array('ec2_ssh_key[aws_key_name]' => $this->castToString());
+		$this->_optional_params = array('cloud_id' => $this->castToInt());
+		$this->_base_params = array('aws_fingerprint' => $this->castToString(), 'aws_material' => $this->castToString());
 
 		parent::__construct($mixed);
 	}

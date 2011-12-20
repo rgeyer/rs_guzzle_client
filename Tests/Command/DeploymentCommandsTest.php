@@ -65,7 +65,7 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertGreaterThan(0, count($depl));
 	}
 	
-	public function testCanGetDeploymentsWithOneFilter() {
+	public function testCanGetDeploymentsWithOneFilterJson() {
 		$command = null;
 		$depl_result = $this->executeCommand('deployments',
 			array('filter' => "nickname=Guzzle_Test_$this->_testTs"),
@@ -78,6 +78,45 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$this->assertNotNull($json_obj);
 		$this->assertEquals(1, count($json_obj));
+	}
+	
+	public function testCanGetDeploymentsWithTwoFiltersJson() {
+		$command = null;
+		$depl_result = $this->executeCommand('deployments',
+			array('filter' => array("nickname=Guzzle_Test_$this->_testTs", "description=This'll stick around for a bit")),
+			&$command,
+			'with_two_filters'
+		);
+		
+		$json_obj = json_decode($depl_result->getBody(true));
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$this->assertNotNull($json_obj);
+		$this->assertEquals(1, count($json_obj));
+	}
+	
+	public function testCanGetDeploymentsWithOneFilterXml() {
+		$command = null;
+		$depl_result = $this->executeCommand('deployments',
+			array('filter' => array("nickname=Guzzle_Test_$this->_testTs"), "output_format" => ".xml"),
+			&$command,
+			'with_one_filter'
+		);
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$this->assertEquals(1, count($depl_result));
+	}
+	
+	public function testCanGetDeploymentsWithTwoFiltersXml() {
+		$command = null;
+		$depl_result = $this->executeCommand('deployments',
+			array('filter' => array("nickname=Guzzle_Test_$this->_testTs", "description=This'll stick around for a bit"), "output_format" => ".xml"),
+			&$command,
+			'with_two_filters'
+		);
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$this->assertEquals(1, count($depl_result));
 	}
 	
 	public function testCanGetDeploymentByIdJson() {

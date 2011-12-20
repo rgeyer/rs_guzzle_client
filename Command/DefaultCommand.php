@@ -52,7 +52,7 @@ class DefaultCommand extends AbstractCommand {
 			if(empty($value)) { continue; }
 			if(is_array($value)) {
 				foreach($value as $ary_key => $ary_value) {												
-					$query_str->add($key . "%5B%5D", $ary_value);
+					$query_str->add($key . "[]", $ary_value);
 					if(is_int($ary_key)) {
 						$post_fields[$key . "[]"] = $ary_value;
 					} else {
@@ -67,6 +67,20 @@ class DefaultCommand extends AbstractCommand {
 		
 		switch ($this->get('method')) {
 			case 'GET':
+				$query_str->setEncodeFields(false);
+				$query_str->setAggregateFunction(
+					function($key, $values, $encodeFields = false, $encodeValues = false) {
+						$retval = array();
+						foreach($values as $value) {
+							if(count($retval) == 0) {
+								$retval[] = ($encodeValues ? rawurlencode($value) : $value);
+							} else {
+								$retval[] = ($encodeFields ? rawurlencode($key) : $key) . "=" . ($encodeValues ? rawurlencode($value) : $value);
+							}
+						}
+						return array(($encodeFields ? rawurlencode($key) : $key) => implode('&', $retval));
+					}
+				);				
 				$this->request = $this->client->get('/api/acct/{{acct_num}}/');
 				$this->request->setPath($this->request->getPath() . $path . $query_str);
 				break;

@@ -43,23 +43,46 @@ abstract class ModelBase {
 	protected $_client;	
 	protected $_last_command;
 	
+	/* ----------------------- Conversion Closures ----------------------- */
+	
+	public function castToString() {
+		return function($value, $params) { return (string)$value; };
+	}
+	
+	public function castToInt() {
+		return function($value, $params) { return intval($value); };
+	}
+	
+	public function castToFloat() {
+		return function($value, $params) { return floatval($value); };
+	}
+	
+	public function castToBool() {
+		return function($value, $params) { return (bool)$value; };
+	}
+	
+	public function castToDateTime() {
+		return function($value, $params) { return new DateTime($value); };
+	}
+	
 	/* ---------------------------- Overrides ---------------------------- */
 	
 	public function __construct($mixed = null) {		
 		$this->_client = ClientFactory::getClient();
+		
 		
 		if(!$this->_path_for_regex) {
 			$this->_path_for_regex = $this->_path . 's';
 		}
 		
 		$this->_base_params = array_merge($this->_base_params, array(
-				'id' 								=> function($value, $mixed) { return intval($value); },
-				'href'							=> null,
-				'created_at' 				=> function($value, $mixed) { return new DateTime($value); },
-				'updated_at' 				=> function($value, $mixed) { return new DateTime($value); },
+				'id' 								=> $this->castToInt(),
+				'href'							=> $this->castToString(),
+				'created_at' 				=> $this->castToDateTime(),
+				'updated_at' 				=> $this->castToDateTime(),
 				'tags' 							=> null,
-				'is_head_version' 	=> function($value, $mixed) { return (bool)$value; },
-				'version'						=> function($value, $mixed) { return intval($value); }
+				'is_head_version' 	=> $this->castToBool(),
+				'version'						=> $this->castToInt()
 			)
 		);
 		
@@ -263,7 +286,7 @@ abstract class ModelBase {
 			$found |= $this->_valueInArray($this->_path . "[" . str_replace('-', '_', $name) . "]", array_keys($allowed_params), &$array_idx);
 	
 			$closure = $allowed_params[$array_idx];
-			$this->$array_idx = $closure ? $closure($value, $params) : (string)$value;
+			$this->$array_idx = $closure ? $closure($value, $params) : $value;
 		}
 	}
 	

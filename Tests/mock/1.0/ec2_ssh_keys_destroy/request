@@ -1,0 +1,8 @@
+DELETE /api/acct/12345/ec2_ssh_keys/12345 HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.6; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkF1vgjAYRv_K8l6DoS0wIFkyh05E8XN-sLtSKkMEN2hBZvzvg2T35zzJc-5AwYG8BQXiCpw7yIqX4OgYEeuhgGDgIIJ1olvY0BRI446mWDvpWsRUTCOsIsSRSgnnKsIEkVjDFjVO3Z7g_65h6L3bzcNqet4Hw_e6dp8Pu_KjXSfyW_eycC_t2JehNzGzwlvaJFWZsc3D5hdtttWcH1lCSNPMy9u65UW5yw4VFehH2udF8yaFv3Arm1qjUTSOZDAiF-PTk565Plhu4AY7Pxsbc5ssycpEw1mWBgjz-mcepcRSNSyoYPsNiutymRRH_zQLmsycovClT3LrkxQ0767ApqXF04S3XR8FKGNXWQhwCNZsQwGe0_TSQWUHDZIeei3T5EtUjF74gF1zeDz-AIV2b4A=;_session_id=1e46931f2e79835e3974e9e43d2d2dd7
+

@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Tue, 20 Dec 2011 02:32:54 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 80
+Content-Length: 731
+Set-Cookie: _session_id=1e46931f2e79835e3974e9e43d2d2dd7; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<servers type="array">
+  <server type="Server">
+    <created-at type="datetime">2011-12-20T02:32:53Z</created-at>
+    <nickname>Guzzle_Test_1324348369</nickname>
+    <updated-at type="datetime">2011-12-20T02:32:53Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <state>stopped</state>
+    <server-type>ec2</server-type>
+    <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+  </server>
+</servers>

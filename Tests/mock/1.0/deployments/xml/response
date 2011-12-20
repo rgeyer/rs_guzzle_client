@@ -1,0 +1,246 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Tue, 20 Dec 2011 02:30:56 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 1411
+Set-Cookie: _session_id=1e46931f2e79835e3974e9e43d2d2dd7; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<deployments type="array">
+  <deployment>
+    <created-at type="datetime">2010-11-09T01:11:07Z</created-at>
+    <description>General deployment for testing and debugging, and to run individual servers.</description>
+    <nickname>Default</nickname>
+    <updated-at type="datetime">2010-11-09T01:11:07Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array"/>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-01-24T18:14:10Z</created-at>
+    <description></description>
+    <nickname>Main Vhosting (nslms.com)</nickname>
+    <updated-at type="datetime">2011-07-21T21:59:46Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array">
+      <server type="Server">
+        <created-at type="datetime">2011-05-09T20:33:11Z</created-at>
+        <nickname>LNMP</nickname>
+        <updated-at type="datetime">2011-12-09T00:14:55Z</updated-at>
+        <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+        <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+        <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+        <state>stopped</state>
+        <server-type>ec2</server-type>
+        <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+      </server>
+      <server type="Server">
+        <created-at type="datetime">2011-05-09T20:33:11Z</created-at>
+        <nickname>LNMP-Relaunch</nickname>
+        <updated-at type="datetime">2011-12-08T18:29:59Z</updated-at>
+        <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+        <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+        <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+        <state>operational</state>
+        <server-type>ec2</server-type>
+        <current-instance-href>https://my.rightscale.com/api/acct/12345/ec2_instances/12345</current-instance-href>
+<tags type="array"/>
+      </server>
+    </servers>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-07-26T20:34:42Z</created-at>
+    <description></description>
+    <nickname>TATA Test</nickname>
+    <updated-at type="datetime">2011-07-28T23:49:36Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array">
+      <server type="Server">
+        <created-at type="datetime">2011-07-28T17:59:47Z</created-at>
+        <nickname>App 01</nickname>
+        <updated-at type="datetime">2011-08-10T16:56:37Z</updated-at>
+      </server>
+      <server type="Server">
+        <created-at type="datetime">2011-07-28T16:17:19Z</created-at>
+        <nickname>DB</nickname>
+        <updated-at type="datetime">2011-08-10T16:56:35Z</updated-at>
+      </server>
+      <server type="Server">
+        <created-at type="datetime">2011-07-28T16:59:45Z</created-at>
+        <nickname>LB</nickname>
+        <updated-at type="datetime">2011-08-26T16:41:23Z</updated-at>
+      </server>
+    </servers>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-08-11T23:36:26Z</created-at>
+    <description></description>
+    <nickname>Sandbox</nickname>
+    <updated-at type="datetime">2011-08-11T23:36:26Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array">
+      <server type="Server">
+        <created-at type="datetime">2011-08-30T22:50:31Z</created-at>
+        <nickname>Base ServerTemplate for Windows</nickname>
+        <updated-at type="datetime">2011-11-21T20:14:12Z</updated-at>
+        <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+        <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+        <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+        <state>stopped</state>
+        <server-type>ec2</server-type>
+        <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+      </server>
+      <server type="Server">
+        <created-at type="datetime">2011-08-27T18:58:59Z</created-at>
+        <nickname>Dev Team All in One v1</nickname>
+        <updated-at type="datetime">2011-12-12T01:25:59Z</updated-at>
+        <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+        <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+        <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+        <state>stopped</state>
+        <server-type>ec2</server-type>
+        <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+      </server>
+      <server type="Server">
+        <created-at type="datetime">2011-05-09T20:33:11Z</created-at>
+        <nickname>LNMPv1</nickname>
+        <updated-at type="datetime">2011-11-03T00:51:25Z</updated-at>
+        <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+        <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+        <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+        <state>stopped</state>
+        <server-type>ec2</server-type>
+        <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+      </server>
+    </servers>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-08-16T17:51:04Z</created-at>
+    <description></description>
+    <nickname>RAX RL Enabling Experiment</nickname>
+    <updated-at type="datetime">2011-08-16T17:51:04Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array">
+      <server type="Server">
+        <created-at type="datetime">2011-08-16T18:25:09Z</created-at>
+        <nickname>Ubuntu on RAX</nickname>
+        <updated-at type="datetime">2011-08-17T16:28:54Z</updated-at>
+      </server>
+    </servers>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-08-26T22:47:08Z</created-at>
+    <description></description>
+    <nickname>DataPipe Test</nickname>
+    <updated-at type="datetime">2011-08-26T22:47:08Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array">
+      <server type="Server">
+        <created-at type="datetime">2011-08-26T23:02:34Z</created-at>
+        <nickname>Database Manager for MySQL 5.1 (Chef) - Alpha v1 Multi-Cloud Mutt</nickname>
+        <updated-at type="datetime">2011-09-10T18:19:41Z</updated-at>
+      </server>
+      <server type="Server">
+        <created-at type="datetime">2011-08-26T22:54:38Z</created-at>
+        <nickname>Load Balancer (Chef) - Alpha v1 Multi-Cloud Mutt</nickname>
+        <updated-at type="datetime">2011-12-12T18:20:30Z</updated-at>
+      </server>
+      <server type="Server">
+        <created-at type="datetime">2011-08-26T23:06:09Z</created-at>
+        <nickname>Load Balancer (Chef) - Alpha v1 Multi-Cloud Mutt</nickname>
+        <updated-at type="datetime">2011-08-26T23:06:10Z</updated-at>
+      </server>
+      <server type="Server">
+        <created-at type="datetime">2011-08-29T20:29:04Z</created-at>
+        <nickname>PHP App Server (Chef) - Alpha v1 Multi-Cloud Mutt</nickname>
+        <updated-at type="datetime">2011-09-08T22:36:39Z</updated-at>
+      </server>
+    </servers>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-08-30T22:20:51Z</created-at>
+    <description></description>
+    <nickname>KT Cloud Test</nickname>
+    <updated-at type="datetime">2011-08-30T22:20:51Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array"/>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-09-09T19:54:14Z</created-at>
+    <description></description>
+    <nickname>TATA Private Beta</nickname>
+    <updated-at type="datetime">2011-09-09T19:54:14Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array"/>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-12-02T01:15:34Z</created-at>
+    <description>foobarbaz</description>
+    <nickname>Guzzlemethis</nickname>
+    <updated-at type="datetime">2011-12-02T01:48:08Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array">
+      <server type="Server">
+        <created-at type="datetime">2011-12-02T01:16:10Z</created-at>
+        <nickname>RightScale Load Balancer with Apache/HAProxy - 11H1</nickname>
+        <updated-at type="datetime">2011-12-02T02:02:14Z</updated-at>
+        <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+        <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+        <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+        <state>stopped</state>
+        <server-type>ec2</server-type>
+        <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+      </server>
+    </servers>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+  <deployment>
+    <created-at type="datetime">2011-12-20T02:30:55Z</created-at>
+    <description>This'll stick around for a bit</description>
+    <nickname>Guzzle_Test_1324348254</nickname>
+    <updated-at type="datetime">2011-12-20T02:30:55Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/deployments/12345</href>
+    <default-vpc-subnet-href nil="true"></default-vpc-subnet-href>
+    <servers type="array"/>
+    <default-ec2-availability-zone></default-ec2-availability-zone>
+<tags type="array"/>
+  </deployment>
+</deployments>

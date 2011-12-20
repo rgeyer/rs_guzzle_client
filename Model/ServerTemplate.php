@@ -31,13 +31,13 @@ class ServerTemplate extends ModelBase {
 	public function __construct($mixed = null) {
 		$this->_path = 'server_template';
 		$this->_required_params = array(
-			'server_template[nickname]' => null,
+			'server_template[nickname]' => $this->castToString(),
 			// TODO write a closure which checks for this, an MCI model, or a proper combination of other params. 
-			'server_template[multi_cloud_image_href]' => null
+			'server_template[multi_cloud_image_href]' => $this->castToString()
 		);
 		
 		$this->_optional_params = array(
-			'server_template[description]' => null
+			'server_template[description]' => $this->castToString()
 		);
 	}
 	

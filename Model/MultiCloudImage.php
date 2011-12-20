@@ -21,7 +21,7 @@ class MultiCloudImage extends ModelBase {
 	
 	public function __construct($mixed = null) {
 		$this->_path = 'multi_cloud_image';
-		$this->_base_params = array('name' => null);
+		$this->_base_params = array('name' => $this->castToString());
 		
 		parent::__construct($mixed);
 	}

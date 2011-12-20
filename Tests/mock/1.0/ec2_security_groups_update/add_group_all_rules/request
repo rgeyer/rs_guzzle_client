@@ -1,0 +1,12 @@
+PUT /api/acct/12345/ec2_security_groups/12345 HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.6; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Expect: 100-Continue
+Cookie: rs_gbl=eNotkM1ugkAYRV-l-dZonGEQhqRJoxZEC4jU-rMx4zAgKWBloILGdy8k3dzVuTe55wEMTMhbUCCSYD6glqIEk2CkGk8FKg4mUjHBmoEpUSCNOhrHkRFTNBpgKtAAoS4MruoDhFWkUjVmpzHv9irx3x1rpO9282BLvDladz_axHhrO-3dmCc1-52HNGJBLIMdO3hNFeTOQJDb0VluiZ5qFo1DNiNyFrb-VZZhlrPVakFO_iddojzzKy11Ai1-9ydfse3vqe4KHy0ysRsV37UeNPrhdvwIXcuYNtPavkTyOpaJOz1vmrXHE9WbCCOyCne3d9ulm5V3rf6RnvPaK2l6JQXLuyuwblnxYou286MA4_xSFxWYKh5RTQGRszTroLKDhkkPvZVpcq4kZ5kY8ksOz-cfUBZwKg==;_session_id=9e5a3415d13bcf7fb44bcf59b9910645
+Content-Length: 95
+
+ec2_security_group%5Bowner%5D=000000000000&ec2_security_group%5Bgroup%5D=Guzzle_Test_1324258351

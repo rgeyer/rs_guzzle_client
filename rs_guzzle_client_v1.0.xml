@@ -47,7 +47,7 @@
       <param name="deployment[description]" type="string" required="false" />
       <param name="deployment[default_vpc_subnet_href]" type="string" required="false" />
       <param name="deployment[default_ec2_availability_zone]" type="string" required="false" />
-      <param name="deployment[parameters]" type="array" requred="false" />
+      <param name="deployment[parameters]" type="array" required="false" />
     </command>
     
     <command name="deployments_duplicate" class="Guzzle.Rs.Command.DefaultCommand">
@@ -180,6 +180,46 @@
       <param name="server[ec2_security_groups_href]" type="array" required="false" />
       <param name="server[server_template_href]" type="string" required="false" />
       <param name="server[deployment_href]" type="string" required="false" />
+      <param name="server[instance_type]" type="enum:t1.micro,m1.small,m1.large,m1.xlarge,m2.xlarge,m2.2xlarge,m2.4xlarge,c1.medium,c1.xlarge,cc1.4xlarge,cc2.8xlarge,cg1.4xlarge" required="false" />
+      <param name="server[pricing]" type="enum:on_demand,spot" required="false" />
+      <param name="server[aki_image_href]" type="string" required="false" />
+      <param name="server[ari_image_href]" type="string" required="false" />
+      <param name="server[ec2_image_href]" type="string" required="false" />
+      <param name="server[multi_cloud_image_href]" type="string" required="false" />
+      <param name="server[vpc_subnet_href]" type="string" required="false" />
+      <param name="server[ec2_user_data]" type="string" required="false" />
+      <param name="server[ec2_elastic_ip_href]" type="string" required="false" />
+      <param name="server[associate_eip_at_launch]" type="boolean" required="false" />
+      <param name="server[ec2_availability_zone]" type="string" required="false" />
+      <param name="server[max_spot_price]" type="float" required="false" />
+      <param name="cloud_id" type="integer" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />      
+    </command>
+    
+    <command name="servers_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates a server</doc>
+      <param name="path" type="string" static="servers/{{id}}" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="method" type="string" static="PUT" />
+      <param name="server[nickname]" type="string" required="true" />
+      <param name="server[ec2_ssh_key_href]" type="string" required="false" />
+      <param name="server[ec2_security_groups_href]" type="array" required="false" />
+      <param name="server[server_template_href]" type="string" required="false" />
+      <param name="server[deployment_href]" type="string" required="false" />      
+      <param name="server[instance_type]" type="enum:t1.micro,m1.small,m1.large,m1.xlarge,m2.xlarge,m2.2xlarge,m2.4xlarge,c1.medium,c1.xlarge,cc1.4xlarge,cc2.8xlarge,cg1.4xlarge" required="false" />
+      <param name="server[pricing]" type="enum:on_demand,spot" required="false" />
+      <param name="server[aki_image_href]" type="string" required="false" />
+      <param name="server[ari_image_href]" type="string" required="false" />
+      <param name="server[ec2_image_href]" type="string" required="false" />
+      <param name="server[multi_cloud_image_href]" type="string" required="false" />
+      <param name="server[vpc_subnet_href]" type="string" required="false" />
+      <param name="server[ec2_user_data]" type="string" required="false" />
+      <param name="server[ec2_elastic_ip_href]" type="string" required="false" />
+      <param name="server[associate_eip_at_launch]" type="boolean" required="false" />
+      <param name="server[ec2_availability_zone]" type="string" required="false" />
+      <param name="server[max_spot_price]" type="float" required="false" />
+      <param name="server[lock]" type="boolean" required="false" />
+      <param name="server[parameters" type="array" required="false" />
       <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />      
     </command>
     
@@ -194,6 +234,169 @@
       <doc>List all Servers</doc>
       <param name="path" type="string" static="servers{{output_format}}" />
       <param name="method" type="string" static="GET" />
+      <param name="filter" doc="An array of filters in the form 'attribute_name=|&lt;&gt;attribute_value'" required="false" />
+      <param name="cloud_id" type="integer" required="false" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>    
+    
+    <command name="server" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Get a server by it's id</doc>
+      <param name="path" type="string" static="servers/{{id}}{{output_format}}" />      
+      <param name="method" type="string" static="GET" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>
+    
+    <command name="servers_start" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Launches the server</doc>
+      <param name="path" type="string" static="servers/{{id}}/start" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="server[parameters]" type="array" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />
+    </command>
+    
+    <command name="servers_stop_ebs" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>'stops' a running server</doc>
+      <param name="path" type="string" static="servers/{{id}}/stop_ebs" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="server[ignore_lock]" type="boolean" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />
+    </command>
+    
+    <command name="servers_start_ebs" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>'starts' a server which is 'stopped'</doc>
+      <param name="path" type="string" static="servers/{{id}}/start_ebs" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="server[parameters]" type="array" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />
+    </command>
+    
+    <command name="servers_stop" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Terminates the running server</doc>
+      <param name="path" type="string" static="servers/{{id}}/stop" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="server[ignore_lock]" type="boolean" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />
+    </command>
+    
+    <command name="servers_reboot" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Reboots the running server</doc>
+      <param name="path" type="string" static="servers/{{id}}/reboot" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="server[ignore_lock]" type="boolean" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />
+    </command>
+    
+    <command name="servers_run_script" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Runs a RightScript on the server</doc>
+      <param name="path" type="string" static="servers/{{id}}/run_script" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="server[right_script_href]" type="string" required="true" />
+      <param name="server[parameters]" type="array" required="false" />
+      <param name="server[ignore_lock]" type="boolean" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />      
+    </command>
+    
+    <command name="servers_executable" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Runs a RightScript or Chef recipe on the server</doc>
+      <param name="path" type="string" static="servers/{{id}}/run_executable" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="server[right_script_href]" type="string" required="false" />
+      <param name="server[recipe]" type="string" required="false" />
+      <param name="server[parameters]" type="array" required="false" />
+      <param name="server[ignore_lock]" type="boolean" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />      
+    </command>
+    
+    <command name="servers_attach_volume" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Attaches an EBS volume to the server</doc>
+      <param name="path" type="string" static="servers/{{id}}/attach_volume" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="server[ec2_ebs_volume_href]" type="string" required="true" />
+      <param name="server[device]" type="string" required="true" />      
+    </command>
+    
+    <command name="servers_settings" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Gets detailed settings of the server</doc>
+      <param name="path" type="string" static="servers/{{id}}/settings{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="servers_get_sketchy_data" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Retrieve the monitoring raw data of a certain time period</doc>
+      <param name="path" type="string" static="servers/{{id}}/get_sketchy_data{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" />
+      <param name="start" type="integer" required="true" doc="The number of seconds in the past" />
+      <param name="stop" type="integer" required="true" doc="The number of seconds in the past" />
+      <param name="variable" type="string" required="false" doc="The name of the collectd metric variable, example disk_ops" />
+      <param name="resolution" type="string" required="false" doc="The RRA resolution, maybe an integer rather than a string" />
+      <param name="plugin_name" type="string" required="false" doc="The name of the collectd plugin (e.g. mysql, cpu-0)" />
+      <param name="plugin_type" type="string" required="false" doc="The type of the instance of the plugin (e.g. cpu-idle, cpu-wait, count)" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>    
+    
+    <command name="server_current_show" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Get a current running server by it's id</doc>
+      <param name="path" type="string" static="servers/{{id}}/current{{output_format}}" />      
+      <param name="method" type="string" static="GET" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>    
+    
+    <command name="server_current_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates the parameters of a running server</doc>
+      <param name="path" type="string" static="servers/{{id}}/current" />      
+      <param name="method" type="string" static="PUT" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server[parameters]" type="array" required="false" />
+    </command>
+    
+    <command name="servers_current_settings" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Gets detailed settings of the running server</doc>
+      <param name="path" type="string" static="servers/{{id}}/current/settings{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="servers_alert_specs" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Gets the alert specs for a server</doc>
+      <param name="path" type="string" static="servers/{{id}}/alert_specs{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="servers_monitoring" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Gets the list of monitors for a server</doc>
+      <param name="path" type="string" static="servers/{{id}}/monitoring{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="servers_monitoring_graph_name" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Gets details for a specific monitor for a server</doc>
+      <param name="path" type="string" static="servers/{{id}}/monitoring/{{graph_name}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="graph_name" type="string" required="true" location="path" />
+      <param name="size" type="enum:tiny,small,large,xlarge" required="true" />
+      <param name="period" type="enum:now,day,yday,week,lweek,month,quarter,year" required="true" />
+      <param name="tz" type="string" required="false" />
+      <param name="title" type="string" required="false" />
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>
     

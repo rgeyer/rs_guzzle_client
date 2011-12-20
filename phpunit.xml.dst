@@ -10,6 +10,10 @@
         <server name="EMAIL" value="" />
         <!-- Change to your RightScale account password -->
         <server name="PASSWORD" value="" />
+        <!-- Populate Tests/mock with raw HTTP requests and responses from the tests -->
+        <server name="HTTP_TRACE" value="false" />
+        <!-- For the mocks created above, strip out sensitive bits like SSH keys, account numbers, and ids -->
+        <server name="OBFUSCATE_IDS" value="false" />
     </php>
     <testsuites>
         <testsuite name="guzzle-service-guzzle-rs-1_0">

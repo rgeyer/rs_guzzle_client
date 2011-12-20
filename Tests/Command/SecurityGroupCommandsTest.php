@@ -23,6 +23,8 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 	
 	protected function tearDown() {
 		$this->_security_group->destroy();
+		
+		parent::tearDown();
 	}
 	
 	public function testCanCreateAndDestroyOneSecurityGroup() {

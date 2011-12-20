@@ -1,0 +1,102 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Tue, 20 Dec 2011 02:32:34 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 112
+Set-Cookie: _session_id=1e46931f2e79835e3974e9e43d2d2dd7; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<servers type="array">
+  <server type="Server">
+    <created-at type="datetime">2011-05-09T20:33:11Z</created-at>
+    <nickname>LNMP</nickname>
+    <updated-at type="datetime">2011-12-09T00:14:55Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <state>stopped</state>
+    <server-type>ec2</server-type>
+    <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+  </server>
+  <server type="Server">
+    <created-at type="datetime">2011-05-09T20:33:11Z</created-at>
+    <nickname>LNMPv1</nickname>
+    <updated-at type="datetime">2011-11-03T00:51:25Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <state>stopped</state>
+    <server-type>ec2</server-type>
+    <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+  </server>
+  <server type="Server">
+    <created-at type="datetime">2011-08-27T18:58:59Z</created-at>
+    <nickname>Dev Team All in One v1</nickname>
+    <updated-at type="datetime">2011-12-12T01:25:59Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <state>stopped</state>
+    <server-type>ec2</server-type>
+    <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+  </server>
+  <server type="Server">
+    <created-at type="datetime">2011-08-30T22:50:31Z</created-at>
+    <nickname>Base ServerTemplate for Windows</nickname>
+    <updated-at type="datetime">2011-11-21T20:14:12Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <state>stopped</state>
+    <server-type>ec2</server-type>
+    <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+  </server>
+  <server type="Server">
+    <created-at type="datetime">2011-12-02T01:16:10Z</created-at>
+    <nickname>RightScale Load Balancer with Apache/HAProxy - 11H1</nickname>
+    <updated-at type="datetime">2011-12-02T02:02:14Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <state>stopped</state>
+    <server-type>ec2</server-type>
+    <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+  </server>
+  <server type="Server">
+    <created-at type="datetime">2011-05-09T20:33:11Z</created-at>
+    <nickname>LNMP-Relaunch</nickname>
+    <updated-at type="datetime">2011-12-08T18:29:59Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <state>operational</state>
+    <server-type>ec2</server-type>
+    <current-instance-href>https://my.rightscale.com/api/acct/12345/ec2_instances/12345</current-instance-href>
+<tags type="array"/>
+  </server>
+  <server type="Server">
+    <created-at type="datetime">2011-12-20T02:32:34Z</created-at>
+    <nickname>Guzzle_Test_1324348350</nickname>
+    <updated-at type="datetime">2011-12-20T02:32:34Z</updated-at>
+    <href>https://my.rightscale.com/api/acct/12345/servers/12345</href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <state>stopped</state>
+    <server-type>ec2</server-type>
+    <current-instance-href nil="true"></current-instance-href>
+<tags type="array"/>
+  </server>
+</servers>

@@ -1,0 +1,170 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Tue, 20 Dec 2011 02:31:44 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 155
+Set-Cookie: _session_id=1e46931f2e79835e3974e9e43d2d2dd7; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-security-groups type="array">
+  <ec2-security-group>
+    <aws-description>default group</aws-description>
+    <aws-group-name>default</aws-group-name>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</href>
+    <aws-perms type="array">
+<aws-perm>
+  <to-port>65535</to-port>
+  <owner>000000000000</owner>
+  <protocol>tcp</protocol>
+  <group>default</group>
+  <group-id>sg-ec44ec85</group-id>
+  <from-port>0</from-port>
+</aws-perm>
+<aws-perm>
+  <to-port>65535</to-port>
+  <owner>000000000000</owner>
+  <protocol>udp</protocol>
+  <group>default</group>
+  <group-id>sg-ec44ec85</group-id>
+  <from-port>0</from-port>
+</aws-perm>
+<aws-perm>
+  <to-port>-1</to-port>
+  <owner>000000000000</owner>
+  <protocol>icmp</protocol>
+  <group>default</group>
+  <group-id>sg-ec44ec85</group-id>
+  <from-port>-1</from-port>
+</aws-perm>
+<aws-perm>
+  <to-port>22</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>22</from-port>
+</aws-perm>
+<aws-perm>
+  <to-port>25</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>25</from-port>
+</aws-perm>
+<aws-perm>
+  <to-port>9418</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>9418</from-port>
+</aws-perm>
+    </aws-perms>
+  </ec2-security-group>
+  <ec2-security-group>
+    <aws-description>-</aws-description>
+    <aws-group-name>SSH</aws-group-name>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</href>
+    <aws-perms type="array">
+<aws-perm>
+  <to-port>22</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>22</from-port>
+</aws-perm>
+    </aws-perms>
+  </ec2-security-group>
+  <ec2-security-group>
+    <aws-description>-</aws-description>
+    <aws-group-name>SMTP</aws-group-name>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</href>
+    <aws-perms type="array">
+<aws-perm>
+  <to-port>25</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>25</from-port>
+</aws-perm>
+    </aws-perms>
+  </ec2-security-group>
+  <ec2-security-group>
+    <aws-description>-</aws-description>
+    <aws-group-name>GIT</aws-group-name>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</href>
+    <aws-perms type="array">
+<aws-perm>
+  <to-port>9418</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>9418</from-port>
+</aws-perm>
+    </aws-perms>
+  </ec2-security-group>
+  <ec2-security-group>
+    <aws-description>-</aws-description>
+    <aws-group-name>Web AIO</aws-group-name>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</href>
+    <aws-perms type="array">
+<aws-perm>
+  <to-port>22</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>22</from-port>
+</aws-perm>
+<aws-perm>
+  <to-port>80</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>80</from-port>
+</aws-perm>
+<aws-perm>
+  <to-port>443</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>443</from-port>
+</aws-perm>
+<aws-perm>
+  <to-port>7777</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>7777</from-port>
+</aws-perm>
+    </aws-perms>
+  </ec2-security-group>
+  <ec2-security-group>
+    <aws-description>-</aws-description>
+    <aws-group-name>ZNC</aws-group-name>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</href>
+    <aws-perms type="array">
+<aws-perm>
+  <to-port>7777</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>7777</from-port>
+</aws-perm>
+    </aws-perms>
+  </ec2-security-group>
+  <ec2-security-group>
+    <aws-description>-</aws-description>
+    <aws-group-name>RDP</aws-group-name>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</href>
+    <aws-perms type="array">
+<aws-perm>
+  <to-port>3389</to-port>
+  <protocol>tcp</protocol>
+  <cidr-ips>0.0.0.0/0</cidr-ips>
+  <from-port>3389</from-port>
+</aws-perm>
+    </aws-perms>
+  </ec2-security-group>
+  <ec2-security-group>
+    <aws-description>Description</aws-description>
+    <aws-group-name>Guzzle_Test_1324348303</aws-group-name>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</href>
+    <aws-perms type="array">
+    </aws-perms>
+  </ec2-security-group>
+</ec2-security-groups>

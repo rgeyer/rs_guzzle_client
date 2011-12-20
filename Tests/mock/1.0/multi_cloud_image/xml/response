@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Tue, 20 Dec 2011 02:31:26 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 66
+Content-Length: 326
+Set-Cookie: _session_id=1e46931f2e79835e3974e9e43d2d2dd7; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<multi-cloud-image>
+  <is-head-version type="boolean">false</is-head-version>
+  <name>RightImage_OSS_Ubuntu_10.10_Maverick_i386_5.5.9.7_EBS</name>
+  <version type="integer">2</version>
+  <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+</multi-cloud-image>

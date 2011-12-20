@@ -32,27 +32,27 @@ component_ec2_ebs_volumes:
 
 servers:
   Commands:
-    show:
-    index:
-    create: 50%
-    update:
+    show: 100%
+    index: 100%
+    create: 100%
+    update: 100%
     destroy: 100%
-    start:
-    start_ebs:
-    stop:
-    stop_ebs:
-    reboot:
-    run_script:
-    run_executable:
-    attach_volume:
-    settings:
-    get_sketchy_data:
-    current/show:
-    current/update:
-    current/settings:
-    alert_specs:
-    monitoring:
-    monitoring/graph-name:
+    start: 50% (Command is implemented, no tests)
+    start_ebs: 50% (Command is implemented, no tests) 
+    stop: 50% (Command is implemented, no tests)
+    stop_ebs: 50% (Command is implemented, no tests)
+    reboot: 50% (Command is implemented, no tests)
+    run_script: 50% (Command is implemented, no tests)
+    run_executable: 50% (Command is implemented, no tests)
+    attach_volume: 50% (Command is implemented, no tests)
+    settings: 100%
+    get_sketchy_data: 50% (Command is implemented, no tests)
+    current/show: 50% (Command is implemented, no tests)
+    current/update: 50% (Command is implemented, no tests)
+    current/settings: 50% (Command is implemented, no tests)
+    alert_specs: 50% (Command is implemented, no tests)
+    monitoring: 50% (Command is implemented, no tests)
+    monitoring/graph-name: 50% (Command is implemented, no tests)
   Model:
   
 credentials:
