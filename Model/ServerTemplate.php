@@ -30,6 +30,7 @@ class ServerTemplate extends ModelBase {
 	
 	public function __construct($mixed = null) {
 		$this->_path = 'server_template';
+		$this->_path_for_regex = 'ec2_server_templates';
 		$this->_required_params = array(
 			'server_template[nickname]' => $this->castToString(),
 			// TODO write a closure which checks for this, an MCI model, or a proper combination of other params. 
@@ -39,6 +40,8 @@ class ServerTemplate extends ModelBase {
 		$this->_optional_params = array(
 			'server_template[description]' => $this->castToString()
 		);
+		
+		parent::__construct($mixed);
 	}
 	
 	protected function intialize($mixed) {		
