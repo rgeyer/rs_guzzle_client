@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Wed, 28 Dec 2011 23:57:54 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 56
+Content-Length: 160
+Set-Cookie: _session_id=130af7c58329695a6153a49be1429934; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"monitor":{"href":"https://my.rightscale.com/sketchy1-121/hosts/12345-29JCDFA/plugins/cpu-0/views/cpu-idle.png?tok=piYftzxiFrzxJCg4XkQOd4w&size=tiny&period=now"}}

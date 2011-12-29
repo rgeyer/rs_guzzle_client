@@ -29,6 +29,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		parent::tearDown ();
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanCreateAndDeleteOneDeployment() {
 		$command = null;		
 		$result = $this->executeCommand('deployments_create', array(
@@ -45,6 +49,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(200, $result->getStatusCode());
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetAllDeploymentsJson() {				
 		$depl = $this->executeCommand('deployments');
 		
@@ -53,8 +61,12 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(200, $depl->getStatusCode());
 		$this->assertNotNull($json_obj);
 		$this->assertGreaterThan(0, count($json_obj));
-	}
+	}	
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetAllDeploymentsXml() {
 		$command = null;				
 		$depl = $this->executeCommand('deployments', array('output_format' => '.xml'), &$command);
@@ -63,8 +75,12 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertNotNull($depl);
 		$this->assertInstanceOf('SimpleXMLElement', $depl);
 		$this->assertGreaterThan(0, count($depl));
-	}
+	}	
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetDeploymentsWithOneFilterJson() {
 		$command = null;
 		$depl_result = $this->executeCommand('deployments',
@@ -80,6 +96,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($json_obj));
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetDeploymentsWithTwoFiltersJson() {
 		$command = null;
 		$depl_result = $this->executeCommand('deployments',
@@ -95,6 +115,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($json_obj));
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetDeploymentsWithOneFilterXml() {
 		$command = null;
 		$depl_result = $this->executeCommand('deployments',
@@ -107,6 +131,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($depl_result));
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetDeploymentsWithTwoFiltersXml() {
 		$command = null;
 		$depl_result = $this->executeCommand('deployments',
@@ -119,6 +147,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($depl_result));
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetDeploymentByIdJson() {
 		$command = null;		
 		$depl_by_id_result = $this->executeCommand('deployment', array('id' => $this->_deployment->id), &$command);
@@ -128,6 +160,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals("Guzzle_Test_$this->_testTs", $depl_by_id_result->nickname);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetDeploymentByIdXml() {
 		$command = null;		
 		$depl_by_id_result = $this->executeCommand('deployment', array('id' => $this->_deployment->id, 'output_format' => '.xml'), &$command);
@@ -137,6 +173,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals("Guzzle_Test_$this->_testTs", $depl_by_id_result->nickname);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetDeploymentByIdWithServerSettingsJson() {
 		$command = null;		
 		$depl_by_id_result = $this->executeCommand('deployment',
@@ -151,6 +191,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		// TODO Not actually testing for servers with server settings, since no servers have been added
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetDeploymentByIdWithServerSettingsXml() {
 		$command = null;		
 		$depl_by_id_result = $this->executeCommand('deployment',
@@ -165,6 +209,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		// TODO Not actually testing for servers with server settings, since no servers have been added
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanUpdateDeploymentDescription() {
 		$command = null;
 		$result = $this->executeCommand('deployment', array('id' => $this->_deployment->id), &$command);
@@ -186,6 +234,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals('foobarbaz', $result->description);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanNotUpdateDeploymentDefaultAZ() {
 		$command = null;		
 		$cmd = $this->executeCommand('deployments_update',
@@ -203,6 +255,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals('', strval($result->default_ec2_availability_zone));
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanNotUpdateDefaultVpcHref() {
 		$command = null;		
 		$cmd = $this->executeCommand('deployments_update',
@@ -221,6 +277,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$this->assertEquals('', strval($result->default_vpc_subnet_href));
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanUpdateDeploymentParameters() {
 		$command = null;
 		$cmd = $this->executeCommand('deployments_update', array('id' => $this->_deployment->id,
@@ -242,6 +302,10 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		// Can't get parameters, so no exception thrown is as good as it gets.
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanDuplicateDeploymentById() {
 		$result = $this->executeCommand('deployments_duplicate', array('id' => $this->_deployment->id));
 		
@@ -257,18 +321,30 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$result = $cmd->getResult();
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanStartAllServers() {
 		$result = $this->executeCommand('deployments_start_all', array('id' => $this->_deployment->id));
 		
 		$this->assertEquals(201, $result->getStatusCode());
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanStopAllServers() {
 		$result = $this->executeCommand('deployments_stop_all', array('id' => $this->_deployment->id));
 		
 		$this->assertEquals(201, $result->getStatusCode());
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testStartAllServersReturns500WhenServersCanNotBeStarted() {
 		$this->markTestIncomplete("Need to create a deployment, add servers, but leave inputs blank");
 	}

@@ -1,0 +1,36 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Wed, 28 Dec 2011 23:57:53 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 125
+Set-Cookie: _session_id=130af7c58329695a6153a49be1429934; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <dns-name>ec2-50-17-167-87.compute-1.amazonaws.com</dns-name>
+  <aki-image-href>https://my.rightscale.com/api/acct/12345/ec2_images/aki-825ea7eb?cloud_id=1</aki-image-href>
+  <aws-platform>Linux/Unix</aws-platform>
+  <aws-product-codes nil="true"></aws-product-codes>
+  <aws-id>i-6c18a30e</aws-id>
+  <ip-address>50.17.167.87</ip-address>
+  <ec2-image-href>https://my.rightscale.com/api/acct/12345/ec2_images/ami-49e32320?cloud_id=1</ec2-image-href>
+  <cloud-id type="integer">1</cloud-id>
+  <private-ip-address>10.32.114.13</private-ip-address>
+  <ec2-ssh-key-href>https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345</ec2-ssh-key-href>
+  <pricing>on_demand</pricing>
+  <locked type="boolean">false</locked>
+  <ec2-instance-type>m1.large</ec2-instance-type>
+  <ec2-availability-zone>us-east-1d</ec2-availability-zone>
+  <private-dns-name>ip-10-32-114-13.ec2.internal</private-dns-name>
+  <ec2-security-groups>
+    <ec2-security-group-href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</ec2-security-group-href>
+  </ec2-security-groups>
+</settings>

@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Wed, 28 Dec 2011 23:57:49 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 118
+Content-Length: 159
+Set-Cookie: _session_id=130af7c58329695a6153a49be1429934; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"cf":"AVERAGE","start":"2011/12/28 23:57:40 +0000","vars":["value"],"end":"2011/12/28 23:58:00 +0000","lag_time":null,"data":{"value":[NaN]},"avg_lag_time":0}

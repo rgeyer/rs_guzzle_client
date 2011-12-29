@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Wed, 28 Dec 2011 23:57:52 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 117
+Content-Length: 731
+Set-Cookie: _session_id=130af7c58329695a6153a49be1429934; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"dns_name":"ec2-50-17-167-87.compute-1.amazonaws.com","aki_image_href":"https://my.rightscale.com/api/acct/12345/ec2_images/aki-825ea7eb?cloud_id=1","aws_platform":"Linux/Unix","aws_product_codes":null,"ec2_security_groups_href":["https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345"],"aws_id":"i-6c18a30e","ip_address":"50.17.167.87","ec2_image_href":"https://my.rightscale.com/api/acct/12345/ec2_images/ami-49e32320?cloud_id=1","cloud_id":1,"private_ip_address":"10.32.114.13","ec2_ssh_key_href":"https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345","pricing":"on_demand","locked":false,"ec2_instance_type":"m1.large","ec2_availability_zone":"us-east-1d","private_dns_name":"ip-10-32-114-13.ec2.internal"}

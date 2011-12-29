@@ -1,0 +1,8 @@
+GET /api/acct/12345/ec2_server_templates.js HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.6; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkN1ugjAARl9l6TU1tAWlJEumm6DTIbJq1BtT2oJs8mOFBWd890Gy-3O-fDl3wIEL8hswgLwC9w6aq9LAtTAizsMAtQAuIthGaIRGpgEy2dGKxsoaDk1IUGxChBSCMbUlRJggQknC46Ho9mr172KL9G43D6L9Rl5MQaOjpxlvnWqxPZmm_tLtz47Vv1W0Pr5BfZxQ9h0qf-zgcJ5Y7_yw1N7a9iNVBbhJ4SpPI3mgu0kQVhyTcL84lLj1SnaVXi2m8ZTaO89vRgsazD59-5IVTmIFcLp6nWGZRJNxBcdLj30wS9ITbTcM87moNPPbpN5aFAZqE1nPfZK2T1LwXPXfb7x48tWt62MALkTZFDVwCTapbQCV8-zcQbqDBmkPvegsPdVXwc9qIMocPB5_O5xtxw==;_session_id=1b3d5d7be0c682dca99c1a1254f14bec
+

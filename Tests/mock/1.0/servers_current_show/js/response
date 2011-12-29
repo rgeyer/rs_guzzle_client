@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Wed, 28 Dec 2011 23:57:50 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 46
+Content-Length: 722
+Set-Cookie: _session_id=130af7c58329695a6153a49be1429934; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"parameters":[{"value":"env:RS_SYSLOG","name":"SYSLOG_SERVER"},{"value":"ignore:$ignore","name":"MON_PROCESSES"},{"value":"env:RS_INSTANCE_UUID","name":"SERVER_UUID"},{"value":"env:RS_SKETCHY","name":"SKETCHY"},{"value":"ignore:$ignore","name":"MON_PROCESSMATCH"},{"value":"text:UTC","name":"SYS_TZINFO"}],"href":"https://my.rightscale.com/api/acct/12345/servers/12345/current","state":"decommissioning","created_at":"2011/12/28 23:49:56 +0000","server_template_href":"https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345","deployment_href":"https://my.rightscale.com/api/acct/12345/deployments/12345","nickname":"Guzzle_Test_1325116183","locked":false,"updated_at":"2011/12/28 23:57:49 +0000"}

@@ -40,6 +40,8 @@ class ClientFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
+	 * @group v1_0
+	 * @group unit
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testThrowsExceptionWhenInvalidVersionSupplied() {

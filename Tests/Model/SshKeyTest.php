@@ -15,6 +15,10 @@ class SshKeyTest extends ClientCommandsBase {
 		ClientFactory::getClient()->get('login')->send();		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
 	public function testCanCreateKeySpecifyingParametersWithProperties() {		
 		$this->setMockResponse(ClientFactory::getClient(), '1.0/ec2_ssh_keys_create/response');
 		
@@ -23,7 +27,11 @@ class SshKeyTest extends ClientCommandsBase {
 		$key->create();
 		$this->assertEquals(12345, $key->id);
 	}
-
+	
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
 	public function testCanCreateKeySpecifyingParametersOnCreate() {		
 		$this->setMockResponse(ClientFactory::getClient(), '1.0/ec2_ssh_keys_create/response');
 
@@ -32,6 +40,10 @@ class SshKeyTest extends ClientCommandsBase {
 		$this->assertEquals(12345, $key->id);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
 	public function testCanFindKeyByIdJson() {
 		$this->setMockResponse(ClientFactory::getClient(), '1.0/ec2_ssh_key/js/response');
 		$key = new SshKey();
@@ -47,6 +59,10 @@ class SshKeyTest extends ClientCommandsBase {
 		$this->assertEquals($key_material, $key->aws_material);		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
 	public function testCanDestroyAKey() {
 		$this->setMockResponse(ClientFactory::getClient(), array('1.0/ec2_ssh_key/js/response', '1.0/ec2_ssh_keys_destroy/response'));
 		$key = new SshKey();

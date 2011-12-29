@@ -60,6 +60,10 @@ class ModelBaseTest extends PHPUnit_Framework_TestCase {
 	public function __construct() {
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
 	public function testCanInstantiateFromSimpleXML() {
 		$xmlStr = <<<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -82,6 +86,10 @@ EOF;
 		$this->assertEquals('Nickname', $model->c);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
 	public function testCanInstantiateFromJson() {
 		$jsonStr = <<<EOF
 {"a":"2011-01-24T18:14:10Z","b":"Description","c":"Nickname","tags":[],"href":"https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345","updated_at":"2011/07/21 21:59:46 +0000","created_at":"2011/01/24 18:14:10 +0000"}		
@@ -97,6 +105,10 @@ EOF;
 		$this->assertEquals('Nickname', $model->c);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
 	public function testCanInstantiateFromStdClass() {
 		$stdClass = new stdClass();
 		$stdClass->a = "2011-01-24T18:14:10Z";
@@ -114,6 +126,10 @@ EOF;
 		$this->assertEquals('Nickname', $model->c);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
 	public function testGetIdFromHref() {
 		$uri = 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345';
 		
@@ -121,6 +137,8 @@ EOF;
 	}
 	
 	/**
+	 * @group v1_0
+	 * @group unit
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testThrowsExceptionWhenRequiredParamsAreMissing() {
@@ -128,6 +146,8 @@ EOF;
 	}
 	
 	/**
+	 * @group v1_0
+	 * @group unit
 	 * @expectedException InvalidArgumentException
 	 */
 	public function testThrowsExceptionWhenInvalidParamsAreProvided() {

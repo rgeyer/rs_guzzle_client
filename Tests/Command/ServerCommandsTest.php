@@ -40,8 +40,6 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->_ssh_key->aws_key_name = "Guzzle_Test_For_Servers_$this->_testTs";
 		$this->_ssh_key->create();
 		
-		$this->_ssh_key_id = $this->_ssh_key->id;
-		
 		$this->_deployment = new Deployment();
 		$this->_deployment->nickname = "Guzzle_Test_For_Servers_$this->_testTs";
 		$this->_deployment->description = 'described';
@@ -52,11 +50,18 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->_security_group->aws_description = "described";
 		$this->_security_group->create();		 
 		
-		$result = $this->executeCommand('server_templates');
+		$result = $this->executeCommand('ec2_server_templates');
 
 		$result_obj = json_decode($result->getBody(true));		
 		
 		$this->_serverTemplateHref = $result_obj[0]->href;
+		
+		$baseStForLinux = null;
+		$baseStForWindows = null;
+		foreach($result_obj as $st) {
+			if($st->nickname == "Base ServerTemplate for Linux") { $baseStForLinux = $st; }
+			if($st->nickname == "Base ServerTemplate for Windows") { $baseStForWindows = $st; }
+		}
 		
 		$params = array(
 				'server[nickname]' => "Guzzle_Test_$this->_testTs",
@@ -67,20 +72,24 @@ class ServerCommandsTest extends ClientCommandsBase {
 		);
 		$this->_server = new Server();
 		$this->_server->create($params);
-		
 	}
 	
 	protected function tearDown() {
-		$this->_ssh_key->destroy();
 		
 		# No need to delete the server(s) this contains.
-		$this->_deployment->destroy();
+		$this->_deployment->destroy();	
+	
+		$this->_ssh_key->destroy();
 		
 		$this->_security_group->destroy();
 		
 		parent::tearDown();
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanCreateAndDestroyOneServer() {
 		$command = null;
 		$params = array(
@@ -99,6 +108,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(200, $result->getStatusCode());
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllServersJson() {
 		$result = $this->executeCommand('servers');
 		
@@ -108,6 +121,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertGreaterThan(0, count($json_obj));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllServersXml() {
 		$command = null;
 		$result = $this->executeCommand('servers', array('output_format' => '.xml'), &$command);
@@ -117,6 +134,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertGreaterThan(0, count($result));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllServersWithOneFilterJson() {
 		$command = null;
 		$result = $this->executeCommand('servers',
@@ -132,6 +153,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($json_obj));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllServersWithTwoFiltersJson() {
 		$command = null;
 		$result = $this->executeCommand('servers',
@@ -147,6 +172,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($json_obj));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllServersWithOneFilterXml() {
 		$command = null;
 		$result = $this->executeCommand('servers',
@@ -160,6 +189,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($result));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllServersWithTwoFiltersXml() {
 		$command = null;
 		$result = $this->executeCommand('servers',
@@ -173,6 +206,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($result));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetServersByIdJson() {
 		$command = null;
 		$result = $this->executeCommand('server', array('id' => $this->_server->id), &$command);
@@ -182,6 +219,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertEquals("Guzzle_Test_$this->_testTs", $result->nickname);		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetServersByIdXml() {
 		$command = null;
 		$result = $this->executeCommand('server', array('id' => $this->_server->id, 'output_format' => '.xml'), &$command);
@@ -191,6 +232,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertEquals("Guzzle_Test_$this->_testTs", $result->nickname);		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanUpdateServerNickname() {
 		$server = new Server();
 		$server->find_by_id($this->_server->id);
@@ -207,51 +252,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertEquals("Guzzle_Changed_$this->_testTs", $server->nickname);
 	}
 	
-	public function testCanStartServer() {
-		$this->markTestIncomplete("Need to use a known ServerTemplate with required parameters");
-		/*$command = null;
-		$result = $this->executeCommand('servers_start', array('id' => $this->_server->id));
-
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertEquals($this->_server->href, $result->href);*/
-	}
-	
-	public function testCanStopEbsBackedServer() {
-		$this->markTestIncomplete("Need to have a started, running EBS backed server");
-	}
-	
-	public function testCanStartStoppedEbsBackedServer() {
-		$this->markTestIncomplete("Need to have a stopped EBS backed server");
-	}
-	
-	public function testCanLockServer() {
-		$this->markTestIncomplete("Would require starting a server, and waiting for it become operational before locking it");
-	}
-	
-	public function testCanUnLockServer() {
-		$this->markTestIncomplete("Would require starting a server, and waiting for it become operational before unlocking it");
-	}
-	
-	public function testCanRebootServer() {
-		$this->markTestIncomplete("Need to have a started, running server");
-	}
-	
-	public function testCanStopServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
-	public function testCanRunScriptOnServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
-	public function testCanExecuteRecipeOnServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
-	public function testCanAttachVolumeToServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetSettingsOfServerJson() {
 		$command = null;
 		$result = $this->executeCommand('servers_settings', array('id' => $this->_server->id), &$command);
@@ -261,6 +265,10 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertNotNull($json_obj);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetSettingsOfServerXml() {
 		$command = null;
 		$result = $this->executeCommand('servers_settings', array('id' => $this->_server->id, 'output_format' => '.xml'), &$command);
@@ -269,32 +277,29 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$this->assertInstanceOf('SimpleXMLElement', $result);
 	}
 	
-	public function testCanGetSketchyDataOfServer() {
-		$this->markTestIncomplete("Need to have a started running server");
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
+	public function testCanGetAlertSpecsOfServerJson() {
+		$command = null;
+		$result = $this->executeCommand('servers_alert_specs', array('id' => $this->_server->id), &$command);
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$json_obj = json_decode($result->getBody(true));
+		$this->assertNotNull($json_obj);
 	}
 	
-	public function testCanShowCurrentServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
-	public function testCanUpdateCurrentServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
-	public function testCanGetSettingsForCurrentServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
-	public function testCanGetAlertSpecsOfServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
-	public function testCanGetMonitorsOfServer() {
-		$this->markTestIncomplete("Need to have a started running server");
-	}
-	
-	public function testCanGetSpecificMonitorOfServer() {
-		$this->markTestIncomplete("Need to have a started running server");
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
+	public function testCanGetAlertSpecsOfServerXml() {
+		$command = null;
+		$result = $this->executeCommand('servers_alert_specs', array('id' => $this->_server->id, 'output_format' => '.xml'), &$command);
+		
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$this->assertInstanceOf('SimpleXMLElement', $result);
 	}
 }
 

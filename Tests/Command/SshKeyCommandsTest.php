@@ -22,6 +22,10 @@ class SshKeyCommandsTest extends ClientCommandsBase {
 		parent::tearDown();
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanShowAKey() {
 		$result = $this->executeCommand('ec2_ssh_key', array('id' => $this->_ssh_key_id));
 				

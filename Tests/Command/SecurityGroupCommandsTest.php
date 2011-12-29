@@ -27,6 +27,10 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		parent::tearDown();
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanCreateAndDestroyOneSecurityGroup() {
 		$command = null;
 		$sec_grp = $this->executeCommand('ec2_security_groups_create',
@@ -43,7 +47,11 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		$destroy_result = $this->executeCommand('ec2_security_groups_destroy', array('id' => $sec_grp->id));
 		$this->assertEquals(200, $destroy_result->getStatusCode());
 	}
-
+	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetSecurityGroupByIdJson() {
 		$command = null;
 		$result = $this->executeCommand('ec2_security_group', array('id' => $this->_security_group->id), &$command);
@@ -56,7 +64,11 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		// For JSON this is available
 		$this->assertNotNull($result->aws_owner);
 	}
-
+	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanGetSecurityGroupByIdXml() {
 		$command = null;
 		$result = $this->executeCommand('ec2_security_group', array('id' => $this->_security_group->id, 'output_format' => '.xml'), &$command);
@@ -70,6 +82,10 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		$this->assertEmpty($result->aws_owner);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllSecurityGroupsJson() {		
 		$result = $this->executeCommand('ec2_security_groups');
 		
@@ -82,6 +98,10 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		$this->assertGreaterThan(0, count($json_obj));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllSecurityGroupsWithCloudIdJson() {
 		$command = null;		
 		$result = $this->executeCommand('ec2_security_groups', array('cloud_id' => 1), &$command, 'with_cloud_id');
@@ -95,6 +115,10 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		$this->assertGreaterThan(0, count($json_obj));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllSecurityGroupsXml() {
 		$command = null;
 		$result = $this->executeCommand('ec2_security_groups', array('output_format' => '.xml'), &$command);
@@ -105,6 +129,10 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		$this->assertGreaterThan(0, count($result));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanListAllSecurityGroupsWithCloudIdXml() {
 		$command = null;
 		$result = $this->executeCommand('ec2_security_groups', array('cloud_id' => 1, 'output_format' => '.xml'), &$command, 'with_cloud_id');
@@ -115,6 +143,10 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		$this->assertGreaterThan(0, count($result));		
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanAddSecurityGroupPermissionOnAllProtocolsAndPortsForAnotherGroup() {
 		$this->_security_group->find_by_id($this->_security_group->id);
 		$command = null;
@@ -150,6 +182,10 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		}
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanAddACidrSecurityGroupPermissions() {
 		$this->_security_group->find_by_id($this->_security_group->id);
 		$command = null;
@@ -176,6 +212,10 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(22, $sec_group->aws_perms[0]->to_port);
 	}
 	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
 	public function testCanAddSecurityGroupPermissionOnOneProtocolsAndPortForAnotherGroup() {
 		$this->_security_group->find_by_id($this->_security_group->id);
 		$command = null;

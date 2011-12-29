@@ -8,7 +8,10 @@ use Guzzle\Http\Message\Response;
 use Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
 class AuthenticationCommandsTest extends ClientCommandsBase {
-	
+
+	/**
+	 * @group unit
+	 */
 	public function testCookieJarIsRFC2109Compliant() {
 		$cookieJar = new ArrayCookieJar();
 		$cookiePlugin = new CookiePlugin($cookieJar);		
@@ -24,6 +27,9 @@ class AuthenticationCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(1, count($cookieJar->getCookies('my.rightscale.com')));		
 	}
 	
+	/**
+	 * @group unit
+	 */
 	public function testCookieJarIsNotRFC2965Compliant() {
 		$cookieJar = new ArrayCookieJar();
 		$cookiePlugin = new CookiePlugin($cookieJar);		

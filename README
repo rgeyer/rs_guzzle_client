@@ -37,22 +37,22 @@ servers:
     create: 100%
     update: 100%
     destroy: 100%
-    start: 50% (Command is implemented, no tests)
-    start_ebs: 50% (Command is implemented, no tests) 
-    stop: 50% (Command is implemented, no tests)
-    stop_ebs: 50% (Command is implemented, no tests)
-    reboot: 50% (Command is implemented, no tests)
+    start: 100%
+    start_ebs: 100% 
+    stop: 100%
+    stop_ebs: 100%
+    reboot: 100%
     run_script: 50% (Command is implemented, no tests)
     run_executable: 50% (Command is implemented, no tests)
     attach_volume: 50% (Command is implemented, no tests)
     settings: 100%
-    get_sketchy_data: 50% (Command is implemented, no tests)
-    current/show: 50% (Command is implemented, no tests)
-    current/update: 50% (Command is implemented, no tests)
-    current/settings: 50% (Command is implemented, no tests)
-    alert_specs: 50% (Command is implemented, no tests)
-    monitoring: 50% (Command is implemented, no tests)
-    monitoring/graph-name: 50% (Command is implemented, no tests)
+    get_sketchy_data: 100%
+    current/show: 100%
+    current/update: 100%
+    current/settings: 100%
+    alert_specs: 100%
+    monitoring: 100%
+    monitoring/graph-name: 100%
   Model:
   
 credentials:

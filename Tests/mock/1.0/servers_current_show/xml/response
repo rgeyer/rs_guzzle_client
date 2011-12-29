@@ -1,0 +1,52 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Wed, 28 Dec 2011 23:57:50 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 50
+Set-Cookie: _session_id=130af7c58329695a6153a49be1429934; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-instance>
+  <created-at type="datetime">2011-12-28T23:49:56Z</created-at>
+  <nickname>Guzzle_Test_1325116183</nickname>
+  <updated-at type="datetime">2011-12-28T23:57:49Z</updated-at>
+  <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+  <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+  <state>decommissioning</state>
+  <locked>false</locked>
+  <href>https://my.rightscale.com/api/acct/12345/servers/12345/current</href>
+  <parameters type="array">
+    <parameter>
+      <value>env:RS_SYSLOG</value>
+      <name>SYSLOG_SERVER</name>
+    </parameter>
+    <parameter>
+      <value>env:RS_INSTANCE_UUID</value>
+      <name>SERVER_UUID</name>
+    </parameter>
+    <parameter>
+      <value>ignore:$ignore</value>
+      <name>MON_PROCESSES</name>
+    </parameter>
+    <parameter>
+      <value>env:RS_SKETCHY</value>
+      <name>SKETCHY</name>
+    </parameter>
+    <parameter>
+      <value>ignore:$ignore</value>
+      <name>MON_PROCESSMATCH</name>
+    </parameter>
+    <parameter>
+      <value>text:UTC</value>
+      <name>SYS_TZINFO</name>
+    </parameter>
+  </parameters>
+</ec2-instance>
