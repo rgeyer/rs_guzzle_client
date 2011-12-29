@@ -40,6 +40,7 @@ class Server extends ModelBase {
 			'server[max_spot_price]' 					=> $this->castToFloat(),
 			'server[deployment_href]' 				=> $this->castToString(),
 			'server[instance_type]' 					=> $this->castToString(),
+			'server[locked]'									=> $this->castToBool(),
 			'cloud_id' 												=> $this->castToInt(),
 			'parameters' 											=> null
 		);
@@ -61,7 +62,7 @@ class Server extends ModelBase {
 	 * @return mixed An stdClass representing the alert_spec, or null if a parsing error occured
 	 */
 	public function alert_specs() {
-		$result = $this->_client->getCommand('servers_alert_specs', array('id' => $this->id));
+		$result = $this->executeCommand($this->_path_for_regex . '_alert_specs', array('id' => $this->id));
 		$json_str = $result->getBody(true);
 		$json_obj = json_decode($json_str);
 		return $json_obj;
@@ -74,7 +75,7 @@ class Server extends ModelBase {
 	 * @param string $device The OS device the EBS volume will be attached to
 	 */
 	public function attach_volume($volume_href, $device) {
-		$this->_client->getCommand('servers_attach_volume',
+		$this->executeCommand($this->_path_for_regex . '_attach_volume',
 			array('id' => $this->id, 'server[ec2_ebs_volume_href]' => $volume_href, 'server[device]' => $device)
 		);		
 	}
@@ -85,7 +86,7 @@ class Server extends ModelBase {
 	 * @return mixed An stdClass representing the current settings, or null if a parsing error occurred
 	 */
 	public function current_settings() {
-		$result = $this->_client->getCommand('servers_current_settings', array('id' => $this->id));
+		$result = $this->executeCommand($this->_path_for_regex . '_current_settings', array('id' => $this->id));
 		$json_str = $result->getBody(true);
 		$json_obj = json_decode($json_str);
 		return $json_obj;
@@ -97,7 +98,7 @@ class Server extends ModelBase {
 	 * @return Server The current running server.
 	 */
 	public function current_show() {
-		$result = $this->_client->getCommand('servers_current_show', array('id' => $this->id));
+		$result = $this->executeCommand($this->_path_for_regex . '_current_show', array('id' => $this->id));
 		return new Server($result);
 	}
 	
@@ -109,7 +110,7 @@ class Server extends ModelBase {
 	 * @return boolean True if the update was successful (determined by the HTTP response), false otherwise
 	 */
 	public function current_update($params) {
-		$result = $this->_client->getCommand('servers_current_update', array('id' => $this->id, 'server[parameters]' => $params));
+		$result = $this->executeCommand($this->_path_for_regex . '_current_update', array('id' => $this->id, 'server[parameters]' => $params));
 		return $result->getStatusCode() == 204;
 	}
 
@@ -131,7 +132,7 @@ class Server extends ModelBase {
 		if($resolution) { $params['resolution'] = $resolution; }
 		if($plugin_name) { $params['plugin_name'] = $plugin_name; }
 		if($plugin_type) { $params['plugin_type'] = $plugin_type; }
-		$result = $this->_client->getCommand('servers_get_sketchy_data', $params);
+		$result = $this->executeCommand($this->_path_for_regex . '_get_sketchy_data', $params);
 		$json_str = $result->getBody(true);
 		$json_obj = json_decode($json_str);
 		return $json_obj;		
@@ -143,7 +144,7 @@ class Server extends ModelBase {
 	 * @return mixed An stdClass representing the raw monitoring data, or null if a parsing error occurred
 	 */
 	public function monitoring() {
-		$result = $this->_client->getCommand('servers_monitoring', array('id' => $this->id));
+		$result = $this->executeCommand($this->_path_for_regex . '_monitoring', array('id' => $this->id));
 		$json_str = $result->getBody(true);
 		$json_obj = json_decode($json_str);
 		return $json_obj;
@@ -161,7 +162,7 @@ class Server extends ModelBase {
 	 * @return string An href to the requested monitoring graph.
 	 */
 	public function monitoring_graph_name($graph_name, $size, $period, $tz, $title) {
-		$result = $this->_client->getCommand('servers_monitoring_graph_name',
+		$result = $this->executeCommand($this->_path_for_regex . '_monitoring_graph_name',
 			array('id' => $this->id, 'graph_name' => $graph_name, 'size' => $size, 'period' => $period, 'tz' => $tz, 'title' => $title)
 		);
 		$json_str = $result->getBody(true);
@@ -175,7 +176,7 @@ class Server extends ModelBase {
 	 * @return boolean True if the reboot request was sucessfully made, false otherwise
 	 */
 	public function reboot() {
-		$result = $this->_client->getCommand('servers_reboot', array('id' => $this->id));
+		$result = $this->executeCommand($this->_path_for_regex . '_reboot', array('id' => $this->id));
 		return $result->getStatusCode() == 200;
 	}
 	
@@ -200,7 +201,7 @@ class Server extends ModelBase {
 		if($right_script_href) { $parameters['server[right_script_href]'] = $right_script_href; }
 		if($recipe) { $parameters['server[recipe]'] = $recipe; }
 		if($params) { $parameters['server[parameters]'] = $params; }
-		$this->_client->getCommand('servers_run_executable', $parameters);
+		$this->executeCommand($this->_path_for_regex . '_run_executable', $parameters);
 	}
 	
 	/**
@@ -215,7 +216,7 @@ class Server extends ModelBase {
 		
 		$parameters = array('id' => $this->id, 'server[ignore_lock]' => $ignore_lock, 'server[right_script_href]' => $right_script_href);
 		if($params) { $parameters['server[parameters]'] = $params; }
-		$this->_client->getCommand('servers_run_script', $parameters);
+		$this->executeCommand($this->_path_for_regex . '_run_script', $parameters);
 	}
 	
 	/**
@@ -224,7 +225,7 @@ class Server extends ModelBase {
 	 * @return mixed An stdClass representing the current settings, or null if a parsing error occurred
 	 */
 	public function settings() {
-		$result = $this->_client->getCommand('servers_settings', array('id' => $this->id));
+		$result = $this->executeCommand($this->_path_for_regex . '_settings', array('id' => $this->id));
 		$json_str = $result->getBody(true);
 		$json_obj = json_decode($json_str);
 		return $json_obj;
@@ -238,7 +239,7 @@ class Server extends ModelBase {
 	public function start($params=null) {
 		$parameters = array('id' => $this->id);		
 		if($params) { $parameters['server[parameters]'] = $params; }
-		$result = $this->_client->getCommand('servers_start', $parameters);
+		$result = $this->executeCommand($this->_path_for_regex . '_start', $parameters);
 	}
 	
 	/**
@@ -249,7 +250,7 @@ class Server extends ModelBase {
 	public function start_ebs($params=null) {
 		$parameters = array('id' => $this->id);		
 		if($params) { $parameters['server[parameters]'] = $params; }
-		$result = $this->_client->getCommand('servers_start_ebs', $parameters);
+		$result = $this->executeCommand($this->_path_for_regex . '_start_ebs', $parameters);
 	}
 	
 	/**
@@ -259,7 +260,7 @@ class Server extends ModelBase {
 	 */
 	public function stop($ignore_lock=false) {
 		$parameters = array('id' => $this->id, 'server[ignore_lock]');
-		$result = $this->_client->getCommand('servers_stop', $parameters);
+		$result = $this->executeCommand($this->_path_for_regex . '_stop', $parameters);
 	}
 	
 	/**
@@ -269,7 +270,7 @@ class Server extends ModelBase {
 	 */
 	public function stop_ebs($ignore_lock=false) {
 		$parameters = array('id' => $this->id, 'server[ignore_lock]');
-		$result = $this->_client->getCommand('servers_stop_ebs', $parameters);
+		$result = $this->executeCommand($this->_path_for_regex . '_stop_ebs', $parameters);
 	}
 }
 
