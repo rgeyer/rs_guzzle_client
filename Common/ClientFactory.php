@@ -17,90 +17,90 @@ namespace Guzzle\Rs\Common;
 
 use Guzzle\Rs\RightScaleClient;
 use Guzzle\Service\ServiceBuilder;
-use \InvalidArgumentException;
+use InvalidArgumentException;
 
 /**
  * A static singleton for creating a Guzzle ServiceBuilder and keeping it around to serve up the
  * same set of RightScaleClient object(s)
- * 
+ *
  * @author Ryan J. Geyer <me@ryangeyer.com>
  *
  */
-class ClientFactory {
-	protected static $_builder;
-	
-	public static $_acct_num 	= null;
-	public static $_email 		= null;
-	public static $_password 	= null;
+class ClientFactory
+{
+    protected static $_builder;
+    public static $_acct_num    = null;
+    public static $_email       = null;
+    public static $_password    = null;
 
-	/**
-	 * Lazy loads the builder singleton.  Requires that ClientFactory::setCredentials has been previously
-	 * called and valid credentials have been given.
-	 * 
-	 * @throws \InvalidArgumentException When no credentials are set
-	 * 
-	 * @return ServiceBuilder
-	 */
-	protected static function getBuilder() {
-		if((!ClientFactory::$_acct_num) || (!ClientFactory::$_email) || (!ClientFactory::$_password)) {
-			// @codeCoverageIgnoreStart
-			throw new InvalidArgumentException("No RightScale API credentials supplied, please call ClientFactory::setCredentials first.");
-			// @codeCoverageIgnoreEnd
-		}
-		
-		if (!ClientFactory::$_builder) {
-			ClientFactory::$_builder = ServiceBuilder::factory(array(
-					'guzzle-rs-1_0' => array (
-							'class' => 'Guzzle\Rs\RightScaleClient',
-							'params' => array (
-									'acct_num' 	=> ClientFactory::$_acct_num,
-									'email' 		=> ClientFactory::$_email,
-									'password' 	=> ClientFactory::$_password,
-									'version' 	=> '1.0'
-							)
-					)
-			));
-		}
-		
-		return ClientFactory::$_builder;
-	}
-	
-	// @codeCoverageIgnoreStart
-	/**
-	 * Sets the credentials to use for any client produced from this factory
-	 * 
-	 * @param string $acct_num Your RightScale account number
-	 * @param string $email Your RightScale account email
-	 * @param string $password Your RightScale account password
-	 */
-	public static function setCredentials($acct_num, $email, $password) {
-		ClientFactory::$_acct_num = $acct_num;
-		ClientFactory::$_email 		= $email;
-		ClientFactory::$_password = $password;		
-	}	
-	// @codeCoverageIgnoreEnd
-	
-	/**
-	 * Returns a persistent instance of the Guzzle RightScaleClient.
-	 * 
-	 * @param string $version The API version of the returned client, currently acceptable options are "1.0" and "1.5"
-	 * 
-	 * @throws \InvalidArgumentException When the version is not 1.0 or 1.5, or when no credentials are set.
-	 * 
-	 * @return RightScaleClient
-	 */
-	public static function getClient($version = "1.0") {
-		$acceptable_versions = array('1.0', '1.5');
-		
-		if(!in_array($version, $acceptable_versions)) {
-			throw new InvalidArgumentException("API Version $version is not supported, please try 1.0 or 1.5");
-		}
-		
-		$version = str_ireplace('.', '_', $version);
-		
-		return ClientFactory::getBuilder()->get( "guzzle-rs-$version" );
-	}
+    /**
+     * Lazy loads the builder singleton.  Requires that ClientFactory::setCredentials has been previously
+     * called and valid credentials have been given.
+     *
+     * @throws \InvalidArgumentException When no credentials are set
+     *
+     * @return ServiceBuilder
+     */
+    protected static function getBuilder()
+    {
+        if ((!ClientFactory::$_acct_num) || (!ClientFactory::$_email) || (!ClientFactory::$_password)) {
+            // @codeCoverageIgnoreStart
+            throw new InvalidArgumentException("No RightScale API credentials supplied, please call ClientFactory::setCredentials first.");
+            // @codeCoverageIgnoreEnd
+        }
 
+        if (!ClientFactory::$_builder) {
+            ClientFactory::$_builder = ServiceBuilder::factory(array(
+                    'guzzle-rs-1_0' => array (
+                            'class' => 'Guzzle\Rs\RightScaleClient',
+                            'params' => array (
+                                    'acct_num'  => ClientFactory::$_acct_num,
+                                    'email'         => ClientFactory::$_email,
+                                    'password'  => ClientFactory::$_password,
+                                    'version'   => '1.0'
+                            )
+                    )
+            ));
+        }
+
+        return ClientFactory::$_builder;
+    }
+
+    // @codeCoverageIgnoreStart
+    /**
+     * Sets the credentials to use for any client produced from this factory
+     *
+     * @param string $acct_num Your RightScale account number
+     * @param string $email Your RightScale account email
+     * @param string $password Your RightScale account password
+     */
+    public static function setCredentials($acct_num, $email, $password)
+    {
+        ClientFactory::$_acct_num = $acct_num;
+        ClientFactory::$_email      = $email;
+        ClientFactory::$_password = $password;
+    }
+    // @codeCoverageIgnoreEnd
+
+    /**
+     * Returns a persistent instance of the Guzzle RightScaleClient.
+     *
+     * @param string $version The API version of the returned client, currently acceptable options are "1.0" and "1.5"
+     *
+     * @throws \InvalidArgumentException When the version is not 1.0 or 1.5, or when no credentials are set.
+     *
+     * @return RightScaleClient
+     */
+    public static function getClient($version = "1.0")
+    {
+        $acceptable_versions = array('1.0', '1.5');
+
+        if (!in_array($version, $acceptable_versions)) {
+            throw new InvalidArgumentException("API Version $version is not supported, please try 1.0 or 1.5");
+        }
+
+        $version = str_ireplace('.', '_', $version);
+
+        return ClientFactory::getBuilder()->get( "guzzle-rs-$version" );
+    }
 }
-
-?>
