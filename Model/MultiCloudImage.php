@@ -15,33 +15,35 @@
 namespace Guzzle\Rs\Model;
 
 use Guzzle\Rs\Model\ModelBase;
-use \BadMethodCallException;
+use BadMethodCallException;
 
-class MultiCloudImage extends ModelBase {
-	
-	public function __construct($mixed = null) {
-		$this->_path = 'multi_cloud_image';
-		$this->_base_params = array('name' => $this->castToString());
-		
-		parent::__construct($mixed);
-	}
-	
-	public function create($params = null) {
-		throw new BadMethodCallException($this->_path . " does not implement a create method");
-	}
-	
-	public function update($params = null) {
-		throw new BadMethodCallException($this->_path . " does not implement an update method");
-	}
-	
-	public function destroy() {
-		throw new BadMethodCallException($this->_path . " does not implement a destroy method");
-	}
-	
-	public function duplicate() {
-		throw new BadMethodCallException($this->_path . " does not implement a duplicate method");
-	}
-	
+class MultiCloudImage extends ModelBase
+{
+    public function __construct($mixed = null)
+    {
+        $this->_path = 'multi_cloud_image';
+        $this->_base_params = array('name' => $this->castToString());
+
+        parent::__construct($mixed);
+    }
+
+    public function create($params = null)
+    {
+        throw new BadMethodCallException($this->_path . " does not implement a create method");
+    }
+
+    public function update($params = null)
+    {
+        throw new BadMethodCallException($this->_path . " does not implement an update method");
+    }
+
+    public function destroy()
+    {
+        throw new BadMethodCallException($this->_path . " does not implement a destroy method");
+    }
+
+    public function duplicate()
+    {
+        throw new BadMethodCallException($this->_path . " does not implement a duplicate method");
+    }
 }
-
-?>

@@ -17,25 +17,24 @@ namespace Guzzle\Rs\Model;
 use Guzzle\Rs\Model\ModelBase;
 use BadMethodCallException;
 
-class SecurityGroup extends ModelBase {
-	
-	public function __construct($mixed = null) {
-		$this->_path = 'ec2_security_group';
-		$this->_required_params = array('ec2_security_group[aws_group_name]' => $this->castToString(), 'ec2_security_group[aws_description]' => $this->castToString());
-		$this->_optional_params = array('cloud_id' => $this->castToInt());		
-		$this->_base_params = array(
-			// BUG aws_owner is only returned for json responses, not xml!
-			'aws_owner' => $this->castToString(),			
-			'aws_perms' => null
-		);
-		
-		parent::__construct($mixed);
-	}
-	
-	public function duplicate() {
-		throw new BadMethodCallException($this->_path . " does not implement a duplicate method");
-	}
+class SecurityGroup extends ModelBase
+{
+    public function __construct($mixed = null)
+    {
+        $this->_path = 'ec2_security_group';
+        $this->_required_params = array('ec2_security_group[aws_group_name]' => $this->castToString(), 'ec2_security_group[aws_description]' => $this->castToString());
+        $this->_optional_params = array('cloud_id' => $this->castToInt());
+        $this->_base_params = array(
+            // BUG aws_owner is only returned for json responses, not xml!
+            'aws_owner' => $this->castToString(),
+            'aws_perms' => null
+        );
 
+        parent::__construct($mixed);
+    }
+
+    public function duplicate()
+    {
+        throw new BadMethodCallException($this->_path . " does not implement a duplicate method");
+    }
 }
-
-?>

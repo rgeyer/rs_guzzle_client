@@ -21,34 +21,32 @@ use Guzzle\Rs\Common\ClientFactory;
 
 /**
  * A model for the RightScale ServerTemplate in v1.0 of the API
- * 
+ *
  * TODO Add MCI parsing
- * 
+ *
  * @author Ryan J. Geyer <me@ryangeyer.com>
  */
-class ServerTemplate extends ModelBase {
-	
-	public function __construct($mixed = null) {
-		$this->_path = 'server_template';
-		$this->_path_for_regex = 'ec2_server_templates';
-		$this->_required_params = array(
-			'server_template[nickname]' => $this->castToString(),
-			// TODO write a closure which checks for this, an MCI model, or a proper combination of other params. 
-			'server_template[multi_cloud_image_href]' => $this->castToString()
-		);
-		
-		$this->_optional_params = array(
-			'server_template[description]' => $this->castToString()
-		);
-		
-		parent::__construct($mixed);
-	}
-	
-	protected function intialize($mixed) {		
-		
-		parent::initialize($mixed);
-	}
-	
-}
+class ServerTemplate extends ModelBase
+{
+    public function __construct($mixed = null)
+    {
+        $this->_path = 'server_template';
+        $this->_path_for_regex = 'ec2_server_templates';
+        $this->_required_params = array(
+            'server_template[nickname]' => $this->castToString(),
+            // TODO write a closure which checks for this, an MCI model, or a proper combination of other params.
+            'server_template[multi_cloud_image_href]' => $this->castToString()
+        );
 
-?>
+        $this->_optional_params = array(
+            'server_template[description]' => $this->castToString()
+        );
+
+        parent::__construct($mixed);
+    }
+
+    protected function intialize($mixed)
+    {
+        parent::initialize($mixed);
+    }
+}
