@@ -35,7 +35,8 @@ class SecurityGroup extends ModelBase {
 	public function duplicate() {
 		throw new BadMethodCallException($this->_path . " does not implement a duplicate method");
 	}
-
+	
+	// TODO: Implement the addition of rules
 }
 
 ?>

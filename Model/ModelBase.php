@@ -43,25 +43,24 @@ abstract class ModelBase {
 	protected $_client;	
 	protected $_last_command;
 	
-	/* ----------------------- Conversion Closures ----------------------- */
-	
-	public function castToString() {
+	/* ----------------------- Conversion Closures ----------------------- */	
+	protected function castToString() {
 		return function($value, $params) { return (string)$value; };
 	}
 	
-	public function castToInt() {
+	protected function castToInt() {
 		return function($value, $params) { return intval($value); };
 	}
 	
-	public function castToFloat() {
+	protected function castToFloat() {
 		return function($value, $params) { return floatval($value); };
 	}
 	
-	public function castToBool() {
+	protected function castToBool() {
 		return function($value, $params) { return (bool)$value; };
 	}
 	
-	public function castToDateTime() {
+	protected function castToDateTime() {
 		return function($value, $params) { return new DateTime($value); };
 	}
 	
@@ -208,8 +207,9 @@ abstract class ModelBase {
 		}
 		
 		$allowed_params = $this->_getAllowedParams();
-		if(count(array_diff(array_keys($params), $allowed_params)) > 0) {
-			throw new InvalidArgumentException("The following parameters are invalid -- " . join(',', array_diff(array_keys($params), $allowed_params)));
+		$allowed_keys = array_keys($allowed_params);
+		if(count(array_diff(array_keys($params), $allowed_keys)) > 0) {
+			throw new InvalidArgumentException("The following parameters are invalid -- " . join(',', array_diff(array_keys($params), $allowed_keys)));
 		}
 		
 		$result = $this->executeCommand($this->_path_for_regex . "_create", $params);		
