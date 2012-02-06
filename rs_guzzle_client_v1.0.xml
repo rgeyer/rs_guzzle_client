@@ -170,6 +170,41 @@
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>
     
+    <!-- Start Tags -->
+    <command name="tags_taggable_resources" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists all taggable resources</doc>
+      <param name="path" type="string" static="tags/taggable_resources{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>
+    
+    <command name="tags_set" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Sets tags</doc>
+      <param name="path" type="string" static="tags/set" />
+      <param name="method" type="string" static="PUT" />
+      <param name="resource_href" type="string" required="true" />
+      <param name="tags" type="array" required="true" />
+    </command>
+    
+    <command name="tags_unset" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Unsets tags</doc>
+      <param name="path" type="string" static="tags/unset" />
+      <param name="method" type="string" static="PUT" />
+      <param name="resource_href" type="string" required="true" />
+      <param name="tags" type="array" required="true" />
+    </command>
+    
+    <command name="tags_search" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Finds objects by their tag</doc>
+      <param name="path" type="string" static="tags/search{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="resource_href" type="string" required="false" />
+      <param name="resource_type" type="string" required="false" />
+      <param name="match_all" type="string" required="false" />
+      <param name="tags" type="array" required="false" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>
+    
     <!-- Start Servers -->
     <command name="servers_create" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Create a new server</doc>

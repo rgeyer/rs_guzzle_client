@@ -1,0 +1,8 @@
+GET /api/acct/12345/tags/taggable_resources.xml HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.6; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNo1kMtugkAYRl-l-ddgYGZAIGlSEW8UbKBirBszhRGIDFDAcjG-e2HR_Tlf8p0HUDCA9yBAVIPxgHvNKjAIkrH2FKAJwZAx0hRF1hASII1GOlIRJQxLoiKxSJRlJovaVdVEGWEZ64hRhSjjXsP-XV2a3HEe7KDCpLFLKeHuwruaFRu6b-9nEUv5WnJuxSe1c6tYHo6eOkd-be976T3Zxvi0rtUvpSsuO32FI9fZcX-Rthc3LpeBYqrk15rbtpl0AW9PkTmww6qu_UTXytA8Zk5ldqdt65NzkO0_-DnKLJeHZFDJUOpHzbnlGffuq9yzN-1gzu0tqSz_9jol6aYkOeXjFfB7mr9sWD_2EYCGYXHPGzAwknRFAMZpmo1QNUKzeILeqjROmjqkGZuFBYfn8w_JCW-O;_session_id=dad1ecc4373742c891719f467ec331db
+

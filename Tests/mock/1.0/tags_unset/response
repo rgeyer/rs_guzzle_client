@@ -1,0 +1,10 @@
+HTTP/1.1 204 No Content
+Server: nginx/1.0.5
+Date: Mon, 06 Feb 2012 18:10:30 GMT
+Connection: keep-alive
+Status: 204
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 130
+Set-Cookie: _session_id=dad1ecc4373742c891719f467ec331db; path=/; Secure; HttpOnly
+Cache-Control: no-cache
+

@@ -184,10 +184,10 @@ statuses:
   
 tags:
   Commands:
-    search:
-    set:
-    unset:
-    taggable_resources:
+    search: 100%
+    set: 100%
+    unset: 100%
+    taggable_resources: 100%
   Model:
   
 vpc_dhcp_option:
