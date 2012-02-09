@@ -435,5 +435,66 @@
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>
     
+    <!-- Start AlertSpecs -->
+    <command name="alert_specs" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Alert Specs</doc>
+      <param name="path" type="string" static="alert_specs{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>    
+    
+    <command name="alert_spec" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Get an alert_spec by it's id</doc>
+      <param name="path" type="string" static="alert_specs/{{id}}{{output_format}}" />      
+      <param name="method" type="string" static="GET" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <!-- <param name="return_class" type="string" static="Guzzle\Rs\Model\AlertSpec" /> -->
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>
+    
+    <command name="alert_specs_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete an Alert Spec</doc>
+      <param name="path" type="string" static="alert_specs/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <command name="alert_specs_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an Alert Spec</doc>
+      <param name="path" type="string" static="alert_specs" />
+      <param name="method" type="string" static="POST" />
+      <param name="alert_spec[name]" type="string" required="true" />
+      <param name="alert_spec[file]" type="string" required="true" />
+      <param name="alert_spec[variable]" type="string" required="true" />
+      <param name="alert_spec[condition]" type="enum:&gt;,&gt;=,&lt;,&lt;=,==,!=" required="true" />
+      <param name="alert_spec[threshold]" type="string" required="true" />
+      <param name="alert_spec[escalation_name]" type="string" required="false" />
+      <param name="alert_spec[duration]" type="integer" required="true" />
+      <param name="alert_spec[description]" type="string" required="false" />
+      <param name="alert_spec[subject_type]" type="enum:Server,ServerTemplate" required="true" />
+      <param name="alert_spec[subject_href]" type="string" required="true" />
+      <param name="alert_spec[action]" type="enum:escalate,vote" required="true" />
+      <param name="alert_spec[vote_tag]" type="string" required="false" />
+      <param name="alert_spec[vote_type" type="enum:grow,shring" required="false" />
+    </command>
+    
+    <command name="alert_specs_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an Alert Spec</doc>
+      <param name="path" type="string" static="alert_specs/{{id}}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="alert_spec[name]" type="string" required="false" />
+      <param name="alert_spec[file]" type="string" required="false" />
+      <param name="alert_spec[variable]" type="string" required="false" />
+      <param name="alert_spec[condition]" type="enum:&gt;,&gt;=,&lt;,&lt;=,==,!=" required="false" />
+      <param name="alert_spec[threshold]" type="string" required="false" />
+      <param name="alert_spec[escalation_name]" type="string" required="false" />
+      <param name="alert_spec[duration]" type="integer" required="false" />
+      <param name="alert_spec[description]" type="string" required="false" />
+      <param name="alert_spec[action]" type="enum:escalate,vote" required="false" />
+      <param name="alert_spec[vote_tag]" type="string" required="false" />
+      <param name="alert_spec[vote_type" type="enum:grow,shring" required="false" />
+    </command>
+    
   </commands>
 </client>

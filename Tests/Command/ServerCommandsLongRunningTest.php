@@ -13,35 +13,57 @@ use Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 class ServerCommandsLongRunningTest extends ClientCommandsBase {
 	
 	/**
-	 * 
+	 * The SSH Key for the test
 	 * @var SshKey
 	 */
 	protected static $_ssh_key;	
 	
 	/**
-	 * 
+	 * The Deployment for the test
 	 * @var Deployment
 	 */
 	protected static $_deployment;
 	
 	/**
-	 * 
+	 * The Security group for the test
 	 * @var SecurityGroup
 	 */
 	protected static $_security_group;
 	
-	protected static $_serverTemplateHref;
-	
+	/**
+	 * A non running server for the test
+	 * @var Server
+	 */
 	protected static $_server;
 	
+	/**
+	 * 
+	 * @var Server
+	 */
 	protected static $_server_started;
 	
+	/**
+	 * 
+	 * @var Server
+	 */
 	protected static $_server_to_start;
 	
+	/**
+	 * 
+	 * @var Server
+	 */
 	protected static $_server_ebs_started;
 	
-	protected static $_server_ebs_stopped;
+	/**
+	 * 
+	 * @var Server
+	 */
+	protected static $_server_ebs_stopped;	
 	
+	/**
+	 * A timestamp for the test
+	 * @var int
+	 */
 	protected static $testTs;
 	
 	protected static function waitForServersToReachState(array $servers, $state) {
@@ -71,26 +93,14 @@ class ServerCommandsLongRunningTest extends ClientCommandsBase {
 		self::$_security_group = new SecurityGroup();
 		self::$_security_group->aws_group_name = "Guzzle_Test_For_Servers_Long_Running_" . self::$testTs;
 		self::$_security_group->aws_description = "described";
-		self::$_security_group->create();		 
+		self::$_security_group->create();
 		
-		$st = new ServerTemplate();
-		$result_obj = $st->index();
-		
-		#$result = $this->executeCommand('server_templates');
-		#$result_obj = json_decode($result->getBody(true));		
-		
-		self::$_serverTemplateHref = $result_obj[0]->href;
-		
-		$baseStForLinux = null;
-		$baseStForWindows = null;
-		foreach($result_obj as $st) {
-			if($st->nickname == "Base ServerTemplate for Linux") { $baseStForLinux = $st; }
-			if($st->nickname == "Base ServerTemplate for Linux (EBS)") { $baseStForWindows = $st; }
-		}
+		$testClassToApproximateThis = new ServerCommandsLongRunningTest();
+		$testClassToApproximateThis->setUp();		
 		
 		$params = array(
 				'server[nickname]' => "Guzzle_Test_" . self::$testTs,
-				'server[server_template_href]' => self::$_serverTemplateHref,
+				'server[server_template_href]' => $testClassToApproximateThis->_serverTemplate->href,
 				'server[ec2_ssh_key_href]' => self::$_ssh_key->href,
 				'server[ec2_security_groups_href]' => array(self::$_security_group->href),
 				'server[deployment_href]' => self::$_deployment->href
@@ -98,7 +108,7 @@ class ServerCommandsLongRunningTest extends ClientCommandsBase {
 		self::$_server = new Server();
 		self::$_server->create($params);
 		
-		$params['server[server_template_href]'] = $baseStForLinux->href;
+		$params['server[server_template_href]'] = $testClassToApproximateThis->_serverTemplate->href;
 		self::$_server_to_start = new Server();
 		self::$_server_to_start->create($params);
 		
@@ -106,7 +116,7 @@ class ServerCommandsLongRunningTest extends ClientCommandsBase {
 		self::$_server_started->create($params);
 		self::$_server_started->start();		
 		
-		$params['server[server_template_href]'] = $baseStForWindows->href;
+		$params['server[server_template_href]'] = $testClassToApproximateThis->_serverTemplateEbs->href;
 		self::$_server_ebs_started = new Server();
 		self::$_server_ebs_started->create($params);
 		self::$_server_ebs_started->start();

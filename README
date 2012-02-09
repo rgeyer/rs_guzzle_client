@@ -12,11 +12,11 @@ alert_spec_subjects:
 
 alert_specs:
   Commands:
-    show:
-    index:
-    create:
-    update:
-    destroy:
+    show: 100%
+    index: 100%
+    create: 100%
+    update: 100%
+    destroy: 50% (Command is implemented, unable to test)
   Model:
   
 audit_entries:

@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Thu, 09 Feb 2012 18:31:41 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 69
+Content-Length: 322
+Set-Cookie: _session_id=93a720250f9d6f3d4a66211480a54dba; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"vote_type":null,"vote_tag":null,"condition":"<","action":"escalate","href":"https://my.rightscale.com/api/acct/12345/alert_specs/12345","file":"memory/memory_free","escalation_name":"critical","variable":"value","duration":1,"name":"rs guzzle test alertzor","threshold":"1000000","description":"A quick description"}

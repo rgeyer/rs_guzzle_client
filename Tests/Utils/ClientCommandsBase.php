@@ -14,6 +14,8 @@
 
 namespace Guzzle\Rs\Tests\Utils;
 
+use Guzzle\Rs\Model\ServerTemplate;
+
 use Guzzle\Rs\Common\ClientFactory;
 
 
@@ -21,14 +23,32 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 	
 	protected $_client;
 
-	protected $_testTs;	
+	protected $_testTs;
+
+	protected $_serverTemplate;
+	
+	protected $_serverTemplateEbs;
 	
 	protected function setUp() {
 		parent::setUp();
 		
 		$this->_testTs = time();
 		
-		$this->_client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');		
+		$this->_client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');
+
+		$st = new ServerTemplate();
+		$result_obj = $st->index();
+		
+		$baseStForLinux = null;
+		$baseStForWindows = null;
+		foreach($result_obj as $st) {
+			if($st->nickname == $_SERVER['ST_NAME']) {
+				$this->_serverTemplate = $st;
+			}
+			if($st->nickname == $_SERVER['ST_EBS_NAME']) {
+				$this->_serverTemplateEbs = $st;
+			}
+		}
 	}
 	
 	/**
