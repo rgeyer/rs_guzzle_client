@@ -1,0 +1,11 @@
+POST /api/acct/12345/alert_spec_subjects HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.6; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkN1ugkAYBV-l-a7BsMvfQtKkKAatWipUwCuzLgsSBCJgEYzvXkh6P3OSM0-gYELRgwBxA-YT7g2vwVQwkslLgJaBiWRsIF3HKhEgi0daohQnjBBR1QwuIsSRSAg9iwjLSI4xUjQpHvda_u8SRZnccR6sxKuLzT4Rb2kqd8Q12InTod_gcqNL_XCIlbUj5649fKe3-strfqNh7V8Ud0eR9Uh03v1Wt89zLzkc7azQb_ah3dfDoHWsyB7zbsgtW1r9HHd4Md8dK1S1jWHkKDoEhX65LvzTqli6nboNwiis2uU54LbInLIbWLRPgrAnizzzPbKNU816n5I8piQlLcYr4PW0fHN4P_YRgDJW3csWTBlLhioAL2h2HaF6hGbpBH3UWXppG0avfMaqAl6vPyMwcRM=;_session_id=640993cc000000000000deb83c713e09
+Content-Length: 271
+
+alert_spec_subject%5Balert_spec_href%5D=https%3A%2F%2Fmy.rightscale.com%2Fapi%2Facct%2F32095%2Falert_specs%2F810255&alert_spec_subject%5Bsubject_href%5D=https%3A%2F%2Fmy.rightscale.com%2Fapi%2Facct%2F32095%2Fservers%2F277342001&alert_spec_subject%5Bsubject_type%5D=Server

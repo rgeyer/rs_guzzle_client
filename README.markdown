@@ -65,7 +65,7 @@ Below you will find the current controllers (and their commands) that are suppor
   <tbody>
     <tr>
       <td>create</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>

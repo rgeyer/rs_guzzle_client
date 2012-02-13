@@ -475,7 +475,7 @@
       <param name="alert_spec[subject_href]" type="string" required="true" />
       <param name="alert_spec[action]" type="enum:escalate,vote" required="true" />
       <param name="alert_spec[vote_tag]" type="string" required="false" />
-      <param name="alert_spec[vote_type" type="enum:grow,shring" required="false" />
+      <param name="alert_spec[vote_type]" type="enum:grow,shrink" required="false" />
     </command>
     
     <command name="alert_specs_update" class="Guzzle.Rs.Command.DefaultCommand">
@@ -493,8 +493,18 @@
       <param name="alert_spec[description]" type="string" required="false" />
       <param name="alert_spec[action]" type="enum:escalate,vote" required="false" />
       <param name="alert_spec[vote_tag]" type="string" required="false" />
-      <param name="alert_spec[vote_type" type="enum:grow,shring" required="false" />
+      <param name="alert_spec[vote_type]" type="enum:grow,shrink" required="false" />
     </command>
+    
+    <!-- Start Alert Spec Subjects -->    
+    <command name="alert_spec_subjects_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an Alert Spec Subject</doc>
+      <param name="path" type="string" static="alert_spec_subjects" />
+      <param name="method" type="string" static="POST" />
+      <param name="alert_spec_subject[alert_spec_href]" type="string" required="true" />
+      <param name="alert_spec_subject[subject_href]" type="string" required="true" />
+      <param name="alert_spec_subject[subject_type]" type="enum:Server,ServerTemplate" required="true" />
+    </command>    
     
   </commands>
 </client>
