@@ -2,204 +2,1063 @@ rs_guzzle_client is a PHP Guzzle REST API client library for the RightScale API.
 
 Support is available for v1.0 of the API and v1.5 support is coming soon!
 
-<table>
-  <tr>
-    <td>Foo</td>
-  </tr>
+Below you will find the current controllers (and their commands) that are supported by the library.
+
+<!-- 
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3"></th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+-->
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Alert Spec Subjects</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
 </table>
 
-Completeness (1.0);
+<br/>
 
-alert_spec_subjects:
-  Commands:
-    create:
-  Model:     
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Alert Spec</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="orange">50%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
 
-alert_specs:
-  Commands:
-    show: 100%
-    index: 100%
-    create: 100%
-    update: 100%
-    destroy: 50% (Command is implemented, unable to test)
-  Model:
-  
-audit_entries:
-  Commands:
-    show:
-  Model:
-  
-component_ec2_ebs_volumes:
-  Commands:
-    create:
-    destroy:
-  Model:
+<br/>
 
-servers:
-  Commands:
-    show: 100%
-    index: 100%
-    create: 100%
-    update: 100%
-    destroy: 100%
-    start: 100%
-    start_ebs: 100% 
-    stop: 100%
-    stop_ebs: 100%
-    reboot: 100%
-    run_script: 50% (Command is implemented, no tests)
-    run_executable: 50% (Command is implemented, no tests)
-    attach_volume: 50% (Command is implemented, no tests)
-    settings: 100%
-    get_sketchy_data: 100%
-    current/show: 100%
-    current/update: 100%
-    current/settings: 100%
-    alert_specs: 100%
-    monitoring: 100%
-    monitoring/graph-name: 100%
-  Model:
-  
-credentials:
-  Commands:
-    show:
-    index:
-    create:
-    update:
-    destroy:
-  Model:
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Audit Entries</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
 
-deployments:
-  Commands:
-    show: 100%
-    index: 100%
-    create: 100%
-    update: 100%
-    destroy: 100%
-    duplicate: 100%
-    start_all: 100%
-    stop_all: 100%
-  Model: 100%
-  
-ec2_ebs_snapshots:
-  Commands:
-    show:
-    index:
-    create:
-    update:
-    destroy:
-  Model:
-  
-ec2_ebs_volumes:
-  Commands:
-    show:
-    index:
-    create:
-    update:
-    destroy:
-  Model:
+<br/>
 
-ec2_elastic_ips:
-  Commands:
-    show:
-    index:
-    create:
-    destroy:
-  Model:
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Component EC2 EBS Volumes</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+    </tr>
+  </tbody>
+</table>
 
-ec2_security_groups:
-  Commands:
-    show: 100%
-    index: 100%
-    create: 100%
-    update: 100%
-    destroy: 100%
-  Model:
-  
-server_arrays:
-  Commands:
-    show:
-    index:
-    create:
-    update:
-    destroy:
-    terminate_all:
-    launch:
-    run_script_on_all:
-    instances:
-  Model:
-  
-ec2_ssh_keys:
-  Commands:
-    show: 100%
-    create: 100%
-    destroy: 100%
-  Model: 100%
-  
-macros:
-  Commands:
-    show:
-    index:
-    create:
-    update:
-    destroy:
-  Model:
+<br/>
 
-multi_cloud_images:
-  Commands:
-    show: 100%
-    index: 100%
-  Model: 100%
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Servers</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>start</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>start_ebs</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>stop</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>stop_ebs</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>reboot</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>run_script</td>
+      <td bgcolor="orange">50%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>run_executable</td>
+      <td bgcolor="orange">50%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>attach_volume</td>
+      <td bgcolor="orange">50%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>settings</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>get_sketchy_data</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>current/show</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>current/update</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>current/settings</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>alert_specs</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>monitoring</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>monitoring/graph-name</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Credentials</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
   
-right_scripts:
-  Commands:
-    show:
-    index:
-  Model:
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Deployments</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>duplicate</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>start_all</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>stop_all</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">EC2 EBS Snapshots</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">EC2 EBS Volumes</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
   
-s3_bucket:
-  Commands:
-    create:
-    destroy:
-  Model:
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">EC2 Elastic IPs</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">EC2 Security Groups</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Server Arrays</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>terminate_all</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>launch</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>run_script_on_all</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>instances</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">EC2 SSH Keys</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Macros</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
   
-server_templates:
-  Commands:
-    show:
-    index: 100%
-    create:
-    update:
-    destroy:
-    executables:
-    alert_specs:
-  Model:
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Multi Cloud Images</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Right Scripts</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
   
-sqs_queues:
-  Commands:
-    show:
-    index:
-    create:
-    destroy:
-  Model:
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">S3 Bucket</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
   
-statuses:
-  Commands:
-    show:
-  Model:
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Server Template</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>executables</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>alert_specs</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">SQS Queues</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
   
-tags:
-  Commands:
-    search: 100%
-    set: 100%
-    unset: 100%
-    taggable_resources: 100%
-  Model:
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Statuses</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
   
-vpc_dhcp_option:
-  Commands:
-    show:
-    index:
-    create:
-    update:
-    destroy:
-  Model:     
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Tags</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>search</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>set</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>unset</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>taggable_resources</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+  
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">VPC DHCP Option</th>      
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>    
