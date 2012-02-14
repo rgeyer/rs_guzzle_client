@@ -12,6 +12,16 @@
         <server name="EMAIL" value="" />
         <!-- Change to your RightScale account password -->
         <server name="PASSWORD" value="" />
+        <!-- Change to the name of a ServerTemplate which can be launched without any input changes (Base ServerTemplate for Linux recommended) -->
+        <server name="ST_NAME" value="Base ServerTemplate for Linux" />
+        <!-- Change to the name of an (EBS backed) ServerTemplate which can be launched without any input changes (Base ServerTemplate for Linux clone with EBS image recommended) -->
+        <server name="ST_EBS_NAME" value="Base ServerTemplate for Linux (EBS)" />
+        <!--
+          Change to the ID of an audit entry in your account.
+          Necessary since I can't see any way to list audit entry ids
+          for a server or other object
+        -->
+        <server name="AUDIT_ID" value="1" />
         <!-- Populate Tests/mock with raw HTTP requests and responses from the tests -->
         <server name="HTTP_TRACE" value="false" />
         <!-- For the mocks created above, strip out sensitive bits like SSH keys, account numbers, and ids -->
