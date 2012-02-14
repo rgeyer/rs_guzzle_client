@@ -1,0 +1,14 @@
+HTTP/1.1 201 Created
+Server: nginx/1.0.5
+Date: Tue, 14 Feb 2012 22:15:11 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 201
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+Location: https://my.rightscale.com/api/acct/12345/credentials/12345
+X-Runtime: 79
+Content-Length: 1
+Set-Cookie: _session_id=6fa154b4f4fb32d0f30a5a20d0e2f2a0; path=/; Secure; HttpOnly
+Cache-Control: no-cache
+
+ 

@@ -1,0 +1,12 @@
+PUT /api/acct/12345/credentials/12345 HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.6; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Expect: 100-Continue
+Cookie: rs_gbl=eNotkNtugkAURX-lOc9gmBmGW9KkWhFqQVChVl_MiIDIVcAUavz3QtL3tXey1gMYaJD3wMG5Ae0B9yasQRMxIsqTgzYADRGsYirLgspBch5oepIERRREnspU5REKEc9YEPAIE0RUErGTFAx_bfi_lUR13A734NnHxW1WpJT3xa2x8LythGzL_F4KolEuUTCbR7lrTpO9ELWXqFwk3X5fWDXfdbfPtezR7ZocMqHP9Mpi-sHXq_f808cIO8UvviqdNz1GubAzW2rZ2cbdUVuhZuOsTklsO1Fah0yP3esPsZ3bvP1yU5dWsmrcj5G3-rhiVjV6efO7g7P2U_F1TNKNSQqWDyqw6VnxYoT90IeDwbe8Fy1oBAsq5SDMWZINUD1Ak3iE3uokvrRNwLJwEpQ5PJ9_FpFuzQ==;_session_id=6fa154b4f4fb32d0f30a5a20d0e2f2a0
+Content-Length: 59
+
+id=204352001&credential%5Bdescription%5D=DescriptionChanged

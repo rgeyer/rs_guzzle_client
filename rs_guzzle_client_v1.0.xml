@@ -553,5 +553,46 @@
       <param name="id" type="integer" required="true" location="path" />      
     </command>
     
+    <!-- Start Credentials -->        
+    <command name="credentials_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a Credential</doc>
+      <param name="path" type="string" static="credentials" />
+      <param name="method" type="string" static="POST" />
+      <param name="credential[name]" type="string" required="true" />
+      <param name="credential[value]" type="string" required="true" />
+      <param name="credential[description]" type="string" required="false" />
+    </command>
+    
+    <command name="credentials_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete a Credential</doc>
+      <param name="path" type="string" static="credentials/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <command name="credentials" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Credentials</doc>
+      <param name="path" type="string" static="credentials{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="credential" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Credentials</doc>
+      <param name="path" type="string" static="credentials/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+            
+    <command name="credentials_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a Credential</doc>
+      <param name="path" type="string" static="credentials/{{id}}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="credential[name]" type="string" required="false" />
+      <param name="credential[value]" type="string" required="false" />
+      <param name="credential[description]" type="string" required="false" />
+    </command>
+    
   </commands>
 </client>
