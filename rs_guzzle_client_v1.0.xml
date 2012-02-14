@@ -504,7 +504,17 @@
       <param name="alert_spec_subject[alert_spec_href]" type="string" required="true" />
       <param name="alert_spec_subject[subject_href]" type="string" required="true" />
       <param name="alert_spec_subject[subject_type]" type="enum:Server,ServerTemplate" required="true" />
-    </command>    
+    </command>
+    
+    <!-- Start Audit Entries -->
+    <command name="audit_entry" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Get an alert_spec by it's id</doc>
+      <param name="path" type="string" static="audit_entries/{{id}}{{output_format}}" />      
+      <param name="method" type="string" static="GET" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <!-- <param name="return_class" type="string" static="Guzzle\Rs\Model\AuditEntry" /> -->
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>        
     
   </commands>
 </client>

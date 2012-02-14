@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Tue, 14 Feb 2012 01:02:42 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 55
+Content-Length: 155
+Set-Cookie: _session_id=39d29a458b18554dcb72a8594fca46e4; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"summary":"completed: rjg_utils::aio_ebs_volume_snapshot","href":"https://my.rightscale.com/api/acct/12345/audit_entries/12345","state":"completed"}
