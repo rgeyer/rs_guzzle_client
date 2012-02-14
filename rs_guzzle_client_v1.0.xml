@@ -514,7 +514,44 @@
       <param name="id" type="integer" required="true" location="path" />
       <!-- <param name="return_class" type="string" static="Guzzle\Rs\Model\AuditEntry" /> -->
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
-    </command>        
+    </command>
+    
+    <!-- Start EBS Volumes -->    
+    <command name="ec2_ebs_volumes_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an EBS Volume</doc>
+      <param name="path" type="string" static="ec2_ebs_volumes" />
+      <param name="method" type="string" static="POST" />
+      <param name="ec2_ebs_volume[nickname]" type="string" required="true" />
+      <param name="ec2_ebs_volume[description]" type="string" required="false" />
+      <param name="ec2_ebs_volume[ec2_availability_zone]" type="string" required="true" />
+      <param name="ec2_ebs_volume[aws_size]" type="integer" required="true" />
+      <param name="cloud_id" type="integer" required="false" default="1" />
+    </command>
+    
+    <command name="ec2_ebs_volumes_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete an EBS Volume</doc>
+      <param name="path" type="string" static="ec2_ebs_volumes/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <!-- Start Componet EBS Volumes -->    
+    <command name="component_ec2_ebs_volumes_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an EBS Volume Mapping to a Server</doc>
+      <param name="path" type="string" static="component_ec2_ebs_volumes" />
+      <param name="method" type="string" static="POST" />
+      <param name="component_ec2_ebs_volume[component_href]" type="string" required="true" />
+      <param name="component_ec2_ebs_volume[ec2_ebs_volume_href]" type="string" required="true" />
+      <param name="component_ec2_ebs_volume[device]" type="string" required="true" />
+      <param name="component_ec2_ebs_volume[mount]" type="string" static="boot" />
+    </command>
+    
+    <command name="component_ec2_ebs_volumes_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete an EBS Volume Mapping to a Server</doc>
+      <param name="path" type="string" static="component_ec2_ebs_volumes/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
     
   </commands>
 </client>

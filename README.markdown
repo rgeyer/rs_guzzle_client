@@ -166,18 +166,18 @@ Below you will find the current controllers (and their commands) that are suppor
   <tbody>
     <tr>
       <td>create</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
-      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>destroy</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
-      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td><b>Model</b></td>
       <td bgcolor="red">0%</td>
-      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
     </tr>
   </tbody>
 </table>
@@ -491,7 +491,7 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
     <tr>
       <td>create</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
@@ -501,7 +501,7 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
     <tr>
       <td>destroy</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
