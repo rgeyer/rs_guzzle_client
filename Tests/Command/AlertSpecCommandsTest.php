@@ -117,11 +117,7 @@ class AlertSpecCommandsTest extends ClientCommandsBase {
 		
 		$alert_spec = $json_obj[0];
 		
-		$regex = ',https://.+/api/acct/[0-9]+/alert_specs/([0-9]+),';
-		$matches = array();
-		preg_match($regex, $alert_spec->href, $matches);
-		
-		$alert_id = $matches[1];
+		$alert_id = $this->getIdFromHref('alert_specs', $alert_spec->href);
 
 		$command = null;
 		$result = $this->executeCommand('alert_spec', array('id' => $alert_id), &$command);
@@ -143,11 +139,7 @@ class AlertSpecCommandsTest extends ClientCommandsBase {
 		
 		$alert_spec = $json_obj[0];
 		
-		$regex = ',https://.+/api/acct/[0-9]+/alert_specs/([0-9]+),';
-		$matches = array();
-		preg_match($regex, $alert_spec->href, $matches);
-		
-		$alert_id = $matches[1];
+		$alert_id = $this->getIdFromHref('alert_specs', $alert_spec->href);
 
 		$command = null;
 		$result = $this->executeCommand('alert_spec', array('id' => $alert_id, 'output_format' => '.xml'), &$command);
@@ -209,11 +201,7 @@ class AlertSpecCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(201, $command->getResponse()->getStatusCode());
 		$this->assertNotNull($command->getResponse()->getHeader('Location'));
 		
-		$regex = ',https://.+/api/acct/[0-9]+/alert_specs/([0-9]+),';
-		$matches = array();
-		preg_match($regex, $command->getResponse()->getHeader('Location'), $matches);
-		
-		$alert_id = $matches[1];
+		$alert_id = $this->getIdFromHref('alert_specs', $command->getResponse()->getHeader('Location'));
 		
 		return $alert_id;
 	}

@@ -67,16 +67,10 @@ class ServerEbsVolumeCommandsTest extends ClientCommandsBase {
 		self::$_ssh_key->destroy();
 		
 		self::$_security_group->destroy();
-
-		$regex = ',https://.+/api/acct/[0-9]+/ec2_ebs_volumes/([0-9]+),';
-		$matches = array();
-		preg_match($regex, self::$_ebsvol_href, $matches);
-		
-		$vol_id = $matches[1];
 		
 		$testClassToApproximateThis = new ServerEbsVolumeCommandsTest();
 		$testClassToApproximateThis->setUp();
-		
+		$vol_id = $testClassToApproximateThis->getIdFromHref('ec2_ebs_volumes', self::$_ebsvol_href);
 		$testClassToApproximateThis->executeCommand('ec2_ebs_volumes_destroy', array('id' => $vol_id));
 	}
 	
@@ -97,11 +91,7 @@ class ServerEbsVolumeCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(201, $command->getResponse()->getStatusCode());
 		$this->assertNotNull($command->getResponse()->getHeader('Location'));
 		
-		$regex = ',https://.+/api/acct/[0-9]+/component_ec2_ebs_volumes/([0-9]+),';
-		$matches = array();
-		preg_match($regex, $command->getResponse()->getHeader('Location'), $matches);
-		
-		$vol_id = $matches[1];
+		$vol_id = $this->getIdFromHref('component_ec2_ebs_volumes', $command->getResponse()->getHeader('Location'));
 		
 		return $vol_id;
 	}

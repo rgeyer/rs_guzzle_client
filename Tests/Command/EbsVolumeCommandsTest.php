@@ -25,11 +25,7 @@ class EbsVolumeCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(201, $command->getResponse()->getStatusCode());
 		$this->assertNotNull($command->getResponse()->getHeader('Location'));
 		
-		$regex = ',https://.+/api/acct/[0-9]+/ec2_ebs_volumes/([0-9]+),';
-		$matches = array();
-		preg_match($regex, $command->getResponse()->getHeader('Location'), $matches);
-		
-		$vol_id = $matches[1];
+		$vol_id = $this->getIdFromHref('ec2_ebs_volumes', $command->getResponse()->getHeader('Location'));
 		
 		return $vol_id;
 	}

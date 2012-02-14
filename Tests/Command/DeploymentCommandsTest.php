@@ -311,12 +311,9 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		
 		$this->assertEquals(201, $result->getStatusCode());
 		
-		$regex = ',https://my.rightscale.com/api/acct/[0-9]+/deployments/([0-9]+),';
-		$location_header = $result->getHeader('Location');
-		$matches = array();
-		$this->assertEquals(1, preg_match($regex, $location_header, $matches));
+		$deployment_id = $this->getIdFromHref('deployments', $result->getHeader('Location'));
 		
-		$cmd = $this->_client->getCommand('deployments_destroy', array('id' => $matches[1]));
+		$cmd = $this->_client->getCommand('deployments_destroy', array('id' => $deployment_id));
 		$resp = $cmd->execute();
 		$result = $cmd->getResult();
 	}

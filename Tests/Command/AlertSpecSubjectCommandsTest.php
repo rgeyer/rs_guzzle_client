@@ -82,11 +82,8 @@ class AlertSpecSubjectCommandsTest extends ClientCommandsBase {
 		$this->assertEquals(201, $command->getResponse()->getStatusCode());		
 		$this->assertNotNull($command->getResponse()->getHeader('Location'));
 		
-		$regex = ',https://.+/api/acct/[0-9]+/alert_specs/([0-9]+),';
-		$matches = array();
-		preg_match($regex, $command->getResponse()->getHeader('Location'), $matches);
-		
-		$alert_subject_id = $matches[1];		
+		$alert_subject_id = $this->getIdFromHref('alert_specs', $command->getResponse()->getHeader('Location'));
+				
 		$this->assertNotNull($alert_subject_id);
 	}
 }

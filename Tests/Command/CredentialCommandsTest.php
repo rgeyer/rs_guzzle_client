@@ -29,11 +29,7 @@ class CredentialCommandsTest extends ClientCommandsBase {
 		$testClassToApproximateThis = new CredentialCommandsTest();
 		$testClassToApproximateThis->setUp();
 		
-		$regex = ',https://.+/api/acct/[0-9]+/credentials/([0-9]+),';
-		$matches = array();
-		preg_match($regex, self::$_credential_href, $matches);
-		
-		$cred_id = $matches[1];
+		$cred_id = $testClassToApproximateThis->getIdFromHref('credentials', self::$_credential_href);
 		
 		$testClassToApproximateThis->executeCommand('credentials_destroy', array('id' => $cred_id));
 	}
