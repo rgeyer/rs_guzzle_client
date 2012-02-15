@@ -1,0 +1,74 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Wed, 15 Feb 2012 00:55:03 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 77
+Set-Cookie: _session_id=f5291d9571f4cfad9e4b3b73e60d4f7d; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-ebs-volumes type="array">
+  <ec2-ebs-volume>
+    <aws-attached-at type="datetime">2011-12-08T18:30:21Z</aws-attached-at>
+    <aws-attachment-status>attached</aws-attachment-status>
+    <aws-device>/dev/sda1</aws-device>
+    <aws-id>vol-b3810cde</aws-id>
+    <aws-size type="integer">8</aws-size>
+    <aws-status>in-use</aws-status>
+    <created-at type="datetime">2011-12-08T18:29:59Z</created-at>
+    <description>/dev/sda1 for i-3bb5a458</description>
+    <nickname>/dev/sda1 for i-3bb5a458</nickname>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345</href>
+    <ec2-availability-zone>us-east-1a</ec2-availability-zone>
+<tags type="array"/>
+  </ec2-ebs-volume>
+  <ec2-ebs-volume>
+    <aws-attached-at type="datetime">2011-12-08T18:36:55Z</aws-attached-at>
+    <aws-attachment-status>attached</aws-attachment-status>
+    <aws-device>/dev/sdi</aws-device>
+    <aws-id>vol-c59d10a8</aws-id>
+    <aws-size type="integer">2</aws-size>
+    <aws-status>in-use</aws-status>
+    <created-at type="datetime">2011-12-08T18:36:47Z</created-at>
+    <description>/dev/sdi for i-3bb5a458</description>
+    <nickname>/dev/sdi for i-3bb5a458</nickname>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345</href>
+    <ec2-availability-zone>us-east-1a</ec2-availability-zone>
+<tags type="array"/>
+  </ec2-ebs-volume>
+  <ec2-ebs-volume>
+    <aws-attached-at type="datetime" nil="true"></aws-attached-at>
+    <aws-attachment-status nil="true"></aws-attachment-status>
+    <aws-device nil="true"></aws-device>
+    <aws-id>vol-3557f159</aws-id>
+    <aws-size type="integer">1</aws-size>
+    <aws-status>available</aws-status>
+    <created-at type="datetime">2012-02-15T00:54:56Z</created-at>
+    <description>described</description>
+    <nickname>Guzzle_Test_For_EBS_1329267295</nickname>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345</href>
+    <ec2-availability-zone>us-east-1a</ec2-availability-zone>
+<tags type="array"/>
+  </ec2-ebs-volume>
+  <ec2-ebs-volume>
+    <aws-attached-at type="datetime" nil="true"></aws-attached-at>
+    <aws-attachment-status nil="true"></aws-attachment-status>
+    <aws-device nil="true"></aws-device>
+    <aws-id>vol-0d57f161</aws-id>
+    <aws-size type="integer">1</aws-size>
+    <aws-status>deleting</aws-status>
+    <created-at type="datetime">2012-02-15T00:54:58Z</created-at>
+    <description>described</description>
+    <nickname>Guzzle_Test_For_EBS_1329267297</nickname>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345</href>
+    <ec2-availability-zone>us-east-1a</ec2-availability-zone>
+<tags type="array"/>
+  </ec2-ebs-volume>
+</ec2-ebs-volumes>

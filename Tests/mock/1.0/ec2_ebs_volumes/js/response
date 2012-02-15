@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Wed, 15 Feb 2012 00:55:01 GMT
+Content-Type: text/javascript; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 71
+Set-Cookie: _session_id=f5291d9571f4cfad9e4b3b73e60d4f7d; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+[{"aws_attachment_status":"attached","aws_attached_at":"2011/12/08 18:30:21 +0000","nickname":"/dev/sda1 for i-3bb5a458","tags":[],"aws_status":"in-use","href":"https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345","created_at":"2011/12/08 18:29:59 +0000","aws_id":"vol-b3810cde","ec2_availability_zone":"us-east-1a","aws_size":8,"aws_device":"/dev/sda1","description":"/dev/sda1 for i-3bb5a458"},{"aws_attachment_status":"attached","aws_attached_at":"2011/12/08 18:36:55 +0000","nickname":"/dev/sdi for i-3bb5a458","tags":[],"aws_status":"in-use","href":"https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345","created_at":"2011/12/08 18:36:47 +0000","aws_id":"vol-c59d10a8","ec2_availability_zone":"us-east-1a","aws_size":2,"aws_device":"/dev/sdi","description":"/dev/sdi for i-3bb5a458"},{"aws_attachment_status":null,"aws_attached_at":null,"nickname":"Guzzle_Test_For_EBS_1329267295","tags":[],"aws_status":"available","href":"https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345","created_at":"2012/02/15 00:54:56 +0000","aws_id":"vol-3557f159","ec2_availability_zone":"us-east-1a","aws_size":1,"aws_device":null,"description":"described"},{"aws_attachment_status":null,"aws_attached_at":null,"nickname":"Guzzle_Test_For_EBS_1329267297","tags":[],"aws_status":"deleting","href":"https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345","created_at":"2012/02/15 00:54:58 +0000","aws_id":"vol-0d57f161","ec2_availability_zone":"us-east-1a","aws_size":1,"aws_device":null,"description":"described"}]
