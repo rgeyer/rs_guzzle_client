@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Thu, 16 Feb 2012 01:51:11 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 29
+Content-Length: 306
+Set-Cookie: _session_id=0799b9fe09e9afaa20617572ca68c939; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-elastic-ip>
+  <ec2-instance-id type="integer" nil="true"></ec2-instance-id>
+  <nickname>Guzzle_Test_1329357059</nickname>
+  <public-ip>174.129.23.216</public-ip>
+  <href>https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345</href>
+</ec2-elastic-ip>

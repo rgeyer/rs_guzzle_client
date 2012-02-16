@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Thu, 16 Feb 2012 01:51:06 GMT
+Content-Type: text/javascript; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 52
+Set-Cookie: _session_id=0799b9fe09e9afaa20617572ca68c939; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+[{"nickname":"ec2.nslms.com","href":"https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345","public_ip":"174.129.224.54","ec2_instance_id":744099001,"server_href":"https://my.rightscale.com/api/acct/12345/servers/12345"},{"nickname":"Guzzle_Test_1329356807","href":"https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345","public_ip":"174.129.23.138","ec2_instance_id":null},{"nickname":"Guzzle_Test_1329357059","href":"https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345","public_ip":"174.129.23.216","ec2_instance_id":null},{"nickname":"Guzzle_Test_1329356988","href":"https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345","public_ip":"107.21.200.155","ec2_instance_id":null},{"nickname":"Guzzle_Test_1329356924","href":"https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345","public_ip":"174.129.24.115","ec2_instance_id":null},{"nickname":"Guzzle_Test_1329356926","href":"https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345","public_ip":"174.129.26.68","ec2_instance_id":null},{"nickname":"Guzzle_Test_1329357063","href":"https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345","public_ip":"174.129.205.223","ec2_instance_id":null}]

@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Thu, 16 Feb 2012 01:51:09 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 60
+Content-Length: 165
+Set-Cookie: _session_id=0799b9fe09e9afaa20617572ca68c939; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"nickname":"Guzzle_Test_1329357059","href":"https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345","public_ip":"174.129.23.216","ec2_instance_id":null}

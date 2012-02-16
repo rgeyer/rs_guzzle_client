@@ -1,0 +1,61 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Thu, 16 Feb 2012 01:51:08 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 102
+Set-Cookie: _session_id=0799b9fe09e9afaa20617572ca68c939; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-elastic-ips type="array">
+  <ec2-elastic-ip>
+    <ec2-instance-id type="integer">744099001</ec2-instance-id>
+    <nickname>ec2.nslms.com</nickname>
+    <public-ip>174.129.224.54</public-ip>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345</href>
+    <server-href>https://my.rightscale.com/api/acct/12345/servers/12345</server-href>
+  </ec2-elastic-ip>
+  <ec2-elastic-ip>
+    <ec2-instance-id type="integer" nil="true"></ec2-instance-id>
+    <nickname>Guzzle_Test_1329356807</nickname>
+    <public-ip>174.129.23.138</public-ip>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345</href>
+  </ec2-elastic-ip>
+  <ec2-elastic-ip>
+    <ec2-instance-id type="integer" nil="true"></ec2-instance-id>
+    <nickname>Guzzle_Test_1329357059</nickname>
+    <public-ip>174.129.23.216</public-ip>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345</href>
+  </ec2-elastic-ip>
+  <ec2-elastic-ip>
+    <ec2-instance-id type="integer" nil="true"></ec2-instance-id>
+    <nickname>Guzzle_Test_1329356988</nickname>
+    <public-ip>107.21.200.155</public-ip>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345</href>
+  </ec2-elastic-ip>
+  <ec2-elastic-ip>
+    <ec2-instance-id type="integer" nil="true"></ec2-instance-id>
+    <nickname>Guzzle_Test_1329356924</nickname>
+    <public-ip>174.129.24.115</public-ip>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345</href>
+  </ec2-elastic-ip>
+  <ec2-elastic-ip>
+    <ec2-instance-id type="integer" nil="true"></ec2-instance-id>
+    <nickname>Guzzle_Test_1329356926</nickname>
+    <public-ip>174.129.26.68</public-ip>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345</href>
+  </ec2-elastic-ip>
+  <ec2-elastic-ip>
+    <ec2-instance-id type="integer" nil="true"></ec2-instance-id>
+    <nickname>Guzzle_Test_1329357063</nickname>
+    <public-ip>174.129.205.223</public-ip>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_elastic_ips/12345</href>
+  </ec2-elastic-ip>
+</ec2-elastic-ips>

@@ -645,7 +645,7 @@
     </command>
     
     <command name="credential" class="Guzzle.Rs.Command.DefaultCommand">
-      <doc>List all Credentials</doc>
+      <doc>Show one Credential</doc>
       <param name="path" type="string" static="credentials/{{id}}{{output_format}}" />
       <param name="method" type="string" static="GET" />
       <param name="id" type="integer" required="true" location="path" /> 
@@ -660,6 +660,37 @@
       <param name="credential[value]" type="string" required="false" />
       <param name="credential[description]" type="string" required="false" />
     </command>
+    
+    <!-- Start Elastic IPs -->        
+    <command name="ec2_elastic_ips_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an AWS Elastic IP</doc>
+      <param name="path" type="string" static="ec2_elastic_ips" />
+      <param name="method" type="string" static="POST" />
+      <param name="ec2_elastic_ip[nickname]" type="string" required="true" />
+      <param name="cloud_id" type="integer" required="false" default="1" />
+    </command>
+    
+    <command name="ec2_elastic_ips_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete an AWS Elastic IP</doc>
+      <param name="path" type="string" static="ec2_elastic_ips/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <command name="ec2_elastic_ips" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Elastic IPs</doc>
+      <param name="path" type="string" static="ec2_elastic_ips{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="ec2_elastic_ip" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one Elastic IP</doc>
+      <param name="path" type="string" static="ec2_elastic_ips/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>    
     
   </commands>
 </client>
