@@ -11,50 +11,54 @@ use Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
 class ServerCommandsTest extends ClientCommandsBase {
 	
+	protected static $testTs;
+	
 	/**
 	 * 
 	 * @var SshKey
 	 */
-	protected $_ssh_key;	
+	protected static $_ssh_key;	
 	
 	/**
 	 * 
 	 * @var Deployment
 	 */
-	protected $_deployment;
+	protected static $_deployment;
 	
 	/**
 	 * 
 	 * @var SecurityGroup
 	 */
-	protected $_security_group;
+	protected static $_security_group;
 	
-	protected $_serverTemplateHref;
+	protected static $_serverTemplateHref;
 	
-	protected $_server;
+	protected static $_server;
 	
-	protected function setUp() {
-		parent::setUp();
+	public static function setUpBeforeClass() {		
+		$testClassToApproximateThis = new ServerCommandsTest();
+		$testClassToApproximateThis->setUp();
 		
-		$this->_ssh_key = new SshKey(); 
-		$this->_ssh_key->aws_key_name = "Guzzle_Test_For_Servers_$this->_testTs";
-		$this->_ssh_key->create();
+		self::$testTs = time();		
+		self::$_ssh_key = new SshKey(); 
+		self::$_ssh_key->aws_key_name = "Guzzle_Test_For_Servers_" . self::$testTs;
+		self::$_ssh_key->create();
 		
-		$this->_deployment = new Deployment();
-		$this->_deployment->nickname = "Guzzle_Test_For_Servers_$this->_testTs";
-		$this->_deployment->description = 'described';
-		$this->_deployment->create();
+		self::$_deployment = new Deployment();
+		self::$_deployment->nickname = "Guzzle_Test_For_Servers_". self::$testTs;
+		self::$_deployment->description = 'described';
+		self::$_deployment->create();
 		
-		$this->_security_group = new SecurityGroup();
-		$this->_security_group->aws_group_name = "Guzzle_Test_For_Servers_$this->_testTs";
-		$this->_security_group->aws_description = "described";
-		$this->_security_group->create();		 
+		self::$_security_group = new SecurityGroup();
+		self::$_security_group->aws_group_name = "Guzzle_Test_For_Servers_". self::$testTs;
+		self::$_security_group->aws_description = "described";
+		self::$_security_group->create();		 
 		
-		$result = $this->executeCommand('ec2_server_templates');
+		$result = $testClassToApproximateThis->executeCommand('ec2_server_templates');
 
 		$result_obj = json_decode($result->getBody(true));		
 		
-		$this->_serverTemplateHref = $result_obj[0]->href;
+		self::$_serverTemplateHref = $result_obj[0]->href;
 		
 		$baseStForLinux = null;
 		$baseStForWindows = null;
@@ -64,47 +68,55 @@ class ServerCommandsTest extends ClientCommandsBase {
 		}
 		
 		$params = array(
-				'server[nickname]' => "Guzzle_Test_$this->_testTs",
-				'server[server_template_href]' => $this->_serverTemplateHref,
-				'server[ec2_ssh_key_href]' => $this->_ssh_key->href,
-				'server[ec2_security_groups_href]' => array($this->_security_group->href),
-				'server[deployment_href]' => $this->_deployment->href
+				'server[nickname]' => "Guzzle_Test_" . self::$testTs,
+				'server[server_template_href]' => self::$_serverTemplateHref,
+				'server[ec2_ssh_key_href]' => self::$_ssh_key->href,
+				'server[ec2_security_groups_href]' => array(self::$_security_group->href),
+				'server[deployment_href]' => self::$_deployment->href
 		);
-		$this->_server = new Server();
-		$this->_server->create($params);
+		self::$_server = new Server();
+		self::$_server->create($params);
 	}
 	
-	protected function tearDown() {
+	public static function tearDownAfterClass() {
 		
 		# No need to delete the server(s) this contains.
-		$this->_deployment->destroy();	
+		self::$_deployment->destroy();	
 	
-		$this->_ssh_key->destroy();
+		self::$_ssh_key->destroy();
 		
-		$this->_security_group->destroy();
-		
-		parent::tearDown();
+		self::$_security_group->destroy();
 	}
 	
 	/**
 	 * @group v1_0
 	 * @group integration
 	 */
-	public function testCanCreateAndDestroyOneServer() {
+	public function testCanCreateServer() {
 		$command = null;
 		$params = array(
-			'server[nickname]' => "Guzzle_Test_$this->_testTs",
-			'server[server_template_href]' => $this->_serverTemplateHref,
-			'server[ec2_ssh_key_href]' => $this->_ssh_key->href,
-			'server[ec2_security_groups_href]' => array($this->_security_group->href),
-			'server[deployment_href]' => $this->_deployment->href
+			'server[nickname]' => "Guzzle_Test_". $this->_testTs,
+			'server[server_template_href]' => self::$_serverTemplateHref,
+			'server[ec2_ssh_key_href]' => self::$_ssh_key->href,
+			'server[ec2_security_groups_href]' => array(self::$_security_group->href),
+			'server[deployment_href]' => self::$_deployment->href
 		);
 		$result = $this->executeCommand('servers_create', $params, &$command);
 
 		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
+		$this->assertNotNull($command->getResponse()->getHeader('Location'));		
 		
-		$result = $this->executeCommand('servers_destroy', array('id' => $result->id));
+		return $this->getIdFromHref('servers', $command->getResponse()->getHeader('Location'));
+	}
+	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 * @depends testCanCreateServer
+	 */
+	public function testCanDestroyServer($server_id) {
+		$command = null;
+		$result = $this->executeCommand('servers_destroy', array('id' => $server_id), &$command);
 		$this->assertEquals(200, $result->getStatusCode());
 	}
 	
@@ -141,7 +153,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 	public function testCanListAllServersWithOneFilterJson() {
 		$command = null;
 		$result = $this->executeCommand('servers',
-			array('filter' => array("nickname=Guzzle_Test_$this->_testTs")),
+			array('filter' => array("nickname=Guzzle_Test_" . self::$testTs)),
 			&$command,
 			'with_one_filter'
 		);
@@ -160,7 +172,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 	public function testCanListAllServersWithTwoFiltersJson() {
 		$command = null;
 		$result = $this->executeCommand('servers',
-			array('filter' => array("nickname=Guzzle_Test_$this->_testTs", "state=stopped")),
+			array('filter' => array("nickname=Guzzle_Test_" . self::$testTs, "state=stopped")),
 			&$command,
 			'with_two_filters'
 		);
@@ -179,7 +191,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 	public function testCanListAllServersWithOneFilterXml() {
 		$command = null;
 		$result = $this->executeCommand('servers',
-			array('filter' => array("nickname=Guzzle_Test_$this->_testTs"), 'output_format' => '.xml'),
+			array('filter' => array("nickname=Guzzle_Test_" . self::$testTs), 'output_format' => '.xml'),
 			&$command,
 			'with_one_filter'
 		);
@@ -196,7 +208,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 	public function testCanListAllServersWithTwoFiltersXml() {
 		$command = null;
 		$result = $this->executeCommand('servers',
-			array('filter' => array("nickname=Guzzle_Test_$this->_testTs", "state=stopped"), 'output_format' => '.xml'),
+			array('filter' => array("nickname=Guzzle_Test_" . self::$testTs, "state=stopped"), 'output_format' => '.xml'),
 			&$command,
 			'with_two_filters'
 		);
@@ -212,11 +224,11 @@ class ServerCommandsTest extends ClientCommandsBase {
 	 */
 	public function testCanGetServersByIdJson() {
 		$command = null;
-		$result = $this->executeCommand('server', array('id' => $this->_server->id), &$command);
+		$result = $this->executeCommand('server', array('id' => self::$_server->id), &$command);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$this->assertInstanceOf('Guzzle\Rs\Model\Server', $result);
-		$this->assertEquals("Guzzle_Test_$this->_testTs", $result->nickname);		
+		$this->assertEquals("Guzzle_Test_" . self::$testTs, $result->nickname);		
 	}
 	
 	/**
@@ -225,11 +237,11 @@ class ServerCommandsTest extends ClientCommandsBase {
 	 */
 	public function testCanGetServersByIdXml() {
 		$command = null;
-		$result = $this->executeCommand('server', array('id' => $this->_server->id, 'output_format' => '.xml'), &$command);
+		$result = $this->executeCommand('server', array('id' => self::$_server->id, 'output_format' => '.xml'), &$command);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$this->assertInstanceOf('Guzzle\Rs\Model\Server', $result);
-		$this->assertEquals("Guzzle_Test_$this->_testTs", $result->nickname);		
+		$this->assertEquals("Guzzle_Test_" . self::$testTs, $result->nickname);		
 	}
 	
 	/**
@@ -238,18 +250,18 @@ class ServerCommandsTest extends ClientCommandsBase {
 	 */
 	public function testCanUpdateServerNickname() {
 		$server = new Server();
-		$server->find_by_id($this->_server->id);
+		$server->find_by_id(self::$_server->id);
 		
-		$this->assertEquals("Guzzle_Test_$this->_testTs", $server->nickname);
+		$this->assertEquals("Guzzle_Test_" . self::$testTs, $server->nickname);
 		
 		$command = null;
-		$result = $this->executeCommand('servers_update', array('id' => $this->_server->id, 'server[nickname]' => "Guzzle_Changed_$this->_testTs"), &$command);
+		$result = $this->executeCommand('servers_update', array('id' => self::$_server->id, 'server[nickname]' => "Guzzle_Changed_" . self::$testTs), &$command);
 		
 		$this->assertEquals(204, $command->getResponse()->getStatusCode());
 		
-		$server->find_by_id($this->_server->id);
+		$server->find_by_id(self::$_server->id);
 		
-		$this->assertEquals("Guzzle_Changed_$this->_testTs", $server->nickname);
+		$this->assertEquals("Guzzle_Changed_" . self::$testTs, $server->nickname);
 	}
 	
 	/**
@@ -258,7 +270,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 	 */
 	public function testCanGetSettingsOfServerJson() {
 		$command = null;
-		$result = $this->executeCommand('servers_settings', array('id' => $this->_server->id), &$command);
+		$result = $this->executeCommand('servers_settings', array('id' => self::$_server->id), &$command);
 				
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$json_obj = json_decode($result->getBody(true));
@@ -271,7 +283,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 	 */
 	public function testCanGetSettingsOfServerXml() {
 		$command = null;
-		$result = $this->executeCommand('servers_settings', array('id' => $this->_server->id, 'output_format' => '.xml'), &$command);
+		$result = $this->executeCommand('servers_settings', array('id' => self::$_server->id, 'output_format' => '.xml'), &$command);
 				
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$this->assertInstanceOf('SimpleXMLElement', $result);
@@ -283,7 +295,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 	 */
 	public function testCanGetAlertSpecsOfServerJson() {
 		$command = null;
-		$result = $this->executeCommand('servers_alert_specs', array('id' => $this->_server->id), &$command);
+		$result = $this->executeCommand('servers_alert_specs', array('id' => self::$_server->id), &$command);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$json_obj = json_decode($result->getBody(true));
@@ -296,7 +308,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 	 */
 	public function testCanGetAlertSpecsOfServerXml() {
 		$command = null;
-		$result = $this->executeCommand('servers_alert_specs', array('id' => $this->_server->id, 'output_format' => '.xml'), &$command);
+		$result = $this->executeCommand('servers_alert_specs', array('id' => self::$_server->id, 'output_format' => '.xml'), &$command);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$this->assertInstanceOf('SimpleXMLElement', $result);

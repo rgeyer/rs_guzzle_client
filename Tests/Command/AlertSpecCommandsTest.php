@@ -152,36 +152,6 @@ class AlertSpecCommandsTest extends ClientCommandsBase {
 	 * @group v1_0
 	 * @group integration
 	 */
-	public function testCanDestroyAlertSpec() {
-		$this->markTestSkipped("Impossible to test since /servers/n/alert_specs does not return alert specs");
-		# Find all alert specs for the server
-// 		$server = new Server();
-// 		$server->find_by_id(self::$_server->id);
-// 		$alert_specs_before = $server->alert_specs();
-// 		print_r($server->getParameters());
-// 		$this->assertGreaterThan(0, count($alert_specs_before));
-		
-// 		$alert_spec = $alert_specs_before[0];
-		
-// 		$regex = ',https://.+/api/acct/[0-9]+/alert_specs/([0-9]+),';
-// 		$matches = array();
-// 		preg_match($regex, $alert_spec->href, $matches);
-		
-// 		$alert_id = $matches[1];
-		
-// 		$command = null;
-// 		$result = $this->executeCommand('alert_specs_destroy', array('id' => $alert_id), &$command);
-// 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		
-// 		$server->find_by_id(self::$_server->id);
-// 		$alert_specs_after = $server->alert_specs();
-// 		$this->assertEquals(count($alert_specs_before)-1, count($alert_specs_after));
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
 	public function testCanCreateAnEscalationAlertSpec() {
 		$command = null;
 		$result = $this->executeCommand('alert_specs_create', array(
@@ -228,6 +198,21 @@ class AlertSpecCommandsTest extends ClientCommandsBase {
 			), &$command);
 		
 		$this->assertEquals(201, $command->getResponse()->getStatusCode());
+		$this->assertNotNull($command->getResponse()->getHeader('Location'));
+		$alert_spec_id = $this->getIdFromHref('alert_specs', $command->getResponse()->getHeader('Location'));
+		
+		return $alert_spec_id;
+	}
+	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 * @depends testCanCreateAVoteAlertSpec
+	 */
+	public function testCanDestroyAlertSpec($alert_spec_id) {
+		$command = null;
+		$result = $this->executeCommand('alert_specs_destroy', array('id' => $alert_spec_id), &$command);
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 	}
 	
 	/**
