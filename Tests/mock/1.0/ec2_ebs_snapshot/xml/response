@@ -1,0 +1,24 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Thu, 16 Feb 2012 00:06:09 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 159
+Content-Length: 522
+Set-Cookie: _session_id=abb67a4b6904e8c93ca45f645451bc3f; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-ebs-snapshot>
+  <aws-id>snap-a8324dcf</aws-id>
+  <aws-progress>100%</aws-progress>
+  <aws-started-at type="datetime">2012-02-16T00:05:51Z</aws-started-at>
+  <aws-status>completed</aws-status>
+  <description>described</description>
+  <ec2-ebs-volume-id type="integer">714642001</ec2-ebs-volume-id>
+  <nickname>Guzzle_Test_For_EBS_1329350746</nickname>
+  <href>https://my.rightscale.com/api/acct/12345/ec2_ebs_snapshots/12345</href>
+<tags type="array"/>
+</ec2-ebs-snapshot>

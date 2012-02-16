@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Thu, 16 Feb 2012 00:06:08 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 66
+Content-Length: 308
+Set-Cookie: _session_id=abb67a4b6904e8c93ca45f645451bc3f; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"aws_progress":"100%","nickname":"Guzzle_Test_For_EBS_1329350746","tags":[],"aws_status":"completed","href":"https://my.rightscale.com/api/acct/12345/ec2_ebs_snapshots/12345","ec2_ebs_volume_id":714642001,"aws_id":"snap-a8324dcf","aws_started_at":"2012/02/16 00:05:51 +0000","description":"described"}

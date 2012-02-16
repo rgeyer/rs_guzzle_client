@@ -560,7 +560,7 @@
       <param name="ec2_ebs_volume[description]" type="string" required="false" />
     </command>
     
-    <!-- Start Componet EBS Volumes -->    
+    <!-- Start Component EBS Volumes -->    
     <command name="component_ec2_ebs_volumes_create" class="Guzzle.Rs.Command.DefaultCommand">
       <doc>Create an EBS Volume Mapping to a Server</doc>
       <param name="path" type="string" static="component_ec2_ebs_volumes" />
@@ -576,6 +576,48 @@
       <param name="path" type="string" static="component_ec2_ebs_volumes/{{id}}" />
       <param name="method" type="string" static="DELETE" />
       <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <!-- Start EBS Snapshots -->    
+    <command name="ec2_ebs_snapshots_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an EBS Volume Snapshot</doc>
+      <param name="path" type="string" static="ec2_ebs_snapshots" />
+      <param name="method" type="string" static="POST" />
+      <param name="ec2_ebs_snapshot[nickname]" type="string" required="true" />
+      <param name="ec2_ebs_snapshot[description]" type="string" required="false" />
+      <param name="ec2_ebs_snapshot[ec2_ebs_volume_id]" type="string" required="true" />
+      <param name="ec2_ebs_snapshot[commit]" type="enum:explicit,implicit" default="implicit" />
+    </command>
+    
+    <command name="ec2_ebs_snapshots_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete an EBS Volume Snapshots</doc>
+      <param name="path" type="string" static="ec2_ebs_snapshots/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <command name="ec2_ebs_snapshots" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all EBS Volume Snapshots</doc>
+      <param name="path" type="string" static="ec2_ebs_snapshots{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+      <param name="cloud_id" type="integer" required="false" default="1" />      
+    </command>
+    
+    <command name="ec2_ebs_snapshot" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Shows one EBS Volume Snapshot</doc>
+      <param name="path" type="string" static="ec2_ebs_snapshots/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+        
+    <command name="ec2_ebs_snapshots_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates an EBS Volume Snapshot commit state</doc>
+      <param name="path" type="string" static="ec2_ebs_snapshots/{{id}}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="ec2_ebs_snapshot[commit_state]" type="enum:committed,uncommitted" required="true" />
     </command>
     
     <!-- Start Credentials -->        
