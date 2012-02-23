@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Sat, 18 Feb 2012 00:42:24 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 57
+Content-Length: 777
+Set-Cookie: _session_id=b3c636e75ac84a0ca8e78243db8bddb6; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"audit_queue_href":null,"active":null,"voters_tag":"foo:bar=baz","elasticity_stat":null,"elasticity_params":{},"nickname":"Guzzle_Test_1329525732","href":"https://my.rightscale.com/api/acct/12345/server_arrays/12345","active_instances_count":0,"ec2_security_groups_href":["https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345"],"server_template_href":"https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345","ec2_availability_zone":"any","total_instances_count":0,"array_type":"alert","ec2_ssh_key_href":"https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345","deployment_href":"https://my.rightscale.com/api/acct/12345/deployments/12345","elasticity_function":null,"elasticity":{},"indicator_href":null,"description":null}

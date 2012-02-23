@@ -1,0 +1,11 @@
+POST /api/acct/12345/server_arrays HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.6; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkFtvgjAARv_K0mcw9MI1WTJnxAlxA7aB-EJKqViVqlAzmfG_D5K9n_Ml37kDCjzQ9EADVQe8O7h2vAUeQRA7Dw0oBjyIkWsixyBEA6IaaGbbxLEg0U2XcR1CDvXSrEwdIgyxi7e0tNiwp_i_i000ut2oYrQ363kdS7ykeNqIjTRo7uzEyZpHaUmyc48TY5-iWNWXmBRvZzGzs1sa5bPlZl1m6y6BP3EhApefmW9V-Uwoic_Va1-FfrA4pmxbCIvCgIRmGNh63pJfeeHVTdWbKPP96TRN5tmWOcxdVfzzI3pXSXuRRilWuQgPZNV8fwWHZRGmh-cxyW1MImkzXAFJT-XTgvdDHw1Qxk5XqYCHkeGaGuANFccBagdoUo_QSyvqneoYPfIJOzXg8fgDyeFvhw==;_session_id=6c50c8af57fa41b7322e8bdb8f3d333d
+Content-Length: 673
+
+server_array%5Bnickname%5D=Guzzle_Test_1329528042&server_array%5Bdeployment_href%5D=https%3A%2F%2Fmy.rightscale.com%2Fapi%2Facct%2F32095%2Fdeployments%2F221843001&server_array%5Barray_type%5D=alert&server_array%5Bec2_security_groups_href%5D%5B%5D=https%3A%2F%2Fmy.rightscale.com%2Fapi%2Facct%2F32095%2Fec2_security_groups%2F315310001&server_array%5Bserver_template_href%5D=https%3A%2F%2Fmy.rightscale.com%2Fapi%2Facct%2F32095%2Fec2_server_templates%2F201195001&server_array%5Bec2_ssh_key_href%5D=https%3A%2F%2Fmy.rightscale.com%2Fapi%2Facct%2F32095%2Fec2_ssh_keys%2F233746001&server_array%5Bvoters_tag%5D=foo%3Abar%3Dbaz&cloud_id=1&server_array%5Bcollect_audit_entries%5D=1

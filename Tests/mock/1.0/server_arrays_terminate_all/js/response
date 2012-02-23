@@ -1,0 +1,20 @@
+HTTP/1.1 201 Created
+Server: nginx/1.0.5
+Date: Sat, 18 Feb 2012 01:25:27 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 201
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 2846
+Content-Length: 231
+Set-Cookie: _session_id=6c50c8af57fa41b7322e8bdb8f3d333d; path=/; Secure; HttpOnly
+Cache-Control: no-cache
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-instances>
+  <success>
+    <ec2-instance-href>https://my.rightscale.com/api/acct/12345/ec2_instances/12345</ec2-instance-href>
+  </success>
+  <failure>
+  </failure>
+</ec2-instances>

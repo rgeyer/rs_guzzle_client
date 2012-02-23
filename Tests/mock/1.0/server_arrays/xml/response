@@ -1,0 +1,75 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Sat, 18 Feb 2012 00:42:22 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 79
+Set-Cookie: _session_id=b3c636e75ac84a0ca8e78243db8bddb6; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<server-arrays type="array">
+  <server-array type="ServerArray">
+    <active type="boolean">false</active>
+    <array-type>alert</array-type>
+    <description nil="true"></description>
+    <elasticity type="yaml">--- !map:HashWithIndifferentAccess 
+resize_down_by: "1"
+max_count: "5"
+schedule: []
+
+min_count: "2"
+resize_up_by: "1"
+resize_calm_time: "5"
+decision_threshold: "51"
+</elasticity>
+    <elasticity-function nil="true"></elasticity-function>
+    <elasticity-params type="yaml">--- {}
+
+</elasticity-params>
+    <elasticity-stat type="yaml" nil="true"></elasticity-stat>
+    <nickname>Base ServerTemplate for Linux</nickname>
+    <href>https://my.rightscale.com/api/acct/12345/server_arrays/12345</href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <indicator-href nil="true"></indicator-href>
+    <audit-queue-href nil="true"></audit-queue-href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <ec2-ssh-key-href>https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345</ec2-ssh-key-href>
+    <ec2-security-groups-href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</ec2-security-groups-href>
+    <active-instances-count type="integer">0</active-instances-count>
+    <total-instances-count type="integer">6</total-instances-count>
+    <voters-tag>Base ServerTemplate for Linux</voters-tag>
+    <ec2-availability-zone>any</ec2-availability-zone>
+  </server-array>
+  <server-array type="ServerArray">
+    <active type="boolean" nil="true"></active>
+    <array-type>alert</array-type>
+    <description nil="true"></description>
+    <elasticity type="yaml">--- {}
+
+</elasticity>
+    <elasticity-function nil="true"></elasticity-function>
+    <elasticity-params type="yaml">--- {}
+
+</elasticity-params>
+    <elasticity-stat type="yaml" nil="true"></elasticity-stat>
+    <nickname>Guzzle_Test_1329525732</nickname>
+    <href>https://my.rightscale.com/api/acct/12345/server_arrays/12345</href>
+    <server-template-href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</server-template-href>
+    <indicator-href nil="true"></indicator-href>
+    <audit-queue-href nil="true"></audit-queue-href>
+    <deployment-href>https://my.rightscale.com/api/acct/12345/deployments/12345</deployment-href>
+    <ec2-ssh-key-href>https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345</ec2-ssh-key-href>
+    <ec2-security-groups-href>https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345</ec2-security-groups-href>
+    <active-instances-count type="integer">0</active-instances-count>
+    <total-instances-count type="integer">0</total-instances-count>
+    <voters-tag>foo:bar=baz</voters-tag>
+    <ec2-availability-zone>any</ec2-availability-zone>
+  </server-array>
+</server-arrays>

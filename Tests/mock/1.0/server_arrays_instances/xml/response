@@ -1,0 +1,25 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.5
+Date: Sat, 18 Feb 2012 01:25:22 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.7
+X-Runtime: 35
+Content-Length: 560
+Set-Cookie: _session_id=6c50c8af57fa41b7322e8bdb8f3d333d; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<instances type="array">
+  <instance>
+    <monitoring-token>pspz4uNT7VV1Yy3iTGxV8Zg</monitoring-token>
+    <nickname>Guzzle_Test_1329528042 #1</nickname>
+    <href>https://my.rightscale.com/api/acct/12345/ec2_instances/12345</href>
+    <resource-uid>i-ac1637c9</resource-uid>
+    <state>operational</state>
+    <ip-address>107.21.180.207</ip-address>
+    <private-ip-address>10.204.239.153</private-ip-address>
+    <monitoring-base-url>/sketchy1-167/hosts/12345-082PVCT</monitoring-base-url>
+  </instance>
+</instances>

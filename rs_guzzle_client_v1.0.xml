@@ -254,7 +254,7 @@
       <param name="server[ec2_availability_zone]" type="string" required="false" />
       <param name="server[max_spot_price]" type="float" required="false" />
       <param name="server[lock]" type="enum:true,false" required="false" />
-      <param name="server[parameters" type="array" required="false" />
+      <param name="server[parameters]" type="array" required="false" />
       <param name="return_class" type="string" static="Guzzle\Rs\Model\Server" />      
     </command>
     
@@ -690,6 +690,124 @@
       <param name="method" type="string" static="GET" />
       <param name="id" type="integer" required="true" location="path" /> 
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <!-- Start Server Arrays -->        
+    <command name="server_arrays_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a Server Array</doc>
+      <param name="path" type="string" static="server_arrays" />
+      <param name="method" type="string" static="POST" />
+      <param name="cloud_id" type="integer" required="false" default="1" />
+      <param name="server_array[nickname]" type="string" required="true" />
+      <param name="server_array[description]" type="string" required="false" />
+      <param name="server_array[deployment_href]" type="string" required="true" />
+      <param name="server_array[array_type]" type="enum:alert,queue" required="true" />
+      <param name="server_array[ec2_security_groups_href]" type="array" required="true" />
+      <param name="server_array[server_template_href]" type="string" required="true" />
+      <param name="server_array[ec2_ssh_key_href]" type="string" required="true" />
+      <param name="server_array[indicator_href]" type="string" required="false" />
+      <param name="server_array[audit_queue_href]" type="string" required="false" />
+      <param name="server_array[collect_audit_entries]" type="integer" default="1" />
+      <param name="server_array[voters_tag]" type="string" required="false" />
+      <param name="server_array[elasticity][max_count]" type="integer" required="false" />
+      <param name="server_array[elasticity][min_count]" type="integer" required="false" />
+      <param name="server_array[elasticity][resize_up_by]" type="integer" required="false" />
+      <param name="server_array[elasticity][resize_down_by]" type="integer" required="false" />
+      <param name="server_array[elasticity][resize_calm_time]" type="integer" required="false" doc="Time in minutes" />
+      <param name="server_array[elasticity][decision_threshold]" type="integer" required="false" />
+      <param name="server_array[elasticity_function]" type="enum:sqs_queue_size,sqs_item_age" required="false" />
+      <param name="server_array[elasticity_params][items_per_instance]" type="integer" required="false" />
+      <param name="server_array[elasticity_params][max_age]" type="integer" required="false" doc="Age in seconds" />
+      <param name="server_array[elasticity_params][algorithm]" type="string" required="false" />
+      <param name="server_array[elasticity_params][regexp]" type="string" required="false" />
+      <param name="server_array[active]" type="enum:true,false" required="false" />      
+      <param name="server_array[parameters]" type="array" required="false" />
+    </command>
+    
+    <command name="server_arrays_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete a Server Array</doc>
+      <param name="path" type="string" static="server_arrays/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <command name="server_arrays" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Server Arrays</doc>
+      <param name="path" type="string" static="server_arrays{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="server_array" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one Server Array</doc>
+      <param name="path" type="string" static="server_arrays/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+            
+    <command name="server_arrays_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Update a Server Array</doc>
+      <param name="path" type="string" static="server_arrays/{{id}}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server_array[nickname]" type="string" required="false" />
+      <param name="server_array[description]" type="string" required="false" />
+      <param name="server_array[deployment_href]" type="string" required="false" />
+      <param name="server_array[array_type]" type="enum:alert,queue" required="false" />
+      <param name="server_array[ec2_security_groups_href]" type="array" required="false" />
+      <param name="server_array[server_template_href]" type="string" required="false" />
+      <param name="server_array[ec2_ssh_key_href]" type="string" required="false" />
+      <param name="server_array[indicator_href]" type="string" required="false" />
+      <param name="server_array[audit_queue_href]" type="string" required="false" />
+      <param name="server_array[collect_audit_entries]" type="integer" default="1" />
+      <param name="server_array[voters_tag]" type="string" required="false" />
+      <param name="server_array[elasticity][max_count]" type="integer" required="false" />
+      <param name="server_array[elasticity][min_count]" type="integer" required="false" />
+      <param name="server_array[elasticity][resize_up_by]" type="integer" required="false" />
+      <param name="server_array[elasticity][resize_down_by]" type="integer" required="false" />
+      <param name="server_array[elasticity][resize_calm_time]" type="integer" required="false" doc="Time in minutes" />
+      <param name="server_array[elasticity][decision_threshold]" type="integer" required="false" />
+      <param name="server_array[elasticity_function]" type="enum:sqs_queue_size,sqs_item_age" required="false" />
+      <param name="server_array[elasticity_params][items_per_instance]" type="integer" required="false" />
+      <param name="server_array[elasticity_params][max_age]" type="integer" required="false" doc="Age in seconds" />
+      <param name="server_array[elasticity_params][algorithm]" type="string" required="false" />
+      <param name="server_array[elasticity_params][regexp]" type="string" required="false" />
+      <param name="server_array[active]" type="enum:true,false" required="false" />      
+      <param name="server_array[parameters]" type="array" required="false" />
+    </command>
+    
+    <command name="server_arrays_terminate_all" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Terminate all running instance in a Server Array</doc>
+      <param name="path" type="string" static="server_arrays/{{id}}/terminate_all" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="server_arrays_launch" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Launches a server into a Server Array</doc>
+      <param name="path" type="string" static="server_arrays/{{id}}/launch" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <command name="server_arrays_instances" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Server Array instances</doc>
+      <param name="path" type="string" static="server_arrays/{{id}}/instances{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="server_arrays_run_script_on_all" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Runs a script on all instances in a Server Array</doc>
+      <param name="path" type="string" static="server_arrays/{{id}}/run_script_on_all" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server_array[right_script_href]" type="string" required="true" />
+      <param name="server_array[server_template_hrefs]" type="array" required="false" />      
+      <param name="server_array[parameters]" type="array" required="false" />      
     </command>    
     
   </commands>
