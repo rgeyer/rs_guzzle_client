@@ -6,7 +6,7 @@ use Guzzle\Rs\Model\Deployment;
 use Guzzle\Rs\Common\ClientFactory;
 use Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
-class DeploymentTest extends ClientCommandsBase {
+class DeploymentTest extends \Guzzle\Tests\GuzzleTestCase {
 	
 	protected function setUp() {
 		parent::setUp();
@@ -30,7 +30,7 @@ class DeploymentTest extends ClientCommandsBase {
 	 * @group v1_0
 	 * @group unit
 	 */
-	public function testCanFindDeploymentByIdJson() {
+	public function testCanFindDeploymentById() {
 		$this->setMockResponse(ClientFactory::getClient(), '1.0/deployment/js/response');
 		$deployment = new Deployment();
 		$deployment->find_by_id(12345);
@@ -46,37 +46,8 @@ class DeploymentTest extends ClientCommandsBase {
 	 * @group v1_0
 	 * @group unit
 	 */
-	public function testCanFindDeploymentByIdXml() {
-		$this->setMockResponse(ClientFactory::getClient(), '1.0/deployment/xml/response');
-		$deployment = new Deployment();
-		$deployment->find_by_id(12345);
-		
-		$this->assertEquals(12345, $deployment->id);
-		$this->assertEquals("This'll stick around for a bit", $deployment->description);
-		$this->assertStringStartsWith('Guzzle_Test_', $deployment->nickname);
-		$this->assertEquals('', $deployment->default_vpc_subnet_href);
-		$this->assertEquals('', $deployment->default_ec2_availability_zone);
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group unit
-	 */
-	public function testCanListAllDeploymentsJson() {
+	public function testCanListAllDeployments() {
 		$this->setMockResponse(ClientFactory::getClient(), '1.0/deployments/js/response');
-		$deployment = new Deployment();
-		$deployments = $deployment->index();
-		
-		$this->assertGreaterThan(0, count($deployments));
-		$this->assertInstanceOf('Guzzle\Rs\Model\Deployment', $deployments[0]);
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group unit
-	 */
-	public function testCanListAllDeploymentsXml() {
-		$this->setMockResponse(ClientFactory::getClient(), '1.0/deployments/xml/response');
 		$deployment = new Deployment();
 		$deployments = $deployment->index();
 		

@@ -44,7 +44,7 @@ class SshKeyTest extends ClientCommandsBase {
 	 * @group v1_0
 	 * @group unit
 	 */
-	public function testCanFindKeyByIdJson() {
+	public function testCanFindKeyById() {
 		$this->setMockResponse(ClientFactory::getClient(), '1.0/ec2_ssh_key/js/response');
 		$key = new SshKey();
 		$key->find_by_id(12345);
