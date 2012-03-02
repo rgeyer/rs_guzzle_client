@@ -159,13 +159,15 @@ abstract class ModelBase {
 		if(!is_a($results, 'SimpleXMLElement')) {
 			// Assuming it's a json bodied response
 			$results = json_decode($results->getBody(true));
-		}
+		}		
 		
 		$klass = get_called_class();
 		$result_ary = array();
 		
-		foreach($results as $result) {
-			$result_ary[] = new $klass($result);
+		if(count($results) > 0) {
+			foreach($results as $result) {
+				$result_ary[] = new $klass($result);
+			}
 		}
 		
 		return $result_ary;
@@ -175,7 +177,12 @@ abstract class ModelBase {
 		$result = $this->executeCommand($this->_path, array('id' => $id));
 		
 		$this->initialize($result);
-	}	
+	}
+
+	public function find_by_href($href) {
+		$id = $this->getIdFromHref($href);
+		$this->find_by_id($id);
+	}
 	
 	/**
 	 * 
