@@ -652,7 +652,7 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
     <tr>
       <td>run_script_on_all</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
@@ -662,7 +662,7 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
     <tr>
       <td><b>Model</b></td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50%</td>
       <td bgcolor="red">0%</td>
     </tr>
   </tbody>
@@ -1062,3 +1062,6 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
   </tbody>
 </table>    
+
+= TODO:
+* Allow the user to specify a logger.

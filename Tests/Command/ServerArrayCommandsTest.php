@@ -56,15 +56,18 @@ class ServerArrayCommandsTest extends ClientCommandsBase {
 	public static function tearDownAfterClass() {		
 		$testClassToApproximateThis = new ServerArrayCommandsTest();
 		$testClassToApproximateThis->setUp();
-		self::$_deployment->destroy();		
-		self::$_ssh_key->destroy();		
-		self::$_security_group->destroy();
 		
 		$command = null;
 		$result = $testClassToApproximateThis->executeCommand('server_arrays_destroy',
-			array('id' => $testClassToApproximateThis->getIdFromHref('server_arrays', self::$_array_href)),
-			&$command
+				array('id' => $testClassToApproximateThis->getIdFromHref('server_arrays', self::$_array_href)),
+				&$command
 		);
+		
+		self::$_deployment->destroy();		
+		self::$_ssh_key->destroy();
+		# The security group doesn't like being destroyed so shortly after things which consume it.
+		sleep(2);		
+		self::$_security_group->destroy();
 	}
 	
 	/**
@@ -81,7 +84,8 @@ class ServerArrayCommandsTest extends ClientCommandsBase {
 				'server_array[ec2_security_groups_href]' => array(self::$_security_group->href),
 				'server_array[server_template_href]' => $this->_serverTemplate->href,
 				'server_array[ec2_ssh_key_href]' => self::$_ssh_key->href,
-				'server_array[voters_tag]' => 'foo:bar=baz'
+				'server_array[voters_tag]' => 'foo:bar=baz',
+				'server_array[ec2_availability_zone]' => 'us-east-1a'
 			),
 			&$command
 		);
@@ -143,6 +147,19 @@ class ServerArrayCommandsTest extends ClientCommandsBase {
 		$this->assertNotNull($json_obj);
 		$this->assertEquals('Guzzle_Test_' . self::$testTs, $json_obj->nickname);
 		$this->assertEquals(self::$_array_href, $json_obj->href);
+	}
+	
+	/**
+	 * @group v1_0
+	 * @group integration
+	 */
+	public function testCanShowServerArrayXml() {
+		$command = null;
+		$result = $this->executeCommand('server_array', array('id' => $this->getIdFromHref('server_arrays', self::$_array_href), 'output_format' => '.xml'), &$command);
+		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+		$this->assertInstanceOf('SimpleXMLElement', $result);
+		$this->assertEquals('Guzzle_Test_' . self::$testTs, $result->nickname);
+		$this->assertEquals(self::$_array_href, $result->href);
 	}
 	
 	/**

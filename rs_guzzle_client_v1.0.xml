@@ -705,6 +705,7 @@
       <param name="server_array[ec2_security_groups_href]" type="array" required="true" />
       <param name="server_array[server_template_href]" type="string" required="true" />
       <param name="server_array[ec2_ssh_key_href]" type="string" required="true" />
+      <param name="server_array[ec2_availability_zone]" type="string" required="false" />
       <param name="server_array[indicator_href]" type="string" required="false" />
       <param name="server_array[audit_queue_href]" type="string" required="false" />
       <param name="server_array[collect_audit_entries]" type="integer" default="1" />
@@ -718,7 +719,7 @@
       <param name="server_array[elasticity_function]" type="enum:sqs_queue_size,sqs_item_age" required="false" />
       <param name="server_array[elasticity_params][items_per_instance]" type="integer" required="false" />
       <param name="server_array[elasticity_params][max_age]" type="integer" required="false" doc="Age in seconds" />
-      <param name="server_array[elasticity_params][algorithm]" type="string" required="false" />
+      <param name="server_array[elasticity_params][algorithm]" type="enum:avg_10,max_10" required="false" />
       <param name="server_array[elasticity_params][regexp]" type="string" required="false" />
       <param name="server_array[active]" type="enum:true,false" required="false" />      
       <param name="server_array[parameters]" type="array" required="false" />
