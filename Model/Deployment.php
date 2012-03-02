@@ -22,8 +22,6 @@ use Guzzle\Rs\Common\ClientFactory;
 /**
  * A model for the RightScale Deployment in v1.0 of the API
  * 
- * TODO Add server parsing
- * 
  * @author Ryan J. Geyer <me@ryangeyer.com>
  */
 class Deployment extends ModelBase {
@@ -37,8 +35,7 @@ class Deployment extends ModelBase {
 		$this->_path = 'deployment';
 		$this->_required_params = array('deployment[nickname]' => $this->castToString());
 		$this->_optional_params = array('deployment[description]' => $this->castToString(), 'deployment[default_vpc_subnet_href]' => $this->castToString(), 'deployment[default_ec2_availability_zone]' => $this->castToString());
-		// TODO Where null is now, a closure which "does the right thing" for servers should be inserted.
-		$this->_base_params = array('servers' => $this->castToString());
+		$this->_base_params = array('servers' => $this->parseServers());
 		
 		parent::__construct($mixed);
 	}
@@ -46,6 +43,16 @@ class Deployment extends ModelBase {
 	protected function initialize($mixed) {
 		
 		parent::initialize($mixed);
+	}
+	
+	protected function parseServers() {
+		return function($value, $params) {
+			$servers = array();
+			foreach($value as $server) {
+				$servers[] = new Server($server);
+			}
+			return $servers;
+		};
 	}
 	
 	/**
