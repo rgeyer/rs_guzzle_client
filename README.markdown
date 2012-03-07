@@ -4,11 +4,12 @@ Support is available for v1.0 of the API and v1.5 support is coming soon!
 
 Below you will find the current controllers (and their commands) that are supported by the library.
 
-= Dependencies
+Dependencies
+============
 
 This client depends upon the guzzle-aws client for some Ec2 security group functionality.  The best way to get this library as well as the guzzle and guzzle-aws libraries upon which it depends, is to just check out https://github.com/rgeyer/guzzle_selfserve_clients and all of it's submodules
 
-  git clone git://github.com/rgeyer/guzzle_selfserve_clients.git --recursive
+<pre><code>git clone git://github.com/rgeyer/guzzle_selfserve_clients.git --recursive</code></pre>
 
 <!-- 
 <table border="1" width="360px">
@@ -1069,5 +1070,6 @@ This client depends upon the guzzle-aws client for some Ec2 security group funct
   </tbody>
 </table>    
 
-= TODO:
+TODO
+====
 * Allow the user to specify a logger.
