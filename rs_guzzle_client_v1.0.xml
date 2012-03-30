@@ -869,6 +869,21 @@
       <param name="method" type="string" static="GET" />
       <param name="id" type="integer" required="true" location="path" /> 
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <!-- Start S3 Buckets -->
+    <command name="s3_buckets_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an S3 Bucket</doc>
+      <param name="path" type="string" static="s3_buckets" />
+      <param name="method" type="string" static="POST" />
+      <param name="s3_bucket[name]" type="string" required="true" /> 
+    </command>
+    
+    <command name="s3_buckets_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete an S3 Bucket</doc>
+      <param name="path" type="string" static="s3_buckets/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
     </command>        
     
   </commands>

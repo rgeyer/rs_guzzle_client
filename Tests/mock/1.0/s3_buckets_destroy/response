@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Fri, 30 Mar 2012 22:13:54 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.11
+X-Runtime: 270
+Content-Length: 1
+Set-Cookie: _session_id=ec73e87e0b24ecd0000000000000a473; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+ 

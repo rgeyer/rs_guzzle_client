@@ -1,0 +1,8 @@
+DELETE /api/acct/12345/s3_buckets/12345 HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.8; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkFtvgjAARv_K0mdqLC1YSJYMmeICTsUAkxdToJYSLsol0Rn_-yDZ-zlf8p0nYMAE1QMoIOuA-QRDx1tgEhVh-lJAnwITYYwR0XSMFCCzkWaIJhlJKFywRIMIcQRpii4QqRjhZE50pKnjXs__XU2lkzvOg6gdtmHWO2uD1geY-7dTGuJsEclN_mnpx5V18eTAguV5K-3D5hcGdI9ZkCYNsWEYFnbDiaCu5xRzvyLF6eu-s4KVs7olP3txLPR54XrG0sgQ6-V3HVuBYInrOtch4vk13sUnKc8sigvmdZZgm33Pu_gK13ZeVhK5frQ0SnhxFjtRiuB9SnKfktSsGq8A_8HqN4c_xj4KYGnaDHU_liIIEwXwislyhNoRmokJ-milyPsuZSWfpU0FXq8_bnVvEA==;_session_id=ec73e87e0b24ecd0000000000000a473
+
