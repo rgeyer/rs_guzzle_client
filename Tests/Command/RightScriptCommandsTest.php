@@ -52,7 +52,7 @@ class RightScriptCommandsTest extends ClientCommandsBase {
 	 */
 	public function testCanShowRightScriptXml() {
 		$command = null;
-		$result = $this->executeCommand('right_script', array('id' => 420961/*self::$_script_id*/, 'output_format' => '.xml'), &$command);
+		$result = $this->executeCommand('right_script', array('id' => self::$_script_id, 'output_format' => '.xml'), &$command);
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
 		$this->assertInstanceOf('SimpleXMLElement', $result);
 		$this->assertNotNull($result->href);
