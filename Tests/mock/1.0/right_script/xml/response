@@ -1,0 +1,53 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Fri, 30 Mar 2012 22:00:00 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.11
+X-Runtime: 41
+Set-Cookie: _session_id=7917254009e66aaf8a5c98f95e4b1487; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<right-script>
+  <created-at type="datetime">2011-08-12T20:46:34Z</created-at>
+  <description>Configures postfix to deliver local mail by accepting SMTP connections on localhost.
+</description>
+  <is-head-version type="boolean">false</is-head-version>
+  <name>MAIL Postfix local delivery - 11H1</name>
+  <script>#!/bin/bash -ex
+#
+# Copyright (c) 2008-2011 RightScale, Inc, All Rights Reserved Worldwide.
+#
+
+postfix_file=/etc/postfix/main.cf
+backupfile_time=`date +%H%M%S`
+cp $postfix_file $postfix_file.$backupfile_time
+
+if [  "$RS_DISTRO" ==  "ubuntu" ]; then
+  if [ "$(lsb_release -rs)" == "8.04" ]; then
+    export DEBIAN_FRONTEND="noninteractive"; apt-get install  -y sysvconfig
+  fi
+  echo "Using Ubuntu default main.cf config"
+else
+# Make the changes needed for centos
+sed -i 's/inet_interfaces = localhost/#inet_interfaces = localhost/' $postfix_file
+sed -i 's/#inet_interfaces = all/inet_interfaces = all/' $postfix_file
+
+# Replace everything after the localhost.  This assumes that the last host entry is
+# The host that this script added.  If there are other hosts added to this line by
+# some other script then this will break.  A specialized script must be written to
+# handle this case.
+sed -i "s/^mydestination = \$myhostname\, localhost\.\$mydomain\, localhost.*$/mydestination = \$myhostname, localhost\.\$mydomain\, localhost\, $EC2_LOCAL_HOSTNAME/" $postfix_file
+
+service postfix reload
+fi</script>
+  <updated-at type="datetime">2012-03-05T09:54:26Z</updated-at>
+  <version type="integer">4</version>
+  <href>https://my.rightscale.com/api/acct/12345/right_scripts/12345</href>
+</right-script>

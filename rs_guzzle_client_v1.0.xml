@@ -853,6 +853,22 @@
       <param name="macro[nickname]" type="string" required="false" />
       <param name="macro[description]" type="string" required="false" />
       <param name="macro[commands]" type="string" required="false" /> 
+    </command>    
+    
+    <!-- Start RightScripts -->
+    <command name="right_scripts" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all RightScripts</doc>
+      <param name="path" type="string" static="right_scripts{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" /> 
+    </command>
+    
+    <command name="right_script" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one RightScript</doc>
+      <param name="path" type="string" static="right_scripts/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>        
     
   </commands>
