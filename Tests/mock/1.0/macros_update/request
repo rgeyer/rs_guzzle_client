@@ -1,0 +1,12 @@
+PUT /api/acct/12345/macros/12345 HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.8; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Expect: 100-Continue
+Cookie: rs_gbl=eNotkNmOgjAARX9l0mcwtGWTZJIZBERFGBdUfDFQKnZkUShxi_8-kMz7OTc35wViYIDiAQSQNsB4gbahNTBkBLH-FgAnwIAYY4hURVYEwNKOxlDRKJFlUYv1oQghheIwIZoIEYY4kRAmR9TtcfrvYqz1bjcPlnZrHq-TZ4p86xBovm6vEsdJua0-d-TyLVa8hH6WbUkuQ3M1urnSxDtJl22iOShQl7-WtJuIUUOq-aJBYzO63kpPyf2IzarUZr43ui-2FTlaoarun5kzrVcLktfEYYl7dQN3prZBeA6jVpseDra53pNmXdNNErbTNNVtj52G-cj64ecNm3_2Se59kjIuaP_9EZcfY_ro-gggJqRqS96VkiGWBUCLmOUdVHfQIOuhr5plJ96QOKcDUhXg_f4DYl9vRQ==;_session_id=0265a81fda346ad776af3997085437c9
+Content-Length: 43
+
+macro%5Bcommands%5D=alert%28%22bar%22%29%3B

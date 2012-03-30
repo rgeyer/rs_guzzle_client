@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Fri, 30 Mar 2012 16:56:08 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.11
+X-Runtime: 39
+Content-Length: 150
+Set-Cookie: _session_id=0265a81fda346ad776af3997085437c9; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"nickname":"NameChanged","href":"https://my.rightscale.com/api/acct/12345/macros/12345","commands":"alert(\"bar\");","description":"DescChanged"}

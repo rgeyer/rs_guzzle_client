@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Fri, 30 Mar 2012 16:55:54 GMT
+Content-Type: text/javascript; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.11
+X-Runtime: 30
+Set-Cookie: _session_id=0265a81fda346ad776af3997085437c9; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+[{"nickname":"LAMP All-In-One Wordpress Trial","href":"https://my.rightscale.com/api/acct/12345/macros/12345","commands":"var trial_template_href = 'https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345';\n        ec2_security_group = pr_create_ec2_security_group({'aws_group_name':'default','aws_description':'default group'});\n        add_ingress_rule(ec2_security_group,{'owner':'000000000000','group':'default'});\n        add_ingress_rule(ec2_security_group,{'to_port':'22','protocol':'tcp','cidr_ips':'0.0.0.0/0','from_port':'22'});\n        add_ingress_rule(ec2_security_group,{'to_port':'80','protocol':'tcp','cidr_ips':'0.0.0.0/0','from_port':'80'});\n        ec2_ssh_key = pr_create_ec2_ssh_key({'aws_key_name':'demo-key'});\n        lamp_server = create_ec2_server({'ec2_ssh_key_href':ec2_ssh_key,'ec2_elastic_ip_href':null,'nickname':'LAMP All-In-One Wordpress Trial','ec2_security_groups_href':[ec2_security_group],'deployment_href':deployment_url,'aki_image_href':null,'ec2_image_href':null,'ec2_availability_zone':null,'ari_image_href':null,'instance_type':null,'server_template_href':trial_template_href, 'server_template_library_id':'18255'});\n\nfunction password(length) {\n  var p = \"\";\n\n  for(i=0; i < length; i++) {\n    var n = (Math.floor((Math.random() * 100)) % 74) + 48;\n    if( (n > 57 && n < 64) || (n > 90 && n < 97)) {\n        i--;\n      continue;\n    }\n    \n    p += String.fromCharCode(n);\n  }\n  \n  return p;\n};\n\nset_ec2_server_parameter(lamp_server, { 'parameters': { 'DBAPPLICATION_PASSWORD': \"text:\" + password(10), 'DBAPPLICATION_USER': 'text:wordpress', 'WORDPRESS_PASSWORD': \"text:\" + password(10) }});\n","description":"Creates a fully functioning LAMP (Linux, Apache, MySQL, and PHP) Wordpress blog server in your RightScale account's 'Default' deployment."},{"nickname":"EmptyMacro 20120330-095545","href":"https://my.rightscale.com/api/acct/12345/macros/12345","commands":"alert(\"foo\");","description":null}]

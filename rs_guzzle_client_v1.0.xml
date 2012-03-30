@@ -809,7 +809,51 @@
       <param name="server_array[right_script_href]" type="string" required="true" />
       <param name="server_array[server_template_hrefs]" type="array" required="false" />      
       <param name="server_array[parameters]" type="array" required="false" />      
-    </command>    
+    </command>
+    
+    <!-- Start Macros -->
+    <command name="macros_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a Macro</doc>
+      <param name="path" type="string" static="macros" />
+      <param name="method" type="string" static="POST" />
+      <param name="macro[source_type]" type="enum:deployment,array,server,macro,blank" required="true" />
+      <param name="macro[object_id]" type="integer" required="false" />
+      <param name="macro[nickname]" type="string" required="false" />
+      <param name="macro[description]" type="string" required="false" />
+      <param name="macro[commands]" type="string" required="false" /> 
+    </command>
+    
+    <command name="macros_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete a Macro</doc>
+      <param name="path" type="string" static="macros/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <command name="macros" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Macros</doc>
+      <param name="path" type="string" static="macros{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" /> 
+    </command>
+    
+    <command name="macro" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one Macro</doc>
+      <param name="path" type="string" static="macros/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="macros_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Update a Macro</doc>
+      <param name="path" type="string" static="macros/{{id}}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="macro[nickname]" type="string" required="false" />
+      <param name="macro[description]" type="string" required="false" />
+      <param name="macro[commands]" type="string" required="false" /> 
+    </command>        
     
   </commands>
 </client>
