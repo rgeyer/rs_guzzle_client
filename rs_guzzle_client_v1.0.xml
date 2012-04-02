@@ -215,7 +215,7 @@
       <param name="server[ec2_security_groups_href]" type="array" required="false" />
       <param name="server[server_template_href]" type="string" required="false" />
       <param name="server[deployment_href]" type="string" required="false" />
-      <param name="server[instance_type]" type="enum:t1.micro,m1.small,m1.large,m1.xlarge,m2.xlarge,m2.2xlarge,m2.4xlarge,c1.medium,c1.xlarge,cc1.4xlarge,cc2.8xlarge,cg1.4xlarge" required="false" />
+      <param name="server[instance_type]" type="enum:t1.micro,m1.small,m1.medium,m1.large,m1.xlarge,m2.xlarge,m2.2xlarge,m2.4xlarge,c1.medium,c1.xlarge,cc1.4xlarge,cc2.8xlarge,cg1.4xlarge" required="false" />
       <param name="server[pricing]" type="enum:on_demand,spot" required="false" />
       <param name="server[aki_image_href]" type="string" required="false" />
       <param name="server[ari_image_href]" type="string" required="false" />
@@ -241,7 +241,7 @@
       <param name="server[ec2_security_groups_href]" type="array" required="false" />
       <param name="server[server_template_href]" type="string" required="false" />
       <param name="server[deployment_href]" type="string" required="false" />      
-      <param name="server[instance_type]" type="enum:t1.micro,m1.small,m1.large,m1.xlarge,m2.xlarge,m2.2xlarge,m2.4xlarge,c1.medium,c1.xlarge,cc1.4xlarge,cc2.8xlarge,cg1.4xlarge" required="false" />
+      <param name="server[instance_type]" type="enum:t1.micro,m1.small,m1.medium,m1.large,m1.xlarge,m2.xlarge,m2.2xlarge,m2.4xlarge,c1.medium,c1.xlarge,cc1.4xlarge,cc2.8xlarge,cg1.4xlarge" required="false" />
       <param name="server[pricing]" type="enum:on_demand,spot" required="false" />
       <param name="server[aki_image_href]" type="string" required="false" />
       <param name="server[ari_image_href]" type="string" required="false" />
