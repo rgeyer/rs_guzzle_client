@@ -100,8 +100,8 @@ abstract class ModelBase {
 		$allowed_params = array_keys($this->_getAllowedParams());
 		$array_idx = $name;
 		$found = false;
-		$found |= $this->_valueInArray($name, $allowed_params, &$array_idx);
-		$found |= $this->_valueInArray($this->_path . "[" . $name . "]", $allowed_params, &$array_idx);
+		$found |= $this->_valueInArray($name, $allowed_params, $array_idx);
+		$found |= $this->_valueInArray($this->_path . "[" . $name . "]", $allowed_params, $array_idx);
 	
 		if(!$found) {
 			throw new InvalidArgumentException("Can not get property $name, it is not defined for this object. Type: " . get_class($this));
@@ -114,11 +114,11 @@ abstract class ModelBase {
 		$allowed_params = array_keys($this->_getAllowedParams());
 		$array_idx = $name;
 		$found = false;
-		$found |= $this->_valueInArray($name, $allowed_params, &$array_idx);
-		$found |= $this->_valueInArray($this->_path . "[" . $name . "]", $allowed_params, &$array_idx);
+		$found |= $this->_valueInArray($name, $allowed_params, $array_idx);
+		$found |= $this->_valueInArray($this->_path . "[" . $name . "]", $allowed_params, $array_idx);
 		// XML Response can't have dashes
-		$found |= $this->_valueInArray(str_replace('-', '_', $name), $allowed_params, &$array_idx);
-		$found |= $this->_valueInArray($this->_path . "[" . str_replace('-', '_', $name) . "]", $allowed_params, &$array_idx);
+		$found |= $this->_valueInArray(str_replace('-', '_', $name), $allowed_params, $array_idx);
+		$found |= $this->_valueInArray($this->_path . "[" . str_replace('-', '_', $name) . "]", $allowed_params, $array_idx);
 	
 		if(!$found) {
 			throw new InvalidArgumentException("Can not set property $name, it is not defined for this object. Type: " . get_class($this));
@@ -286,11 +286,11 @@ abstract class ModelBase {
 		foreach($params as $name => $value) {
 			$array_idx = $name;
 			$found = false;
-			$found |= $this->_valueInArray($name, array_keys($allowed_params), &$array_idx);
-			$found |= $this->_valueInArray($this->_path . "[" . $name . "]", array_keys($allowed_params), &$array_idx);
+			$found |= $this->_valueInArray($name, array_keys($allowed_params), $array_idx);
+			$found |= $this->_valueInArray($this->_path . "[" . $name . "]", array_keys($allowed_params), $array_idx);
 			// XML Response can't have dashes
-			$found |= $this->_valueInArray(str_replace('-', '_', $name), array_keys($allowed_params), &$array_idx);
-			$found |= $this->_valueInArray($this->_path . "[" . str_replace('-', '_', $name) . "]", array_keys($allowed_params), &$array_idx);
+			$found |= $this->_valueInArray(str_replace('-', '_', $name), array_keys($allowed_params), $array_idx);
+			$found |= $this->_valueInArray($this->_path . "[" . str_replace('-', '_', $name) . "]", array_keys($allowed_params), $array_idx);
 	
 			$closure = $allowed_params[$array_idx];
 			$this->$array_idx = $closure ? $closure($value, $params) : $value;
