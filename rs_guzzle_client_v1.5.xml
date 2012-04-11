@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client>
+  <commands>
+    <!-- Start Clouds -->
+    <command name="clouds" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List the clouds available to this account.</doc>
+      <param name="path" type="string" static="clouds{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+      <param name="filters" type="array" required="false" />      
+    </command>
+  </commands>
+</client>
