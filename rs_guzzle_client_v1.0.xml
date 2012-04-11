@@ -944,5 +944,37 @@
       <param name="id" type="integer" required="true" location="path" />      
     </command>        
     
+    <!-- Start SQS Queues -->
+    <command name="sqs_queues_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create an SQS Queue</doc>
+      <param name="path" type="string" static="sqs_queues" />
+      <param name="method" type="string" static="POST" />
+      <param name="sqs_queue[name]" type="string" required="true" />
+      <param name="sqs_queue[api_generation]" type="integer" required="false" />
+      <param name="sqs_queue[description]" type="string" required="false" />
+    </command>
+    
+    <command name="sqs_queues_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete an SQS Queue</doc>
+      <param name="path" type="string" static="sqs_queues/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>    
+    
+    <command name="sqs_queues" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all SQS Queues</doc>
+      <param name="path" type="string" static="sqs_queues{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" /> 
+    </command>
+    
+    <command name="sqs_queue" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one SQS Queue</doc>
+      <param name="path" type="string" static="sqs_queues/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
   </commands>
 </client>
