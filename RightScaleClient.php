@@ -110,8 +110,12 @@ class RightScaleClient extends Client {
 		
 		// No login cookies, or they're expired
 		if(count($cookies) == 0) {
-			$request = $this->get('/api/acct/{{acct_num}}/login');
-			$request->setAuth($this->email, $this->password);
+			if($this->version == "1.0") {
+				$request = $this->get('/api/acct/{{acct_num}}/login');
+				$request->setAuth($this->email, $this->password);
+			} else {
+				$request = $this->post('/api/session', null, array('email' => $this->email, 'password' => $this->password, 'account_href' => '/api/accounts/' . $this->acct_num));				
+			}
 			$request->setHeader('X-API-VERSION', $this->version);
 			$request->send();						
 		}

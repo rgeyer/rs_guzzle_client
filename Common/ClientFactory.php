@@ -58,6 +58,15 @@ class ClientFactory {
 									'password' 	=> ClientFactory::$_password,
 									'version' 	=> '1.0'
 							)
+					),
+					'guzzle-rs-1_5' => array (
+							'class' => 'Guzzle\Rs\RightScaleClient',
+							'params' => array (
+									'acct_num' 	=> ClientFactory::$_acct_num,
+									'email' 		=> ClientFactory::$_email,
+									'password' 	=> ClientFactory::$_password,
+									'version' 	=> '1.5'
+							)
 					)
 			));
 		}

@@ -43,6 +43,8 @@ class DefaultCommand extends AbstractCommand {
 		
 		$remainder = array_diff_key($this->getAll(), $disposable);
 		
+		$path_prefix = $this->getClient()->getConfig('version') == '1.0' ? '/api/acct/{{acct_num}}/' : '/api/';
+		
 		$path = $this->get('path');
 		$query_str = new QueryString();
 		$post_fields = array();
@@ -81,20 +83,20 @@ class DefaultCommand extends AbstractCommand {
 						return array(($encodeFields ? rawurlencode($key) : $key) => implode('&', $retval));
 					}
 				);				
-				$this->request = $this->client->get('/api/acct/{{acct_num}}/');
+				$this->request = $this->client->get($path_prefix);
 				$this->request->setPath($this->request->getPath() . $path . $query_str);
 				break;
 			case 'POST':
-				$this->request = $this->client->post('/api/acct/{{acct_num}}/' . $path, null, $post_fields);
+				$this->request = $this->client->post($path_prefix . $path, null, $post_fields);
 				break;
 			case 'DELETE':
-				$this->request = $this->client->delete('/api/acct/{{acct_num}}/' . $path);
+				$this->request = $this->client->delete($path_prefix . $path);
 				break;
 			case 'PUT':
 				$body = new QueryString();
 				$body->merge($post_fields);
 				$body->setPrefix('');				
-				$this->request = $this->client->put('/api/acct/{{acct_num}}/' . $path, null, $body);
+				$this->request = $this->client->put($path_prefix . $path, null, $body);
 				$this->request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
 				break; 
 		}
@@ -116,6 +118,34 @@ class DefaultCommand extends AbstractCommand {
 			$result = new $classname($result);
 		}
 		return $result;		
+	}
+	
+	/**
+	 * Create the result of the command after the request has been completed.
+	 * 
+	 * Different from the overridden method in that it properly detects the 1.5 API content type
+	 * 'application/vnd.rightscale.cloud+xml' as XML, and it does NOT silently ignore XML parsing errors
+	 * 
+	 * TODO: Not sure what exceptions (if any) get thrown, but the original implemenation eats them with
+	 * a try/catch with no handling in the catch.
+	 * 
+	 * (non-PHPdoc)
+	 * @see Guzzle\Service\Command.AbstractCommand::process()
+	 * 
+	 * @throws Exception (I think anyway)
+	 */
+	protected function process() {
+		$this->result = $this->getRequest()->getResponse();
+		
+		// Is the body an XML document?  If so, set the result to be a SimpleXMLElement
+		if (preg_match('/^\s*(text\/xml|application\/.*xml).*$/', $this->result->getContentType())) {
+			// If the body is available, then parse the XML
+			$body = trim($this->result->getBody(true));
+			if ($body) {
+				$xml = new \SimpleXMLElement($body);
+				$this->result = $xml;
+			}
+		}
 	}
 	
 }
