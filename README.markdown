@@ -2,7 +2,11 @@ rs_guzzle_client is a PHP Guzzle REST API client library for the RightScale API.
 
 Support is available for v1.0 of the API and v1.5 support is coming soon!
 
-Below you will find the current controllers (and their commands) that are supported by the library.
+Below you will find the current controllers (and their commands) that are supported by the library.  A quick legend for the completeness percentage.
+
+100% - Implemented Commands, Full tests, Mock responses in the library
+50% - Implemented Commands, Not tested or minimally tested, Mocks may or may not exist
+0% - Not implemented
 
 <!-- 
 <table border="1" width="360px">
@@ -1032,27 +1036,27 @@ Below you will find the current controllers (and their commands) that are suppor
   <tbody>
     <tr>
       <td>show</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
       <td>index</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
       <td>create</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
       <td>update</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
       <td>destroy</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>

@@ -985,5 +985,50 @@
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>
     
+    <!-- Start VPC DHCP Options -->
+    <command name="vpc_dhcp_options_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create VPC DHCP Options</doc>
+      <param name="path" type="string" static="vpc_dhcp_options" />
+      <param name="method" type="string" static="POST" />
+      <param name="vpc_dhcp_options[name]" type="string" required="true" />
+      <param name="vpc_dhcp_options[domain_name]" type="string" required="false" />
+      <param name="vpc_dhcp_options[domain_name_server]" type="string" required="false" />
+      <param name="vpc_dhcp_options[ntp_servers]" type="string" required="false" />
+      <param name="vpc_dhcp_options[netbios_name_servers]" type="string" required="false" />
+      <param name="vpc_dhcp_options[netbios_node_type]" type="enum:1,2,4,8" required="false" />
+      <param name="vpc_dhcp_options[description]" type="string" required="false" /> 
+    </command>
+    
+    <command name="vpc_dhcp_options_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Delete a VPC DHCP Option</doc>
+      <param name="path" type="string" static="vpc_dhcp_options/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />      
+    </command>
+    
+    <command name="vpc_dhcp_options" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all VPC DHCP Options</doc>
+      <param name="path" type="string" static="vpc_dhcp_options{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" /> 
+    </command>
+    
+    <command name="vpc_dhcp_option" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one VPC DHCP Option</doc>
+      <param name="path" type="string" static="vpc_dhcp_options/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="vpc_dhcp_options_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Update a VPC DHCP Options</doc>
+      <param name="path" type="string" static="vpc_dhcp_options/{{id}}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="vpc_dhcp_option[nickname]" type="string" required="false" />
+      <param name="vpc_dhcp_option[description]" type="string" required="false" />
+    </command>
+    
   </commands>
 </client>
