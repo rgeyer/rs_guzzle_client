@@ -1,0 +1,447 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Wed, 11 Apr 2012 05:00:03 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.11
+X-Runtime: 384
+Set-Cookie: _session_id=7eb4fd2549e4702aee20b3741f96237d; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<server-template-executables type="array">
+  <server-template-executable>
+    <apply>boot</apply>
+    <position type="integer">1</position>
+    <recipe nil="true"></recipe>
+    <right-script>
+      <created-at type="datetime">2012-03-27T20:33:54Z</created-at>
+      <description>Sets the server timezone.
+
+**Launch**
+
+Updates the timezone to the one specified in the SYS\_TZINFO input variable selected from the pull-down menu.  If "localtime" is selected then the timezone will not be changed from the current/installed setting.
+
+**Reboot**
+
+No actions are taken.  If you have changed the value it will remain set to your selection.
+
+**Operation Script**
+
+Will change the timezone setting to the value of SYS\_TZINFO</description>
+      <is-head-version type="boolean">false</is-head-version>
+      <name>SYS Timezone set - 12H1.rc</name>
+      <script>#!/bin/bash -ex
+#
+# Copyright (c) 2008-2011 RightScale, Inc, All Rights Reserved Worldwide.
+#
+
+#
+# Test for a reboot,  if this is a reboot just skip this script.
+#
+if test "$RS_REBOOT" = "true" ; then
+  echo "Skip re-setting Timezone on reboot."
+  exit 0 # Leave with a smile ...
+fi
+
+#
+# If this parameter is not set leave unchanged and use localtime
+#
+if [ "$SYS_TZINFO" = "localtime" ]; then
+  echo "SYS_TZINFO set to localtime.  Not changing /etc/localtime..."
+  exit 0
+else
+  tzset="$SYS_TZINFO"
+fi
+
+#
+# Set the Timezone
+#
+ln -sf /usr/share/zoneinfo/$tzset /etc/localtime
+echo "Timezone set to $tzset"
+
+logger -t RightScale "Timezone set to $tzset"
+
+exit 0
+</script>
+      <updated-at type="datetime">2012-03-27T20:33:55Z</updated-at>
+      <version type="integer">1</version>
+      <href>https://my.rightscale.com/api/acct/12345/right_scripts/12345</href>
+    </right-script>
+  </server-template-executable>
+  <server-template-executable>
+    <apply>boot</apply>
+    <position type="integer">2</position>
+    <recipe nil="true"></recipe>
+    <right-script>
+      <created-at type="datetime">2012-03-27T20:33:55Z</created-at>
+      <description>Configures syslog-ng for remote logging on the RightScale syslog servers.
+
+</description>
+      <is-head-version type="boolean">false</is-head-version>
+      <name>SYS Syslog remote logging client - 12H1.rc</name>
+      <script>#!/bin/bash -ex
+# Copyright (c) 2007-2011 by RightScale Inc., all rights reserved
+
+set +e
+which rs_tag
+if [ "$?" -ne 0 ]; then
+  logger -s -t RightScale "FATAL ERROR: this RightScript only supports v5 based RightImages that have rs_tag support!  You must use SYS Syslog Remote Logging Client v7 instead if you are using a v4 RightImage"
+  exit 1
+fi
+set -e
+
+# Auto-gernerate config file
+function write_config
+{
+  [ -e /etc/syslog-ng/syslog-ng.conf ] &amp;&amp; mv -f /etc/syslog-ng/syslog-ng.conf /etc/syslog-ng/syslog-ng.conf.bak.$(date "+%Y%m%d%H%M%S")
+  cp $RS_ATTACH_DIR/syslog-ng-remote.conf /etc/syslog-ng/syslog-ng.conf
+  if [[ "$RS_DISTRO" == ubuntu ]]; then
+    cat &gt;&gt; /etc/syslog-ng/syslog-ng.conf &lt;&lt;EOF
+destination df_syslog { file("/var/log/syslog"); };
+
+# all messages except from the auth and authpriv facilities
+filter f_syslog { not facility(auth, authpriv); };
+
+# *.*;auth,authpriv.none          -/var/log/syslog
+log {
+        source(s_sys);
+        filter(f_syslog);
+        destination(df_syslog);
+};
+EOF
+  fi
+  #Inject Instance ID into config
+  perl -p -i -e 's/i-123456/'$SERVER_UUID'/' /etc/syslog-ng/syslog-ng.conf
+  #set syslog server. 
+  perl -p -i -e 's/syslog.rightscale.com/'$SYSLOG_SERVER'/' /etc/syslog-ng/syslog-ng.conf
+  # Set apache log dir (for haproxy.log)
+  sed -i "/@@APACHE_LOG_DIR@@/s//$apache_log_dir/" /etc/syslog-ng/syslog-ng.conf
+  #
+  # Remote syslog is not currently supported on the any cloud other than ec2 cloud,
+  # so instead redirect all logging over UDP to /var/log/messages.
+  #
+  # RS_CLOUD_PROVIDER is not defined yet for all clouds - check for existence so we
+  # can get cloud.com going.
+  # Ticket #s-8736
+  #
+  if [ -z "$RS_CLOUD_PROVIDER" -o "$RS_CLOUD_PROVIDER" != "ec2" ]; then
+    sed -i 's/^destination d_udp .*$/destination d_udp { file("\/dev\/null.syslog-ng"); };/' /etc/syslog-ng/syslog-ng.conf
+  fi
+}
+
+case "$RS_DISTRO" in
+  ubuntu)
+    logrotate_file=/etc/logrotate.d/syslog-ng
+    apache_log_dir=apache2
+    ;;
+  centos|redhat*)
+    logrotate_file=/etc/logrotate.d/syslog
+    apache_log_dir=httpd
+    ;;
+  *)
+    logger -s -t RightScale "RS_DIST ($RS_DISTRO) is not supported at this time. exiting..."
+    exit 1
+    ;;
+esac
+
+# Test for a reboot,  if this is a reboot just update config.
+#
+# Test if this script has already run.  If so it is either a boot script being re-run
+# or the server is being started from a stopped state.  Update the config - same as reboot.
+#
+if test "$RS_REBOOT" = "true" -o "$RS_ALREADY_RUN" = "true"; then
+  logger -s -t RightScale "Update SYSLOG configuration on reboot or start."
+  write_config
+  service syslog-ng restart
+  # Tag instance for start/stop support
+  rs_tag -a "rs_logging:state=active" &amp;&amp; logger -s -t RightScale "Setting logging active tag"
+  logger -t RightScale "Updated SYSLOG configuration on reboot or start."
+  exit 0
+fi
+
+#create a new /dev/null for syslog-ng to use
+#
+if [ ! -e /dev/null.syslog-ng ]; then
+  mknod /dev/null.syslog-ng c 1 3
+fi
+
+write_config
+service syslog-ng restart
+
+# Set up log file rotation
+perl -p -i -e 's/weekly/daily/; s/rotate\s+\d+/rotate 7/' /etc/logrotate.conf
+
+# fix /var/log/boot.log issue
+[ ! -e /var/log/boot.log ] &amp;&amp; touch /var/log/boot.log
+
+[ -z "$(grep -lir "missingok" $logrotate_file)" ] &amp;&amp; sed -i '/sharedscripts/ a\    missingok' $logrotate_file
+[ -z "$(grep -lir "notifempty" $logrotate_file)" ] &amp;&amp; sed -i '/sharedscripts/ a\    notifempty' $logrotate_file
+
+# tag required for RightLink enabled images
+rs_tag -a "rs_logging:state=active" &amp;&amp; logger -s -t RightScale "Setting logging active tag"
+</script>
+      <updated-at type="datetime">2012-03-27T20:33:55Z</updated-at>
+      <version type="integer">10</version>
+      <href>https://my.rightscale.com/api/acct/12345/right_scripts/12345</href>
+    </right-script>
+  </server-template-executable>
+  <server-template-executable>
+    <apply>boot</apply>
+    <position type="integer">3</position>
+    <recipe nil="true"></recipe>
+    <right-script>
+      <created-at type="datetime">2012-03-27T20:33:47Z</created-at>
+      <description>Configures postfix to deliver local mail by accepting SMTP connections on localhost.
+</description>
+      <is-head-version type="boolean">false</is-head-version>
+      <name>MAIL Postfix local delivery - 12H1.rc</name>
+      <script>#!/bin/bash -ex
+#
+# Copyright (c) 2008-2011 RightScale, Inc, All Rights Reserved Worldwide.
+#
+
+postfix_file=/etc/postfix/main.cf
+backupfile_time=`date +%H%M%S`
+cp $postfix_file $postfix_file.$backupfile_time
+
+if [  "$RS_DISTRO" ==  "ubuntu" ]; then
+  logger -s -t RightScale "Using Ubuntu default main.cf config"
+else
+# Make the changes needed for centos
+sed -i 's/inet_interfaces = localhost/#inet_interfaces = localhost/' $postfix_file
+sed -i 's/#inet_interfaces = all/inet_interfaces = all/' $postfix_file
+
+# Replace everything after the localhost.  This assumes that the last host entry is
+# The host that this script added.  If there are other hosts added to this line by
+# some other script then this will break.  A specialized script must be written to
+# handle this case.
+fqdn=`hostname -f`
+logger -s -t RightScale 'Adding $fqdn to postfix destinations.'
+sed -i "s/^mydestination = \$myhostname\, localhost\.\$mydomain\, localhost.*$/mydestination = \$myhostname, localhost\.\$mydomain\, localhost\, $fqdn/" $postfix_file
+
+# Must restart to change inet settings.
+service postfix restart
+
+fi</script>
+      <updated-at type="datetime">2012-03-27T20:33:47Z</updated-at>
+      <version type="integer">5</version>
+      <href>https://my.rightscale.com/api/acct/12345/right_scripts/12345</href>
+    </right-script>
+  </server-template-executable>
+  <server-template-executable>
+    <apply>boot</apply>
+    <position type="integer">4</position>
+    <recipe nil="true"></recipe>
+    <right-script>
+      <created-at type="datetime">2012-03-27T20:33:47Z</created-at>
+      <description>Installs and configures monitoring data collection for RightScale. Uses collectd 4.10.*.  
+The MON\_PROCESSES can be a (space-separated) list of processes to monitor, such as "httpd mysqld".
+
+</description>
+      <is-head-version type="boolean">false</is-head-version>
+      <name>SYS Monitoring install - 12H1.rc</name>
+      <script>#!/bin/bash -ex
+# Copyright (c) 2007-2011 by RightScale Inc., all rights reserved
+
+#### Check if supported on image ####
+
+set +e
+which rs_tag
+if [ "$?" -ne 0 ]; then
+  logger -s -t RightScale "FATAL ERROR: this RightScript only supports v5 based RightImages that have rs_tag support!  You must use SYS Monitoring install v8 instead if you are using a v4 RightImage"
+  exit 1
+fi
+set -e
+
+
+#### Setup Distro dependent variables ####
+package_comment="\n#RightScale: do not allow collectd version to be modified.\n#Collectd packages handled by SYS Monitoring install rightscript"
+
+case "$RS_DISTRO" in
+  ubuntu)
+    config="/etc/collectd/collectd.conf"
+    plugin_dir="/etc/collectd/conf"
+    cron_service=cron
+    apt_preferences_config=/etc/apt/preferences.d/12345rightscale
+    ;;
+  centos|redhat*)
+    config="/etc/collectd.conf"
+    plugin_dir="/etc/collectd.d"
+    cron_service=crond
+    yum_epel_config=/etc/yum.repos.d/Epel.repo
+    ;;
+  *)
+    logger -s -t RightScale "RS_DIST ($RS_DISTRO) is not supported at this time. exiting..."
+    exit 1
+    ;;
+esac
+mkdir -p $plugin_dir
+
+# Auto-generate config file
+function write_config 
+{
+  [ -e $config ] &amp;&amp; mv -f $config ${config}.bak.$(date "+%Y%m%d%H%M%S")
+  cp -f $RS_ATTACH_DIR/collectd-client.conf $config
+  sed -i -e "s/^Hostname.*/Hostname \"$SERVER_UUID\"/" $config
+  [ -n "$SKETCHY" ] &amp;&amp; sed -i -e "s/sketchy\.rightscale\.com/$SKETCHY/" $config
+  [ "$(uname -m)" == "x86_64" ] &amp;&amp; sed -i -e "s:/usr/lib/collectd:/usr/lib64/collectd:" $config
+  echo "Include \"$plugin_dir/*.conf\"" &gt;&gt; $config
+}
+
+#### Update configuration for start/stop and reboot ####
+
+if test "$RS_REBOOT" = "true" -o "$RS_ALREADY_RUN" = "true"; then
+  service collectd stop
+  write_config
+  service collectd start
+  logger -t RightScale "Updated collectd configuration on REBOOT."
+  rs_tag -a "rs_monitoring:state=active" &amp;&amp; logger -s -t RightScale "Setting monitoring active tag"
+
+#Repo is replaced by the core site.  Re-add the exclude
+  if [[ "$RS_DISTRO" =~ centos|redhat.* ]]; then 
+    echo -e "$package_comment\nexclude=collectd\n" &gt;&gt; $yum_epel_config
+  fi
+  exit 0
+fi
+
+#### Install Attached Packages ####
+
+if [ $RS_DISTRO = ubuntu ]; then 
+  apt-get -y install librrd4
+  # Only update when using Ubuntu Hardy
+  if [ "$(lsb_release -rs)" != "10.04" ]; then
+    logger -s -t RightScale "WARNING These packages were built for Ubuntu Lucid (10.04), you may have issues!"
+  fi
+
+  if [ "$RS_ARCH" = "x86_64" ]; then
+    RS_ARCH="amd64"
+  fi   
+
+  logger -s -t RightScale "Removing any installed version of collectd..."
+  set -e
+  apt-get -y remove collectd
+  set +e
+  logger -s -t RightScale "Installing Collectd Packages Now..."
+  dpkg -i $ATTACH_DIR/*$RS_ARCH.deb
+  echo -e "$package_comment\nPackage: collectd collectd-core\nPin: version 4.10*\nPin-Priority: 1001\n" &gt; $apt_preferences_config
+else
+  yum erase -y collectd
+  rpm -i $ATTACH_DIR/*$RS_ARCH.rpm
+  echo -e "$package_comment\nexclude=collectd\n" &gt;&gt; $yum_epel_config
+fi
+
+logger -s -t RightScale "Package Installation Complete."
+
+
+#### Create the config file ####
+# This should be updated to use default the default config file installed
+# with the package.  The default configs should be modified as needed.
+write_config
+
+#### Install a Nightly Crontask to Restart Collectd ####
+
+# Add the task to /etc/crontab, at 04:00 localtime.
+[ -z "$(grep "service collectd restart" /etc/crontab)" ] &amp;&amp; echo '00 4 * * * root service collectd restart &gt; /dev/null' &gt;&gt; /etc/crontab
+
+logger -s -t RightScale "Installed nightly restart crontask"
+
+#### Monitor Processes from Script Input ####
+
+# we always want to monitor collectd itself.
+processes="  process \"collectd\""
+
+if [ ! -z "$MON_PROCESSES" ]; then
+  # Loop over processes and format them properly for the collectd config file.
+  # Store the result in processes environment variable.
+  for p in $MON_PROCESSES; do
+    processes="$processes\n  process \"$p\""
+    logger -s -t RightScale "Monitoring $p process" 
+  done
+else
+  logger -s -t RightScale "No additional processes were specified to monitor."
+fi
+
+if [ ! -z "$MON_PROCESSMATCH" ]; then
+  # ProcessMatch arguments are passed in as 'name/regex', in a space separated list.
+  # so as we iterate over the list, we have to cut each entry into the two parts.
+  for p in $MON_PROCESSMATCH; do
+    p_name=$(echo $p | cut -d/ -f1)
+    p_regex=$(echo $p | cut -d/ -f2)
+    processes="$processes\n  processmatch \"$p_name\" \"$p_regex\""
+    logger -s -t RightScale "Monitoring $p_regex as $p_name"
+  done
+else
+  logger -s -t RightScale "No processmatch inputs have been specified."
+fi
+
+# Write the process file into the include directory.
+process_conf="$plugin_dir/processes.conf"
+
+echo -e "LoadPlugin Processes" &gt; $process_conf
+echo -e "&lt;Plugin processes&gt;"  &gt;&gt; $process_conf
+echo -e "$processes"  &gt;&gt; $process_conf
+echo -e "&lt;/Plugin&gt;"  &gt;&gt; $process_conf
+
+if [[ "$RS_DISTRO" =~ centos|redhat.* ]]; then 
+#
+# Patch collectd init script, so it uses collectdmon.  
+#
+# Only needed for CentOS, Ubuntu already does this out of the box.
+#
+patch -N -p 0 -l -c &lt;&lt;'EOF' || logger -s -t RightScale "Error installing collectdmon"
+--- /etc/init.d/collectd        Tue Oct 13 17:51:38 2009
+*** ./collectd  Tue Oct 13 17:58:04 2009
+***************
+*** 25,31 ****
+        echo -n $"Starting $prog: "
+        if [ -r "$CONFIG" ]
+        then
+!               daemon /usr/sbin/collectd -C "$CONFIG"
+                RETVAL=$?
+                echo
+                [ $RETVAL -eq 0 ] &amp;&amp; touch /var/lock/subsys/$prog
+--- 25,31 ----
+        echo -n $"Starting $prog: "
+        if [ -r "$CONFIG" ]
+        then
+!               daemon collectdmon -c /usr/sbin/collectd -P /var/run/collectdmon.pid -- -C "$CONFIG"
+                RETVAL=$?
+                echo
+                [ $RETVAL -eq 0 ] &amp;&amp; touch /var/lock/subsys/$prog
+***************
+*** 33,39 ****
+  }
+  stop () {
+        echo -n $"Stopping $prog: "
+!       killproc $prog
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] &amp;&amp; rm -f /var/lock/subsys/$prog
+--- 33,39 ----
+  }
+  stop () {
+        echo -n $"Stopping $prog: "
+!       killproc collectdmon
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] &amp;&amp; rm -f /var/lock/subsys/$prog
+EOF
+
+fi
+service collectd restart
+
+#### tag required for RightLink enabled images ####
+rs_tag -a "rs_monitoring:state=active" &amp;&amp; logger -s -t RightScale "Setting monitoring active tag"
+</script>
+      <updated-at type="datetime">2012-03-27T20:33:49Z</updated-at>
+      <version type="integer">10</version>
+      <href>https://my.rightscale.com/api/acct/12345/right_scripts/12345</href>
+    </right-script>
+  </server-template-executable>
+</server-template-executables>

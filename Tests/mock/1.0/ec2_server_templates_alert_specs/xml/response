@@ -1,0 +1,186 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Wed, 11 Apr 2012 05:00:13 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.11
+X-Runtime: 444
+Set-Cookie: _session_id=7eb4fd2549e4702aee20b3741f96237d; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<alert-specs type="array">
+  <alert-spec>
+    <condition>&lt;</condition>
+    <description>Raise an alert if free memory is too low.</description>
+    <duration type="integer">1</duration>
+    <escalation-name>critical</escalation-name>
+    <file>memory/memory-free</file>
+    <name>rs memory low</name>
+    <threshold>1000000</threshold>
+    <variable>value</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>&lt;</condition>
+    <description>Raise an alert if the available space in the root partition is too low.</description>
+    <duration type="integer">5</duration>
+    <escalation-name>critical</escalation-name>
+    <file>df/df-root</file>
+    <name>rs low space in root partition</name>
+    <threshold>1000000000</threshold>
+    <variable>free</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>&gt;</condition>
+    <description>Raise an alert if the amount of network data transmitted is too high.</description>
+    <duration type="integer">10</duration>
+    <escalation-name>critical</escalation-name>
+    <file>interface/if_octets-eth0</file>
+    <name>rs high network tx activity</name>
+    <threshold>10000000</threshold>
+    <variable>tx</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>&gt;</condition>
+    <description>Raise an alert if the amount of network data received is too high.</description>
+    <duration type="integer">30</duration>
+    <escalation-name>critical</escalation-name>
+    <file>interface/if_octets-eth0</file>
+    <name>rs high network rx activity</name>
+    <threshold>50000000</threshold>
+    <variable>rx</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>&lt;</condition>
+    <description>Raise alert if the free swap space is too low.</description>
+    <duration type="integer">5</duration>
+    <escalation-name>critical</escalation-name>
+    <file>swap/swap-free</file>
+    <name>rs low swap space</name>
+    <threshold>100000000</threshold>
+    <variable>value</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>&lt;</condition>
+    <description>Raise an alert if the idle time is too low.</description>
+    <duration type="integer">3</duration>
+    <escalation-name>warning</escalation-name>
+    <file>cpu-0/cpu-idle</file>
+    <name>rs cpu busy</name>
+    <threshold>15</threshold>
+    <variable>value</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>&lt;</condition>
+    <description>Raise an alert when the cpu idle time is too low.</description>
+    <duration type="integer">5</duration>
+    <escalation-name>critical</escalation-name>
+    <file>cpu-0/cpu-idle</file>
+    <name>rs cpu overloaded</name>
+    <threshold>3</threshold>
+    <variable>value</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>&gt;</condition>
+    <description>Raise an alert disk io is too high.</description>
+    <duration type="integer">15</duration>
+    <escalation-name>warning</escalation-name>
+    <file>cpu-0/cpu-wait</file>
+    <name>rs cpu I/O wait</name>
+    <threshold>40</threshold>
+    <variable>value</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>==</condition>
+    <description>Raise an alert when the server is out of free memory.</description>
+    <duration type="integer">1</duration>
+    <escalation-name>critical</escalation-name>
+    <file>memory/memory-free</file>
+    <name>rs out of memory</name>
+    <threshold>0</threshold>
+    <variable>value</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>==</condition>
+    <description>Raise an alert if the instance has been terminated abnormally, i.e. not through the RightScale interface or by an elasticity daemon resizing server arrays.</description>
+    <duration type="integer">1</duration>
+    <escalation-name>critical</escalation-name>
+    <file>EC2/server</file>
+    <name>rs instance terminated</name>
+    <threshold>terminated</threshold>
+    <variable>state</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>==</condition>
+    <description>Raise an alert if the instance enters the stranded state.</description>
+    <duration type="integer">1</duration>
+    <escalation-name>warning</escalation-name>
+    <file>EC2/server-failure</file>
+    <name>rs instance stranded</name>
+    <threshold>stranded</threshold>
+    <variable>state</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+  <alert-spec>
+    <condition>==</condition>
+    <description>Raise an alert if the instance fails to send monitoring information for 5 minutes.</description>
+    <duration type="integer">5</duration>
+    <escalation-name>critical</escalation-name>
+    <file>cpu-0/cpu-idle</file>
+    <name>rs instance not responding</name>
+    <threshold>NaN</threshold>
+    <variable>value</variable>
+    <href>https://my.rightscale.com/api/acct/12345/alert_specs/12345</href>
+    <action>escalate</action>
+    <vote-tag></vote-tag>
+    <vote-type></vote-type>
+  </alert-spec>
+</alert-specs>

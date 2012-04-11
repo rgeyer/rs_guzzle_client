@@ -109,7 +109,7 @@
     </command>
     
     <command name="ec2_security_groups_destroy" class="Guzzle.Rs.Command.DefaultCommand">
-      <doc>Destroy a Security Group</doc>
+      <doc>Show a Security Group</doc>
       <param name="path" type="string" static="ec2_security_groups/{{id}}" />
       <param name="method" type="string" static="DELETE" />
       <param name="id" type="integer" required="true" location="path" />
@@ -151,6 +151,64 @@
       <param name="path" type="string" static="ec2_server_templates{{output_format}}" />
       <param name="method" type="string" static="GET" />
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
+    <command name="ec2_server_templates_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a new ServerTemplate</doc>
+      <param name="path" type="string" static="server_templates" />
+      <param name="method" type="string" static="POST" />
+      <param name="server_template[nickname]" type="string" required="true" />
+      <param name="server_template[description]" type="string" required="false"/>
+      <param name="server_template[multi_cloud_image_href]" type="string" required="false" />
+      <param name="server_template[ec2_image_href]" type="string" required="false" />
+      <param name="server_template[aki_image_href]" type="string" required="false" />
+      <param name="server_template[ari_image_href]" type="string" required="false" />
+      <param name="server_template[instance_type]" type="string" required="false" />
+      <param name="server_template[ec2_user_data]" type="string" required="false" />
+      <param name="cloud_id" type="integer" required="false" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\ServerTemplate" />
+    </command>
+    
+    <command name="ec2_server_templates_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Destroy a ServerTemplate</doc>
+      <param name="path" type="string" static="server_templates/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="integer" required="true" location="path" />
+    </command>
+    
+    <command name="ec2_server_template" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show a ServerTemplate</doc>
+      <param name="path" type="string" static="ec2_server_templates/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />      
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>
+    
+    <command name="ec2_server_templates_executables" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show a ServerTemplates Executables</doc>
+      <param name="path" type="string" static="ec2_server_templates/{{id}}/executables{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="phase" type="string" required="false" />      
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>
+    
+    <command name="ec2_server_templates_alert_specs" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show a ServerTemplates Alert Specs</doc>
+      <param name="path" type="string" static="ec2_server_templates/{{id}}/alert_specs{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />      
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+    </command>
+    
+    <command name="ec2_server_templates_update" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Update a ServerTemplate</doc>
+      <param name="path" type="string" static="server_templates/{{id}}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server_template[nickname]" type="string" required="false" />
+      <param name="server_template[description]" type="string" required="false"/>
+      <param name="server_template[parameters]" type="array" required="false" />
     </command>
     
     <!-- Start MultiCloudImages -->

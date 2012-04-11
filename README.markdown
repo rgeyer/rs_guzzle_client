@@ -864,7 +864,7 @@ Below you will find the current controllers (and their commands) that are suppor
   <tbody>
     <tr>
       <td>show</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
@@ -874,27 +874,27 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
     <tr>
       <td>create</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
       <td>update</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
       <td>destroy</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
       <td>executables</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
       <td>alert_specs</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>

@@ -1,0 +1,51 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Wed, 11 Apr 2012 04:59:58 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Vary: Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.11
+X-Runtime: 45
+Set-Cookie: _session_id=7eb4fd2549e4702aee20b3741f96237d; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-server-template>
+  <created-at type="datetime">2012-03-27T20:33:55Z</created-at>
+  <description>This ServerTemplate is a starting point for custom ServerTemplate development.
+
+This ServerTemplate uses RightScript technology; for a Chef-based version of this ServerTemplate, see: Base ServerTemplate for Linux (Chef)
+
+__Key Features:__
+* Basic set of scripts for a RightLink-based server with logging, monitoring, alerts, etc.
+* MultiCloud Images that reference the latest supported images with a frozen software repository date that has been tested.
+* Basic set of alerts for most server type monitoring.
+* Examples of system-required input variables.
+
+__Release Notes:__
+[Base ServerTemplate for Linux Release Notes](http://support.rightscale.com/12345-Release_Notes/ServerTemplates_and_RightImages/12345-03-26#Base_ServerTemplate_for_Linux)
+
+* * *
+
+__Supported compute clouds:__
+* Amazon Web Services EC2
+* Citrix CloudStack
+* Datapipe
+* IDC Frontier
+* Logicworks
+* Rackspace
+
+__Supported MultiCloud Images:__
+* CentOS 5.6 - Amazon, CloudStack, Datapipe, IDC Frontier, Logicworks, Rackspace
+* Ubuntu 10.04 - Amazon, Rackspace
+* RHEL 5.6 - Amazon</description>
+  <is-head-version type="boolean">false</is-head-version>
+  <nickname>Base ServerTemplate for Linux</nickname>
+  <updated-at type="datetime">2012-03-27T20:33:55Z</updated-at>
+  <version type="integer">47</version>
+  <href>https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345</href>
+</ec2-server-template>
