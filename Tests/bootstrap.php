@@ -33,6 +33,15 @@ spl_autoload_register(function($class) {
     			'password'	=> $_SERVER['PASSWORD'],
     			'version'		=> '1.0'
     		)
+    ),
+		'test.guzzle-rs-1_5' => array(
+        'class' 	=> 'Guzzle\Rs\RightScaleClient',
+    		'params' 	=> array(
+	    		'acct_num' 	=> $_SERVER['ACCT_NUM'],
+    			'email'			=> $_SERVER['EMAIL'],
+    			'password'	=> $_SERVER['PASSWORD'],
+    			'version'		=> '1.5'
+    		)
     )
 )));
 

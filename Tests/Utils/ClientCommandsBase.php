@@ -21,7 +21,17 @@ use Guzzle\Rs\Common\ClientFactory;
 
 class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 	
+	/**
+	 * 
+	 * @var RightScaleClient
+	 */
 	protected $_client;
+	
+	/**
+	 * 
+	 * @var RightScaleClient
+	 */
+	protected $_client_v1_5;
 
 	protected $_testTs;
 
@@ -35,6 +45,7 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 		$this->_testTs = time();
 		
 		$this->_client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');
+		$this->_client_v1_5 = $this->getServiceBuilder()->get('test.guzzle-rs-1_5');
 
 		$st = new ServerTemplate();
 		$result_obj = $st->index();
@@ -52,8 +63,37 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 	}
 	
 	/**
+	 * Does the heavy lifting of getting and executing a command for API v1.0
+	 *
+	 * @param string $commandName The name of the dynamic command specified in the xml file
+	 * @param array $params The array of parameters for the command
+	 * @param CommandInterface $command A reference to an object which will get set to the command interface object
+	 * @param string $variant A description which will become part of the path for the mock request/response files if $_SERVER['HTTP_TRACE'] is set
+	 *
+	 * @return mixed Either a CommandInterface or the specific model as defined in the xml file
+	 */
+	protected function executeCommand($commandName, array $params = array(), &$command = null, $variant = null) {
+		return $this->_executeCommand($this->_client, $commandName, $params, $command, $variant);
+	}
+	
+	/**
+	 * Does the heavy lifting of getting and executing a command for API v1.5
+	 *
+	 * @param string $commandName The name of the dynamic command specified in the xml file
+	 * @param array $params The array of parameters for the command
+	 * @param CommandInterface $command A reference to an object which will get set to the command interface object
+	 * @param string $variant A description which will become part of the path for the mock request/response files if $_SERVER['HTTP_TRACE'] is set
+	 *
+	 * @return mixed Either a CommandInterface or the specific model as defined in the xml file
+	 */
+	protected function executeCommand1_5($commandName, array $params = array(), &$command = null, $variant = null) {
+		return $this->_executeCommand($this->_client_v1_5, $commandName, $params, $command, $variant);
+	}
+	
+	/**
 	 * Does the heavy lifting of getting and executing a command 
 	 * 
+	 * @param RightScaleClient $client An instantiated RightScaleClient object for the desired version of the API
 	 * @param string $commandName The name of the dynamic command specified in the xml file
 	 * @param array $params The array of parameters for the command
 	 * @param CommandInterface $command A reference to an object which will get set to the command interface object
@@ -61,8 +101,8 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 	 * 
 	 * @return mixed Either a CommandInterface or the specific model as defined in the xml file
 	 */
-	protected function executeCommand($commandName, array $params = array(), &$command = null, $variant = null) {		
-		$command = $this->_client->getCommand($commandName, $params); 
+	protected function _executeCommand($client, $commandName, array $params = array(), &$command = null, $variant = null) {		
+		$command = $client->getCommand($commandName, $params); 
 		$command->execute();
 		$result = $command->getResult();
 		
