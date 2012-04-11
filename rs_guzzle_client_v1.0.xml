@@ -976,5 +976,14 @@
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>
     
+    <!-- Start Statuses -->
+    <command name="statuses" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one Status</doc>
+      <param name="path" type="string" static="statuses/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" /> 
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
+    </command>
+    
   </commands>
 </client>

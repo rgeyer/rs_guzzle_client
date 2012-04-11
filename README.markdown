@@ -963,7 +963,7 @@ Below you will find the current controllers (and their commands) that are suppor
   <tbody>
     <tr>
       <td>show</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50%</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
