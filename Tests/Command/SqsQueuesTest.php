@@ -3,6 +3,10 @@ namespace Guzzle\Rs\Tests\Command;
 
 use Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
+/**
+ * TODO: Creation throws 422 so can't test anything.
+ *
+ */
 class SqsQueuesTest extends ClientCommandsBase {
 	
 	public static function setUpBeforeClass() {
