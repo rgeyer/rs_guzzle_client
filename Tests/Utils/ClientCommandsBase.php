@@ -107,7 +107,7 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 		$result = $command->getResult();
 		
 		if($_SERVER['HTTP_TRACE'] == 'true') {
-			$dir = __DIR__ . '/../' . 'mock/' . $this->_client->getConfig('version') . '/' . $commandName;			
+			$dir = __DIR__ . '/../' . 'mock/' . $client->getConfig('version') . '/' . $commandName;			
 			$command_params = $command->getAll();			
 			if(array_key_exists('output_format', $command_params)) {
 				$dir .= '/' . str_replace('.', '', $command_params['output_format']);
@@ -152,6 +152,23 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 		$matches = array();
 		preg_match($regex, $href, $matches);		
 		
+		return count($matches) > 0 ? $matches[1] : 0;
+	}	
+	
+	/**
+	 * Returns the object id when given the objects relative href.
+	 *
+	 * @example $this->getIdFromRelativeHref('/api/clouds/12345');
+	 *
+	 * @param string $href The relative API href of the object.  I.E. /api/clouds/12345
+	 *
+	 * @return integer The ID of the object
+	 */
+	protected function getIdFromRelativeHref($relative_href) {
+		$regex = ',.+/([0-9]+)$,';
+		$matches = array();
+		preg_match($regex, $relative_href, $matches);
+	
 		return count($matches) > 0 ? $matches[1] : 0;
 	}
 }
