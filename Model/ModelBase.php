@@ -30,6 +30,8 @@ use ReflectionProperty;
  */
 abstract class ModelBase {
 	
+	protected $_api_version = '1.0';
+	
 	protected $_path;
 	protected $_path_for_regex;
 	
@@ -67,8 +69,7 @@ abstract class ModelBase {
 	/* ---------------------------- Overrides ---------------------------- */
 	
 	public function __construct($mixed = null) {		
-		$this->_client = ClientFactory::getClient();
-		
+		$this->_client = ClientFactory::getClient($this->_api_version);		
 		
 		if(!$this->_path_for_regex) {
 			$this->_path_for_regex = $this->_path . 's';
@@ -124,7 +125,7 @@ abstract class ModelBase {
 			throw new InvalidArgumentException("Can not set property $name, it is not defined for this object. Type: " . get_class($this));
 		}
 	
-		$this->_params[$array_idx] = $value;
+		$this->_params[strval($array_idx)] = $value;
 	}
 	
 	/* ---------------------------- Accessors ---------------------------- */
@@ -259,13 +260,27 @@ abstract class ModelBase {
 			$this->_params = $mixed->_params;
 		}
 		
+		if(isset($this->_params['links'])) {
+			foreach($this->links as $link) {
+				if($link->rel == 'self') {
+					$this->href = $link->href;
+				}
+			}
+		}
+		
 		if($this->href) {
 			$this->id = intval($this->getIdFromHref($this->href));
 		}
 	}
 	
 	protected function getIdFromHref($href) {
-		$regex = ',https://.+/api/acct/[0-9]+/' . preg_quote($this->_path_for_regex) . '/([0-9]+),';
+		switch($this->_api_version) {
+			case '1.0':		
+				$regex = ',https://.+/api/acct/[0-9]+/' . preg_quote($this->_path_for_regex) . '/([0-9]+),';
+				break;
+			case '1.5':
+				$regex = ',.+/([0-9]+)$,';
+		}
 		$matches = array();
 		preg_match($regex, $href, $matches);
 		

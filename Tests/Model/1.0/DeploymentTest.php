@@ -4,7 +4,6 @@ namespace Guzzle\Rs\Test\Model;
 
 use Guzzle\Rs\Model\Deployment;
 use Guzzle\Rs\Common\ClientFactory;
-use Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
 class DeploymentTest extends \Guzzle\Tests\GuzzleTestCase {
 	
