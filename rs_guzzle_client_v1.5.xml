@@ -16,6 +16,7 @@
       <param name="method" type="string" static="GET" />      
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="id" type="integer" required="true" />
+      <param name="return_class" type="string" static="Guzzle\Rs\Model\Cloud" />
     </command>
   </commands>
 </client>
