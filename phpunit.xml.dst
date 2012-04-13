@@ -22,6 +22,8 @@
           for a server or other object
         -->
         <server name="AUDIT_ID" value="1" />
+        <!-- Change to the ID of a cloud which supports Security Groups -->
+        <server name="SECGRP_CLOUD_ID" value="1999" />
         <!-- Populate Tests/mock with raw HTTP requests and responses from the tests -->
         <server name="HTTP_TRACE" value="false" />
         <!-- For the mocks created above, strip out sensitive bits like SSH keys, account numbers, and ids -->

@@ -1,0 +1,25 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Fri, 13 Apr 2012 00:03:42 GMT
+Content-Type: application/vnd.rightscale.security_group+xml;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 93
+Content-Length: 470
+X-Request-Uuid: 004c4d5794b446ad96e3491375f8f07b
+Set-Cookie: _session_id=d6927bf96d79ce5818217bc9149f5f73; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<security_groups>
+  <security_group>
+    <actions></actions>
+    <links>
+      <link rel="self" href="/api/clouds/12345/security_groups/12345B7N4HMGPFQ5"/>
+      <link rel="cloud" href="/api/clouds/12345"/>
+      <link rel="security_group_rules" href="/api/clouds/12345/security_groups/12345B7N4HMGPFQ5/security_group_rules"/>
+    </links>
+    <name>default</name>
+    <resource_uid>76</resource_uid>
+  </security_group>
+</security_groups>

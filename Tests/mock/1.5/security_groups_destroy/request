@@ -1,0 +1,8 @@
+DELETE /api/clouds/12345/security_groups/CFS0HI9SMMCOC HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.8; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkE9vgjAcQL9LzzbpjxaoJDuIf9ARAyJxuAuptCw4ZQxBoYbvPkx2f-8d3hMJ5KBrjyZI3pDzRO1N1chhBlA-TFCTIQcoZYZtWZY9QYUcaWIz4Bk1MGd5jgEUYMFMwGBQoFPCJFd07DXq3-WUv9wxjzy3ClY4OeR1uPA6lxepunfaItedt753ptxXm_emjErRtv4807K_J1blrUMtVcfjb_PryAk29Q2O2t5WqwPePvBloYpHIAKIwj4R68te1HWj0-nuM07P7tmfQRLBbzjFcU-59mZXi4jyVPI5kaft0qvOH3bcd0Em1Kb3C__kRpUmwfLttaR7LRFZ9tOWzXiFAWXD8AfUx1zZ;_session_id=43c7b11e041d82c92f8dc4876ef3909c
+

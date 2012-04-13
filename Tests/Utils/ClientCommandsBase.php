@@ -165,7 +165,7 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 	 * @return integer The ID of the object
 	 */
 	protected function getIdFromRelativeHref($relative_href) {
-		$regex = ',.+/([0-9]+)$,';
+		$regex = ',.+/([0-9A-Z]+)$,';
 		$matches = array();
 		preg_match($regex, $relative_href, $matches);
 	

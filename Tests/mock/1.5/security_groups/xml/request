@@ -1,0 +1,8 @@
+GET /api/clouds/12345/security_groups.xml HTTP/1.1
+Accept: */*
+Accept-Encoding: deflate, gzip
+User-Agent: Guzzle/1.1 (Language=PHP/5.3.8; curl=7.19.7; Host=universal-apple-darwin10.0)
+Host: my.rightscale.com
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMlugkAAQP9lzk7CLCyS9CC0GKAuoEL1QhiGtYjIoqjh34tJ7--9w3uBEKjg_AAzwFugvkDfxg1QKUZEGWegi4CKCKFYFinGM5DzicZIImzOQ6jQJIIIxQiGImMQYYLIXEAKx3jqdfG_q2Dp7U55oLedya2jbksxK4rGzVqHQbyxq8Q1Sy8U0cIQHL3qa7usvupBW678Wo4aQ0tLOijN9vEIe5nDfHWCbsOdq2Ifd0ZjoeXPb3HsToF_zethsY6F1jzsz4b8zLy1GVh03d8cX9vfmJCWW2hd6ObTTnqss2zusuTglP7-_ryn9jcV6Srw_Fg0P95LhveSMIoufdVNVygidBz_ABiZXQE=;_session_id=d6927bf96d79ce5818217bc9149f5f73
+

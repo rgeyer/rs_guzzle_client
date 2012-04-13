@@ -18,5 +18,46 @@
       <param name="id" type="integer" required="true" />
       <param name="return_class" type="string" static="Guzzle\Rs\Model\Cloud" />
     </command>
+    
+    <!-- Start Security Groups -->    
+    <command name="security_groups_create" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a new security group</doc>
+      <param name="path" type="string" static="clouds/{{cloud_id}}/security_groups" />
+      <param name="method" type="string" static="POST" />
+      <param name="cloud_id" type="integer" required="true" location="path"/>
+      <param name="security_group[name]" type="string" required="true" />
+      <param name="security_group[description]" type="string" required="false" />
+      <!-- <param name="return_class" type="string" static="Guzzle\Rs\Model\SecurityGroup" /> -->
+    </command>
+    
+    <command name="security_groups_destroy" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show a Security Group</doc>
+      <param name="path" type="string" static="clouds/{{cloud_id}}/security_groups/{{id}}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="cloud_id" type="integer" required="true" location="path"/>
+    </command>
+    
+    <command name="security_groups" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Security Groups</doc>
+      <param name="path" type="string" static="clouds/{{cloud_id}}/security_groups{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="cloud_id" type="integer" required="true" location="path"/>
+      <param name="filters" type="array" required="false" />
+      <param name="view" type="enum:default,tiny" required="false" />      
+    </command>
+    
+    <command name="security_group" class="Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one Security Group</doc>
+      <param name="path" type="string" static="cloud/{{cloud_id}}/security_groups/{{id}}{{output_format}}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="cloud_id" type="integer" required="true" location="path"/>
+      <!-- <param name="return_class" type="string" static="Guzzle\Rs\Model\SecurityGroup" /> -->
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default,tiny" required="false" />
+    </command>
+    
   </commands>
 </client>
