@@ -279,7 +279,7 @@ abstract class ModelBase {
 				$regex = ',https://.+/api/acct/[0-9]+/' . preg_quote($this->_path_for_regex) . '/([0-9]+),';
 				break;
 			case '1.5':
-				$regex = ',.+/([0-9]+)$,';
+				$regex = ',.+/([0-9A-Z]+)$,';
 		}
 		$matches = array();
 		preg_match($regex, $href, $matches);
