@@ -155,7 +155,12 @@ abstract class ModelBase {
 	/* ----------------------------- Actions ----------------------------- */
 	
 	public function index() {
-		$results = $this->executeCommand($this->_path_for_regex);
+		$params = array();
+		// TODO: This is a bit hacky, it depends upon a child class having the cloud_id set.
+		if($this->_api_version > '1.0') {
+			$params['cloud_id'] = $this->cloud_id;
+		}
+		$results = $this->executeCommand($this->_path_for_regex, $params);
 		
 		if(!is_a($results, 'SimpleXMLElement')) {
 			// Assuming it's a json bodied response
