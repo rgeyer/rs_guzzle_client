@@ -26,9 +26,7 @@ class SecurityGroup1_5 extends ModelBase {
 		$this->_required_params = array('security_group[name]' => $this->castToString(), 'cloud_id' => $this->castToInt());
 		$this->_optional_params = array('security_group[description]' => $this->castToString());
 		$this->_base_params = array(
-				'resource_uid' => $this->castToString(),
-				'links' => null,
-				'actions' => null
+				'resource_uid' => $this->castToString()
 		);
 
 		parent::__construct($mixed);

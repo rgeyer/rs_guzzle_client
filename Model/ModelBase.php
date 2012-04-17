@@ -82,7 +82,9 @@ abstract class ModelBase {
 				'updated_at' 				=> $this->castToDateTime(),
 				'tags' 							=> null,
 				'is_head_version' 	=> $this->castToBool(),
-				'version'						=> $this->castToInt()
+				'version'						=> $this->castToInt(),
+				'links'							=> null,
+				'actions'						=> null
 			)
 		);
 		

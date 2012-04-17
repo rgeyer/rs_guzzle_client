@@ -1,4 +1,4 @@
-GET /api/clouds.json HTTP/1.1
+DELETE /api/servers/12345 HTTP/1.1
 Accept: */*
 Accept-Encoding: deflate, gzip
 User-Agent: Guzzle/1.1 (Language=PHP/5.3.8; curl=7.19.7; Host=universal-apple-darwin10.0)

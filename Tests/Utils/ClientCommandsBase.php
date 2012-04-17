@@ -102,7 +102,7 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 	 * @return mixed Either a CommandInterface or the specific model as defined in the xml file
 	 */
 	protected function _executeCommand($client, $commandName, array $params = array(), &$command = null, $variant = null) {		
-		$command = $client->getCommand($commandName, $params); 
+		$command = $client->getCommand($commandName, $params);
 		$command->execute();
 		$result = $command->getResult();
 		
@@ -170,6 +170,16 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 		preg_match($regex, $relative_href, $matches);
 	
 		return count($matches) > 0 ? $matches[1] : 0;
+	}
+	
+	protected function convertHrefFrom1to15($href) {
+		return preg_replace(',https://my.rightscale.com,', '',
+				preg_replace(',/acct/[0-9]*,', '', $href)
+		);
+	}
+	
+	protected function convertStHrefFrom1to15($href) {
+		return preg_replace(',ec2_server_templates,', 'server_templates', $this->convertHrefFrom1to15($href));
 	}
 }
 
