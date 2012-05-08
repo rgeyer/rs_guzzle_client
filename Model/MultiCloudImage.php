@@ -15,7 +15,7 @@
 namespace Guzzle\Rs\Model;
 
 use Guzzle\Rs\Model\ModelBase;
-use \BadMethodCallException;
+use BadMethodCallException;
 
 class MultiCloudImage extends ModelBase {
 	

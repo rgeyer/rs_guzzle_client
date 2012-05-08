@@ -32,9 +32,9 @@ class DefaultCommand extends AbstractCommand {
 	 * (non-PHPdoc)
 	 * @see Guzzle\Service\Command.AbstractCommand::build()
 	 */
-	protected function build() {				
+	protected function build() {
 		$disposable = array('path' => null, 'method' => null, 'headers' => null, 'return_class' => null);
-		$args = $this->getApiCommand()->getArgs();
+		$args = $this->getApiCommand()->getParams();
 		foreach($args as $arg) {
 			if($arg->get('location') && $arg->get('location') == 'path') {
 				$disposable += array($arg->get('name') => null);

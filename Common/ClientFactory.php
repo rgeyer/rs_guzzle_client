@@ -17,7 +17,7 @@ namespace Guzzle\Rs\Common;
 
 use Guzzle\Rs\RightScaleClient;
 use Guzzle\Service\ServiceBuilder;
-use \InvalidArgumentException;
+use InvalidArgumentException;
 
 /**
  * A static singleton for creating a Guzzle ServiceBuilder and keeping it around to serve up the
