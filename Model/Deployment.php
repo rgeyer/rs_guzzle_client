@@ -23,6 +23,7 @@ use Guzzle\Rs\Common\ClientFactory;
  * A model for the RightScale Deployment in v1.0 of the API
  * 
  * @author Ryan J. Geyer <me@ryangeyer.com>
+ *
  */
 class Deployment extends ModelBase {
 	
@@ -34,7 +35,7 @@ class Deployment extends ModelBase {
 	public function __construct($mixed = null) {
 		$this->_path = 'deployment';
 		$this->_required_params = array('deployment[nickname]' => $this->castToString());
-		$this->_optional_params = array('deployment[description]' => $this->castToString(), 'deployment[default_vpc_subnet_href]' => $this->castToString(), 'deployment[default_ec2_availability_zone]' => $this->castToString());
+		$this->_optional_params = array('deployment[description]' => $this->castToString(), 'deployment[default_vpc_subnet_href]' => $this->castToString(), 'deployment[default_ec2_availability_zone]' => $this->castToString(), 'deployment[parameters]' => $this->castToString());
 		$this->_base_params = array('servers' => $this->parseServers());
 		
 		parent::__construct($mixed);
@@ -66,6 +67,12 @@ class Deployment extends ModelBase {
 				'deployment[default_vpc_subnet_href]' => $this->default_vpc_subnet_href,
 				'deployment[default_ec2_availability_zone]' => $this->default_ec2_availability_zone
 				);
+		$additionalParams = $this->parameters;
+		if(is_array($additionalParams)){
+			foreach ($additionalParams as $key => $value) {
+				$params['deployment[parameters]['.$key.']'] = $value;
+			}
+		}
 		$result = $this->executeCommand('deployments_update', $params);
 		return $result;
 	}
