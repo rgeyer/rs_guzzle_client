@@ -17,7 +17,7 @@ namespace Guzzle\Rs\Common;
 
 use Guzzle\Rs\RightScaleClient;
 use Guzzle\Service\ServiceBuilder;
-use \InvalidArgumentException;
+use InvalidArgumentException;
 
 /**
  * A static singleton for creating a Guzzle ServiceBuilder and keeping it around to serve up the
@@ -32,6 +32,8 @@ class ClientFactory {
 	public static $_acct_num 	= null;
 	public static $_email 		= null;
 	public static $_password 	= null;
+
+	public static $_additionalParams = array();
 
 	/**
 	 * Lazy loads the builder singleton.  Requires that ClientFactory::setCredentials has been previously
@@ -49,23 +51,26 @@ class ClientFactory {
 		}
 		
 		if (!ClientFactory::$_builder) {
+
 			ClientFactory::$_builder = ServiceBuilder::factory(array(
 					'guzzle-rs-1_0' => array (
 							'class' => 'Guzzle\Rs\RightScaleClient',
-							'params' => array (
+							'params' => array_merge(array(
 									'acct_num' 	=> ClientFactory::$_acct_num,
 									'email' 		=> ClientFactory::$_email,
 									'password' 	=> ClientFactory::$_password,
 									'version' 	=> '1.0'
+									), ClientFactory::$_additionalParams
 							)
 					),
 					'guzzle-rs-1_5' => array (
 							'class' => 'Guzzle\Rs\RightScaleClient',
-							'params' => array (
+							'params' => array_merge(array(
 									'acct_num' 	=> ClientFactory::$_acct_num,
 									'email' 		=> ClientFactory::$_email,
 									'password' 	=> ClientFactory::$_password,
 									'version' 	=> '1.5'
+									), ClientFactory::$_additionalParams
 							)
 					)
 			));
@@ -85,10 +90,19 @@ class ClientFactory {
 	public static function setCredentials($acct_num, $email, $password) {
 		ClientFactory::$_acct_num = $acct_num;
 		ClientFactory::$_email 		= $email;
-		ClientFactory::$_password = $password;		
-	}	
+		ClientFactory::$_password = $password;
+	}
 	// @codeCoverageIgnoreEnd
-	
+
+	/**
+	 * Sets additional parameters (e.g. curl options) to use for any client produced from this factory
+	 *
+	 * @param array $params array with additional parameters, key is parameter name, value - parameter value
+	 */
+	public static function setAdditionalParams($params) {
+		ClientFactory::$_additionalParams = $params;
+	}
+
 	/**
 	 * Returns a persistent instance of the Guzzle RightScaleClient.
 	 * 
