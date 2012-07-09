@@ -18,7 +18,7 @@ use Guzzle\Http\Plugin\ExponentialBackoffPlugin;
 
 use Guzzle\Http\Plugin\CookiePlugin;
 
-use Guzzle\Common\Inspector;
+use Guzzle\Service\Inspector;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\XmlDescriptionBuilder;
@@ -41,7 +41,11 @@ class RightScaleClient extends Client {
 	 * Factory method to create a new RightScaleClient
 	 *
 	 * @param array|Collection $config Configuration data. Array keys:
-	 * base_url - Base URL of web service
+     *     base_url - * Base URL of web service
+     *     acct_num - * RightScale account number
+     *     email - Email
+     *     password - RS password
+     *     version - * API version
 	 *
 	 * @return RightScaleClient
 	 *
@@ -61,31 +65,32 @@ class RightScaleClient extends Client {
 		$client->setConfig ( $config );
 		
 		// Add the XML service description to the client		
-		$builder = new XmlDescriptionBuilder(__DIR__ . DIRECTORY_SEPARATOR . 'rs_guzzle_client_v'. $client->getVersion() . '.xml');
-		$client->setDescription($builder->build());
+        $client->setDescription(XmlDescriptionBuilder::build(__DIR__ . DIRECTORY_SEPARATOR . 'rs_guzzle_client_v'. $client->getVersion() . '.xml'));
 
 		// Keep them cookies
 		$client->cookieJar = new IndiscriminateArrayCookieJar(); 
-		$client->getEventManager()->attach(new CookiePlugin($client->cookieJar));
+        $client->getEventDispatcher()->addSubscriber(new CookiePlugin($client->cookieJar));
 		
 		// Retry 50x responses
-		$client->getEventManager()->attach(new ExponentialBackoffPlugin());
+        $client->getEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin());
 
 		return $client;
 	}
 	
 	/**
-	 * 
-	 * @param unknown_type $base_url
-	 * @param unknown_type $acct_num
+     * @param string $baseUrl
+     * @param string $acctNum
+     * @param string $email
+     * @param string $password
+     * @param string $version
 	 */
-	public function __construct($base_url, $acct_num, $email, $password, $version) {
-		parent::__construct($base_url);
-		
-		$this->acct_num = $acct_num;
+    public function __construct($baseUrl, $acctNum, $email, $password, $version)
+    {
+        parent::__construct($baseUrl);
+        $this->acct_num = $acctNum;
 		$this->email 		= $email;
 		$this->password = $password;
-		$this->version 	= $version;	
+		$this->version 	= $version;
 	}
 	
 	public function getVersion() {
@@ -114,7 +119,7 @@ class RightScaleClient extends Client {
 				$request = $this->get('/api/acct/{{acct_num}}/login');
 				$request->setAuth($this->email, $this->password);
 			} else {
-				$request = $this->post('/api/session', null, array('email' => $this->email, 'password' => $this->password, 'account_href' => '/api/accounts/' . $this->acct_num));				
+				$request = $this->post('/api/session', null, array('email' => $this->email, 'password' => $this->password, 'account_href' => '/api/accounts/' . $this->acct_num));
 			}
 			$request->setHeader('X-API-VERSION', $this->version);
 			$request->send();						

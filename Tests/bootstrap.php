@@ -21,10 +21,10 @@ spl_autoload_register(function($class) {
 });
 
 // Register services with the GuzzleTestCase
-\Guzzle\Tests\GuzzleTestCase::setMockBasePath(__DIR__ . DIRECTORY_SEPARATOR . 'mock');
+Guzzle\Tests\GuzzleTestCase::setMockBasePath(__DIR__ . DIRECTORY_SEPARATOR . 'mock');
 
 // Create a service builder to use in the unit tests
-\Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\ServiceBuilder::factory(array(
+Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\ServiceBuilder::factory(array(
     'test.guzzle-rs-1_0' => array(
         'class' 	=> 'Guzzle\Rs\RightScaleClient',
     		'params' 	=> array(
@@ -45,6 +45,6 @@ spl_autoload_register(function($class) {
     )
 )));
 
-\Guzzle\Rs\Common\ClientFactory::setCredentials($_SERVER['ACCT_NUM'], $_SERVER['EMAIL'], $_SERVER['PASSWORD']);
+Guzzle\Rs\Common\ClientFactory::setCredentials($_SERVER['ACCT_NUM'], $_SERVER['EMAIL'], $_SERVER['PASSWORD']);
 
 date_default_timezone_set('America/Los_Angeles');

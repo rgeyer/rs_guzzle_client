@@ -16,7 +16,7 @@ namespace Guzzle\Rs\Model;
 
 use Guzzle\Rs\Model\ModelBase;
 use Guzzle\Rs\Common\ClientFactory;
-use \BadMethodCallException;
+use BadMethodCallException;
 
 class SshKey extends ModelBase {
 	
