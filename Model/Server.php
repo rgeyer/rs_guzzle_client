@@ -15,7 +15,7 @@
 namespace Guzzle\Rs\Model;
 
 use Guzzle\Rs\Model\ModelBase;
-use \InvalidArgumentException;
+use InvalidArgumentException;
 
 class Server extends ModelBase {
 	

@@ -16,7 +16,7 @@ namespace Guzzle\Rs\Model;
 
 use Guzzle\Rs\Common\ClientFactory;
 use DateTime;
-use \InvalidArgumentException;
+use InvalidArgumentException;
 use BadMethodCallException;
 use ReflectionClass;
 use ReflectionProperty;

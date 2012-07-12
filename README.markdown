@@ -1,7 +1,57 @@
+Guzzle Rightscale API client for PHP
+==========================================
+
 rs_guzzle_client is a PHP Guzzle REST API client library for the RightScale API.
 
 Support is available for v1.0 of the API and v1.5 support is coming soon!
 
+## Installation
+Add rs_guzzle_client to the src/Guzzle/Rs directory of your Guzzle
+installation:
+
+    cd /path/to/guzzle
+    git submodule add git://github.com/rgeyer/rs_guzzle_client.git ./src/Guzzle/Rs
+
+You can now build a phar file containing guzzle-aws and the main guzzle framework:
+
+    cd /path/to/guzzle/build
+    phing phar
+
+Now you just need to include guzzle.phar in your script.  The phar file
+will take care of autoloading Guzzle classes:
+
+```php
+
+    <?php
+    require_once 'guzzle.phar';
+```
+
+The example script for getting your servers:
+```php
+<?php
+    require_once 'guzzle.phar';
+    $serviceBuilder = \Guzzle\Service\ServiceBuilder::factory(array(
+    'guzzle-rs-1_0' => array(
+        'class'     => 'Guzzle\Rs\RightScaleClient',
+        'params'     => array(
+            'acct_num'     => '00000', // your rightscale account id
+            'email'            => 'your@email.com',
+            'password'    => 'yourPassword',
+            'version'        => '1.0',
+            'curl.CURLOPT_SSL_VERIFYHOST' => false,
+            'curl.CURLOPT_SSL_VERIFYPEER' => false,
+        )
+    ),
+    ));
+
+    $client = $serviceBuilder->get('guzzle-rs-1_0');
+
+    $params = array();
+    $command = $client->getCommand('servers', $params);
+
+```
+
+## API coverage
 Below you will find the current controllers (and their commands) that are supported by the library.  A quick legend for the completeness percentage.
 
 100% - Implemented Commands, Full tests, Mock responses in the library
