@@ -5,3 +5,6 @@
 phpunit.xml
 docs
 test_reports
+*.iml
+*.ipr
+*.iws

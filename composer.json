@@ -1,9 +1,10 @@
 {
-    "name": "guzzle-rs",
+    "name": "rgeyer/guzzle-rs",
     "type": "library",
-    "description": "Guzzle RightScale",
-    "keywords": ["Guzzle"],
-    "version": "1.0.0",
+    "description": "Guzzle Client for RightScale API 1.0 and 1.5",
+    "keywords": ["Guzzle", "RightScale", "API", "Client"],
+    "homepage": "https://github.com/rgeyer/rs_guzzle_client",
+    "license": "Apache 2.0",
     "authors": [
         {
             "name": "Ryan J. Geyer",
