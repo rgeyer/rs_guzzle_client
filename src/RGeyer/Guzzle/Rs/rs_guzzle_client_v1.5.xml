@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client>
+  <commands>
+    <!-- Start Clouds -->
+    <command name="clouds" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>List the clouds available to this account.</doc>
+      <param name="path" type="string" static="clouds{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filters" type="array" required="false" />      
+    </command>
+    
+    <command name="cloud" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show information about a single cloud</doc>
+      <param name="path" type="string" static="clouds/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />      
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="id" type="integer" required="true" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Cloud" />-->
+    </command>
+    
+    <!-- Start Security Groups -->    
+    <command name="security_groups_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a new security group</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/security_groups" />
+      <param name="method" type="string" static="POST" />
+      <param name="cloud_id" type="integer" required="true" location="path"/>
+      <param name="security_group[name]" type="string" required="true" />
+      <param name="security_group[description]" type="string" required="false" />
+      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SecurityGroup" /> -->
+    </command>
+    
+    <command name="security_groups_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show a Security Group</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/security_groups/{id}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="cloud_id" type="integer" required="true" location="path"/>
+    </command>
+    
+    <command name="security_groups" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Security Groups</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/security_groups{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="cloud_id" type="integer" required="true" location="path"/>
+      <param name="filters" type="array" required="false" />
+      <param name="view" type="enum:default,tiny" required="false" />      
+    </command>
+    
+    <command name="security_group" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show one Security Group</doc>
+      <param name="path" type="string" static="cloud/{cloud_id}/security_groups/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="cloud_id" type="integer" required="true" location="path"/>
+      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SecurityGroup" /> -->
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default,tiny" required="false" />
+    </command>    
+    
+    <!-- Start Servers -->
+    <command name="servers_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new server, and configures its corresponding "next" instance with the received parameters.</doc>
+      <param name="path" type="string" static="servers" />
+      <param name="method" type="string" static="POST" />      
+      <param name="server[deployment_href]" type="string" required="true" />
+      <param name="server[description]" type="string" required="false" />
+      <param name="server[instance][cloud_href]" type="string" required="true" />
+      <param name="server[instance][datacenter_href]" type="string" required="false" />
+      <param name="server[instance][image_href]" type="string" required="false" />
+      <param name="server[instance][inputs]" type="array" required="false" />
+      <param name="server[instance][instance_type_href]" type="string" required="false" />
+      <param name="server[instance][kernel_image_href]" type="string" required="false" />
+      <param name="server[instance][multi_cloud_image_href]" type="string" required="false" />
+      <param name="server[instance][ramdisk_image_href]" type="string" required="false" />
+      <param name="server[instance][security_group_hrefs]" type="array" required="false" />
+      <param name="server[instance][server_template_href]" type="string" required="true" />
+      <param name="server[instance][ssh_key_href]" type="string" required="false" />
+      <param name="server[instance][user_data]" type="string" required="false" />      
+      <param name="server[name]" type="string" required="true" />
+      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" /> -->
+    </command>
+    
+    <command name="servers_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes a given server.</doc>
+      <param name="path" type="string" static="servers/{id}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+    </command>    
+    
+    <command name="server" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Shows the information of a single server.</doc>
+      <param name="path" type="string" static="servers/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" /> -->
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default,instance_detail" required="false" />
+    </command>
+    
+    <command name="servers_launch" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Launches the "next" instance of this server. This function is equivalent to invoking the launch action on the URL of this servers next_instance. See Instances#launch for details.</doc>
+      <param name="path" type="string" static="servers/{id}/launch" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="inputs" type="array" required="false" />
+      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" /> -->
+    </command>
+    
+  </commands>
+</client>

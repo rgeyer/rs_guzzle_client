@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace Guzzle\Rs\Tests\Utils;
+namespace RGeyer\Guzzle\Rs\Tests\Utils;
 
-use Guzzle\Rs\Model\ServerTemplate;
+use RGeyer\Guzzle\Rs\Model\ServerTemplate;
 
-use Guzzle\Rs\Common\ClientFactory;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
 
 class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {

@@ -32,7 +32,7 @@ The example script for getting your servers:
     require_once 'guzzle.phar';
     $serviceBuilder = \Guzzle\Service\ServiceBuilder::factory(array(
     'guzzle-rs-1_0' => array(
-        'class'     => 'Guzzle\Rs\RightScaleClient',
+        'class'     => 'RGeyer\Guzzle\Rs\RightScaleClient',
         'params'     => array(
             'acct_num'     => '00000', // your rightscale account id
             'email'            => 'your@email.com',

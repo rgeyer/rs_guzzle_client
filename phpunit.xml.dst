@@ -35,8 +35,21 @@
         lowUpperBound="35" highLowerBound="70"/>
     </logging>
     <testsuites>
-        <testsuite name="guzzle-service-guzzle-rs-1_0">
-            <directory suffix="Test.php">./Tests</directory>
+        <testsuite name="API 1.0 Commands">
+            <directory suffix="Test.php">./Tests/Command/Ec2</directory>
+        </testsuite> <!-- Passing -->
+        <testsuite name="API 1.5 Commands">
+            <directory suffix="Test.php">./Tests/Command/Mc</directory>
+        </testsuite> <!-- Failing -->
+        <testsuite name="API 1.0 Models">
+            <directory suffix="Test.php">./Tests/Model/Ec2</directory>
+        </testsuite> <!-- Passing -->
+        <testsuite name="API 1.5 Models">
+            <directory suffix="Test.php">./Tests/Model/Mc</directory>
+        </testsuite> <!-- Failing -->
+        <testsuite name="Common and Utils">
+            <directory suffix="Tests.php">./Tests/Common</directory>
+            <directory suffix="Tests.php">./Tests/Utils</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -45,6 +58,7 @@
             <exclude>
                 <directory>./Tests</directory>
                 <directory>./docs</directory>
+                <directory>./vendor</directory>
             </exclude>
         </whitelist>
     </filter>

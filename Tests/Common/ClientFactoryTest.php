@@ -1,9 +1,9 @@
 <?php
 
-namespace Guzzle\Rs\Tests\Common;
+namespace RGeyer\Guzzle\Rs\Tests\Common;
 
 use PHPUnit_Framework_TestCase;
-use Guzzle\Rs\Common\ClientFactory;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 use InvalidArgumentException;
 
 /**

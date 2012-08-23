@@ -1,21 +1,17 @@
 <?php
 
-require_once $_SERVER['GUZZLE'] . '/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-
-use Symfony\Component\ClassLoader\UniversalClassLoader;
-
-$loader = new UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Guzzle' => $_SERVER['GUZZLE'] . '/src',
-    'Guzzle\\Tests' => $_SERVER['GUZZLE'] . '/tests'
-));
-$loader->register();
+require_once 'vendor/autoload.php';
 
 // Autoload classes for guzzle-rs-1_0
 spl_autoload_register(function($class) {
-    if (0 === strpos($class, 'Guzzle\Rs\\')) {
-        $path = implode('/', array_slice(explode('\\', $class), 2)) . '.php';
-        require_once __DIR__ . '/../' . $path;
+    if (0 === strpos($class, 'RGeyer\Guzzle\Rs\Tests\\')) {
+        $path = implode('/', array_slice(explode('\\', $class), 4)) . '.php';
+        require_once __DIR__ . '/' . $path;
+        return true;
+    }
+    if (0 === strpos($class, 'RGeyer\Guzzle\Rs\\')) {
+        $path = implode('/', explode('\\', $class)) . '.php';
+        require_once __DIR__ . '/../src/' . $path;
         return true;
     }
 });
@@ -24,9 +20,9 @@ spl_autoload_register(function($class) {
 Guzzle\Tests\GuzzleTestCase::setMockBasePath(__DIR__ . DIRECTORY_SEPARATOR . 'mock');
 
 // Create a service builder to use in the unit tests
-Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\ServiceBuilder::factory(array(
+Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\Builder\ServiceBuilder::factory(array(
     'test.guzzle-rs-1_0' => array(
-        'class' 	=> 'Guzzle\Rs\RightScaleClient',
+        'class' 	=> 'RGeyer\Guzzle\Rs\RightScaleClient',
     		'params' 	=> array(
 	    		'acct_num' 	=> $_SERVER['ACCT_NUM'],
     			'email'			=> $_SERVER['EMAIL'],
@@ -35,7 +31,7 @@ Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\ServiceBuilder::f
     		)
     ),
 		'test.guzzle-rs-1_5' => array(
-        'class' 	=> 'Guzzle\Rs\RightScaleClient',
+        'class' 	=> 'RGeyer\Guzzle\Rs\RightScaleClient',
     		'params' 	=> array(
 	    		'acct_num' 	=> $_SERVER['ACCT_NUM'],
     			'email'			=> $_SERVER['EMAIL'],
@@ -45,6 +41,8 @@ Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\ServiceBuilder::f
     )
 )));
 
-Guzzle\Rs\Common\ClientFactory::setCredentials($_SERVER['ACCT_NUM'], $_SERVER['EMAIL'], $_SERVER['PASSWORD']);
+RGeyer\Guzzle\Rs\Common\ClientFactory::setCredentials($_SERVER['ACCT_NUM'], $_SERVER['EMAIL'], $_SERVER['PASSWORD']);
+# This is added to compensate for a broken curl implementation in Zend Studio when debugging or running PHP unit
+RGeyer\Guzzle\Rs\Common\ClientFactory::setAdditionalParams(array('curl.CURLOPT_SSL_VERIFYPEER' => false));
 
 date_default_timezone_set('America/Los_Angeles');

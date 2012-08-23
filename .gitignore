@@ -8,3 +8,4 @@ test_reports
 *.iml
 *.ipr
 *.iws
+vendor

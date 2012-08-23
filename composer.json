@@ -16,6 +16,6 @@
         "guzzle/guzzle": ">=2.0.0"
     },
     "autoload": {
-        "psr-0": { "Guzzle\\Rs": "/" }
+        "psr-0": { "RGeyer\\Guzzle\\Rs": "/" }
     }
 }
