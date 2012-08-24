@@ -74,19 +74,21 @@ abstract class ModelBase {
 		if(!$this->_path_for_regex) {
 			$this->_path_for_regex = $this->_path . 's';
 		}
+
+    $all_base = array(
+      'id' 								=> $this->castToInt(),
+      'cloud_id'          => $this->castToString(),
+      'href'							=> $this->castToString(),
+      'created_at' 				=> $this->castToDateTime(),
+      'updated_at' 				=> $this->castToDateTime(),
+      'tags' 							=> null,
+      'is_head_version' 	=> $this->castToBool(),
+      'version'						=> $this->castToInt(),
+      'links'							=> null,
+      'actions'						=> null
+    );
 		
-		$this->_base_params = array_merge($this->_base_params, array(
-				'id' 								=> $this->castToInt(),
-				'href'							=> $this->castToString(),
-				'created_at' 				=> $this->castToDateTime(),
-				'updated_at' 				=> $this->castToDateTime(),
-				'tags' 							=> null,
-				'is_head_version' 	=> $this->castToBool(),
-				'version'						=> $this->castToInt(),
-				'links'							=> null,
-				'actions'						=> null
-			)
-		);
+		$this->_base_params = array_merge($this->_base_params, $all_base);
 		
 		$this->initialize($mixed);
 	}
@@ -159,7 +161,7 @@ abstract class ModelBase {
 	public function index() {
 		$params = array();
 		// TODO: This is a bit hacky, it depends upon a child class having the cloud_id set.
-		if($this->_api_version > '1.0') {
+		if($this->_api_version > '1.0' && array_key_exists('cloud_id', $this->_params)) {
 			$params['cloud_id'] = $this->cloud_id;
 		}
 		$results = $this->executeCommand($this->_path_for_regex, $params);
