@@ -128,4 +128,29 @@ class RightScaleClient extends Client {
 
 		return parent::getCommand($name, $args);
 	}
+
+  /**
+   * Returns a new model of the specified type, which will use this client for making API calls
+   *
+   * @throws \InvalidArgumentException If a namespace is specified, or if the model does not exist
+   * @param $modelName The classname of the model you want to instantiate.  Do NOT include the fully qualified class name with namespace.
+   * @param mixed $mixed Any of the acceptable parameter types for ModelBase::__construct
+   * @return \RGeyer\Guzzle\Rs\ModelBase A model object of the type specified in $modelName
+   */
+  public function newModel($modelName, $mixed = null) {
+    if(strpos("\\", $modelName) === true) {
+      throw new InvalidArgumentException("Do not provide the full namespace plus classname of the desired model.  Only the model classname is required.");
+    }
+
+    $modelName = "\\RGeyer\\Guzzle\\Rs\\Model\\" . $modelName;
+
+    if(!class_exists($modelName)) {
+      throw new \InvalidArgumentException("The model $modelName does not exist");
+    }
+
+    $model = new $modelName($mixed);
+    $model->setClient($this);
+
+    return new $modelName();
+  }
 }
