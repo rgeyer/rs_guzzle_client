@@ -26,22 +26,64 @@ use ReflectionProperty;
  * I.E. server_template[multi_cloud_image_href] || multi_cloud_image_model || (server_template[ec2_image_href] & server_template[aki_image_href] & server_template[ari_image_href] & server_template[instance_type] & server_template[ec2_user_data])
  * 
  * @author Ryan J. Geyer <me@ryangeyer.com>
- *
+ * @property int $id The unique identifier of the object in the RightScale API
+ * @property string $href The API href of the object in the RightScale API
+ * @property DateTime $created_at Creation date of the object
+ * @property DateTime $updated_at Last update date of the object
+ * @property array $tags A list of tags on the object (not available to all object types)
+ * @property bool $is_head_version Boolean indicating head revision for an object
+ * @property int $version The current revision/version of the object
+ * @property array $links A list of references to related objects in the RightScale API (An API 1.5 extension)
+ * @property array $actions
+ * @property string $cloud_id The cloud id of the object (An API 1.5 extension)
  */
 abstract class ModelBase {
-	
+
+  /**
+   * @var string Which RightScale API version to use
+   */
 	protected $_api_version = '1.0';
-	
+
+  /**
+   * @var string The RightScale API path for this model.  I.E. https://my.rightscale.com/api/acct/<path>
+   */
 	protected $_path;
+
+  /**
+   * @var string The name of the object when returned by the API.  This is usually the plural of $_path, but in some cases (like for the ServerTemplates in API 1.0) it is a completely different thing.
+   */
 	protected $_path_for_regex;
-	
+
+  /**
+   * @var array An array of parameters which are permissible for this object. Just-in-time created by ModelBase::_getAllowedParams
+   */
 	protected $_allowed_params;
+
+  /**
+   * @var array An array of parameters which are required for the ModelBase::create and ModelBase::update requests
+   */
 	protected $_required_params = array();
-	protected $_optional_params = array();	
+
+  /**
+   * @var array An array of parameters which are admissible for the ModelBase::create and ModelBase::update requests, but which are not required
+   */
+	protected $_optional_params = array();
+
+  /**
+   * @var array An array of any additional parameters or properties that the object exposes, but which are not input parameters to ModelBase::create or ModelBase::update
+   */
 	protected $_base_params = array();
-	
-	// Protected attributes with public accessors
+
+  /* ------------ Protected attributes with public accessors ----------- */
+
+  /**
+   * @var array The array of all parameters and properties for the object.  Gettable and settable by the "magic" __get and __set calls
+   */
 	protected $_params = array();
+
+  /**
+   * @var \RGeyer\Guzzle\Rs\Common\RightScaleClient
+   */
 	protected $_client;	
 	protected $_last_command;
 	
