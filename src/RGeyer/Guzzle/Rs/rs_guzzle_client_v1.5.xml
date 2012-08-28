@@ -50,14 +50,32 @@
     
     <command name="security_group" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Show one Security Group</doc>
-      <param name="path" type="string" static="cloud/{cloud_id}/security_groups/{id}{output_format}" />
+      <param name="path" type="string" static="clouds/{cloud_id}/security_groups/{id}{output_format}" />
       <param name="method" type="string" static="GET" />
       <param name="id" type="string" required="true" location="path" />
       <param name="cloud_id" type="integer" required="true" location="path"/>
       <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SecurityGroup" /> -->
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="view" type="enum:default,tiny" required="false" />
-    </command>    
+    </command>
+
+    <!-- Start Security Group Rules -->
+    <command name="security_group_rules_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Create a Security Group Rule</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/security_groups/{security_group_id}/security_group_rules" />
+      <param name="method" type="string" static="POST" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="security_group_id" type="string" required="true" location="path" />
+      <param name="security_group_rule[protocol]" type="enum:tcp,udp,icmp" required="true" />
+      <param name="security_group_rule[source_type]" type="enum:cidr_ips,group" required="true" />
+      <param name="security_group_rule[cidr_ips]" type="string" required="false" />
+      <param name="security_group_rule[group_name]" type="string" required="false" />
+      <param name="security_group_rule[group_owner]" type="string" required="false" />
+      <param name="security_group_rule[protocol_details][start_port]" type="string" required="false" />
+      <param name="security_group_rule[protocol_details][end_port]" type="string" required="false" />
+      <param name="security_group_rule[protocol_details][icmp_code]" type="string" required="false" />
+      <param name="security_group_rule[protocol_details][icmp_type]" type="string" required="false" />
+    </command>
     
     <!-- Start Servers -->
     <command name="servers_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">

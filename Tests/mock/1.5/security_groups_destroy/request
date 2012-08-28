@@ -1,8 +1,6 @@
-DELETE /api/clouds/12345/security_groups/CFS0HI9SMMCOC HTTP/1.1
-Accept: */*
-Accept-Encoding: deflate, gzip
-User-Agent: Guzzle/1.1 (Language=PHP/5.3.8; curl=7.19.7; Host=universal-apple-darwin10.0)
+DELETE /api/clouds/12345/security_groups/12345I8FG7HTFVJ HTTP/1.1
 Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
 X-API-VERSION: 1.5
-Cookie: rs_gbl=eNotkE9vgjAcQL9LzzbpjxaoJDuIf9ARAyJxuAuptCw4ZQxBoYbvPkx2f-8d3hMJ5KBrjyZI3pDzRO1N1chhBlA-TFCTIQcoZYZtWZY9QYUcaWIz4Bk1MGd5jgEUYMFMwGBQoFPCJFd07DXq3-WUv9wxjzy3ClY4OeR1uPA6lxepunfaItedt753ptxXm_emjErRtv4807K_J1blrUMtVcfjb_PryAk29Q2O2t5WqwPePvBloYpHIAKIwj4R68te1HWj0-nuM07P7tmfQRLBbzjFcU-59mZXi4jyVPI5kaft0qvOH3bcd0Em1Kb3C__kRpUmwfLttaR7LRFZ9tOWzXiFAWXD8AfUx1zZ;_session_id=43c7b11e041d82c92f8dc4876ef3909c
+Cookie: rs_gbl=eNo1kF1vgjAYRv9Lr23St63QkuzCMYO64UyAqdws0ML4GBgEnWD878LF7p9zkufcUYQsVPVohnSLrDu6tMkZWZwCE48Z6hSygHEDTMqFMUO5HteUJTIlJsEpMIIBEsAi1goDZcAkiWNDktHXJf-sNCZ21KN2FTZ611Ur7DG7XDtlvy---uP6ta0PfaO9ha1-82vYRf75ffjYUrHfro0ouBbZPA9zArbgTZAd65sDh8yuQp5m6ocvo2Oji60OSy2Fl2m1r_2T0hu_5pwqBUE631XqwL4NwP1yoQcw06AvzE9a5p0r35yc6PpcYiazwU3SjYix-_cyJblNSSKlTpe6G6vw8c_j8QQvWVzM; _session_id=0000000000004b65becde60f6759754d
 

@@ -98,8 +98,6 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 	 * @group integration
 	 */
 	public function testCanShowSecurityGroupJson() {
-		$this->markTestSkipped('Security Groups Show returns 404 even given a valid href');
-			
 		$command = null;
 		$result = $this->executeCommand1_5('security_group', array('id' => $this->getIdFromRelativeHref(self::$_secgrp_href), 'cloud_id' => $_SERVER['SECGRP_CLOUD_ID']), $command);
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
@@ -112,8 +110,6 @@ class SecurityGroupCommandsTest extends ClientCommandsBase {
 	 * @group integration
 	 */
 	public function testCanShowSecurityGroupXml() {
-		$this->markTestSkipped('Security Groups Show returns 404 even given a valid href');
-		
 		$command = null;
 		$result = $this->executeCommand1_5('security_group', array('id' => $this->getIdFromRelativeHref(self::$_secgrp_href), 'cloud_id' => $_SERVER['SECGRP_CLOUD_ID'], 'output_format' => '.xml'), $command);
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());

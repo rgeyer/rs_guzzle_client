@@ -613,7 +613,7 @@ Below you will find the current controllers (and their commands) that are suppor
 <table border="1" width="360px">
   <thead>
     <tr>
-      <th colspan="3">EC2 Security Groups</th>      
+      <th colspan="3">Security Groups</th>
     </tr>
     <tr>
       <th width="120px">Command</th>
@@ -625,26 +625,68 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>show</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>index</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>create</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>update</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>destroy</td>
       <td bgcolor="green">100%</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="orange">50%</td>
+      <td bgcolor="orange">50%</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Security Group Rules</th>
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>create</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>destroy</td>
+      <td bgcolor="green">N/A</td>
       <td bgcolor="red">0%</td>
     </tr>
     <tr>
@@ -1120,3 +1162,4 @@ Below you will find the current controllers (and their commands) that are suppor
 TODO
 ====
 * Allow the user to specify a logger.
+* My tests are testing the wrong thing... The "Integration" tests are making actual requests, which is good but is really only testing the WSAPI rather than the requests I'm making. See Tests/Command/Mc/SecurityGroupRulesCommandsTests.php for the golden standard.
