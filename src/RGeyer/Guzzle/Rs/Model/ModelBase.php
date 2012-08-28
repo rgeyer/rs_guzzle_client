@@ -84,8 +84,22 @@ abstract class ModelBase {
   /**
    * @var \RGeyer\Guzzle\Rs\Common\RightScaleClient
    */
-	protected $_client;	
+	protected $_client;
+
+  /**
+   * @var Guzzle\Http\Service\Command\CommandInterface The last command object created by the current client.
+   */
 	protected $_last_command;
+
+  /**
+   * @var bool A boolean indicating if the cloud ID is required in the API request path.  I.E. /api/clouds/:cloud_id/security_groups
+   */
+  protected $_path_requires_cloud_id = false;
+
+  /**
+   * @var bool A boolean indicating if the objects ID is an integer, or alphanumeric string
+   */
+  protected $_id_is_alphanumeric = false;
 	
 	/* ----------------------- Conversion Closures ----------------------- */	
 	protected function castToString() {
@@ -118,7 +132,7 @@ abstract class ModelBase {
 		}
 
     $all_base = array(
-      'id' 								=> $this->castToInt(),
+      'id' 								=> $this->_id_is_alphanumeric ? $this->castToString() : $this->castToInt(),
       'cloud_id'          => $this->castToString(),
       'href'							=> $this->castToString(),
       'created_at' 				=> $this->castToDateTime(),
@@ -184,16 +198,23 @@ abstract class ModelBase {
 	}
 	
 	/**
-	 * @return RightScaleClient
+	 * @return Rgeyer\Guzzle\Rs\Common\RightScaleClient
 	 */
 	public function getClient() {
 		return $this->_client;
 	}
-	
-	public function setClient($client) {
+
+  /**
+   * @param Rgeyer\Guzzle\Rs\Common\RightScaleClient $client A RightScale API guzzle client to use for request
+   * @return void
+   */
+	public function setClient(Rgeyer\Guzzle\Rs\Common\RightScaleClient $client) {
 		$this->_client = $client;
 	}
-	
+
+  /**
+   * @return Guzzle\Http\Service\Command\CommandInterface The last command object created by the current client.
+   */
 	public function getLastCommand() {
 		return $this->_last_command;
 	}
@@ -203,7 +224,7 @@ abstract class ModelBase {
 	public function index() {
 		$params = array();
 		// TODO: This is a bit hacky, it depends upon a child class having the cloud_id set.
-		if($this->_api_version > '1.0' && array_key_exists('cloud_id', $this->_params)) {
+		if($this->_path_requires_cloud_id && array_key_exists('cloud_id', $this->_params)) {
 			$params['cloud_id'] = $this->cloud_id;
 		}
 		$results = $this->executeCommand($this->_path_for_regex, $params);
@@ -226,7 +247,11 @@ abstract class ModelBase {
 	}
 	
 	public function find_by_id($id) {
-		$result = $this->executeCommand($this->_path, array('id' => $id));
+    $params = array('id' => $this->_castIdWithClosure($id));
+    if($this->_path_requires_cloud_id && array_key_exists('cloud_id', $this->_params)) {
+			$params['cloud_id'] = $this->cloud_id;
+		}
+		$result = $this->executeCommand($this->_path, $params);
 		
 		$this->initialize($result);
 	}
@@ -265,7 +290,7 @@ abstract class ModelBase {
 			throw new BadMethodCallException("This object has not yet been created, and therefore can not be updated.  Try the ->create() method first");
 		}
 
-    $params['id'] = $this->id;
+    $params['id'] = $this->_castIdWithClosure();
 		
 		$allowed_params = $this->_getAllowedParams();
 		$allowed_keys = array_keys($allowed_params);
@@ -278,12 +303,18 @@ abstract class ModelBase {
 	
 	public function destroy() {
 		$params = array('id' => $this->id);
+    if($this->_path_requires_cloud_id && array_key_exists('cloud_id', $this->_params)) {
+			$params['cloud_id'] = $this->cloud_id;
+		}
 		$result = $this->executeCommand($this->_path_for_regex . '_destroy', $params);
 		return $result;		
 	}
 	
 	public function duplicate() {
 		$params = array('id' => $this->id);
+    if($this->_path_requires_cloud_id && array_key_exists('cloud_id', $this->_params)) {
+			$params['cloud_id'] = $this->cloud_id;
+		}
 		$result = $this->executeCommand($this->_path_for_regex . '_duplicate', $params);
 		return $result;
 	}
@@ -322,7 +353,7 @@ abstract class ModelBase {
 		}
 		
 		if($this->href) {
-			$this->id = intval($this->getIdFromHref($this->href));
+			$this->id = $this->_castIdWithClosure($this->getIdFromHref($this->href));
 		}
 	}
 	
@@ -359,11 +390,24 @@ abstract class ModelBase {
 			// XML Response can't have dashes
 			$found |= $this->_valueInArray(str_replace('-', '_', $name), array_keys($allowed_params), $array_idx);
 			$found |= $this->_valueInArray($this->_path . "[" . str_replace('-', '_', $name) . "]", array_keys($allowed_params), $array_idx);
-	
-			$closure = $allowed_params[$array_idx];
-			$this->$array_idx = $closure ? $closure($value, $params) : $value;
+
+      if($found) {
+        $closure = $allowed_params[$array_idx];
+        $this->$array_idx = $closure ? $closure($value, $params) : $value;
+      }
+      if($array_idx == 0) {
+        //print_r($params);
+      }
 		}
 	}
+
+  private function _castIdWithClosure($id = null) {
+    if($id == null) {
+      $id = $this->id;
+    }
+    $id_closure = $this->_base_params['id'];
+    return $id_closure($id, array('id' => $id));
+  }
 	
 	private function _valueInArray($value, $array, &$setValue = null) {
 		$in_array = in_array($value, $array);
