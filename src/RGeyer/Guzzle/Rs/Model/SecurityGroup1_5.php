@@ -57,7 +57,7 @@ class SecurityGroup1_5 extends AbstractSecurityGroup {
    * @param string $protocol Which protocol for the rule.  One of "tcp", "udp", or "icmp"
    * @param string $cidr_ips An IP range in CIDR notation. @see http://en.wikipedia.org/wiki/CIDR_notation
    * @param int $from_port The starting port of a range of ports, or the ICMP type.  If $to_port is null, this port will be used as the start and end of the range, effectively opening only this port number
-   * @param mixed $to_port The ending port of a range of ports, or null.  When the $protocol is ICMP this is the ICMP code, and cannot be null.  If null is specified, this should default to the same as $from_port.
+   * @param mixed $to_port The ending port of a range of ports, the ICMP code or null.  If null is specified, this should default to the same as $from_port.
    * @return void
    */
   public function createCidrRule($protocol, $cidr_ips, $from_port, $to_port = null) {
@@ -71,6 +71,17 @@ class SecurityGroup1_5 extends AbstractSecurityGroup {
     $this->executeCommand('security_group_rules_create', $params);
   }
 
+  /**
+   * Creates an ingress rule for another security group to access this security group over the specified protocol and port(s)
+   *
+   * @throws \InvalidArgumentException If the protocol is ICMP, which is unsupported for group ingress rules
+   * @param string $group_name The name of the ingress security group
+   * @param string $group_owner The cloud user account name/number of the ingress security group
+   * @param string $protocol Which protocol for the rule.  One of "tcp", "udp", or "icmp"
+   * @param int $from_port The starting port of a range of ports, or the ICMP type.  If $to_port is null, this port will be used as the start and end of the range, effectively opening only this port number
+   * @param mixed $to_port The ending port of a range of ports, the ICMP code or null.  If null is specified, this should default to the same as $from_port.
+   * @return void
+   */
   public function createGroupRule($group_name, $group_owner, $protocol, $from_port, $to_port = null) {
     if($protocol == 'icmp') {
       throw new \InvalidArgumentException("ICMP is not supported for group ingress rules.  Please specify a CIDR based ingress rule for ICMP");
@@ -90,7 +101,7 @@ class SecurityGroup1_5 extends AbstractSecurityGroup {
   /**
    * @param string $protocol Which protocol for the rule.  One of "tcp", "udp", or "icmp"
    * @param int $from_port The starting port of a range of ports, or the ICMP type.  If $to_port is null, this port will be used as the start and end of the range, effectively opening only this port number
-   * @param mixed $to_port The ending port of a range of ports, or null.  When the $protocol is ICMP this is the ICMP code, and cannot be null.  If null is specified, this should default to the same as $from_port.
+   * @param mixed $to_port The ending port of a range of ports, the ICMP code or null.  If null is specified, this should default to the same as $from_port.
    * @return array A parameters array to pass to ModelBase::executeCommand containing the common input params.  This should be merged with parameters specific and required for CIDR or group based rules.
    */
   private function getCommonRuleParams($protocol, $from_port, $to_port) {

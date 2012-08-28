@@ -65,6 +65,16 @@ class SecurityGroup extends AbstractSecurityGroup {
     $this->executeCommand('ec2_security_groups_update', $params);
   }
 
+  /**
+   * Creates an ingress rule for another security group to access this security group over the specified protocol and port(s)
+   *
+   * @param string $group_name The name of the ingress security group
+   * @param string $group_owner The cloud user account name/number of the ingress security group
+   * @param string $protocol Which protocol for the rule.  One of "tcp", "udp", or "icmp"
+   * @param int $from_port The starting port of a range of ports, or the ICMP type.  If $to_port is null, this port will be used as the start and end of the range, effectively opening only this port number
+   * @param mixed $to_port The ending port of a range of ports, the ICMP code or null.  If null is specified, this should default to the same as $from_port.
+   * @return void
+   */
   public function createGroupRule($group_name, $group_owner, $protocol, $from_port, $to_port = null) {
     $params = array_merge($this->getCommonRuleParams($protocol, $from_port, $to_port),
       array(
