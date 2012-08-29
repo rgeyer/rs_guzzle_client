@@ -260,45 +260,52 @@ abstract class ModelBase {
 		$id = $this->getIdFromHref($href);
 		$this->find_by_id($id);
 	}
-	
-	/**
-	 * 
-	 * @param unknown_type $params
-	 * 
-	 */
+
+  /**
+   * Calls the "Create" or POST method on the API resource represented by the model.
+   *
+   * @throws \InvalidArgumentException When invalid parameters are supplied, or when required parameters are ommitted
+   * @param array $params An array of paramters to override in the request.  This will be merged with all existing parameters/properties of this object.
+   */
 	public function create($params = null) {
-		if(!$params) { $params = $this->_params; }
+		if($params) { $this->_params = array_merge($this->_params, $params); }
 		
-		$supplied_require_params = array_intersect(array_keys($this->_required_params), array_keys($params));				
+		$supplied_require_params = array_intersect(array_keys($this->_required_params), array_keys($this->_params));
 		if(count($supplied_require_params) != count($this->_required_params)) {
-			throw new InvalidArgumentException("The following required param(s) were not supplied -- " . join(',', array_diff(array_keys($this->_required_params), array_keys($params))));
+			throw new InvalidArgumentException("The following required param(s) were not supplied -- " . join(',', array_diff(array_keys($this->_required_params), array_keys($this->_params))));
 		}
 		
 		$allowed_params = array_keys($this->_getAllowedParams());
-		if(count(array_diff(array_keys($params), $allowed_params)) > 0) {
-			throw new InvalidArgumentException("The following parameters are invalid -- " . join(',', array_diff(array_keys($params), $allowed_params)));
+		if(count(array_diff(array_keys($this->_params), $allowed_params)) > 0) {
+			throw new InvalidArgumentException("The following parameters are invalid -- " . join(',', array_diff(array_keys($this->_params), $allowed_params)));
 		}
 		
-		$result = $this->executeCommand($this->_path_for_regex . "_create", $params);
+		$result = $this->executeCommand($this->_path_for_regex . "_create", $this->_params);
 		$this->initialize($result);
 	}
-	
+
+  /**
+   * Calls the "Update" or PUT method on the API resource represented by the model.
+   *
+   * @throws \BadMethodCallException|\InvalidArgumentException If the id or href of the resource in the API is unknown, or if an invalid parameter was supplied.
+   * @param array $params An array of paramters to override in the request.  This will be merged with all existing parameters/properties of this object.
+   */
 	public function update($params = null) {
-		if(!$params) { $params = $this->_params; }
+    if($params) { $this->_params = array_merge($this->_params, $params); }
 		
 		if(!$this->id || !$this->href) {
-			throw new BadMethodCallException("This object has not yet been created, and therefore can not be updated.  Try the ->create() method first");
+			throw new BadMethodCallException("This object has not yet been created, and therefore can not be updated.  Try the ->create() or one of the ->findBy* methods first");
 		}
 
-    $params['id'] = $this->_castIdWithClosure();
+    $this->_params['id'] = $this->_castIdWithClosure();
 		
 		$allowed_params = $this->_getAllowedParams();
 		$allowed_keys = array_keys($allowed_params);
-		if(count(array_diff(array_keys($params), $allowed_keys)) > 0) {
-			throw new InvalidArgumentException("The following parameters are invalid -- " . join(',', array_diff(array_keys($params), $allowed_keys)));
+		if(count(array_diff(array_keys($this->_params), $allowed_keys)) > 0) {
+			throw new InvalidArgumentException("The following parameters are invalid -- " . join(',', array_diff(array_keys($this->_params), $allowed_keys)));
 		}
 		
-		$result = $this->executeCommand($this->_path_for_regex . "_update", $params);
+		$result = $this->executeCommand($this->_path_for_regex . "_update", $this->_params);
 	}
 	
 	public function destroy() {

@@ -3,12 +3,14 @@
 namespace RGeyer\Guzzle\Rs\Tests\Model;
 
 use RGeyer\Guzzle\Rs\Model\ModelBase;
-use PHPUnit_Framework_TestCase;
+use \PHPUnit_Framework_TestCase;
 use SimpleXMLElement;
 use \DateTime;
 use stdClass;
 
 class ModelConcreteClass extends ModelBase {
+  public $last_request_params;
+
 	public function __construct($mixed = null) {
 		$this->_path_for_regex = 'ec2_ssh_keys';
 		
@@ -20,6 +22,10 @@ class ModelConcreteClass extends ModelBase {
 	public function getId($href) {
 		return $this->getIdFromHref($href);
 	}
+
+  public function executeCommand($command, array $params = array()) {
+    $this->last_request_params = $params;
+  }
 }
 
 /**
@@ -61,7 +67,6 @@ class ModelBaseTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	/**
-	 * @group v1_0
 	 * @group unit
 	 */
 	public function testCanInstantiateFromSimpleXML() {
@@ -87,7 +92,6 @@ EOF;
 	}
 	
 	/**
-	 * @group v1_0
 	 * @group unit
 	 */
 	public function testCanInstantiateFromJson() {
@@ -106,7 +110,6 @@ EOF;
 	}
 	
 	/**
-	 * @group v1_0
 	 * @group unit
 	 */
 	public function testCanInstantiateFromStdClass() {
@@ -127,7 +130,6 @@ EOF;
 	}
 	
 	/**
-	 * @group v1_0
 	 * @group unit
 	 */
 	public function testGetIdFromHref() {
@@ -137,7 +139,6 @@ EOF;
 	}
 	
 	/**
-	 * @group v1_0
 	 * @group unit
 	 * @expectedException InvalidArgumentException
 	 */
@@ -146,7 +147,6 @@ EOF;
 	}
 	
 	/**
-	 * @group v1_0
 	 * @group unit
 	 * @expectedException InvalidArgumentException
 	 */
@@ -154,5 +154,40 @@ EOF;
 		$this->_modelBase->create(array('a' => null, 'b' => null, 'c' => null, 'foo' => null));
 	}
 
+  /**
+   * @group unit
+   */
+  public function testMergesParamsOnCreate() {
+    $a = new DateTime();
+    $merged_array = array('a' => $a, 'b' => 'bee', 'c' => 'c');
+
+    $model = new ModelConcreteClass();
+    $model->a = $a;
+    $model->b = 'b';
+    $model->c = 'c';
+    $model->create(array('b' => 'bee'));
+
+    $this->assertEquals($merged_array, $model->getParameters());
+    $this->assertEquals($merged_array, $model->last_request_params);
+  }
+
+  /**
+   * @group unit
+   */
+  public function testMergesParamsOnUpdate() {
+    $a = new DateTime();
+    $merged_array = array('a' => $a, 'b' => 'bee', 'c' => 'c', 'id' => 1, 'href' => 'href');
+
+    $model = new ModelConcreteClass();
+    $model->id = 1;
+    $model->href = 'href';
+    $model->a = $a;
+    $model->b = 'b';
+    $model->c = 'c';
+    $model->update(array('b' => 'bee'));
+
+    $this->assertEquals($merged_array, $model->getParameters());
+    $this->assertEquals($merged_array, $model->last_request_params);
+  }
 }
 
