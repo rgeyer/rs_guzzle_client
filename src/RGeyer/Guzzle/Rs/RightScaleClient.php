@@ -133,13 +133,13 @@ class RightScaleClient extends Client {
    * Returns a new model of the specified type, which will use this client for making API calls
    *
    * @throws \InvalidArgumentException If a namespace is specified, or if the model does not exist
-   * @param $modelName The classname of the model you want to instantiate.  Do NOT include the fully qualified class name with namespace.
+   * @param $modelName The type (Ec2 or Mc) and classname of the model you want to instantiate.  Do NOT include the fully qualified class name with namespace.  E.G. Mc\Cloud
    * @param mixed $mixed Any of the acceptable parameter types for ModelBase::__construct
    * @return \RGeyer\Guzzle\Rs\ModelBase A model object of the type specified in $modelName
    */
   public function newModel($modelName, $mixed = null) {
-    if(strpos("\\", $modelName) === true) {
-      throw new InvalidArgumentException("Do not provide the full namespace plus classname of the desired model.  Only the model classname is required.");
+    if(substr_count("\\", $modelName) > 1) {
+      throw new InvalidArgumentException("Do not provide the full namespace plus classname of the desired model.  Only the model type (Ec2 or Mc) and classname is required.  E.G. Mc\\Cloud");
     }
 
     $modelName = "\\RGeyer\\Guzzle\\Rs\\Model\\" . $modelName;
