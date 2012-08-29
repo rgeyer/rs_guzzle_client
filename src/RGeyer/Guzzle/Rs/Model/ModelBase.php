@@ -82,7 +82,7 @@ abstract class ModelBase {
 	protected $_params = array();
 
   /**
-   * @var \RGeyer\Guzzle\Rs\Common\RightScaleClient
+   * @var \RGeyer\Guzzle\Rs\RightScaleClient
    */
 	protected $_client;
 
@@ -198,7 +198,7 @@ abstract class ModelBase {
 	}
 	
 	/**
-	 * @return Rgeyer\Guzzle\Rs\Common\RightScaleClient
+	 * @return Rgeyer\Guzzle\Rs\RightScaleClient
 	 */
 	public function getClient() {
 		return $this->_client;
@@ -208,7 +208,7 @@ abstract class ModelBase {
    * @param Rgeyer\Guzzle\Rs\Common\RightScaleClient $client A RightScale API guzzle client to use for request
    * @return void
    */
-	public function setClient(Rgeyer\Guzzle\Rs\Common\RightScaleClient $client) {
+	public function setClient(Rgeyer\Guzzle\Rs\RightScaleClient $client) {
 		$this->_client = $client;
 	}
 
