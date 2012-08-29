@@ -25,9 +25,9 @@ class Server extends ModelBase {
 		$this->_path = 'server';
 		$this->_required_params = array(
 			'server[name]' 														=> $this->castToString(),
+			'server[deployment_href]' 			          => $this->castToString(),
 			'server[instance][cloud_href]'						=> $this->castToString(),
-			'server[instance][server_template_href]' 	=> $this->castToString(),
-			'server[instance][deployment_href]' 			=> $this->castToString()
+			'server[instance][server_template_href]' 	=> $this->castToString()
 		);
 		$this->_optional_params = array(
 			'server[description]' 											=> $this->castToString(),
