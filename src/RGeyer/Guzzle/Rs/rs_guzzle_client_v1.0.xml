@@ -16,7 +16,7 @@
       <param name="path" type="string" static="deployments/{id}{output_format}" />
       <param name="method" type="string" static="GET" />      
       <param name="id" type="integer" required="true" location="path" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Deployment" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Deployment" />
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
     </command>
     
@@ -28,7 +28,7 @@
       <param name="deployment[description]" type="string" required="true" />
       <param name="deployment[default_vpc_subnet_href]" type="string" required="false" />
       <param name="deployment[default_ec2_availability_zone]" type="string" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Deployment" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Deployment" />
     </command>
     
     <command name="deployments_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -78,7 +78,7 @@
       <param name="method" type="string" static="POST" />
       <param name="ec2_ssh_key[aws_key_name]" type="string" required="true" />
       <param name="cloud_id" type="integer" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SshKey" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\SshKey" />
     </command>
     
     <command name="ec2_ssh_keys_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -93,7 +93,7 @@
       <param name="path" type="string" static="ec2_ssh_keys/{id}{output_format}" />
       <param name="method" type="string" static="GET" />
       <param name="id" type="integer" required="true" location="path" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SshKey" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\SshKey" />
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
     </command>
     
@@ -105,7 +105,7 @@
       <param name="ec2_security_group[aws_group_name]" type="string" required="true" />
       <param name="ec2_security_group[aws_description]" type="string" required="true" />
       <param name="cloud_id" type="integer" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SecurityGroup" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup" />
     </command>
     
     <command name="ec2_security_groups_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -120,7 +120,7 @@
       <param name="path" type="string" static="ec2_security_groups/{id}{output_format}" />
       <param name="method" type="string" static="GET" />
       <param name="id" type="integer" required="true" location="path" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SecurityGroup" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup" />
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
     </command>
     
@@ -166,7 +166,7 @@
       <param name="server_template[instance_type]" type="string" required="false" />
       <param name="server_template[ec2_user_data]" type="string" required="false" />
       <param name="cloud_id" type="integer" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\ServerTemplate" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\ServerTemplate" />
     </command>
     
     <command name="ec2_server_templates_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -224,7 +224,7 @@
       <param name="path" type="string" static="multi_cloud_images/{id}{output_format}" />
       <param name="method" type="string" static="GET" />
       <param name="id" type="integer" required="true" location="path" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\MultiCloudImage" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\MultiCloudImage" />
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>
     
@@ -286,7 +286,7 @@
       <param name="server[ec2_availability_zone]" type="string" required="false" />
       <param name="server[max_spot_price]" type="float" required="false" />
       <param name="cloud_id" type="integer" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -313,7 +313,7 @@
       <param name="server[max_spot_price]" type="float" required="false" />
       <param name="server[lock]" type="enum:true,false" required="false" />
       <param name="server[parameters]" type="array" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -337,7 +337,7 @@
       <param name="path" type="string" static="servers/{id}{output_format}" />
       <param name="method" type="string" static="GET" />      
       <param name="id" type="integer" required="true" location="path" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
     </command>
     
@@ -347,7 +347,7 @@
       <param name="method" type="string" static="POST" />
       <param name="id" type="integer" required="true" />
       <param name="server[parameters]" type="array" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_stop_ebs" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -356,7 +356,7 @@
       <param name="method" type="string" static="POST" />
       <param name="id" type="integer" required="true" />
       <param name="server[ignore_lock]" type="boolean" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_start_ebs" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -365,7 +365,7 @@
       <param name="method" type="string" static="POST" />
       <param name="id" type="integer" required="true" />
       <param name="server[parameters]" type="array" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_stop" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -374,7 +374,7 @@
       <param name="method" type="string" static="POST" />
       <param name="id" type="integer" required="true" />
       <param name="server[ignore_lock]" type="boolean" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_reboot" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -383,7 +383,7 @@
       <param name="method" type="string" static="POST" />
       <param name="id" type="integer" required="true" />
       <param name="server[ignore_lock]" type="boolean" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_run_script" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -394,7 +394,7 @@
       <param name="server[right_script_href]" type="string" required="true" />
       <param name="server[parameters]" type="array" required="false" />
       <param name="server[ignore_lock]" type="boolean" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_executable" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -406,7 +406,7 @@
       <param name="server[recipe]" type="string" required="false" />
       <param name="server[parameters]" type="array" required="false" />
       <param name="server[ignore_lock]" type="boolean" required="false" />
-      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
     <command name="servers_attach_volume" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -506,7 +506,7 @@
       <param name="path" type="string" static="alert_specs/{id}{output_format}" />
       <param name="method" type="string" static="GET" />      
       <param name="id" type="integer" required="true" location="path" />
-      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\AlertSpec" /> -->
+      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\AlertSpec" /> -->
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
     </command>
     
@@ -570,7 +570,7 @@
       <param name="path" type="string" static="audit_entries/{id}{output_format}" />
       <param name="method" type="string" static="GET" />      
       <param name="id" type="integer" required="true" location="path" />
-      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\AuditEntry" /> -->
+      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\AuditEntry" /> -->
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
     </command>
     

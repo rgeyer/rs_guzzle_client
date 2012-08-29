@@ -3,7 +3,7 @@
 namespace RGeyer\Guzzle\Rs\Test\Model\Mc;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
-use RGeyer\Guzzle\Rs\Model\SecurityGroup1_5;
+use RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup;
 
 class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 	
@@ -21,7 +21,7 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 	public function testCanParseJsonResponse() {
 		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/security_groups/json/response');
 		// Doing a list rather than a show/find since show does not work
-		$secgrp = new SecurityGroup1_5();
+		$secgrp = new SecurityGroup();
 		$secgrp->cloud_id = 12345;
 		$groups = $secgrp->index();
     // TODO: Actually test something?
@@ -33,7 +33,7 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 	 * @expectedException BadMethodCallException
 	 */
 	public function testDoesNotSupportDuplicateMethod() {
-		$secgrp = new SecurityGroup1_5();
+		$secgrp = new SecurityGroup();
 		$secgrp->duplicate();
 	}
 	
@@ -43,7 +43,7 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 	 * @expectedException BadMethodCallException
 	 */
 	public function testDoesNotSupportUpdateMethod() {
-		$secgrp = new SecurityGroup1_5();
+		$secgrp = new SecurityGroup();
 		$secgrp->update();
 	}
 
@@ -56,7 +56,7 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 			'1.5/security_group/json/response',
 			'1.5/security_group_rules_create/response'
 		));
-		$secgrp = new SecurityGroup1_5();
+		$secgrp = new SecurityGroup();
     $secgrp->cloud_id = 12345;
 		$secgrp->find_by_id('12345');
     $secgrp->createCidrRule('tcp', '0.0.0.0/0', 25);
@@ -79,7 +79,7 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 			'1.5/security_group/json/response',
 			'1.5/security_group_rules_create/response'
 		));
-		$secgrp = new SecurityGroup1_5();
+		$secgrp = new SecurityGroup();
     $secgrp->cloud_id = 12345;
 		$secgrp->find_by_id('12345');
     $secgrp->createCidrRule('icmp', '0.0.0.0/0', -1);
@@ -103,7 +103,7 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 			'1.5/security_group_rules_create/response'
 		));
 
-		$secgrp = new SecurityGroup1_5();
+		$secgrp = new SecurityGroup();
     $secgrp->cloud_id = 12345;
 		$secgrp->find_by_id('12345');
     $secgrp->createGroupRule('foobarbaz', '0000000000', 'tcp', 25);
@@ -130,7 +130,7 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 			'1.5/security_group_rules_create/response'
 		));
 
-		$secgrp = new SecurityGroup1_5();
+		$secgrp = new SecurityGroup();
     $secgrp->cloud_id = 12345;
 		$secgrp->find_by_id('12345');
     $secgrp->createGroupRule('foobarbaz', '0000000000', 'icmp', -1);

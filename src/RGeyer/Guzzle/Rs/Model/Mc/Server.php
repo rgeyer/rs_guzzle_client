@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace RGeyer\Guzzle\Rs\Model;
+namespace RGeyer\Guzzle\Rs\Model\Mc;
 
 use RGeyer\Guzzle\Rs\Model\ModelBase;
 use BadMethodCallException;
 
-class Server15 extends ModelBase {
+class Server extends ModelBase {
 	
 	public function __construct($mixed = null) {
 		$this->_api_version = '1.5';

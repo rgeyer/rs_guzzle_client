@@ -2,7 +2,7 @@
 
 namespace RGeyer\Guzzle\Rs\Tests\Model;
 
-use RGeyer\Guzzle\Rs\Model\SshKey;
+use RGeyer\Guzzle\Rs\Model\Ec2\SshKey;
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
 class SshKeyTest extends \Guzzle\Tests\GuzzleTestCase {

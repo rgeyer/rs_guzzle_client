@@ -2,7 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
-// Autoload classes for guzzle-rs-1_0
+// Autoload classes for guzzle-rs
 spl_autoload_register(function($class) {
     if (0 === strpos($class, 'RGeyer\Guzzle\Rs\Tests\\')) {
         $path = implode('/', array_slice(explode('\\', $class), 4)) . '.php';

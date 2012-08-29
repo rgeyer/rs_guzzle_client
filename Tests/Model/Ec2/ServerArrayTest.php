@@ -1,7 +1,7 @@
 <?php
 namespace RGeyer\Guzzle\Rs\Test\Model\Ec2;
 
-use RGeyer\Guzzle\Rs\Model\ServerArray;
+use RGeyer\Guzzle\Rs\Model\Ec2\ServerArray;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
@@ -58,7 +58,7 @@ class ServerArrayTest extends \Guzzle\Tests\GuzzleTestCase {
 		$array = new ServerArray();
 		$arrays = $array->index();
 		$this->assertGreaterThan(0, count($arrays));
-		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\ServerArray', $arrays[0]);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\ServerArray', $arrays[0]);
 	}
 	
 	/**

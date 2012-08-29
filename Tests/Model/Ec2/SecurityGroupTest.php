@@ -3,7 +3,7 @@
 namespace RGeyer\Guzzle\Rs\Test\Model\Ec2;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
-use RGeyer\Guzzle\Rs\Model\SecurityGroup;
+use RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup;
 use RGeyer\Guzzle\Rs\Model\AbstractSecurityGroup;
 
 class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {

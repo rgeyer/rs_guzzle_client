@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace RGeyer\Guzzle\Rs\Model;
+namespace RGeyer\Guzzle\Rs\Model\Ec2;
 
 use RGeyer\Guzzle\Rs\Model\ModelBase;
 

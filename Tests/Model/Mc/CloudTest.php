@@ -2,7 +2,7 @@
 
 namespace RGeyer\Guzzle\Rs\Test\Model\Mc;
 
-use RGeyer\Guzzle\Rs\Model\Cloud;
+use RGeyer\Guzzle\Rs\Model\Mc\Cloud;
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
 class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
@@ -22,7 +22,7 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
 		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/clouds/json/response');
 		$cloud = new Cloud();
 		$clouds = $cloud->index();		
-		$this->assertEquals(11, count($clouds));
+		$this->assertEquals(12, count($clouds));
 	}
 	
 	/**
@@ -48,7 +48,7 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
 		$this->assertEquals(9, count($hash));
 		$this->assertEquals(array(11111, 22222, 33333, 44444, 55555, 66666, 77777, 88888, 99999), array_keys($hash));
 		foreach($hash as $cloud_id => $cloud) {
-			$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Cloud', $cloud);
+			$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Cloud', $cloud);
 		}
 	}
 	

@@ -2,7 +2,7 @@
 
 namespace RGeyer\Guzzle\Rs\Test\Model\Ec2;
 
-use RGeyer\Guzzle\Rs\Model\Deployment;
+use RGeyer\Guzzle\Rs\Model\Ec2\Deployment;
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
 class DeploymentTest extends \Guzzle\Tests\GuzzleTestCase {
@@ -51,7 +51,7 @@ class DeploymentTest extends \Guzzle\Tests\GuzzleTestCase {
 		$deployments = $deployment->index();
 		
 		$this->assertGreaterThan(0, count($deployments));
-		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Deployment', $deployments[0]);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Deployment', $deployments[0]);
 	}
 	
 	/**

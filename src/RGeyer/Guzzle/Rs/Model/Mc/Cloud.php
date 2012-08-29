@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace RGeyer\Guzzle\Rs\Model;
+namespace RGeyer\Guzzle\Rs\Model\Mc;
 
+use RGeyer\Guzzle\Rs\Model\ModelBase;
 use \BadMethodCallException;
 
 /**
