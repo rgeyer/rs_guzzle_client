@@ -15,6 +15,7 @@
 namespace RGeyer\Guzzle\Rs\Model;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
+use RGeyer\Guzzle\Rs\RightScaleClient;
 use DateTime;
 use InvalidArgumentException;
 use BadMethodCallException;
@@ -82,7 +83,7 @@ abstract class ModelBase {
 	protected $_params = array();
 
   /**
-   * @var \RGeyer\Guzzle\Rs\RightScaleClient
+   * @var RGeyer\Guzzle\Rs\RightScaleClient
    */
 	protected $_client;
 
@@ -205,10 +206,10 @@ abstract class ModelBase {
 	}
 
   /**
-   * @param Rgeyer\Guzzle\Rs\Common\RightScaleClient $client A RightScale API guzzle client to use for request
+   * @param Rgeyer\Guzzle\Rs\RightScaleClient $client A RightScale API guzzle client to use for request
    * @return void
    */
-	public function setClient(Rgeyer\Guzzle\Rs\RightScaleClient $client) {
+	public function setClient(RightScaleClient $client) {
 		$this->_client = $client;
 	}
 
@@ -348,7 +349,7 @@ abstract class ModelBase {
 		}
 		
 		if(is_a($mixed, 'RGeyer\Guzzle\Rs\Model\ModelBase')) {
-			$this->_params = $mixed->_params;
+			$this->_params = array_merge($this->_params, $mixed->_params);
 		}
 		
 		if(isset($this->_params['links'])) {
