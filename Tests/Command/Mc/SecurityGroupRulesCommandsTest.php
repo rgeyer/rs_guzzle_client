@@ -2,39 +2,18 @@
 
 namespace RGeyer\Guzzle\Rs\Tests\Command\Mc;
 
-use RGeyer\Guzzle\Rs\Model\SecurityGroup1_5;
-
+use RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup;
 use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class SecurityGroupRulesCommandsTest extends ClientCommandsBase {
-	
-	/**
-	 * 
-	 * @var RGeyer\Guzzle\Rs\Model\SecurityGroup1_5
-	 */
-	protected static $_security_group;
-	protected static $testTs;
-	
-	public static function setUpBeforeClass() {
-		/*
-		self::$testTs = time();
-		self::$_security_group = new SecurityGroup1_5();
-		self::$_security_group->name = 'Guzzle_Test_' . self::$testTs;
-    self::$_security_group->cloud_id = $_SERVER['SECGRP_CLOUD_ID'];
-		self::$_security_group->create();
-		*/
-	}
-	
-	public static function tearDownAfterClass() {
-		//self::$_security_group->destroy();
-	}
-	
+class SecurityGroupRulesCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	/**
 	 * @group v1_5
 	 * @group unit
 	 */
 	public function testCanCreateCidrRule() {
-    $this->setMockResponse($this->_client_v1_5,
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
       array(
         '1.5/login',
         '1.5/security_groups_create/response'
@@ -50,7 +29,7 @@ class SecurityGroupRulesCommandsTest extends ClientCommandsBase {
       'security_group_rule[source_type]' => 'cidr_ips'
     );
 
-    $command = $this->_client_v1_5->getCommand('security_group_rules_create', $params);
+    $command = $client->getCommand('security_group_rules_create', $params);
     $command->execute();
 
     $request = (string)$command->getRequest();
@@ -69,7 +48,8 @@ class SecurityGroupRulesCommandsTest extends ClientCommandsBase {
 	 * @group unit
 	 */
 	public function testCanCreateGroupRule() {
-    $this->setMockResponse($this->_client_v1_5,
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
       array(
         '1.5/login',
         '1.5/security_groups_create/response'
@@ -86,7 +66,7 @@ class SecurityGroupRulesCommandsTest extends ClientCommandsBase {
       'security_group_rule[source_type]' => 'cidr_ips'
     );
 
-    $command = $this->_client_v1_5->getCommand('security_group_rules_create', $params);
+    $command = $client->getCommand('security_group_rules_create', $params);
     $command->execute();
 
     $request = (string)$command->getRequest();

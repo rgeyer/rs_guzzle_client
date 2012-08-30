@@ -14,7 +14,7 @@
 
 namespace RGeyer\Guzzle\Rs\Tests\Utils;
 
-use RGeyer\Guzzle\Rs\Model\ServerTemplate;
+use RGeyer\Guzzle\Rs\Model\Ec2\ServerTemplate;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 

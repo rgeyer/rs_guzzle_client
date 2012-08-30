@@ -7,7 +7,7 @@
       <param name="path" type="string" static="clouds{output_format}" />
       <param name="method" type="string" static="GET" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
-      <param name="filters" type="array" required="false" />      
+      <param name="filter" type="array" required="false" />
     </command>
     
     <command name="cloud" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -44,7 +44,7 @@
       <param name="method" type="string" static="GET" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="cloud_id" type="integer" required="true" location="path"/>
-      <param name="filters" type="array" required="false" />
+      <param name="filter" type="array" required="false" />
       <param name="view" type="enum:default,tiny" required="false" />      
     </command>
     
@@ -124,6 +124,16 @@
       <param name="id" type="integer" required="true" />
       <param name="inputs" type="array" required="false" />
       <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" /> -->
+    </command>
+
+    <!-- Start ServerTemplates -->
+    <command name="server_templates" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all ServerTemplates</doc>
+      <param name="path" type="string" static="server_templates{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="view" type="enum:default,inputs" required="false" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
     </command>
     
   </commands>
