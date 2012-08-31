@@ -189,5 +189,17 @@ EOF;
     $this->assertEquals($merged_array, $model->getParameters());
     $this->assertEquals($merged_array, $model->last_request_params);
   }
+
+  public function testSetsEc2VersionHeaderOnEc2Request() {
+    $this->markTestIncomplete('Not yet implemented.');
+  }
+
+  public function testSetsMcVersionHeaderOnMcRequest() {
+    $this->markTestIncomplete('Not yet implemented.');
+  }
+
+  public function testPassesFilters() {
+    $this->markTestIncomplete('Not yet implemented.');
+  }
 }
 
