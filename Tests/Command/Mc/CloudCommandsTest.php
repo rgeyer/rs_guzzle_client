@@ -5,12 +5,53 @@ use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
 class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('clouds');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('clouds');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/clouds/json/response'
+      )
+    );
+
+    $command = $client->getCommand('clouds');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+    $this->assertContains('/api/clouds.json', $request);
+	}
 	
 	/**
 	 * @group v1_5
 	 * @group unit
 	 */
-	public function testCanListCloudsJson() {
+	public function testCanRequestIndexAsJson() {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
@@ -31,7 +72,7 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	 * @group v1_5
 	 * @group unit
 	 */
-	public function testCanListCloudsXml() {
+	public function testCanRequestIndexAsXml() {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
@@ -47,12 +88,88 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
     $this->assertEquals('GET', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds.xml', $request);
 	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexAcceptsFilters() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('clouds');
+    $args = $command->getApiCommand()->getParams();
+    $filter_param = array_filter(
+      $args,
+      function($arg) {
+        return $arg->getName() == 'filter';
+      }
+    );
+
+    $this->assertNotNull($filter_param);
+    $this->assertEquals(1, count($filter_param));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('cloud');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('cloud');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  public function testShowCommandReturnsAModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/cloud/json/response'
+      )
+    );
+
+    $command = $client->getCommand('cloud', array('id' => '12345'));
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Cloud', $result);
+  }
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/cloud/json/response'
+      )
+    );
+
+    $command = $client->getCommand('cloud', array('id' => '12345'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+    $this->assertContains('/api/clouds/12345.json', $request);
+	}
 	
 	/**
 	 * @group v1_5
 	 * @group unit
 	 */
-	public function testCanShowCloudJson() {
+	public function testCanShowAsJson() {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
@@ -73,7 +190,7 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 	 * @group v1_5
 	 * @group unit
 	 */
-	public function testCanShowCloudXml() {
+	public function testCanShowAsXml() {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
