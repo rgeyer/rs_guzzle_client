@@ -27,7 +27,7 @@
       <param name="cloud_id" type="integer" required="true" location="path"/>
       <param name="security_group[name]" type="string" required="true" />
       <param name="security_group[description]" type="string" required="false" />
-      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SecurityGroup" /> -->
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup" />
     </command>
     
     <command name="security_groups_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -54,7 +54,7 @@
       <param name="method" type="string" static="GET" />
       <param name="id" type="string" required="true" location="path" />
       <param name="cloud_id" type="integer" required="true" location="path"/>
-      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\SecurityGroup" /> -->
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="view" type="enum:default,tiny" required="false" />
     </command>
@@ -81,10 +81,12 @@
     <command name="servers_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Creates a new server, and configures its corresponding "next" instance with the received parameters.</doc>
       <param name="path" type="string" static="servers" />
-      <param name="method" type="string" static="POST" />      
+      <param name="method" type="string" static="POST" />
+      <param name="server[name]" type="string" required="true" />
       <param name="server[deployment_href]" type="string" required="true" />
-      <param name="server[description]" type="string" required="false" />
       <param name="server[instance][cloud_href]" type="string" required="true" />
+      <param name="server[instance][server_template_href]" type="string" required="true" />
+      <param name="server[description]" type="string" required="false" />
       <param name="server[instance][datacenter_href]" type="string" required="false" />
       <param name="server[instance][image_href]" type="string" required="false" />
       <param name="server[instance][inputs]" type="array" required="false" />
@@ -93,11 +95,9 @@
       <param name="server[instance][multi_cloud_image_href]" type="string" required="false" />
       <param name="server[instance][ramdisk_image_href]" type="string" required="false" />
       <param name="server[instance][security_group_hrefs]" type="array" required="false" />
-      <param name="server[instance][server_template_href]" type="string" required="true" />
       <param name="server[instance][ssh_key_href]" type="string" required="false" />
-      <param name="server[instance][user_data]" type="string" required="false" />      
-      <param name="server[name]" type="string" required="true" />
-      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" /> -->
+      <param name="server[instance][user_data]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Server" />
     </command>
     
     <command name="servers_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -112,7 +112,7 @@
       <param name="path" type="string" static="servers/{id}{output_format}" />
       <param name="method" type="string" static="GET" />      
       <param name="id" type="integer" required="true" location="path" />
-      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" /> -->
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Server" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="view" type="enum:default,instance_detail" required="false" />
     </command>
@@ -123,7 +123,6 @@
       <param name="method" type="string" static="POST" />
       <param name="id" type="integer" required="true" />
       <param name="inputs" type="array" required="false" />
-      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Server" /> -->
     </command>
 
     <!-- Start ServerTemplates -->

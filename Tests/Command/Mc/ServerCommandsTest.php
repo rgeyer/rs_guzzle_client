@@ -1,114 +1,465 @@
 <?php
 namespace RGeyer\Guzzle\Rs\Tests\Command\Mc;
 
-use RGeyer\Guzzle\Rs\Model\Deployment;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
+class ServerCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 
-class ServerCommandsTest extends ClientCommandsBase {
-	
-	protected static $_cloud_name;
-	protected static $_cloud_href;
-	protected static $_depl_href;
-	protected static $_server_href;
-	protected static $testTs;
-	
-	public static function setUpBeforeClass() {
-		self::$testTs = time();
-		$testClassToApproximateThis = new ServerCommandsTest();
-		$testClassToApproximateThis->setUp();
-				
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand1_5('clouds', array(), $command);
-		$json_obj = json_decode($result->getBody(true));
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasCreateCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_create');
+    $this->assertNotNull($command);
+  }
 
-		self::$_cloud_href = $json_obj[0]->links[0]->href;
-		self::$_cloud_name = $json_obj[0]->name;
-		
-		// TODO: Eventually use the 1.5 deployment api to get the href
-		$deplobj = new Deployment();
-		$depl_list = $deplobj->index();
-		foreach($depl_list as $depl) {
-			if($depl->nickname == "Default") {
-				self::$_depl_href = $testClassToApproximateThis->convertHrefFrom1to15($depl->href);
-			}
-		}
-		
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand1_5('servers_create', array(
-			'server[name]' => 'Guzzle_Test_' . self::$testTs,
-			'server[deployment_href]' => self::$_depl_href,
-			'server[instance][cloud_href]' => self::$_cloud_href,
-			'server[instance][server_template_href]' => $testClassToApproximateThis->convertStHrefFrom1to15($testClassToApproximateThis->_serverTemplate->href)
-		), $command);
-		
-		self::$_server_href = strval($command->getResponse()->getHeader('Location'));
-	}
-	
-	public static function tearDownAfterClass() {
-		$testClassToApproximateThis = new ServerCommandsTest();
-		$testClassToApproximateThis->setUp();
-				
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand1_5('servers_destroy', array('id' => $testClassToApproximateThis->getIdFromRelativeHref(self::$_server_href)), $command);
-	}
-	
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCreateUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_create/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'servers_create',
+      array(
+        'server[name]' => 'foo',
+        'server[deployment_href]' => '/api/deployments/1234',
+        'server[instance][cloud_href]' => '/api/clouds/1234',
+        'server[instance][server_template_href]' =>'/api/server_templates/1234'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCreateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_create');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server[name] argument be supplied.
+   */
+  public function testCreateRequiresName() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_create/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'servers_create',
+      array(
+        'server[deployment_href]' => '/api/deployments/1234',
+        'server[instance][cloud_href]' => '/api/clouds/1234',
+        'server[instance][server_template_href]' =>'/api/server_templates/1234'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server[deployment_href] argument be supplied.
+   */
+  public function testCreateRequiresDeploymentHref() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_create/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'servers_create',
+      array(
+        'server[name]' => 'name',
+        'server[instance][cloud_href]' => '/api/clouds/1234',
+        'server[instance][server_template_href]' =>'/api/server_templates/1234'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server[instance][cloud_href] argument be supplied.
+   */
+  public function testCreateRequiresCloudHref() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_create/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'servers_create',
+      array(
+        'server[name]' => 'name',
+        'server[deployment_href]' => '/api/deployments/1234',
+        'server[instance][server_template_href]' =>'/api/server_templates/1234'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server[instance][server_template_href] argument be supplied.
+   */
+  public function testCreateRequiresServerTemplateHref() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_create/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'servers_create',
+      array(
+        'server[name]' => 'name',
+        'server[deployment_href]' => '/api/deployments/1234',
+        'server[instance][cloud_href]' => '/api/clouds/1234'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCreateCommandReturnsAModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_create/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'servers_create',
+      array(
+        'server[name]' => 'foo',
+        'server[deployment_href]' => '/api/deployments/1234',
+        'server[instance][cloud_href]' => '/api/clouds/1234',
+        'server[instance][server_template_href]' =>'/api/server_templates/1234'
+      )
+    );
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Server', $result);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('server');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/server/json/response'
+      )
+    );
+
+    $command = $client->getCommand('server',array('id' => '1234'));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('server');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/server/json/response'
+      )
+    );
+
+    $command = $client->getCommand('server');
+    $command->execute();
+  }
+
 	/**
 	 * @group v1_5
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanCreateServer() {		
-		$command = null;
-		$result = $this->executeCommand1_5('servers_create', array(
-			'server[name]' => 'Guzzle_Test_' . $this->_testTs,
-			'server[deployment_href]' => self::$_depl_href,
-			'server[instance][cloud_href]' => self::$_cloud_href,
-			'server[instance][server_template_href]' => $this->convertStHrefFrom1to15($this->_serverTemplate->href)			
-		), $command);
-		
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
-		
-		$id = $this->getIdFromRelativeHref($command->getResponse()->getHeader('Location'));
-		
-		return $id;
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/server/json/response'
+      )
+    );
+
+    $command = $client->getCommand('server',array('id' => '1234'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/servers/1234.json', $request);
 	}
-	
+
 	/**
 	 * @group v1_5
-	 * @group integration
-	 * @depends testCanCreateServer
+	 * @group unit
 	 */
-	public function testCanDestroyServer($id) {
-		$command = null;
-		$result = $this->executeCommand1_5('servers_destroy', array('id' => $id), $command);
-		$this->assertEquals(204, $command->getResponse()->getStatusCode());
+	public function testShowAsJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/server/json/response'
+      )
+    );
+
+    $command = $client->getCommand('server', array('id' => 1234, 'output_format' => '.json'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/servers/1234.json', $request);
 	}
-	
+
 	/**
 	 * @group v1_5
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanShowServerJson() {
-		$command = null;
-		$result = $this->executeCommand1_5('server', array('id' => $this->getIdFromRelativeHref(self::$_server_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotNull($json_obj);
-		$this->assertEquals('Guzzle_Test_' . self::$testTs, $json_obj->name);
-		$this->assertEquals(self::$_server_href, $json_obj->links[0]->href);		
+	public function testShowAsXml() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/server/xml/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'server',
+      array(
+        'id' => '1234',
+        'output_format' => '.xml'
+      )
+    );
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/servers/1234.xml', $request);
 	}
-	
-	/**
-	 * @group v1_5
-	 * @group integration
-	 */
-	public function testCanShowServerXml() {
-		$command = null;
-		$result = $this->executeCommand1_5('server', array('id' => $this->getIdFromRelativeHref(self::$_server_href), 'output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertEquals('Guzzle_Test_' . self::$testTs, $result->name);
-		$this->assertEquals(self::$_server_href, $result->links->link[0]['href']);		
-	}
-	
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowAcceptsViews() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('server');
+    $args = $command->getApiCommand()->getParams();
+    $filter_param = array_filter(
+      $args,
+      function($arg) {
+        return $arg->getName() == 'view';
+      }
+    );
+
+    $this->assertNotNull($filter_param);
+    $this->assertEquals(1, count($filter_param));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowCommandReturnsAModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/server/json/response'
+      )
+    );
+
+    $command = $client->getCommand('server',array('id' => '1234'));
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Server', $result);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasDestroyCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_destroy');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testDestroyUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('servers_destroy',array('id' => '1234'));
+    $command->execute();
+
+    $this->assertEquals('DELETE', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testDestroyCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_destroy');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testDestroyRequiresId() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('servers_destroy');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasLaunchCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_launch');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testLaunchUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_launch/response'
+      )
+    );
+
+    $command = $client->getCommand('servers_launch',array('id' => '1234'));
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testLaunchCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_launch');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testLaunchRequiresId() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_launch/response'
+      )
+    );
+
+    $command = $client->getCommand('servers_launch');
+    $command->execute();
+  }
 }

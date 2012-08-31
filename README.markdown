@@ -1162,4 +1162,4 @@ Below you will find the current controllers (and their commands) that are suppor
 TODO
 ====
 * Allow the user to specify a logger.
-* My tests are testing the wrong thing... The "Integration" tests are making actual requests, which is good but is really only testing the WSAPI rather than the requests I'm making. See Tests/Command/Mc/SecurityGroupRulesCommandsTests.php for the golden standard.
+* My tests are testing the wrong thing... The "Integration" tests are making actual requests, which is good but is really only testing the WSAPI rather than the requests I'm making. See Tests/Command/Mc/* for the golden standard.

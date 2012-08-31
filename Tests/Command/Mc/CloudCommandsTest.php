@@ -20,6 +20,25 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
    * @group v1_5
    * @group unit
    */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/clouds/json/response'
+      )
+    );
+
+    $command = $client->getCommand('clouds');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testIndexCommandExtendsDefaultCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('clouds');
@@ -43,7 +62,6 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertEquals('GET', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds.json', $request);
 	}
 	
@@ -64,7 +82,6 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertEquals('GET', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds.json', $request);
 	}
 	
@@ -85,7 +102,6 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertEquals('GET', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds.xml', $request);
 	}
 
@@ -122,12 +138,78 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
    * @group v1_5
    * @group unit
    */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/cloud/json/response'
+      )
+    );
+
+    $command = $client->getCommand('cloud', array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testShowCommandExtendsDefaultCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('cloud');
     $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
   }
 
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/cloud/json/response'
+      )
+    );
+
+    $command = $client->getCommand('cloud');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testShowRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/cloud/json/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'cloud',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testShowCommandReturnsAModel() {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
@@ -161,7 +243,6 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertEquals('GET', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds/12345.json', $request);
 	}
 	
@@ -182,7 +263,6 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertEquals('GET', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds/12345.json', $request);
 	}
 	
@@ -203,7 +283,6 @@ class CloudCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertEquals('GET', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds/12345.xml', $request);
 	}
 }
