@@ -3,7 +3,7 @@
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
 use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
-use RGeyer\Guzzle\Rs\Model\SecurityGroup;
+use RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup;
 
 class SecurityGroupCommandsTest extends ClientCommandsBase {
 	

@@ -2,10 +2,10 @@
 
 namespace RGeyer\Guzzle\Rs\Test\Command;
 
-use RGeyer\Guzzle\Rs\Model\ServerTemplate;
+use RGeyer\Guzzle\Rs\Model\Ec2\ServerTemplate;
 
 use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
-use RGeyer\Guzzle\Rs\Model\MultiCloudImage;
+use RGeyer\Guzzle\Rs\Model\Ec2\MultiCloudImage;
 
 class ServerTemplateCommandsTest extends ClientCommandsBase {
 	

@@ -2,12 +2,12 @@
 
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
-use RGeyer\Guzzle\Rs\Model\SecurityGroup;
+use RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup;
 
-use RGeyer\Guzzle\Rs\Model\SshKey;
-use RGeyer\Guzzle\Rs\Model\Server;
-use RGeyer\Guzzle\Rs\Model\Deployment;
-use RGeyer\Guzzle\Rs\Model\ServerTemplate;
+use RGeyer\Guzzle\Rs\Model\Ec2\SshKey;
+use RGeyer\Guzzle\Rs\Model\Ec2\Server;
+use RGeyer\Guzzle\Rs\Model\Ec2\Deployment;
+use RGeyer\Guzzle\Rs\Model\Ec2\ServerTemplate;
 use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
 class ServerCommandsLongRunningTest extends ClientCommandsBase {

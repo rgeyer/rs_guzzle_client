@@ -2,10 +2,10 @@
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
 use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
-use RGeyer\Guzzle\Rs\Model\SshKey;
-use RGeyer\Guzzle\Rs\Model\Deployment;
-use RGeyer\Guzzle\Rs\Model\SecurityGroup;
-use RGeyer\Guzzle\Rs\Model\Server;
+use RGeyer\Guzzle\Rs\Model\Ec2\SshKey;
+use RGeyer\Guzzle\Rs\Model\Ec2\Deployment;
+use RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup;
+use RGeyer\Guzzle\Rs\Model\Ec2\Server;
 
 class AlertSpecCommandsTest extends ClientCommandsBase {
 	
