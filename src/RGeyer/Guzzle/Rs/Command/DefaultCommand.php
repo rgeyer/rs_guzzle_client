@@ -28,28 +28,51 @@ use Guzzle\Http\QueryString;
  */
 class DefaultCommand extends AbstractCommand {
 
+  /**
+   * @var array An array of parameters which won't be included in the request,
+   * but which may impact the behavior of the command.
+   */
+  protected $_disposable_parameters = array(
+    'path' => null,
+    'method' => null,
+    'headers' => null,
+    'return_class' => null
+  );
+
+  /**
+   * @param array $params An array of parameters which won't be included in the request,
+   * but which may impact the behavior of the command.
+   */
+  public function setDisposableParameters($params = array()) {
+    $this->_disposable_parameters = $params;
+  }
+
+  public function getDisposableParameters() {
+    return $this->_disposable_parameters;
+  }
+
 	/**
 	 * (non-PHPdoc)
 	 * @see Guzzle\Service\Command.AbstractCommand::build()
 	 */
 	protected function build() {
-		$disposable = array('path' => null, 'method' => null, 'headers' => null, 'return_class' => null);
 		$args = $this->getApiCommand()->getParams();
 		foreach($args as $arg) {
 			if($arg->getLocation() && $arg->getLocation() == 'path') {
-				$disposable += array($arg->getName() => null);
+				$this->_disposable_parameters += array($arg->getName() => null);
 			}
 		}
 		
-		$remainder = array_diff_key($this->getAll(), $disposable);
+		$remainder = array_diff_key($this->getAll(), $this->_disposable_parameters);
+    // TODO: Maybe limit this to only params which are defined in the *.xml file?
+    // Maybe with an overridable "strict" mode?
 		
 		$path_prefix = $this->getClient()->getConfig('version') == '1.0' ? '/api/acct/{acct_num}/' : '/api/';
 		
 		$path = $this->get('path');
 		$query_str = new QueryString();
 		$post_fields = array();
-		
-		// Take the remaining ones and see if they match any tokens in the path string
+
 		foreach($remainder as $key => $value) {
 			if(empty($value)) { continue; }
 			if(is_array($value)) {
