@@ -6,9 +6,8 @@ use Guzzle\Common\Event;
 use Guzzle\Http\Plugin\CookiePlugin;
 use Guzzle\Http\CookieJar\ArrayCookieJar;
 use Guzzle\Http\Message\Response;
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
-class AuthenticationCommandsTest extends ClientCommandsBase {
+class AuthenticationCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 
 	/**
 	 * @group unit
