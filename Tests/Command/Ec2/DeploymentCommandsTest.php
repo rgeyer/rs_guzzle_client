@@ -167,7 +167,7 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$depl_by_id_result = $this->executeCommand('deployment', array('id' => self::$_deployment->id), $command);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Deployment', $depl_by_id_result);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Deployment', $depl_by_id_result);
 		$this->assertEquals("Guzzle_Test_" . self::$testTs, $depl_by_id_result->nickname);
 	}
 	
@@ -180,7 +180,7 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		$depl_by_id_result = $this->executeCommand('deployment', array('id' => self::$_deployment->id, 'output_format' => '.xml'), $command);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Deployment', $depl_by_id_result);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Deployment', $depl_by_id_result);
 		$this->assertEquals("Guzzle_Test_" . self::$testTs, $depl_by_id_result->nickname);
 	}
 	
@@ -197,7 +197,7 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());		
-		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Deployment', $depl_by_id_result);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Deployment', $depl_by_id_result);
 		$this->assertEquals("Guzzle_Test_" . self::$testTs, $depl_by_id_result->nickname);
 		// TODO Not actually testing for servers with server settings, since no servers have been added
 	}
@@ -215,7 +215,7 @@ class DeploymentCommandsTest extends ClientCommandsBase {
 		);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());		
-		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Deployment', $depl_by_id_result);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Deployment', $depl_by_id_result);
 		$this->assertEquals("Guzzle_Test_" . self::$testTs, $depl_by_id_result->nickname);
 		// TODO Not actually testing for servers with server settings, since no servers have been added
 	}

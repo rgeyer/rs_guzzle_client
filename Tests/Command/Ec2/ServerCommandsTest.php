@@ -227,7 +227,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$result = $this->executeCommand('server', array('id' => self::$_server->id), $command);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Server', $result);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Server', $result);
 		$this->assertEquals("Guzzle_Test_" . self::$testTs, $result->nickname);		
 	}
 	
@@ -240,7 +240,7 @@ class ServerCommandsTest extends ClientCommandsBase {
 		$result = $this->executeCommand('server', array('id' => self::$_server->id, 'output_format' => '.xml'), $command);
 		
 		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Server', $result);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Server', $result);
 		$this->assertEquals("Guzzle_Test_" . self::$testTs, $result->nickname);		
 	}
 	
