@@ -1,248 +1,735 @@
 <?php
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
-use RGeyer\Guzzle\Rs\Model\Ec2\SshKey;
-use RGeyer\Guzzle\Rs\Model\Ec2\Deployment;
-use RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup;
-use RGeyer\Guzzle\Rs\Model\Ec2\Server;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class AlertSpecCommandsTest extends ClientCommandsBase {
-	
-	/**
-	 * A timestamp for the test
-	 * @var int
-	 */
-	protected static $testTs;
-	
-	/**
-	 *
-	 * @var Deployment
-	 */
-	protected static $_deployment;
-	
-	/**
-	 *
-	 * @var SecurityGroup
-	 */
-	protected static $_security_group;
-	
-	/**
-	 *
-	 * @var SshKey
-	 */
-	protected static $_ssh_key;
-	
-	/**
-	 * 
-	 * @var Server
-	 */
-	protected static $_server;
-	
-	public static function setUpBeforeClass() {
-		self::$testTs = time();
-		self::$_ssh_key = new SshKey();
-		self::$_ssh_key->aws_key_name = "Guzzle_Test_For_Alert_Spec_" . self::$testTs;
-		self::$_ssh_key->create();
-		
-		self::$_deployment = new Deployment();
-		self::$_deployment->nickname = "Guzzle_Test_For_Alert_Spec_" . self::$testTs;
-		self::$_deployment->description = 'described';
-		self::$_deployment->create();
-		
-		self::$_security_group = new SecurityGroup();
-		self::$_security_group->aws_group_name = "Guzzle_Test_For_Alert_Spec_" . self::$testTs;
-		self::$_security_group->aws_description = "described";
-		self::$_security_group->create();
-		
-		$testClassToApproximateThis = new AlertSpecCommandsTest();
-		$testClassToApproximateThis->setUp();
-		
-		$params = array(
-				'server[nickname]' => "Guzzle_Test_For_Alert_Spec_" . self::$testTs,
-				'server[server_template_href]' => $testClassToApproximateThis->_serverTemplate->href,
-				'server[ec2_ssh_key_href]' => self::$_ssh_key->href,
-				'server[ec2_security_groups_href]' => array(self::$_security_group->href),
-				'server[deployment_href]' => self::$_deployment->href
-		);
-		self::$_server = new Server();
-		self::$_server->create($params);
-	}
-	
-	public static function tearDownAfterClass() {
-		// No need to delete the server(s) this contains.
-		self::$_deployment->destroy();
-		
-		self::$_ssh_key->destroy();
-		
-		self::$_security_group->destroy();
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanListAlertSpecsJson() {
-		$command = null;
-		$result = $this->executeCommand('alert_specs', array(), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertGreaterThan(0, count($json_obj));
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanListAlertSpecsXml() {
-		$command = null;
-		$result = $this->executeCommand('alert_specs', array('output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$attrname = 'alert-spec';
-		$this->assertObjectHasAttribute($attrname, $result);
-		$this->assertGreaterThan(0, count($result->$attrname));
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanShowOneAlertSpecJson() {
-		$command = null;
-		$result = $this->executeCommand('alert_specs', array(), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertGreaterThan(0, count($json_obj));
-		
-		$alert_spec = $json_obj[0];
-		
-		$alert_id = $this->getIdFromHref('alert_specs', $alert_spec->href);
+class AlertSpecCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 
-		$command = null;
-		$result = $this->executeCommand('alert_spec', array('id' => $alert_id), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertEquals(1, count($json_obj));		
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanShowOneAlertSpecXml() {
-		$command = null;
-		$result = $this->executeCommand('alert_specs', array(), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertGreaterThan(0, count($json_obj));
-		
-		$alert_spec = $json_obj[0];
-		
-		$alert_id = $this->getIdFromHref('alert_specs', $alert_spec->href);
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_specs');
+    $this->assertNotNull($command);
+  }
 
-		$command = null;
-		$result = $this->executeCommand('alert_spec', array('id' => $alert_id, 'output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertObjectHasAttribute('href', $result);		
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanCreateAnEscalationAlertSpec() {
-		$command = null;
-		$result = $this->executeCommand('alert_specs_create', array(
-				'alert_spec[name]' => 'rs guzzle test alert',
-				'alert_spec[file]' => 'memory/memory_free',
-				'alert_spec[variable]' => 'value',
-				'alert_spec[condition]' => '<',
-				'alert_spec[threshold]' => '1000000',
-				'alert_spec[escalation_name]' => 'critical',
-				'alert_spec[duration]' => 1,
-				'alert_spec[description]' => 'A quick description',
-				'alert_spec[subject_type]' => 'Server',
-				'alert_spec[subject_href]' => self::$_server->href,
-				'alert_spec[action]' => 'escalate'
-			), $command);
-		
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
-		
-		$alert_id = $this->getIdFromHref('alert_specs', $command->getResponse()->getHeader('Location'));
-		
-		return $alert_id;
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanCreateAVoteAlertSpec() {
-		$command = null;
-		$result = $this->executeCommand('alert_specs_create', array(
-				'alert_spec[name]' => 'rs guzzle test alert',
-				'alert_spec[file]' => 'memory/memory_free',
-				'alert_spec[variable]' => 'value',
-				'alert_spec[condition]' => '<',
-				'alert_spec[threshold]' => '1000000',
-				'alert_spec[duration]' => 1,
-				'alert_spec[description]' => 'A quick description',
-				'alert_spec[subject_type]' => 'Server',
-				'alert_spec[subject_href]' => self::$_server->href,
-				'alert_spec[action]' => 'vote',
-				'alert_spec[vote_tag]' => 'foo:bar=baz',
-				'alert_spec[vote_type]' => 'grow'
-			), $command);
-		
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
-		$alert_spec_id = $this->getIdFromHref('alert_specs', $command->getResponse()->getHeader('Location'));
-		
-		return $alert_spec_id;
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 * @depends testCanCreateAVoteAlertSpec
-	 */
-	public function testCanDestroyAlertSpec($alert_spec_id) {
-		$command = null;
-		$result = $this->executeCommand('alert_specs_destroy', array('id' => $alert_spec_id), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 * @depends testCanCreateAnEscalationAlertSpec
-	 */
-	public function testCanUpdateAnAlertSpec($alert_id) {		
-		$command = null;
-		$result = $this->executeCommand('alert_spec', array('id' => $alert_id), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertEquals(1, count($json_obj));
-		$this->assertEquals($json_obj->name, 'rs guzzle test alert');
-		
-		$command = null;
-		$result = $this->executeCommand('alert_specs_update', array(
-				'id' => $alert_id,
-				'alert_spec[name]' => 'rs guzzle test alertzor'
-			), $command);
-		
-		$this->assertEquals(204, $command->getResponse()->getStatusCode());
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs/js/response'
+      )
+    );
 
-		
-		$command = null;
-		$result = $this->executeCommand('alert_spec', array('id' => $alert_id), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertEquals(1, count($json_obj));
-		$this->assertEquals($json_obj->name, 'rs guzzle test alertzor');
+    $command = $client->getCommand('alert_specs');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_specs');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs/js/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/alert_specs.js', $request);
 	}
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testCanRequestIndexAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs/js/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs', array('output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/alert_specs.js', $request);
+	}
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testCanRequestIndexAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs', array('output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/alert_specs.xml', $request);
+	}
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_spec');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_spec/js/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_spec', array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_spec');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_spec/js/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_spec');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testShowRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_spec/js/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_spec', array('id' => 'abc'));
+    $command->execute();
+  }
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_spec/js/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_spec', array('id' => 1234));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/alert_specs/1234.js', $request);
+	}
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testShowAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_spec/js/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_spec', array('id' => 1234, 'output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/alert_specs/1234.js', $request);
+	}
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testShowAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_spec/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_spec', array('id' => 1234, 'output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/alert_specs/1234.xml', $request);
+	}
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasDestroyCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_specs_destroy');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_destroy',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('DELETE', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_specs_destroy');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testDestroyRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_destroy');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testDestroyRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_destroy', array('id' => 'abc'));
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasCreateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_specs_create');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[file]' => 'file',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[condition]' => '==',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[subject_href]' => 'href',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_specs_create');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[name] argument be supplied.
+   */
+  public function testCreateRequiresName() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[file]' => 'file',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[condition]' => '==',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[subject_href]' => 'href',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[file] argument be supplied.
+   */
+  public function testCreateRequiresFile() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[condition]' => '==',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[subject_href]' => 'href',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[variable] argument be supplied.
+   */
+  public function testCreateRequiresVariable() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[file]' => 'file',
+        'alert_spec[condition]' => '==',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[subject_href]' => 'href',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[condition] argument be supplied.
+   */
+  public function testCreateRequiresCondition() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[file]' => 'file',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[subject_href]' => 'href',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[threshold] argument be supplied.
+   */
+  public function testCreateRequiresThreshold() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[file]' => 'file',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[condition]' => '==',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[subject_href]' => 'href',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[duration] argument be supplied.
+   */
+  public function testCreateRequiresDuration() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[file]' => 'file',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[condition]' => '==',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[subject_href]' => 'href',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[subject_type] argument be supplied.
+   */
+  public function testCreateRequiresSubjectType() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[file]' => 'file',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[condition]' => '==',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_href]' => 'href',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[subject_href] argument be supplied.
+   */
+  public function testCreateRequiresSubjectHref() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[file]' => 'file',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[condition]' => '==',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[action]' => 'escalate'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage alert_spec[action] argument be supplied.
+   */
+  public function testCreateRequiresAction() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_create/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_create',
+      array(
+        'alert_spec[name]' => 'name',
+        'alert_spec[file]' => 'file',
+        'alert_spec[variable]' => 'variable',
+        'alert_spec[condition]' => '==',
+        'alert_spec[threshold]' => 'threshold',
+        'alert_spec[duration]' => 10,
+        'alert_spec[subject_type]' => 'Server',
+        'alert_spec[subject_href]' => 'href'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasUpdateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_specs_update');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_update/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_update',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('PUT', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('alert_specs_update');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testUpdateRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_update/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_update');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testUpdateRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/alert_specs_update/response'
+      )
+    );
+
+    $command = $client->getCommand('alert_specs_update', array('id' => 'abc'));
+    $command->execute();
+  }
 	
 }
