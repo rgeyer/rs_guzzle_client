@@ -714,6 +714,7 @@
       <doc>Create a Credential</doc>
       <param name="path" type="string" static="credentials/{id}" />
       <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
       <param name="credential[name]" type="string" required="false" />
       <param name="credential[value]" type="string" required="false" />
       <param name="credential[description]" type="string" required="false" />
