@@ -332,7 +332,7 @@ class CredentialCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
    */
   public function testHasCreateCommand() {
     $client = ClientFactory::getClient();
-    $command = $client->getCommand('alert_specs_create');
+    $command = $client->getCommand('credentials_create');
     $this->assertNotNull($command);
   }
 
