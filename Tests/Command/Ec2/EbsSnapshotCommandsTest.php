@@ -1,150 +1,570 @@
 <?php
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class EbsSnapshotCommandsTest extends ClientCommandsBase {
-	
-	protected static $testTs;
-	protected static $_ebsvol_href;
-	protected static $_ebssnap_href;
-	
-	public static function setUpBeforeClass() {
-		self::$testTs = time();
-		$testClassToApproximateThis = new EbsVolumeCommandsTest();
-		$testClassToApproximateThis->setUp();
-		
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand('ec2_ebs_volumes_create',
-				array(
-						'ec2_ebs_volume[nickname]' => 'Guzzle_Test_For_EBS_' . self::$testTs,
-						'ec2_ebs_volume[description]' => 'described',
-						'ec2_ebs_volume[ec2_availability_zone]' => 'us-east-1a',
-						'ec2_ebs_volume[aws_size]' => 1,
-						'cloud_id' => 1
-				),
-				$command
-		);
-		
-		self::$_ebsvol_href = $command->getResponse()->getHeader('Location');
-		
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand('ec2_ebs_snapshots_create',
-				array(
-						'ec2_ebs_snapshot[nickname]' => 'Guzzle_Test_For_EBS_' . self::$testTs,
-						'ec2_ebs_snapshot[description]' => 'described',
-						'ec2_ebs_snapshot[ec2_ebs_volume_id]' => $testClassToApproximateThis->getIdFromHref('ec2_ebs_volumes', self::$_ebsvol_href)
-				),
-				$command
-		);
-		
-		self::$_ebssnap_href = $command->getResponse()->getHeader('Location');
-	}
-	
-	public static function tearDownAfterClass() {		
-		$testClassToApproximateThis = new EbsVolumeCommandsTest();
-		$testClassToApproximateThis->setUp();
-		
-		$ebsvol_id = $testClassToApproximateThis->getIdFromHref('ec2_ebs_volumes', self::$_ebsvol_href);		
-		$testClassToApproximateThis->executeCommand('ec2_ebs_volumes_destroy', array('id' => $ebsvol_id));
-		
-		$ebssnap_id = $testClassToApproximateThis->getIdFromHref('ec2_ebs_snapshots', self::$_ebssnap_href);		
-		$testClassToApproximateThis->executeCommand('ec2_ebs_snapshots_destroy', array('id' => $ebssnap_id));
-	}
-	
+class EbsSnapshotCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshots');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshots');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanCreateEbsSnapshot() {
-		$command = null;
-		$result = $this->executeCommand('ec2_ebs_snapshots_create',
-				array(
-						'ec2_ebs_snapshot[nickname]' => 'Guzzle_Test_For_EBS_' . $this->_testTs,
-						'ec2_ebs_snapshot[description]' => 'described',
-						'ec2_ebs_snapshot[ec2_ebs_volume_id]' => $this->getIdFromHref('ec2_ebs_volumes', self::$_ebsvol_href)
-				),
-				$command
-		);
-	
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
-	
-		$snap_id = $this->getIdFromHref('ec2_ebs_snapshots', $command->getResponse()->getHeader('Location'));
-	
-		return $snap_id;
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_ebs_snapshots.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
-	 * @depends testCanCreateEbsSnapshot
+	 * @group unit
 	 */
-	public function testCanDestroyEbsSnapshot($snap_id) {
-		$command = null;
-		$result = $this->executeCommand('ec2_ebs_snapshots_destroy', array('id' => $snap_id), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
+	public function testCanRequestIndexAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots', array('output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_ebs_snapshots.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListEbsSnapshotsJson() {
-		$command = null;
-		$result = $this->executeCommand('ec2_ebs_snapshots', array(), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotNull($json_obj);
-		$this->assertGreaterThan(0, count($json_obj));
+	public function testCanRequestIndexAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots', array('output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_ebs_snapshots.xml', $request);
 	}
-	
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshot');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshot/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshot', array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshot');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshot/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshot');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testShowRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshot/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshot', array('id' => 'abc'));
+    $command->execute();
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListEbsSnapshotsXml() {
-		$propname = 'ec2-ebs-snapshot';
-		$command = null;
-		$result = $this->executeCommand('ec2_ebs_snapshots', array('output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertGreaterThan(0, count($result->$propname));
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshot/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshot', array('id' => 1234));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_ebs_snapshots/1234.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanShowEbsSnapshotJson() {
-		$command = null;
-		$result = $this->executeCommand('ec2_ebs_snapshot', array('id' => $this->getIdFromHref('ec2_ebs_snapshots', self::$_ebssnap_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));		
-		$this->assertNotNull($json_obj);
-		$this->assertEquals('described', $json_obj->description);
-		$this->assertEquals($this->getIdFromHref('ec2_ebs_volumes', self::$_ebsvol_href), $json_obj->ec2_ebs_volume_id);
+	public function testShowAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshot/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshot', array('id' => 1234, 'output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_ebs_snapshots/1234.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanShowEbsSnapshotXml() {
-		$propname = 'ec2-ebs-volume-id';
-		$command = null;
-		$result = $this->executeCommand('ec2_ebs_snapshot', array('id' => $this->getIdFromHref('ec2_ebs_snapshots', self::$_ebssnap_href), 'output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertEquals('described', $result->description);
-		$this->assertEquals($this->getIdFromHref('ec2_ebs_volumes', self::$_ebsvol_href), $result->$propname);
+	public function testShowAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshot/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshot', array('id' => 1234, 'output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_ebs_snapshots/1234.xml', $request);
 	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanUpdateEbsSnapshotCommitState() {
-		$this->markTestSkipped('Can not test because the API does not return commit_state');
-	}
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshot/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshot', array('id' => '12345'));
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Ec2EbsSnapshot', $result);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasCreateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshots_create');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_create/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_create',
+      array(
+        'ec2_ebs_snapshot[ec2_ebs_volume_id]' => 'abc',
+        'ec2_ebs_snapshot[nickname]' => 'name'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshots_create');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage ec2_ebs_snapshot[nickname] argument be supplied.
+   */
+  public function testCreateRequiresNickname() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_create/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_create',
+      array(
+        'ec2_ebs_snapshot[ec2_ebs_volume_id]' => 'abc'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage ec2_ebs_snapshot[ec2_ebs_volume_id] argument be supplied.
+   */
+  public function testCreateRequiresSnapshotId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_create/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_create',
+      array(
+        'ec2_ebs_snapshot[nickname]' => 'nickname'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_create/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_create',
+      array(
+        'ec2_ebs_snapshots_create[nickname]' => 'name'
+      )
+    );
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Ec2EbsSnapshot', $result);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasDestroyCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshots_destroy');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_destroy',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('DELETE', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshots_destroy');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testDestroyRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_destroy');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testDestroyRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_destroy', array('id' => 'abc'));
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasUpdateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshots_update');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_update/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_update',
+      array(
+        'id' => 1234,
+        'ec2_ebs_snapshot[commit_state]' => 'committed'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('PUT', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_ebs_snapshots_update');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testUpdateRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_update/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_update',
+      array(
+        'ec2_ebs_snapshot[commit_state]' => 'committed'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testUpdateRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_update/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_update',
+      array(
+        'id' => 'abc',
+        'ec2_ebs_snapshot[commit_state]' => 'committed'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage ec2_ebs_snapshot[commit_state] argument be supplied.
+   */
+  public function testUpdateRequiresCommitState() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_ebs_snapshots_update/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_ebs_snapshots_update',
+      array(
+        'id' => 1234
+      )
+    );
+    $command->execute();
+  }
 }

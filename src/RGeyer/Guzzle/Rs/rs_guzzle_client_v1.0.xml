@@ -642,9 +642,10 @@
       <param name="path" type="string" static="ec2_ebs_snapshots" />
       <param name="method" type="string" static="POST" />
       <param name="ec2_ebs_snapshot[nickname]" type="string" required="true" />
-      <param name="ec2_ebs_snapshot[description]" type="string" required="false" />
       <param name="ec2_ebs_snapshot[ec2_ebs_volume_id]" type="string" required="true" />
+      <param name="ec2_ebs_snapshot[description]" type="string" required="false" />
       <param name="ec2_ebs_snapshot[commit]" type="enum:explicit,implicit" default="implicit" />
+      <param name="cloud_id" type="integer" required="false" />
     </command>
     
     <command name="ec2_ebs_snapshots_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">

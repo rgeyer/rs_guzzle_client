@@ -1,0 +1,10 @@
+PUT /api/acct/12345/ec2_ebs_snapshots/12345 HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+Expect: 100-Continue
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkFtvgjAARv_K0mcwttxJlsxtqDOTABOMT6aUFhCpch2N8b-vJHs_35ec8wAYuKAWQAFZB9wHGDraAldHULOfCugJcKGmm5ZloKWjgDKTtGUyRg22VJmJUxVCClXs2ESFSIOas3SoTaD86-n_1kb6vJX3IByHqJlGzvaX77Lld2El-WpLf02jmsJPtIvTxHLMMaN9ijw-8vCjWeskGuJJJ3rRN91PwZx9xsnVHNHWwPvNMbmk52Dr1-coPlRBb35Z0cnbOEFVjcVuqETPmuBs-dNKXOqD9u3frSM7-Tn0ShEEvM08FIui4T7sqKjTQxit9371nqxe5yTTnITjWqqASGD-sqFC9lEAJuQ28F6W0qWjAmiNy6uEWgkt8hl6a8u86DuCr3RBbjV4Pv8Aaoxylw==; _session_id=4203ee397a9006b4b01871471c4d4b1a
+Content-Length: 46
+
+ec2_ebs_snapshot%5Bcommit_state%5D=uncommitted
