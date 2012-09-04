@@ -1,207 +1,475 @@
 <?php
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class MacroCommandsTest extends ClientCommandsBase {
-	
-	protected static $testTs;
-	protected static $_macro_href;
-	
-	public static function setUpBeforeClass() {
-		self::$testTs = time();
-		$testClassToApproximateThis = new MacroCommandsTest();
-		$testClassToApproximateThis->setUp();
+class MacroCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand('macros_create',
-			array(
-				'macro[source_type]' => 'blank',
-				'macro[commands]' => 'alert("foo");'
-			),
-			$command
-		);
-		
-		self::$_macro_href = $command->getResponse()->getHeader('Location');
-	}
-	
-	public static function tearDownAfterClass() {
-		$testClassToApproximateThis = new MacroCommandsTest();
-		$testClassToApproximateThis->setUp();
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macros');
+    $this->assertNotNull($command);
+  }
 
-		$macro_id = $testClassToApproximateThis->getIdFromHref('macros', self::$_macro_href);
-		
-		$testClassToApproximateThis->executeCommand('macros_destroy', array('id' => $macro_id));
-	}
-	
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros/js/response'
+      )
+    );
+
+    $command = $client->getCommand('macros');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macros');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
-	 * 
-	 * TODO: Haven't really tested creating from the other source types (deployment, array, server, macro)
+	 * @group unit
 	 */
-	public function testCanCreateMacro() {
-		$command = null;
-		$result = $this->executeCommand('macros_create',
-			array(
-				'macro[source_type]' => 'blank',
-				'macro[commands]' => 'alert("foo");'
-			),
-			$command
-		);
-		
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
-		
-		$regex = ',https://.+/api/acct/[0-9]+/macros/([0-9]+),';
-		$matches = array();
-		preg_match($regex, $command->getResponse()->getHeader('Location'), $matches);
-		
-		$macro_id = $this->getIdFromHref('macros', $command->getResponse()->getHeader('Location'));
-		
-		return $macro_id;
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros/js/response'
+      )
+    );
+
+    $command = $client->getCommand('macros');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/macros.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
-	 * @depends testCanCreateMacro
+	 * @group unit
 	 */
-	public function testCanDestroyMacro($macro_id) {
-		$command = null;
-		$result = $this->executeCommand('macros_destroy', array('id' => $macro_id), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());		
+	public function testCanRequestIndexAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros/js/response'
+      )
+    );
+
+    $command = $client->getCommand('macros', array('output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/macros.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListMacrosJson() {
-		$command = null;
-		$result = $this->executeCommand('macros', array(), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertGreaterThan(0, count($json_obj));	
+	public function testCanRequestIndexAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('macros', array('output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/macros.xml', $request);
 	}
-	
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macro');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macro/js/response'
+      )
+    );
+
+    $command = $client->getCommand('macro', array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macro');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macro/js/response'
+      )
+    );
+
+    $command = $client->getCommand('macro');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testShowRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macro/js/response'
+      )
+    );
+
+    $command = $client->getCommand('macro', array('id' => 'abc'));
+    $command->execute();
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListMacrosXml() {
-		$command = null;
-		$result = $this->executeCommand('macros', array('output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertGreaterThan(0, count($result->macro));
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macro/js/response'
+      )
+    );
+
+    $command = $client->getCommand('macro', array('id' => 1234));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/macros/1234.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanShowMacroJson() {
-		$command = null;
-		$result = $this->executeCommand('macro', array('id' => $this->getIdFromHref('macros', self::$_macro_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertEquals('alert("foo");', $json_obj->commands);
+	public function testShowAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macro/js/response'
+      )
+    );
+
+    $command = $client->getCommand('macro', array('id' => 1234, 'output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/macros/1234.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanShowMacroXml() {
-		$command = null;
-		$result = $this->executeCommand('macro', array('id' => $this->getIdFromHref('macros', self::$_macro_href), 'output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertEquals('alert("foo");', $result->commands);
+	public function testShowAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macro/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('macro', array('id' => 1234, 'output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/macros/1234.xml', $request);
 	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanUpdateMacroName() {
-		$command = null;
-		$result = $this->executeCommand('macro', array('id' => $this->getIdFromHref('macros', self::$_macro_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotEquals('NameChanged', $json_obj->nickname);
-		
-		$command = null;
-		$result = $this->executeCommand('macros_update',
-			array(
-				'id' => $this->getIdFromHref('macros', self::$_macro_href),
-				'macro[nickname]' => 'NameChanged'
-			),
-			$command
-		);		
-		$this->assertEquals(204, $command->getResponse()->getStatusCode());		
-		
-		$command = null;
-		$result = $this->executeCommand('macro', array('id' => $this->getIdFromHref('macros', self::$_macro_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertEquals('NameChanged', $json_obj->nickname);
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanUpdateMacroDescription() {
-		$command = null;
-		$result = $this->executeCommand('macro', array('id' => $this->getIdFromHref('macros', self::$_macro_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotEquals('DescChanged', $json_obj->description);
-		
-		$command = null;
-		$result = $this->executeCommand('macros_update',
-			array(
-				'id' => $this->getIdFromHref('macros', self::$_macro_href),
-				'macro[description]' => 'DescChanged'
-			),
-			$command
-		);		
-		$this->assertEquals(204, $command->getResponse()->getStatusCode());		
-		
-		$command = null;
-		$result = $this->executeCommand('macro', array('id' => $this->getIdFromHref('macros', self::$_macro_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertEquals('DescChanged', $json_obj->description);
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanUpdateMacroCommands() {
-		$command = null;
-		$result = $this->executeCommand('macro', array('id' => $this->getIdFromHref('macros', self::$_macro_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotEquals('alert("bar");', $json_obj->commands);
-		
-		$command = null;
-		$result = $this->executeCommand('macros_update',
-			array(
-				'id' => $this->getIdFromHref('macros', self::$_macro_href),
-				'macro[commands]' => 'alert("bar");'
-			),
-			$command
-		);		
-		$this->assertEquals(204, $command->getResponse()->getStatusCode());		
-		
-		$command = null;
-		$result = $this->executeCommand('macro', array('id' => $this->getIdFromHref('macros', self::$_macro_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertEquals('alert("bar");', $json_obj->commands);
-	}
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasDestroyCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macros_destroy');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('macros_destroy',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('DELETE', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macros_destroy');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testDestroyRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('macros_destroy');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testDestroyRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('macros_destroy', array('id' => 'abc'));
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasCreateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macros_create');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros_create/response'
+      )
+    );
+
+    $command = $client->getCommand('macros_create',
+      array(
+        'macro[source_type]' => 'blank'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macros_create');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage macro[source_type] argument be supplied.
+   */
+  public function testCreateRequiresSourceType() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros_create/response'
+      )
+    );
+
+    $command = $client->getCommand('macros_create');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasUpdateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macros_update');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros_update/response'
+      )
+    );
+
+    $command = $client->getCommand('macros_update',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('PUT', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('macros_update');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testUpdateRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros_update/response'
+      )
+    );
+
+    $command = $client->getCommand('macros_update');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testUpdateRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/macros_update/response'
+      )
+    );
+
+    $command = $client->getCommand('macros_update', array('id' => 'abc'));
+    $command->execute();
+  }
 }
