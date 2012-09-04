@@ -2,55 +2,253 @@
 
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
-use RGeyer\Guzzle\Rs\Model\Ec2\MultiCloudImage;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class MultiCloudImageCommandsTest extends ClientCommandsBase {
-	
-	protected $mci_id;
+class MultiCloudImageCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 
-	protected function setUp() {
-		parent::setUp();
-		
-		$mci = new MultiCloudImage();
-		$list = $mci->index();
-		
-		$this->mci_id = $list[0]->id;		
-	}
-	
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('multi_cloud_images');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_images/js/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_images');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('multi_cloud_images');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanGetMCIByIdJson() {
-		$command = null;
-		$mci = $this->executeCommand('multi_cloud_image', array('id' => $this->mci_id), $command);
-		
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());		
-		$this->assertNotNull($mci);
-		$this->assertEquals($this->mci_id, $mci->id);
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_images/js/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_images');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/multi_cloud_images.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanGetMCIByIdXml() {
-		$command = null;
-		$mci = $this->executeCommand('multi_cloud_image', array('id' => $this->mci_id, 'output_format' => '.xml'), $command);
-		
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($mci);
-		$this->assertEquals($this->mci_id, $mci->id);
+	public function testCanRequestIndexAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_images/js/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_images', array('output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/multi_cloud_images.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListAllMCIsJson() {
-		$this->markTestIncomplete("Not yet implemented");
+	public function testCanRequestIndexAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_images/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_images', array('output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/multi_cloud_images.xml', $request);
 	}
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('multi_cloud_image');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_image/js/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_image', array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('multi_cloud_image');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_image/js/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_image');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testShowRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_image/js/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_image', array('id' => 'abc'));
+    $command->execute();
+  }
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_image/js/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_image', array('id' => 1234));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/multi_cloud_images/1234.js', $request);
+	}
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testShowAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_image/js/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_image', array('id' => 1234, 'output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/multi_cloud_images/1234.js', $request);
+	}
+
+	/**
+	 * @group v1_0
+	 * @group unit
+	 */
+	public function testShowAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/multi_cloud_image/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_image', array('id' => 1234, 'output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/multi_cloud_images/1234.xml', $request);
+	}
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+  }
 	
 }
 

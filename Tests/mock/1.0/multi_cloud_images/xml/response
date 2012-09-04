@@ -1,0 +1,1319 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Tue, 04 Sep 2012 21:51:56 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding; Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.12
+X-Runtime: 471
+Set-Cookie: _session_id=ff3fe9e3e9228c7e6e528e0456a6d99a; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<multi-cloud-images type="array">
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_i386_v5.6 - 11H1</name>
+    <version type="integer">16</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_x64_v5.6 - 11H1</name>
+    <version type="integer">16</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_i386_v5.6 - 11H1</name>
+    <version type="integer">13</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.6 - 11H1</name>
+    <version type="integer">12</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_x64_v5.6 - 11H2.a1</name>
+    <version type="integer">21</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_i386_v5.6 - 11H2.a1</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_x64_v5.6 - 11H2.a1</name>
+    <version type="integer">12</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_x64_v5.6 - 11H2.a1 - DBMgr</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>KT Cloud Test</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>RightImage CentOS 5.6 x64 v5.7.14 - TATA Private Beta (India)</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_i386_v5.7</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>RightImage CentOS 5.6 x64 v5.7.14 - TATA Private Beta (Singapore)</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage CentOS 5.6 x64 v5.7.14 - TATA Private Beta (India)</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage CentOS 5.6 x64 v5.7.14 - TATA Private Beta (Singapore)</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_x64_v5.6 - 11H1.b1</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_iis7_sqlex2k8_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_iis7.5_sqlex2k8r2_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2003_i386_iis6_sqlex2k5_v5.7</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_i386_iis7_sqlex2k8_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2003_x64_iis6_sqlex2k5_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - XenServer</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - KVM</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.7</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>myCloud Test</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>Debian 6.0</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.7</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - KVM</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - XenServer</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage CentOS_5.2_i386_v4.2.4</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>CP Ubuntu 10.04</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">11</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>MyCloud: 	RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_i386_v5.7</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - KVM</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_i386_v5.7</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - VMware</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.6_x64_v5.7</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.6_i386_v5.7</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_OSS_Ubuntu_11.04_i386_v5.6.28_EBS</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>Ubuntu 11.04 (Official)</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsrv2k8r2_v5.7 - XenServer</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsvr2k8r2_v5.7</name>
+    <version type="integer">7</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2003_x64_sqlsvr2k5_v5.7</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsrv2k8r2_v5.7 - VMware</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_sqlsvr2k8_v5.7</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.7</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - KVM</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - XenServer</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>RightImage_Ubuntu_10.04_i386_v5.7</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>RightImage_CentOS_5.6_i386_v5.7</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.6_EBS</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_i386_v5.6_EBS</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2003_i386_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2003_x64_iis6_sqlex2k5_v5.7</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_iis7.5_v5.7 - VMware</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_i386_iis7_sqlex2k8_v5.7</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_iis7_sqlex2k8_v5.7</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2003_x64_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_i386_v5.7</name>
+    <version type="integer">7</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2003_i386_iis6_sqlex2k5_v5.7</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_v5.7</name>
+    <version type="integer">7</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.7</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.7 - VMware</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.7 - XenServer</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_iis7.5_v5.7 - XenServer</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>SL CentOS 5.5</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">15</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_i386_v5.7</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.6_x64_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.6_i386_v5.7</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_i386_v5.7</name>
+    <version type="integer">7</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - KVM</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - VMware</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.7_EBS</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_x64_v4.4</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_i386_v4.4</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>SL CentOS 5.5</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsvr2k8r2_v5.7</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>CG-Win2008-R2-SP1-RightLink-Test</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_v5.7</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_iis7.5_sqlex2k8r2_v5.7</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.7</name>
+    <version type="integer">11</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_i386_v5.7</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>CentOS 5.6 import and RL test</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>SalesEngineering-SupportGateway-Ri-Win2008-R2-SP1-x64</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>SalesEngineering-SupportGateway-Ri-Win2008-R2-SP1-x64</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>SalesEngineering-SupportGateway-Ri-Win2008-R2-SP1-x64</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">26</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - XenServer</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - KVM</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>MyCloud: 	RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.6_x64_v5.7</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7 - VMware</name>
+    <version type="integer">7</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.7</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage CentOS_5.2_x64_v4.2</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>My MCI</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">27</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.7</name>
+    <version type="integer">11</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.6_x64_v5.7</name>
+    <version type="integer">11</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>SoftLayerImage_CentOS_5.7_x64_v5.7</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">true</is-head-version>
+    <name>MCI DEmo</name>
+    <version type="integer">0</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>CG-Win2008-R2-SP1-RightLink-Test</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>SoftLayerImage_Storage_CentOS_5.7_x64_v5.7</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_v5.7</name>
+    <version type="integer">13</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.7</name>
+    <version type="integer">15</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_iis7.5_v5.7 - XenServer</name>
+    <version type="integer">7</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsrv2k8r2_v5.7 - XenServer</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.7 - KVM</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.7 - XenServer</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_iis7.5_v5.7 - KVM</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsrv2k8r2_v5.7 - KVM</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_iis7.5_v5.7</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsvr2k8r2_v5.7</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_iis7_v5.7</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_sqlsvr2k8_v5.7</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7</name>
+    <version type="integer">29</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.7</name>
+    <version type="integer">12</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_OSS_Ubuntu_11.10_amd64_v5.6.28_EBS</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage CentOS Linux 6.0 i386</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage CentOS Linux 6.0 i386 EBS</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage CentOS Linux 6.0 x86_64</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage Debian 6.0.1 (squeeze) amd64 RL 5.6.28</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage CentOS Linux 6.0 x86_64 EBS</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage Debian 6.0.1 (squeeze) amd64 RL 5.6.28 EBS</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_OSS_Ubuntu_11.04_x64_v5.6.28</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_OSS_Ubuntu_11.04_i386_v5.6.28</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage Debian 6.0.1 (squeeze) i386 RL 5.6.28</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_OSS_Ubuntu_11.04_x64_v5.6.28_HVM</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_OSS_Ubuntu_11.04_x64_v5.6.28_EBS</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>Ubuntu Server 12.04 (precise) amd64</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.8_x64_v5.8</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8 - KVM</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - KVM</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8 - XenServer</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8 - VMWare</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - VMWare</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - XenServer</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8_EBS</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8_EBS</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - KVM</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_i386_v5.6_EBS</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.4_x64_v5.6_EBS</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsvr2k8r2_v5.7</name>
+    <version type="integer">11</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.7 - VMware</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.8_Dev</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_v5.8_Dev</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_v5.8.6.2_Test</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_v5.8.6.2_Test</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_x64_sqlsrv2k8r2_v5.7 - XenServer</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_x64_sqlsvr2k8_v5.7</name>
+    <version type="integer">7</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>SoftLayerImage_Storage_CentOS_5.8_x64_v5.8</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.8_x64_v5.8</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8_HVM_EBS</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8 - KVM</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - KVM</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8 - XenServer</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8 - VMWare</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - VMWare</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - XenServer</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8_EBS</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8_EBS</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_10.04_x64_v5.8</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>SoftLayerImage_CentOS_5.8_x64_v5.8</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8 (XenServer)</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_iis7.5_v5.8 (XenServer)</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_SP1_x64_v5.8</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_iis7.5_v5.8</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8 (VMware)</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_SP1_x64_sqlsvr2k8_v5.8</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_iis7.5_v5.8 (VMware)</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsvr2k8r2_v5.8</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsrv2k8r2_v5.8 (KVM)</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_SP1_x64_iis7.5_v5.8</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsrv2k8r2_v5.8 (VMware)</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8 (KVM)</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_iis7.5_v5.8 (KVM)</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsrv2k8r2_v5.8 (XenServer)</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8</name>
+    <version type="integer">11</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_SP2_x64_sqlsvr2k8_v5.8</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_6.2_x64_v5.8_EBS</name>
+    <version type="integer">2</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_6.2_x64_v5.8</name>
+    <version type="integer">7</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_SP2_x64_sqlsvr2k8_v5.8</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsrv2k8r2_v5.8-VMware</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsvr2k8r2_v5.8</name>
+    <version type="integer">12</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsvr2012_v5.8</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_iis7.5_v5.8</name>
+    <version type="integer">13</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_SP2_x64_iis7.5_v5.8</name>
+    <version type="integer">11</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsrv2k8r2_v5.8-XenServer</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8-KVM</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8-XenServer</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_iis7.5_v5.8-KVM</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_iis7.5_v5.8-XenServer</name>
+    <version type="integer">10</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8</name>
+    <version type="integer">15</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_v5.8-VMware</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008_SP2_x64_v5.8</name>
+    <version type="integer">13</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_iis7.5_v5.8-VMware</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Windows_2008R2_SP1_x64_sqlsrv2k8r2_v5.8-KVM</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_6.2_x64_v5.8</name>
+    <version type="integer">8</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.6_x64_v5.7_EBS</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_12.04_x64_v5.8_Beta_EBS</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_Ubuntu_12.04_x64_v5.8_Beta</name>
+    <version type="integer">1</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_RHEL_5.8_x64_v5.8</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8_HVM_EBS</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - KVM</name>
+    <version type="integer">9</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_6.2_x64_v5.8_EBS</name>
+    <version type="integer">3</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8 - XenServer</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8_EBS</name>
+    <version type="integer">4</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>SoftLayerImage_Storage_CentOS_5.8_x64_v5.8</name>
+    <version type="integer">5</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+  <multi-cloud-image>
+    <is-head-version type="boolean">false</is-head-version>
+    <name>RightImage_CentOS_5.8_x64_v5.8</name>
+    <version type="integer">6</version>
+    <href>https://my.rightscale.com/api/acct/12345/multi_cloud_images/12345</href>
+  </multi-cloud-image>
+</multi-cloud-images>
