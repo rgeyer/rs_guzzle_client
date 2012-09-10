@@ -2,267 +2,538 @@
 
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
-use RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class SecurityGroupCommandsTest extends ClientCommandsBase {
-	
-	/**
-	 * 
-	 * @var SecurityGroup
-	 */
-	protected static $_security_group;
-	protected static $testTs;
-	
-	public static function setUpBeforeClass() {
-		self::$testTs = time();
-		self::$_security_group = new SecurityGroup();
-		self::$_security_group->aws_group_name = "Guzzle_Test_" . self::$testTs;
-		self::$_security_group->aws_description = "Description";
-		self::$_security_group->create();
-	}
-	
-	public static function tearDownAfterClass() {
-		self::$_security_group->destroy();
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanCreateSecurityGroup() {
-		$command = null;
-		$sec_grp = $this->executeCommand('ec2_security_groups_create',
-			array(
-				'ec2_security_group[aws_group_name]' => "Guzzle_Integration_Test_$this->_testTs",
-				'ec2_security_group[aws_description]' => "Description"
-			),
-			$command
-		);
-		
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
-		
-		return $this->getIdFromHref('ec2_security_groups', $command->getResponse()->getHeader('Location'));		
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 * @depends testCanCreateSecurityGroup
-	 */
-	public function testCanDestroySecurityGroup($secgrp_id) {
-		$command = null;
-		$destroy_result = $this->executeCommand('ec2_security_groups_destroy', array('id' => $secgrp_id), $command);
-		$this->assertEquals(200, $destroy_result->getStatusCode());
-	}
-	
+class SecurityGroupCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_groups');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_groups');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanGetSecurityGroupByIdJson() {
-		$command = null;
-		$result = $this->executeCommand('ec2_security_group', array('id' => self::$_security_group->id), $command);
-		
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertEquals("Guzzle_Test_" . self::$testTs, $result->aws_group_name);
-		$this->assertEquals("Description", $result->aws_description);
-		$this->assertEquals(self::$_security_group->id, $result->id);
-		$this->assertEquals(self::$_security_group->href, $result->href);
-		// For JSON this is available
-		$this->assertNotNull($result->aws_owner);
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_security_groups.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanGetSecurityGroupByIdXml() {
-		$command = null;
-		$result = $this->executeCommand('ec2_security_group', array('id' => self::$_security_group->id, 'output_format' => '.xml'), $command);
-		
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertEquals("Guzzle_Test_" . self::$testTs, $result->aws_group_name);
-		$this->assertEquals("Description", $result->aws_description);
-		$this->assertEquals(self::$_security_group->id, $result->id);
-		$this->assertEquals(self::$_security_group->href, $result->href);
-		// For JSON this is available
-		$this->assertEmpty($result->aws_owner);
+	public function testCanRequestIndexAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups', array('output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_security_groups.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListAllSecurityGroupsJson() {		
-		$result = $this->executeCommand('ec2_security_groups');
-		
-		$this->assertNotNull($result);
-		
-		$json_obj = json_decode($result->getBody(true));
-		
-		$this->assertEquals(200, $result->getStatusCode());
-		$this->assertNotNull($json_obj);
-		$this->assertGreaterThan(0, count($json_obj));		
+	public function testCanRequestIndexAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups', array('output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_security_groups.xml', $request);
 	}
-	
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_group');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_group/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_group', array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_group');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_group/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_group');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testShowRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_group/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_group', array('id' => 'abc'));
+    $command->execute();
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListAllSecurityGroupsWithCloudIdJson() {
-		$command = null;		
-		$result = $this->executeCommand('ec2_security_groups', array('cloud_id' => 1), $command, 'with_cloud_id');
-		
-		$this->assertNotNull($result);
-		
-		$json_obj = json_decode($result->getBody(true));
-		
-		$this->assertEquals(200, $result->getStatusCode());
-		$this->assertNotNull($json_obj);
-		$this->assertGreaterThan(0, count($json_obj));		
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_group/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_group', array('id' => 1234));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_security_groups/1234.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListAllSecurityGroupsXml() {
-		$command = null;
-		$result = $this->executeCommand('ec2_security_groups', array('output_format' => '.xml'), $command);
-		
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertNotNull($result);
-		$this->assertGreaterThan(0, count($result));		
+	public function testShowAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_group/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_group', array('id' => 1234, 'output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_security_groups/1234.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListAllSecurityGroupsWithCloudIdXml() {
-		$command = null;
-		$result = $this->executeCommand('ec2_security_groups', array('cloud_id' => 1, 'output_format' => '.xml'), $command, 'with_cloud_id');
-		
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertNotNull($result);
-		$this->assertGreaterThan(0, count($result));		
+	public function testShowAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_group/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_group', array('id' => 1234, 'output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/ec2_security_groups/1234.xml', $request);
 	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanAddACidrSecurityGroupPermissions() {
-		self::$_security_group->find_by_id(self::$_security_group->id);
-		$command = null;
-		$result = $this->executeCommand('ec2_security_groups_update',
-			array(
-				'id' => self::$_security_group->id,
-				'ec2_security_group[cidr_ips]' => '0.0.0.0/0',
-				'ec2_security_group[protocol]' => 'tcp',
-				'ec2_security_group[from_port]' => 22,
-				'ec2_security_group[to_port]' => 22
-			),
-			$command,
-			'add_cidr_one_rule'
-		);
-		
-		$this->assertEquals(204, $result->getStatusCode());
-		
-		$sec_group = new SecurityGroup();
-		$sec_group->find_by_id(self::$_security_group->id);
-		
-		$this->assertGreaterThan(0, count($sec_group->aws_perms));
-		$count = count($sec_group->aws_perms);
-		$idx = $count-1;
-		$this->assertEquals('tcp', $sec_group->aws_perms[$idx]->protocol);
-		$this->assertEquals(22, $sec_group->aws_perms[$idx]->from_port);
-		$this->assertEquals(22, $sec_group->aws_perms[$idx]->to_port);
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanAddSecurityGroupPermissionOnOneProtocolsAndPortForAnotherGroup() {
-		self::$_security_group->find_by_id(self::$_security_group->id);
-		$command = null;
-		$result = $this->executeCommand('ec2_security_groups_update',
-			array(
-				'id' => self::$_security_group->id,
-				'ec2_security_group[owner]' => self::$_security_group->aws_owner,
-				'ec2_security_group[group]' => self::$_security_group->aws_group_name,
-				'ec2_security_group[protocol]' => 'tcp',
-				'ec2_security_group[from_port]' => 22,
-				'ec2_security_group[to_port]' => 22
-			),
-			$command,
-			'add_group_one_rule'
-		);
-		
-		$this->assertEquals(204, $result->getStatusCode());
-		
-		$sec_group = new SecurityGroup();
-		$sec_group->find_by_id(self::$_security_group->id);
-		
-		$this->assertGreaterThan(0, count($sec_group->aws_perms));
-		$count = count($sec_group->aws_perms);
-		$idx = $count-1;
-		$this->assertEquals(self::$_security_group->aws_owner, $sec_group->aws_perms[$idx]->owner);
-		$this->assertEquals(self::$_security_group->aws_group_name, $sec_group->aws_perms[$idx]->group);
-		$this->assertEquals('tcp', $sec_group->aws_perms[$idx]->protocol);
-		$this->assertEquals(22, $sec_group->aws_perms[$idx]->from_port);
-		$this->assertEquals(22, $sec_group->aws_perms[$idx]->to_port);
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanAddSecurityGroupPermissionOnAllProtocolsAndPortsForAnotherGroup() {
-		self::$_security_group->find_by_id(self::$_security_group->id);
-		$command = null;
-		$result = $this->executeCommand('ec2_security_groups_update',
-			array(
-				'id' => self::$_security_group->id,
-				'ec2_security_group[owner]' => self::$_security_group->aws_owner,
-				'ec2_security_group[group]' => self::$_security_group->aws_group_name
-			),
-			$command,
-			'add_group_all_rules'
-		);
-		
-		$this->assertEquals(204, $result->getStatusCode());
-		
-		$sec_group = new SecurityGroup();
-		$sec_group->find_by_id(self::$_security_group->id);
-		
-		$found = 0;
-		
-		foreach($sec_group->aws_perms as $perm)
-		{
-			if(property_exists($perm, 'owner') && property_exists($perm, 'group') && !($perm->from_port == 22)) {
-				$found++;
-				$this->assertEquals(self::$_security_group->aws_owner, $perm->owner);
-				$this->assertEquals(self::$_security_group->aws_group_name, $perm->group);
-				$this->assertContains($perm->protocol, array('icmp','tcp','udp'));
-				if($perm->protocol == 'icmp') {
-					$this->assertEquals('-1', $perm->from_port);
-					$this->assertEquals('-1', $perm->to_port);
-				} else {				
-					$this->assertEquals('0', $perm->from_port);
-					$this->assertEquals('65535', $perm->to_port);
-				}
-			}
-		}
-		
-		$this->assertEquals(3, $found);
-	}
-	
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandReturnsAModel() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_group/js/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_group', array('id' => '12345'));
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup', $result);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasCreateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_groups_create');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_create/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_create',
+      array(
+        'ec2_security_group[aws_group_name]' => 'name',
+        'ec2_security_group[aws_description]' => 'description'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_groups_create');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage ec2_security_group[aws_group_name] argument be supplied.
+   */
+  public function testCreateRequiresNickname() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_create/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_create',
+      array(
+        'ec2_security_group[aws_description]' => 'description'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage ec2_security_group[aws_description] argument be supplied.
+   */
+  public function testCreateRequiresDescription() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_create/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_create',
+      array(
+        'ec2_security_group[aws_group_name]' => 'name'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandReturnsAModel() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_create/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_create',
+      array(
+        'ec2_security_group[aws_group_name]' => 'name',
+        'ec2_security_group[aws_description]' => 'description'
+      )
+    );
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup', $result);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasDestroyCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_groups_destroy');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_destroy',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('DELETE', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_groups_destroy');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testDestroyRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_destroy');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testDestroyRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_destroy', array('id' => 'abc'));
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasUpdateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_groups_update');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_update/add_cidr_one_rule/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_update',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('PUT', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('ec2_security_groups_update');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testUpdateRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_update/add_cidr_one_rule/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_update');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testUpdateRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/ec2_security_groups_update/add_cidr_one_rule/response'
+      )
+    );
+
+    $command = $client->getCommand('ec2_security_groups_update',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
 }
 
 ?>
