@@ -1,0 +1,6 @@
+GET /api/acct/12345/ec2_ssh_keys/12345.xml HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkN1ugjAARl9l6TU1tEX-kiW7mAhuSGRYHTcGSkEMWBFUwPjuK8nuz_cl5zxBAmxQD0ABWQvsJ7i1_ApsDSNivhTQMWAjohnEtDTVVECZSdrEmGUkxzBnGoIIcQQtxCyIMEHEIjjNdST_Ov6_tXR92sp7wLl6Hy2qPy7BQ5zSbz_gS0jKQMM8oI4Ve1WPhqgVm4L6h_ikrdM-Do90Pu-N7dBclvey2cSqCcfdFeJmH_b6jwjpwRXFo6likf9SwyXY2btqh4YVJH5-S43OhastdfT6PkZqIMzccRdjdamIt1bH-TZcUHdVLSKvzTy_pV-fO1RFTLxPSfopyTmppQoIh-T8tuSD7KOAhDFxO3eylCYdFcDrpKwkdJXQrJigj2tZHLuWJRWfMVGD1-sPA-JvXg==; _session_id=58ba9cded00ac416e212f407c45f16c1
+

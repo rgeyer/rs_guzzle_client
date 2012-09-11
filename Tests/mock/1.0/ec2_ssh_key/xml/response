@@ -1,0 +1,23 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Tue, 11 Sep 2012 18:50:09 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding; Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.12
+X-Runtime: 162
+Set-Cookie: _session_id=58ba9cded00ac416e212f407c45f16c1; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ec2-ssh-key>
+  <aws-fingerprint>ff:55:f0:bd:c6:61:5f:d4:6a:dc:f9:50:9f:b3:0f:4d:93:51:27:7c</aws-fingerprint>
+  <aws-key-name>dotnet</aws-key-name>
+  <created-at type="datetime">2012-03-09T19:56:11Z</created-at>
+  <updated-at type="datetime">2012-03-09T19:56:11Z</updated-at>
+  <href>https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345</href>
+  <aws-material></aws-material>
+</ec2-ssh-key>
