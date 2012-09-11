@@ -1,109 +1,204 @@
 <?php
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
-use RGeyer\Guzzle\Rs\Model\Ec2\Server;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-use RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup;
-use RGeyer\Guzzle\Rs\Model\Ec2\Deployment;
-use RGeyer\Guzzle\Rs\Model\Ec2\SshKey;
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
+class ServerEbsVolumeCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
 
-class ServerEbsVolumeCommandsTest extends ClientCommandsBase {
-	protected static $testTs;
-	protected static $_deployment;
-	protected static $_security_group;
-	protected static $_ssh_key;
-	protected static $_server;
-	protected static $_ebsvol_href;
-	
-	public static function setUpBeforeClass() {
-		self::$testTs = time();
-		self::$_ssh_key = new SshKey();
-		self::$_ssh_key->aws_key_name = "Guzzle_Test_For_Component_Ebs_Volume_" . self::$testTs;
-		self::$_ssh_key->create();
-		
-		self::$_deployment = new Deployment();
-		self::$_deployment->nickname = "Guzzle_Test_For_Component_Ebs_Volume_" . self::$testTs;
-		self::$_deployment->description = 'described';
-		self::$_deployment->create();
-		
-		self::$_security_group = new SecurityGroup();
-		self::$_security_group->aws_group_name = "Guzzle_Test_For_Component_Ebs_Volume_" . self::$testTs;
-		self::$_security_group->aws_description = "described";
-		self::$_security_group->create();
-		
-		$testClassToApproximateThis = new ServerEbsVolumeCommandsTest();
-		$testClassToApproximateThis->setUp();
-		
-		$params = array(
-				'server[nickname]' => "Guzzle_Test_For_Component_Ebs_Volume_" . self::$testTs,
-				'server[server_template_href]' => $testClassToApproximateThis->_serverTemplate->href,
-				'server[ec2_ssh_key_href]' => self::$_ssh_key->href,
-				'server[ec2_security_groups_href]' => array(self::$_security_group->href),
-				'server[deployment_href]' => self::$_deployment->href
-		);
-		self::$_server = new Server();
-		self::$_server->create($params);		
-		
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand('ec2_ebs_volumes_create',
-			array(
-					'ec2_ebs_volume[nickname]' => 'Guzzle_Test_For_Component_Ebs_Volume_' . self::$testTs,
-					'ec2_ebs_volume[description]' => 'described',
-					'ec2_ebs_volume[ec2_availability_zone]' => 'us-east-1a',
-					'ec2_ebs_volume[aws_size]' => 1,
-					'cloud_id' => 1
-			),
-			$command
-		);
-		
-		self::$_ebsvol_href = strval($command->getResponse()->getHeader('Location'));
-	}
-	
-	public static function tearDownAfterClass() {
-		// No need to delete the server(s) this contains.
-		self::$_deployment->destroy();
-		
-		self::$_ssh_key->destroy();
-		
-		self::$_security_group->destroy();
-		
-		$testClassToApproximateThis = new ServerEbsVolumeCommandsTest();
-		$testClassToApproximateThis->setUp();
-		$vol_id = $testClassToApproximateThis->getIdFromHref('ec2_ebs_volumes', self::$_ebsvol_href);
-		$testClassToApproximateThis->executeCommand('ec2_ebs_volumes_destroy', array('id' => $vol_id));
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 */
-	public function testCanCreateEbsVolMappingToServer() {
-		$command = null;
-		$result = $this->executeCommand('component_ec2_ebs_volumes_create',
-			array(
-				'component_ec2_ebs_volume[component_href]' => self::$_server->href,
-				'component_ec2_ebs_volume[ec2_ebs_volume_href]' => self::$_ebsvol_href,
-				'component_ec2_ebs_volume[device]' => '/dev/sdh'
-			),
-			$command
-		);
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
-		
-		$vol_id = $this->getIdFromHref('component_ec2_ebs_volumes', strval($command->getResponse()->getHeader('Location')));
-		
-		return $vol_id;
-	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 * @depends testCanCreateEbsVolMappingToServer
-	 */
-	public function testCanDestroyEbsVolMappingToServer($vol_id) {
-		$command = null;
-		$result = $this->executeCommand('component_ec2_ebs_volumes_destroy', array('id' => $vol_id), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-	}
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasCreateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('component_ec2_ebs_volumes_create');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/component_ec2_ebs_volumes_create/response'
+      )
+    );
+
+    $command = $client->getCommand('component_ec2_ebs_volumes_create',
+      array(
+        'component_ec2_ebs_volume[component_href]' => 'https://my.rightscale.com/api/acct/12345/servers/12345',
+        'component_ec2_ebs_volume[ec2_ebs_volume_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345',
+        'component_ec2_ebs_volume[device]' => 'sda'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('component_ec2_ebs_volumes_create');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage component_ec2_ebs_volume[component_href] argument be supplied.
+   */
+  public function testCreateRequiresComponentHref() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/component_ec2_ebs_volumes_create/response'
+      )
+    );
+
+    $command = $client->getCommand('component_ec2_ebs_volumes_create',
+      array(
+        'component_ec2_ebs_volume[ec2_ebs_volume_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345',
+        'component_ec2_ebs_volume[device]' => 'sda'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage component_ec2_ebs_volume[ec2_ebs_volume_href] argument be supplied.
+   */
+  public function testCreateRequiresEbsVolumeHref() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/component_ec2_ebs_volumes_create/response'
+      )
+    );
+
+    $command = $client->getCommand('component_ec2_ebs_volumes_create',
+      array(
+        'component_ec2_ebs_volume[component_href]' => 'https://my.rightscale.com/api/acct/12345/servers/12345',
+        'component_ec2_ebs_volume[device]' => 'sda'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/component_ec2_ebs_volumes_create/response'
+      )
+    );
+
+    $command = $client->getCommand('component_ec2_ebs_volumes_create',
+      array(
+        'component_ec2_ebs_volume[component_href]' => 'https://my.rightscale.com/api/acct/12345/servers/12345',
+        'component_ec2_ebs_volume[ec2_ebs_volume_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ebs_volumes/12345',
+        'component_ec2_ebs_volume[device]' => 'sda'
+      )
+    );
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\Na', $result);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasDestroyCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('component_ec2_ebs_volumes_destroy');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/component_ec2_ebs_volumes_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('component_ec2_ebs_volumes_destroy',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('DELETE', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('component_ec2_ebs_volumes_destroy');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testDestroyRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/component_ec2_ebs_volumes_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('component_ec2_ebs_volumes_destroy');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testDestroyRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/component_ec2_ebs_volumes_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('component_ec2_ebs_volumes_destroy', array('id' => 'abc'));
+    $command->execute();
+  }
 }
