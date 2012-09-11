@@ -759,12 +759,12 @@
       <param name="method" type="string" static="POST" />
       <param name="cloud_id" type="integer" required="false" default="1" />
       <param name="server_array[nickname]" type="string" required="true" />
-      <param name="server_array[description]" type="string" required="false" />
       <param name="server_array[deployment_href]" type="string" required="true" />
       <param name="server_array[array_type]" type="enum:alert,queue" required="true" />
       <param name="server_array[ec2_security_groups_href]" type="array" required="true" />
       <param name="server_array[server_template_href]" type="string" required="true" />
       <param name="server_array[ec2_ssh_key_href]" type="string" required="true" />
+      <param name="server_array[description]" type="string" required="false" />
       <param name="server_array[ec2_availability_zone]" type="string" required="false" />
       <param name="server_array[indicator_href]" type="string" required="false" />
       <param name="server_array[audit_queue_href]" type="string" required="false" />

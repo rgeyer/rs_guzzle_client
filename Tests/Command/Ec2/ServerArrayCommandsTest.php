@@ -1,254 +1,1108 @@
 <?php
 namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
-use RGeyer\Guzzle\Rs\Model\Ec2\SshKey;
+use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-use RGeyer\Guzzle\Rs\Model\Ec2\Deployment;
+class ServerArrayCommandsLongRunningTest extends \Guzzle\Tests\GuzzleTestCase {
 
-use RGeyer\Guzzle\Rs\Model\Ec2\SecurityGroup;
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays');
+    $this->assertNotNull($command);
+  }
 
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays/js/response'
+      )
+    );
 
-class ServerArrayCommandsTest extends ClientCommandsBase {
-	
-	protected static $testTs;	
-	protected static $_array_href;
-	protected static $_ssh_key;
-	protected static $_deployment;
-	protected static $_security_group;
-	
-	public static function setUpBeforeClass() {		
-		$testClassToApproximateThis = new ServerArrayCommandsTest();
-		$testClassToApproximateThis->setUp();
-		
-		self::$testTs = time();		
-		self::$_ssh_key = new SshKey(); 
-		self::$_ssh_key->aws_key_name = "Guzzle_Test_For_Server_Arrays_" . self::$testTs;
-		self::$_ssh_key->create();
-		
-		self::$_deployment = new Deployment();
-		self::$_deployment->nickname = "Guzzle_Test_For_Server_Arrays_". self::$testTs;
-		self::$_deployment->description = 'described';
-		self::$_deployment->create();
-		
-		self::$_security_group = new SecurityGroup();
-		self::$_security_group->aws_group_name = "Guzzle_Test_For_Server_Arrays_". self::$testTs;
-		self::$_security_group->aws_description = "described";
-		self::$_security_group->create();
-		
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand('server_arrays_create',
-			array(
-				'server_array[nickname]' => 'Guzzle_Test_' . self::$testTs,
-				'server_array[deployment_href]' => self::$_deployment->href,
-				'server_array[array_type]' => 'alert',
-				'server_array[ec2_security_groups_href]' => array(self::$_security_group->href),
-				'server_array[server_template_href]' => $testClassToApproximateThis->_serverTemplate->href,
-				'server_array[ec2_ssh_key_href]' => self::$_ssh_key->href,
-				'server_array[voters_tag]' => 'foo:bar=baz'
-			),
-			$command
-		);
-		
-		self::$_array_href = $command->getResponse()->getHeader('Location');
-	}
-	
-	public static function tearDownAfterClass() {		
-		$testClassToApproximateThis = new ServerArrayCommandsTest();
-		$testClassToApproximateThis->setUp();
-		
-		$command = null;
-		$result = $testClassToApproximateThis->executeCommand('server_arrays_destroy',
-				array('id' => $testClassToApproximateThis->getIdFromHref('server_arrays', self::$_array_href)),
-				$command
-		);
-		
-		self::$_deployment->destroy();		
-		self::$_ssh_key->destroy();
-		# The security group doesn't like being destroyed so shortly after things which consume it.
-		sleep(2);		
-		self::$_security_group->destroy();
-	}
-	
+    $command = $client->getCommand('server_arrays');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanCreateServerArray() {
-		$command = null;
-		$result = $this->executeCommand('server_arrays_create',
-			array(
-				'server_array[nickname]' => 'Guzzle_Test_' . $this->_testTs,
-				'server_array[deployment_href]' => self::$_deployment->href,
-				'server_array[array_type]' => 'alert',
-				'server_array[ec2_security_groups_href]' => array(self::$_security_group->href),
-				'server_array[server_template_href]' => $this->_serverTemplate->href,
-				'server_array[ec2_ssh_key_href]' => self::$_ssh_key->href,
-				'server_array[voters_tag]' => 'foo:bar=baz',
-				'server_array[ec2_availability_zone]' => 'us-east-1a'
-			),
-			$command
-		);
-		
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertNotNull($command->getResponse()->getHeader('Location'));
-		
-		$array_id = $this->getIdFromHref('server_arrays', $command->getResponse()->getHeader('Location'));
-		
-		return $array_id;
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
-	 * @depends testCanCreateServerArray
+	 * @group unit
 	 */
-	public function testCanDestroyServerArray($array_id) {
-		$command = null;
-		$result = $this->executeCommand('server_arrays_destroy', array('id' => $array_id), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());		
+	public function testCanRequestIndexAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays', array('output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListServerArraysJson() {
-		$command = null;
-		$result = $this->executeCommand('server_arrays', array(), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotNull($json_obj);
-		$this->assertGreaterThan(0, count($json_obj));
+	public function testCanRequestIndexAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays', array('output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays.xml', $request);
 	}
-	
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasCreateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_create');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_create/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_create',
+      array(
+        'server_array[nickname]' => 'name',
+        'server_array[deployment_href]' => 'https://my.rightscale.com/api/acct/12345/deployments/12345',
+        'server_array[array_type]' => 'alert',
+        'server_array[ec2_security_groups_href]' => array(
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345',
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12346'
+        ),
+        'server_array[server_template_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345',
+        'server_array[ec2_ssh_key_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_create');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server_array[nickname] argument be supplied.
+   */
+  public function testCreateRequiresNickname() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_create/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_create',
+      array(
+        'server_array[deployment_href]' => 'https://my.rightscale.com/api/acct/12345/deployments/12345',
+        'server_array[array_type]' => 'alert',
+        'server_array[ec2_security_groups_href]' => array(
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345',
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12346'
+        ),
+        'server_array[server_template_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345',
+        'server_array[ec2_ssh_key_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server_array[deployment_href] argument be supplied.
+   */
+  public function testCreateRequiresDeploymentHref() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_create/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_create',
+      array(
+        'server_array[nickname]' => 'name',
+        'server_array[array_type]' => 'alert',
+        'server_array[ec2_security_groups_href]' => array(
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345',
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12346'
+        ),
+        'server_array[server_template_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345',
+        'server_array[ec2_ssh_key_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server_array[array_type] argument be supplied.
+   */
+  public function testCreateRequiresArrayType() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_create/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_create',
+      array(
+        'server_array[nickname]' => 'name',
+        'server_array[deployment_href]' => 'https://my.rightscale.com/api/acct/12345/deployments/12345',
+        'server_array[ec2_security_groups_href]' => array(
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345',
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12346'
+        ),
+        'server_array[server_template_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345',
+        'server_array[ec2_ssh_key_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server_array[ec2_security_groups_href] argument be supplied.
+   */
+  public function testCreateRequiresSecurityGroupHrefs() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_create/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_create',
+      array(
+        'server_array[nickname]' => 'name',
+        'server_array[deployment_href]' => 'https://my.rightscale.com/api/acct/12345/deployments/12345',
+        'server_array[array_type]' => 'alert',
+        'server_array[server_template_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345',
+        'server_array[ec2_ssh_key_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server_array[server_template_href] argument be supplied.
+   */
+  public function testCreateRequiresServerTemplateHref() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_create/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_create',
+      array(
+        'server_array[nickname]' => 'name',
+        'server_array[deployment_href]' => 'https://my.rightscale.com/api/acct/12345/deployments/12345',
+        'server_array[array_type]' => 'alert',
+        'server_array[ec2_security_groups_href]' => array(
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345',
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12346'
+        ),
+        'server_array[ec2_ssh_key_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server_array[ec2_ssh_key_href] argument be supplied.
+   */
+  public function testCreateRequiresSshKeyHref() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_create/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_create',
+      array(
+        'server_array[nickname]' => 'name',
+        'server_array[deployment_href]' => 'https://my.rightscale.com/api/acct/12345/deployments/12345',
+        'server_array[array_type]' => 'alert',
+        'server_array[ec2_security_groups_href]' => array(
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345',
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12346'
+        ),
+        'server_array[server_template_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testCreateCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_create/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_create',
+      array(
+        'server_array[nickname]' => 'name',
+        'server_array[deployment_href]' => 'https://my.rightscale.com/api/acct/12345/deployments/12345',
+        'server_array[array_type]' => 'alert',
+        'server_array[ec2_security_groups_href]' => array(
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12345',
+          'https://my.rightscale.com/api/acct/12345/ec2_security_groups/12346'
+        ),
+        'server_array[server_template_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_server_templates/12345',
+        'server_array[ec2_ssh_key_href]' => 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345'
+      )
+    );
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\ServerArray', $result);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasDestroyCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_destroy');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_destroy',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('DELETE', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testDestroyCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_destroy');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testDestroyRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_destroy');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testDestroyRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_destroy', array('id' => 'abc'));
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_array');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_array/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_array', array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_array');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_array/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_array');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testShowRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_array/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_array', array('id' => 'abc'));
+    $command->execute();
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanListServerArraysXml() {
-		$propname = 'server-array';
-		$command = null;
-		$result = $this->executeCommand('server_arrays', array('output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertGreaterThan(0, count($result->$propname));
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_array/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_array', array('id' => 1234));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays/1234.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanShowServerArrayJson() {
-		$command = null;
-		$result = $this->executeCommand('server_array', array('id' => $this->getIdFromHref('server_arrays', self::$_array_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotNull($json_obj);
-		$this->assertEquals('Guzzle_Test_' . self::$testTs, $json_obj->nickname);
-		$this->assertEquals(self::$_array_href, $json_obj->href);
+	public function testShowAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_array/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_array', array('id' => 1234, 'output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays/1234.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanShowServerArrayXml() {
-		$command = null;
-		$result = $this->executeCommand('server_array', array('id' => $this->getIdFromHref('server_arrays', self::$_array_href), 'output_format' => '.xml'), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertEquals('Guzzle_Test_' . self::$testTs, $result->nickname);
-		$this->assertEquals(strval(self::$_array_href), strval($result->href));
+	public function testShowAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_array/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('server_array', array('id' => 1234, 'output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays/1234.xml', $request);
 	}
-	
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testShowCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_array/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_array', array('id' => '12345'));
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Ec2\ServerArray', $result);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasUpdateCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_update');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_update/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_update',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('PUT', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_update');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testUpdateRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_update/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_update');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testUpdateRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_update/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_update',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasTerminateAllCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_terminate_all');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testTerminateAllUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_terminate_all/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_terminate_all',
+      array(
+        'id' => 1234
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testTerminateAllCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_terminate_all');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testTerminateAllRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_terminate_all/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_terminate_all');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testTerminateAllRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_terminate_all/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_terminate_all',
+      array(
+        'id' => 'abc',
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasLaunchCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_launch');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testLaunchUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_launch/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_launch',
+      array(
+        'id' => 1234
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testLaunchCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_launch');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testLaunchRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_launch/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_launch');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testLaunchRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_launch/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_launch',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasInstancesCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_instances');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testInstancesUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_instances/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_instances', array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testInstancesCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_instances');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanUpdateServerArrayNickname() {
-		$this->markTestSkipped("Setting nickname results in a 422?");
-		$command = null;
-		$result = $this->executeCommand('server_array', array('id' => $this->getIdFromHref('server_arrays', self::$_array_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotNull($json_obj);
-		$this->assertNotEquals('NewNickname', $json_obj->nickname);
-		
-		$command = null;
-		$result = $this->executeCommand('server_arrays_update',
-			array(
-				'id' => $this->getIdFromHref('server_arrays', self::$_array_href),
-				'server_array[nickname]' => 'NewNickname'),
-			$command
-		);		
-		$this->assertEquals(204, $command->getResponse()->getStatusCode());
-		
-		$command = null;
-		$result = $this->executeCommand('server_array', array('id' => $this->getIdFromHref('server_arrays', self::$_array_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotNull($json_obj);
-		$this->assertEquals('NewNickname', $json_obj->nickname);
+	public function testInstancesDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_instances/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_instances', array('id' => 1234));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays/1234/instances.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanUpdateServerArrayDescription() {
-		$this->markTestSkipped("Setting description results in a 422?");
-		$command = null;
-		$result = $this->executeCommand('server_array', array('id' => $this->getIdFromHref('server_arrays', self::$_array_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotNull($json_obj);
-		$this->assertNotEquals('NewDescription', $json_obj->description);
-		
-		$command = null;
-		$result = $this->executeCommand('server_arrays_update',
-			array(
-				'id' => $this->getIdFromHref('server_arrays', self::$_array_href),
-				'server_array[description]' => 'NewDescription'),
-			$command
-		);		
-		$this->assertEquals(204, $command->getResponse()->getStatusCode());
-		
-		$command = null;
-		$result = $this->executeCommand('server_array', array('id' => $this->getIdFromHref('server_arrays', self::$_array_href)), $command);
-		$this->assertEquals(200, $command->getResponse()->getStatusCode());
-		$json_obj = json_decode($result->getBody(true));
-		$this->assertNotNull($json_obj);
-		$this->assertEquals('NewDescription', $json_obj->description);
+	public function testCanRequestInstancesAsJson() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_instances/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_instances', array('id' => 1234, 'output_format' => '.js'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays/1234/instances.js', $request);
 	}
-	
+
 	/**
 	 * @group v1_0
-	 * @group integration
+	 * @group unit
 	 */
-	public function testCanLaunchAServer() {
-		$command = null;
-		$result = $this->executeCommand('server_arrays_launch',array('id' => $this->getIdFromHref('server_arrays', self::$_array_href)),$command);
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$instance_href = $command->getResponse()->getHeader('Location');
-		$this->assertNotNull($instance_href);
-		return strval($instance_href);
+	public function testCanRequestInstancesAsXml() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_instances/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_instances', array('id' => 1234, 'output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/server_arrays/1234/instances.xml', $request);
 	}
-	
-	/**
-	 * @group v1_0
-	 * @group integration
-	 * @depends testCanLaunchAServer
-	 */
-	public function testCanTerminateAllServers($instance_href) {
-		$propname = 'ec2-instance-href';
-		$command = null;
-		$result = $this->executeCommand('server_arrays_terminate_all',array('id' => $this->getIdFromHref('server_arrays', self::$_array_href)),$command);
-		$this->assertEquals(201, $command->getResponse()->getStatusCode());
-		$this->assertInstanceOf('SimpleXMLElement', $result);
-		$this->assertObjectHasAttribute('success', $result);
-		$this->assertObjectHasAttribute('failure', $result);
-		$this->assertEquals(1, count($result->success));
-		$this->assertEquals($instance_href, $result->success[0]->$propname);
-	}
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testInstancesRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_instances/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_instances');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testInstancesRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/server_arrays_instances/js/response'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_instances',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasRunScriptOnAllInstancesCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_run_script_on_all');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testRunScriptOnAllInstancesUsesCorrectVerb() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/login'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_run_script_on_all',
+      array(
+        'id' => 1234,
+        'server_array[right_script_href]' => 'https://my.rightscale.com/api/acct/12345/right_scripts/12345'
+      )
+    );
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testRunScriptOnAllInstancesCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient();
+    $command = $client->getCommand('server_arrays_run_script_on_all');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testRunScriptOnAllInstancesRequiresId() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/login'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_run_script_on_all',
+      array(
+        'server_array[right_script_href]' => 'https://my.rightscale.com/api/acct/12345/right_scripts/12345'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testRunScriptOnAllInstancesRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/login'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_run_script_on_all',
+      array(
+        'id' => 'abc',
+        'server_array[right_script_href]' => 'https://my.rightscale.com/api/acct/12345/right_scripts/12345'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage server_array[right_script_href] argument be supplied.
+   */
+  public function testRunScriptOnAllInstancesRequiresScriptHref() {
+    $client = ClientFactory::getClient();
+    $this->setMockResponse($client,
+      array(
+        '1.0/login',
+        '1.0/login'
+      )
+    );
+
+    $command = $client->getCommand('server_arrays_run_script_on_all',
+      array(
+        'id' => 1234
+      )
+    );
+    $command->execute();
+  }
 }
