@@ -152,6 +152,15 @@
       <param name="method" type="string" static="GET" />
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>
+
+    <command name="ec2_server_template" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Show a ServerTemplate</doc>
+      <param name="path" type="string" static="ec2_server_templates/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\ServerTemplate" />
+    </command>
     
     <command name="ec2_server_templates_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Create a new ServerTemplate</doc>
@@ -175,13 +184,15 @@
       <param name="method" type="string" static="DELETE" />
       <param name="id" type="integer" required="true" location="path" />
     </command>
-    
-    <command name="ec2_server_template" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
-      <doc>Show a ServerTemplate</doc>
-      <param name="path" type="string" static="ec2_server_templates/{id}{output_format}" />
-      <param name="method" type="string" static="GET" />
-      <param name="id" type="integer" required="true" location="path" />      
-      <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
+
+    <command name="ec2_server_templates_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Update a ServerTemplate</doc>
+      <param name="path" type="string" static="server_templates/{id}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server_template[nickname]" type="string" required="false" />
+      <param name="server_template[description]" type="string" required="false"/>
+      <param name="server_template[parameters]" type="array" required="false" />
     </command>
     
     <command name="ec2_server_templates_executables" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -199,16 +210,6 @@
       <param name="method" type="string" static="GET" />
       <param name="id" type="integer" required="true" location="path" />      
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />
-    </command>
-    
-    <command name="ec2_server_templates_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
-      <doc>Update a ServerTemplate</doc>
-      <param name="path" type="string" static="server_templates/{id}" />
-      <param name="method" type="string" static="PUT" />
-      <param name="id" type="integer" required="true" location="path" />
-      <param name="server_template[nickname]" type="string" required="false" />
-      <param name="server_template[description]" type="string" required="false"/>
-      <param name="server_template[parameters]" type="array" required="false" />
     </command>
     
     <!-- Start MultiCloudImages -->
