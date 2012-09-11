@@ -5,7 +5,7 @@ use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
 //use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
-class EbsVolumeCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+class EbsVolumeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
 
   /**
    * @group v1_0

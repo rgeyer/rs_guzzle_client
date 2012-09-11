@@ -6,7 +6,7 @@ use RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup;
 use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class SecurityGroupRulesCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
 
   /**
    * @group v1_5

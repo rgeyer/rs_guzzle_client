@@ -3,7 +3,7 @@ namespace RGeyer\Guzzle\Rs\Tests\Command\Mc;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class ServerCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+class ServerCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
 
   /**
    * @group v1_5

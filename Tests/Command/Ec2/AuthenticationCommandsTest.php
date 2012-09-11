@@ -7,7 +7,7 @@ use Guzzle\Http\Plugin\CookiePlugin;
 use Guzzle\Http\CookieJar\ArrayCookieJar;
 use Guzzle\Http\Message\Response;
 
-class AuthenticationCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+class AuthenticationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
 
 	/**
 	 * @group unit

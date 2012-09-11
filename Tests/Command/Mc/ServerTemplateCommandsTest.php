@@ -5,7 +5,7 @@ namespace RGeyer\Guzzle\Rs\Tests\Command\Mc;
 use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class ServerTemplateCommandsTest extends \Guzzle\Tests\GuzzleTestCase {
+class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
 
   /**
    * @group v1_5
