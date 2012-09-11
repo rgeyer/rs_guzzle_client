@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Tue, 11 Sep 2012 18:09:09 GMT
+Content-Type: text/javascript; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.12
+X-Runtime: 137
+Content-Length: 203
+Set-Cookie: _session_id=2c4d5a7f57f389718e61bda75e928c28; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"url":"https://queue.amazonaws.com/12345/GuzzleTest","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null}

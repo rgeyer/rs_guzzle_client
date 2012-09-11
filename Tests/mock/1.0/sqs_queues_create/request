@@ -1,0 +1,8 @@
+POST /api/acct/12345/sqs_queues HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkFtvgjAAhf_K0mcw9gK2JEvm5mU6jTqG0b2V0iIZlHGRm_G_ryZ7PfnOSc53Axx4IOuBBaIKeDdwrWQJPIIgpncL1AJ4EJMJpg7DjgWSyNCuQBLS0LWVwMyGUEI7VFDZEGGIozHCiFCzV8v_LjOx6Zp58L756el1_6vS2TrNFQna9s3-WgZCt5xc0vO3Trkvymp3OZ5XiypfrekyaI517voO23au9ul0Sq59Xmgn2r9XNCVzpoa5w4oiTGB-qE7jE1_tZdjGc9ZuO43wGpINQT6fvIr4sMtUMIs2rA2GBm7Hxanj6mNSNxr7NVwMTeMOZrcdUPD8UNI9lGiemSvgs-f6aSl748cCXIj8qmtjipiPFpAZT1IDlQYaxQ_opUziS10JnsqRyDNwv_8B_UZwyg==; _session_id=6d365e5846f22f8ec8daafdf43260d35
+
+sqs_queue%5Bname%5D=GuzzleTest

@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Tue, 11 Sep 2012 18:08:47 GMT
+Content-Type: application/xml; charset=utf-8
+Connection: keep-alive
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.12
+X-Runtime: 63
+Content-Length: 392
+Set-Cookie: _session_id=a47e36858a0c7d3f2345286d7e532a97; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<sqs-queue>
+  <api-generation type="integer">2</api-generation>
+  <description nil="true"></description>
+  <size type="integer">0</size>
+  <url>https://queue.amazonaws.com/12345/GuzzleTest</url>
+  <visibility-timeout type="integer">30</visibility-timeout>
+  <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+</sqs-queue>

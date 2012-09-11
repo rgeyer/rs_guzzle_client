@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Tue, 11 Sep 2012 17:53:29 GMT
+Content-Type: text/javascript; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding; Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.12
+X-Runtime: 49
+Set-Cookie: _session_id=b6a9f34db4e23bd24486613878ba6da4; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+[{"url":"https://queue.amazonaws.com/12345/cmg-elasticitydemo1-audit","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null},{"url":"https://queue.amazonaws.com/12345/cmg-elasticitydemo1-in","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null},{"url":"https://queue.amazonaws.com/12345/cmg-elasticitydemo1-out","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null},{"url":"https://queue.amazonaws.com/12345/Workers","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null},{"url":"https://queue.amazonaws.com/12345/Workit","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null},{"url":"https://queue.amazonaws.com/12345/cmg-elasticitydemo1-array-indicator","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null},{"url":"https://queue.amazonaws.com/12345/cmg-elasticitydemo1-array-audit","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null},{"url":"https://queue.amazonaws.com/12345/GuzzleTest","visibility_timeout":30,"href":"https://my.rightscale.com/api/acct/12345/sqs_queues/12345","size":0,"api_generation":2,"description":null}]

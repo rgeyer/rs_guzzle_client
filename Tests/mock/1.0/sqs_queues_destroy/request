@@ -1,0 +1,6 @@
+DELETE /api/acct/12345/sqs_queues/12345 HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkFtvgjAARv_K0mcwljILJEs2RZ04DQqI8rKUUpFxKXJTZvzvK8nez_cl5zwAAQbIeyCBqAbGA7Q1q4ChKhBpTwk0FBgQqRhpeKxDCSSRoCFlWNUgkc8UURlCBmWdEiRDBUGkIyU8T6D4a9j_VleVYSvuAffDU2fbEdtW2_DXJszsXb3ZRyFfdv6m2lm0RPJ8Mit3IcPzxPJcsznUWN0X3t394sdFefN6Ok_kOv42W_aKg0XszCLTCj6mxSK10xilS_kAv9y8bbJszbiTnj4vgdW5urO7bThJnURFqy3xgh8P21fXV_B1dS-c6QQefVe7rbvytKm6MX8bktyHJAXJhQrY96R4WbJe9JEAoZS3RSNKqcJRAiwnSSagSkCjeIDeqyS-NDUlGRtRnoPn8w9Q1nEd; _session_id=c05ca332e0f042ef12e4b59e4e56533e
+

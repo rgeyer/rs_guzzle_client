@@ -1,0 +1,81 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Tue, 11 Sep 2012 17:53:50 GMT
+Content-Type: application/xml; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding; Accept-Encoding
+Status: 200
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.12
+X-Runtime: 97
+Set-Cookie: _session_id=52fe7f0c0991c10cb5a4c490ee7d974b; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+Content-Encoding: gzip
+
+<?xml version="1.0" encoding="UTF-8"?>
+<sqs-queues type="array">
+  <sqs-queue>
+    <api-generation type="integer">2</api-generation>
+    <description nil="true"></description>
+    <size type="integer">0</size>
+    <url>https://queue.amazonaws.com/12345/cmg-elasticitydemo1-audit</url>
+    <visibility-timeout type="integer">30</visibility-timeout>
+    <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+  </sqs-queue>
+  <sqs-queue>
+    <api-generation type="integer">2</api-generation>
+    <description nil="true"></description>
+    <size type="integer">0</size>
+    <url>https://queue.amazonaws.com/12345/cmg-elasticitydemo1-in</url>
+    <visibility-timeout type="integer">30</visibility-timeout>
+    <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+  </sqs-queue>
+  <sqs-queue>
+    <api-generation type="integer">2</api-generation>
+    <description nil="true"></description>
+    <size type="integer">0</size>
+    <url>https://queue.amazonaws.com/12345/cmg-elasticitydemo1-out</url>
+    <visibility-timeout type="integer">30</visibility-timeout>
+    <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+  </sqs-queue>
+  <sqs-queue>
+    <api-generation type="integer">2</api-generation>
+    <description nil="true"></description>
+    <size type="integer">0</size>
+    <url>https://queue.amazonaws.com/12345/Workers</url>
+    <visibility-timeout type="integer">30</visibility-timeout>
+    <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+  </sqs-queue>
+  <sqs-queue>
+    <api-generation type="integer">2</api-generation>
+    <description nil="true"></description>
+    <size type="integer">0</size>
+    <url>https://queue.amazonaws.com/12345/Workit</url>
+    <visibility-timeout type="integer">30</visibility-timeout>
+    <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+  </sqs-queue>
+  <sqs-queue>
+    <api-generation type="integer">2</api-generation>
+    <description nil="true"></description>
+    <size type="integer">0</size>
+    <url>https://queue.amazonaws.com/12345/cmg-elasticitydemo1-array-indicator</url>
+    <visibility-timeout type="integer">30</visibility-timeout>
+    <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+  </sqs-queue>
+  <sqs-queue>
+    <api-generation type="integer">2</api-generation>
+    <description nil="true"></description>
+    <size type="integer">0</size>
+    <url>https://queue.amazonaws.com/12345/cmg-elasticitydemo1-array-audit</url>
+    <visibility-timeout type="integer">30</visibility-timeout>
+    <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+  </sqs-queue>
+  <sqs-queue>
+    <api-generation type="integer">2</api-generation>
+    <description nil="true"></description>
+    <size type="integer">0</size>
+    <url>https://queue.amazonaws.com/12345/GuzzleTest</url>
+    <visibility-timeout type="integer">30</visibility-timeout>
+    <href>https://my.rightscale.com/api/acct/12345/sqs_queues/12345</href>
+  </sqs-queue>
+</sqs-queues>
