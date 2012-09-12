@@ -1,0 +1,8 @@
+POST /api/acct/12345/servers/12345/attach_volume HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNotkFtvgjAARv_K0mcwlJbLSJZMF3UgwlLBTV4WKAVRQOSigPG_ryR7P9-XnPMAITBAMQABxA0wHqBrWA0MLEOkPwXQUmBAhDUsaUhSBZDFnJaZhCIUYzGhaiRCyKCoo1gSoYwgepVphJDG_1r2v4VYmbb8Huz6jM6X5FtKxLIvj8Q5jldpPtrbxGz9_OYrN123U93pgmC4bJzkBEVV29uBTfeHz5W_WMCx3y-H30yxVPMs76xXSlBl0zF2z9XPydot1pT4uWmuSAiXzmb88C3LiztS43S7rQ5VV8ild08D3Udknbl172rW1fO-LLcqqVbnZqOLLGqwcn-bkvRTkjIsuAogQ1i-rNnA-wggpPTSlS0vhbmjAFgRZjmHag7N0gl6r7P02DY0zNmMXgrwfP4BGn9vvw==; _session_id=ad3f49928afa5889c540ae8cc0d6a372
+
+id=259186001&server%5Bec2_ebs_volume_href%5D=https%3A%2F%2Fmy.rightscale.com%2Fapi%2Facct%2F44134%2Fclouds%2F1%2Fec2_ebs_volumes%2F2110370001&server%5Bdevice%5D=%2Fdev%2Fsdj

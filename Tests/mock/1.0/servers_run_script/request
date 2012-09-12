@@ -1,0 +1,8 @@
+POST /api/acct/12345/servers/12345/run_script HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.0
+Cookie: rs_gbl=eNo1kNlugkAARX-lmWcwDIMIJE2KuKKVKCrCixmGRSj7UkDjv3d46Pu5NznnBTBQQDoABng1UF6grf0KKAIPkfRmQEOAApEwEzheQBIDIo_SnkRkOJMENiDTgIXQh6wcuCILeQSRzBMXoRn9a_z_rSyOW3oPdC3rylPs3bJDZZrVZr6wpK0RFd10Zf3m-RHqclfjVruWF3OQ3Xu2NVQ7fZjlzpp3baKGqOjLLp3qP2XtrZ7F0eZPu3tyhJx8SUmvrq_r_cLg2rPpizo2llbai2pe3PYzGcfOHh-cp2Oeb6FtaYNDltr-Grl13sXW93brOq0_R_ZDjM1NkHCfY5J-TJLhlKqA04Czj7U_0D4MwITkbdbQUgJ1ZICf4iihUEWhSThCX1UUPpqa4MSfkDwF7_cfkVhxkg==; _session_id=194b9999e516f09a6a40240e7dddb77d
+
+id=259186001&server%5Bright_script_href%5D=https%3A%2F%2Fmy.rightscale.com%2Fapi%2Facct%2F44134%2Fright_scripts%2F275794001

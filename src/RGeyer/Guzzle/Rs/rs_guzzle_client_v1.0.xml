@@ -398,7 +398,7 @@
       <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Ec2\Server" />
     </command>
     
-    <command name="servers_executable" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+    <command name="servers_run_executable" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Runs a RightScript or Chef recipe on the server</doc>
       <param name="path" type="string" static="servers/{id}/run_executable" />
       <param name="method" type="string" static="POST" />
