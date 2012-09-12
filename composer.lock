@@ -1,5 +1,5 @@
 {
-    "hash": "03b5f8eb98848f716bafb82aad0e185b",
+    "hash": "c013e37602c9d9e2f119b25d9885a333",
     "packages": [
         {
             "package": "guzzle/guzzle",
@@ -7,7 +7,7 @@
         },
         {
             "package": "symfony/event-dispatcher",
-            "version": "v2.0.16"
+            "version": "v2.1.1"
         }
     ],
     "packages-dev": null,
