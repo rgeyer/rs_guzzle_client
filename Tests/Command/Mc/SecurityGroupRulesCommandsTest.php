@@ -2,11 +2,9 @@
 
 namespace RGeyer\Guzzle\Rs\Tests\Command\Mc;
 
-use RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup;
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
+class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase {
 
   /**
    * @group v1_5

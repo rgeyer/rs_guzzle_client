@@ -3,9 +3,7 @@ namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-//use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
-
-class EbsVolumeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
+class EbsVolumeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase {
 
   /**
    * @group v1_0

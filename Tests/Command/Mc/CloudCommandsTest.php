@@ -1,10 +1,9 @@
 <?php
 namespace RGeyer\Guzzle\Rs\Tests\Command\Mc;
 
-use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
+class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase {
 
   /**
    * @group v1_5

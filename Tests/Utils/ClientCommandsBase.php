@@ -1,5 +1,5 @@
 <?php
-// Copyright 2011 Ryan J. Geyer
+// Copyright 2011-2012 Ryan J. Geyer
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,8 +13,6 @@
 // limitations under the License.
 
 namespace RGeyer\Guzzle\Rs\Tests\Utils;
-
-use RGeyer\Guzzle\Rs\Model\Ec2\ServerTemplate;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
@@ -35,31 +33,28 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 
 	protected $_testTs;
 
-	protected $_serverTemplate;
-	
-	protected $_serverTemplateEbs;
+  public static function setUpBeforeClass() {
+    $classToApproximateThis = new ClientCommandsBase();
+
+    // Login to API 1.0 to get a mocked session header
+    $client = \RGeyer\Guzzle\Rs\Common\ClientFactory::getClient();
+    $classToApproximateThis->setMockResponse($client, array('1.0/login'));
+    $request = $client->get('/api/acct/{acct_num}/login');
+    $request->send();
+
+    // Login to the API 1.5 to get a mocked session header
+    $client = \RGeyer\Guzzle\Rs\Common\ClientFactory::getClient('1.5');
+    $classToApproximateThis->setMockResponse($client, array('1.5/login'));
+    $request = $client->post('/api/session');
+    $request->send();
+  }
 	
 	protected function setUp() {
 		parent::setUp();
-		
 		$this->_testTs = time();
 		
 		$this->_client = $this->getServiceBuilder()->get('test.guzzle-rs-1_0');
 		$this->_client_v1_5 = $this->getServiceBuilder()->get('test.guzzle-rs-1_5');
-
-		$st = new ServerTemplate();
-		$result_obj = $st->index();
-		
-		$baseStForLinux = null;
-		$baseStForWindows = null;
-		foreach($result_obj as $st) {
-			if($st->nickname == $_SERVER['ST_NAME']) {
-				$this->_serverTemplate = $st;
-			}
-			if($st->nickname == $_SERVER['ST_EBS_NAME']) {
-				$this->_serverTemplateEbs = $st;
-			}
-		}
 	}
 	
 	/**

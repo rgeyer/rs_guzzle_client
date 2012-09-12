@@ -4,7 +4,7 @@ namespace RGeyer\Guzzle\Rs\Tests\Command\Ec2;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\RightScaleClientTestBase {
+class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase {
 
   /**
    * @group v1_0
