@@ -1,0 +1,8 @@
+POST /api/tags/multi_delete HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNo1kMlugzAURf_F6yA9YzMEqQsItKlKQxFkKBtkbFKmJBU41GmUfy8sur_nSPfcEUMOOt3QAokBOXd0HcoeOVTHxH4skOTIwYTasASTWgtUi2lNDGDAhK2BznQN41LXClZiDesEEwHADZtOPln-s5Y9s5MefasY59gkv9tLH_mdWSVjM2hy7F_fCilLv7dYlCqVZscgxJ1NuNmYOj54yeeB5gfLtYLVfrzxZxAQgv-jPN6vYmjSOGz3jWzOXy-b9fr4cVkOZJUWIJdMS-rdRkATvYt1HcUsoxXLkq4iZ9affLcbraD2dt22VVnrFjfpXTvXyBULnuYkak7COL9cz3KqQqc_j8cftdxczA==; _session_id=4efa0bf05613155bd6a64aa2dfec0a89
+
+resource_hrefs%5B%5D=%2Fapi%2Fclouds%2F1869%2Finstances%2F6M4HQRAUFTCA5&tags%5B%5D=foo%3Abar%3Dbaz

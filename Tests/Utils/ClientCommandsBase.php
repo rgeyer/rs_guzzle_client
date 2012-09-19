@@ -96,7 +96,9 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 	 * 
 	 * @return mixed Either a CommandInterface or the specific model as defined in the xml file
 	 */
-	protected function _executeCommand($client, $commandName, array $params = array(), &$command = null, $variant = null) {		
+	protected function _executeCommand($client, $commandName, array $params = array(), &$command = null, $variant = null) {
+    // Clear any mocked login cookies
+    $client->getCookieJar()->remove();
 		$command = $client->getCommand($commandName, $params);
 		$command->execute();
 		$result = $command->getResult();

@@ -1,0 +1,8 @@
+POST /api/tags/by_resource.json HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMuOgjAARf-la5q0BW0hmYVRQGSAYXyMuiHQojKKyvth_PeBZPb33OScFwiBBtIOSEAUQHuBqohzoCkEy-wtgZIDDcsKQ4wygiSQiGEdIpkToXKIiBpBjGMC1YieICYyllUUMcbx8FfG_6w6QSNbjOikeXRYj2zHbMSWrLL9_Ynzu04vJ-HOXC7s-tInFmxUscwDv4Hzdm4841Udo82OtD_fX7-HLA3QLdDTQHhOPUO-VZpKohvdMSc039Zrmlfp3sna3ebRe6Z76FjjdfVexmayTG_TbGd_djwJe8sxpnFSnUkAizU9Cv96XSxca11aOm2d88eYpB2ThJw_qns5VFEGn_f7D5xSXj8=; _session_id=0c4827e247af418acb870cb41c27fbd6
+
+resource_hrefs%5B%5D=%2Fapi%2Fservers%2F328730001

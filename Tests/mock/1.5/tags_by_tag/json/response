@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Wed, 19 Sep 2012 21:19:44 GMT
+Content-Type: application/vnd.rightscale.resource_tag+json;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 98
+Content-Length: 2
+X-Request-Uuid: 121c9a91a4094bb7a6a5ae5c77bea315
+Set-Cookie: _session_id=11cb638a7579455ec1390fef9467185d; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+[]

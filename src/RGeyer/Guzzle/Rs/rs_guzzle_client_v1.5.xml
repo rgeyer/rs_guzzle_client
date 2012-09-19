@@ -134,6 +134,43 @@
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="filter" type="array" required="false" />
     </command>
+
+
+    <!-- Start Tags -->
+    <command name="tags_by_resource" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all tags for specified resource hrefs</doc>
+      <param name="path" type="string" static="tags/by_resource{output_format}" />
+      <param name="method" type="string" static="POST" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="resource_hrefs" type="array" required="true" />
+    </command>
+
+    <command name="tags_by_tag" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all resources matching the tag query</doc>
+      <param name="path" type="string" static="tags/by_tag{output_format}" />
+      <param name="method" type="string" static="POST" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="resource_type" type="enum:servers,instances,volumes,volume_snapshots,deployments,server_templates,multi_cloud_images,images,server_arrays" required="true" />
+      <param name="tags" type="array" required="true" />
+      <param name="include_tags_with_prefix" type="string" required="false" />
+      <param name="match_all" type="enum:true,false" required="false" />
+    </command>
+
+    <command name="tags_multi_add" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Add one or many tags to one or many resources</doc>
+      <param name="path" type="string" static="tags/multi_add" />
+      <param name="method" type="string" static="POST" />
+      <param name="resource_hrefs" type="array" required="true" />
+      <param name="tags" type="array" required="true" />
+    </command>
+
+    <command name="tags_multi_delete" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes one or many tags from one or many resources</doc>
+      <param name="path" type="string" static="tags/multi_delete" />
+      <param name="method" type="string" static="POST" />
+      <param name="resource_hrefs" type="array" required="true" />
+      <param name="tags" type="array" required="true" />
+    </command>
     
   </commands>
 </client>

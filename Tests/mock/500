@@ -1,0 +1,10 @@
+HTTP/1.1 500 Internal Server Error
+Server: nginx/1.0.14
+Date: Mon, 10 Sep 2012 23:33:58 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 500
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 3.0.12
+Set-Cookie: _session_id=33d19e11b6a59b3e03f8d7bb3f4d5f7c; path=/; Secure; HttpOnly
+Cache-Control: no-cache

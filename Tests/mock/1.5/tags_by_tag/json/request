@@ -1,0 +1,8 @@
+POST /api/tags/by_tag.json HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMuOgjAYRt-la0n4S0FKMgtmdBADxjGi6MaUchMvBYoKGN9dTGb_nZN854kYstClQyMUS2Q90U0mNbIIBs18jVDDkQUaMVWT6iYZoWM8rKNIBzBjrqiYpgpAgpWIR1QBrIFGVa7qPB18TfLPUmP8YQc9CrrqXpm7io4nPvFm9PvRB6Vz6Rd2BvrPSkYyf8xTWGXhJKkT4rt9Jfy83u6ELeZldgJl06mzfBssi07bpOxP9KKMz5kMfreee7pyuffbpRuuvG5cMCfiLLzK4_pgLz1H3A_EW5TTYr-J23ORt4YOOsgG47RuGF5PhWeELgt2Rw6Ts_j6JGk_SRjn4nZthipk-PN6vQFDoV85; _session_id=11cb638a7579455ec1390fef9467185d
+
+resource_type=instances&tags%5B%5D=foo%3Abar%3Dbaz
