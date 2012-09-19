@@ -19,6 +19,7 @@ use RGeyer\Guzzle\Rs\Model\ModelBase;
 abstract class AbstractSecurityGroup extends ModelBase {
 
   /**
+   * @abstract
    * @param string $protocol Which protocol for the rule.  One of "tcp", "udp", or "icmp"
    * @param string $cidr_ips An IP range in CIDR notation. @see http://en.wikipedia.org/wiki/CIDR_notation
    * @param int $from_port The starting port of a range of ports.  If $to_port is null, this port will be used as the start and end of the range, effectively opening only this port number
@@ -28,6 +29,7 @@ abstract class AbstractSecurityGroup extends ModelBase {
   public abstract function createCidrRule($protocol, $cidr_ips, $from_port, $to_port = null);
 
   /**
+   * @abstract
    * @param string $group_name The name of the ingress security group
    * @param string $group_owner The cloud user account name/number of the ingress security group
    * @param string $protocol Which protocol for the rule.  One of "tcp", "udp", or "icmp"

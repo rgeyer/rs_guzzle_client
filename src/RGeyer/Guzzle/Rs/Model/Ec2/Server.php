@@ -14,10 +14,10 @@
 
 namespace RGeyer\Guzzle\Rs\Model\Ec2;
 
-use RGeyer\Guzzle\Rs\Model\ModelBase;
+use RGeyer\Guzzle\Rs\Model\AbstractServer;
 use InvalidArgumentException;
 
-class Server extends ModelBase {
+class Server extends AbstractServer {
 	
 	public function __construct($mixed = null) {		
 		$this->_path = 'server';
@@ -232,13 +232,11 @@ class Server extends ModelBase {
 	}
 	
 	/**
-	 * Launches the server
-	 * 
-	 * @param array $params An associative array where the key is the name of the input parameter to change, and the value is a value in the format <type>:<value>.  For instance text:foobar
+   * {@inheritdoc}
 	 */
-	public function start($params=null) {
+	public function launch($inputs=null) {
 		$parameters = array('id' => $this->id);		
-		if($params) { $parameters['server[parameters]'] = $params; }
+		if($inputs) { $parameters['server[parameters]'] = $inputs; }
 		$result = $this->executeCommand($this->_path_for_regex . '_start', $parameters);
 	}
 	
@@ -272,6 +270,20 @@ class Server extends ModelBase {
 		$parameters = array('id' => $this->id, 'server[ignore_lock]');
 		$result = $this->executeCommand($this->_path_for_regex . '_stop_ebs', $parameters);
 	}
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addTags(array $tags) {
+    $this->executeCommand('tags_set', array('resource_href' => $this->href, 'tags' => $tags));
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function deleteTags(array $tags) {
+    $this->executeCommand('tags_unset', array('resource_href' => $this->href, 'tags' => $tags));
+  }
 }
 
 ?>

@@ -14,10 +14,10 @@
 
 namespace RGeyer\Guzzle\Rs\Model\Mc;
 
-use RGeyer\Guzzle\Rs\Model\ModelBase;
+use RGeyer\Guzzle\Rs\Model\AbstractServer;
 use BadMethodCallException;
 
-class Server extends ModelBase {
+class Server extends AbstractServer {
 	
 	public function __construct($mixed = null) {
 		$this->_api_version = '1.5';
@@ -48,10 +48,37 @@ class Server extends ModelBase {
 		
 		parent::__construct($mixed);
 	}
-	
+
+  /**
+   * {@inheritdoc}
+   */
 	public function launch($inputs=null) {
 		$parameters = array('id' => $this->id);
 		if($inputs) { $parameters['inputs'] = $inputs; }
 		$result = $this->executeCommand($this->_path_for_regex . '_launch', $parameters);
 	}
+
+  /**
+   * {@inheritdoc}
+   */
+  public function addTags(array $tags) {
+    $this->executeCommand('tags_multi_add',
+      array(
+        'resource_hrefs' => array($this->href),
+        'tags' => $tags
+      )
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function deleteTags(array $tags) {
+    $this->executeCommand('tags_multi_delete',
+      array(
+        'resource_hrefs' => array($this->href),
+        'tags' => $tags
+      )
+    );
+  }
 }
