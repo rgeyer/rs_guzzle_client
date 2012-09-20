@@ -1,0 +1,6 @@
+GET /api/deployments/12345/servers HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkNlugkAARf9lnplkNnAg6UOrRVzAaqs1vBAYhkWroyyF0fjvxaTv95zknjuIgQNOGhggrYFzB20tK-Awgil_GKARwMGUcYwoYaYBynRY85gyM7YtiEiSQYwlgVyaKcSEYpogbMlEDr5G_rMYsSc76EGet-y15lFI7GhuB8ryi90p5J6uC4Er2ibuVZhzvzmPusqLdQAzHUHkcjtLPaKXB4tKrY5k-1EsvVH_LpDaVF33893suTf--sxZoqdBgDb7a0Uu2ex2PFtlMjGxUkG0jtQbKye_cHxQ3WqhRT-b1KGvec4vi9V0566O6Oavq94dn5rl9uWZpH8miYVQ7bkZqrDhz-PxBwM3XVE=; _session_id=ca003bfc80414c7aeee2eb1cc93e0b7d
+

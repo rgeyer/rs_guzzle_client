@@ -9,6 +9,143 @@ class ServerCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBas
    * @group v1_5
    * @group unit
    */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers/json/response'
+      )
+    );
+
+    $command = $client->getCommand('servers');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers/json/response'
+      )
+    );
+
+    $command = $client->getCommand('servers');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/servers.json', $request);
+	}
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testCanRequestIndexAsJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers/json/response'
+      )
+    );
+
+    $command = $client->getCommand('servers', array('output_format' => '.json'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/servers.json', $request);
+	}
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testCanRequestIndexAsXml() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('servers', array('output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/servers.xml', $request);
+	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexAcceptsFilters() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers');
+    $args = $command->getApiCommand()->getParams();
+    $filter_param = array_filter(
+      $args,
+      function($arg) {
+        return $arg->getName() == 'filter';
+      }
+    );
+
+    $this->assertNotNull($filter_param);
+    $this->assertEquals(1, count($filter_param));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexAcceptsViews() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers');
+    $args = $command->getApiCommand()->getParams();
+    $filter_param = array_filter(
+      $args,
+      function($arg) {
+        return $arg->getName() == 'view';
+      }
+    );
+
+    $this->assertNotNull($filter_param);
+    $this->assertEquals(1, count($filter_param));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testHasCreateCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('servers_create');

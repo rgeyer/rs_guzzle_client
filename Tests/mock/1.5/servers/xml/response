@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Thu, 20 Sep 2012 22:59:52 GMT
+Content-Type: application/vnd.rightscale.server+json;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 280
+Content-Length: 1001
+X-Request-Uuid: 89912ad0be0246aa8292e69ea9f8bbff
+Set-Cookie: _session_id=cea2c116bd79e421adbd08038f0d321d; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+[{"updated_at":"2012/05/25 21:48:20 +0000","description":null,"created_at":"2012/05/01 00:50:00 +0000","name":"CloudStack Management Server Single-Node","links":[{"href":"/api/servers/12345","rel":"self"},{"href":"/api/deployments/12345","rel":"deployment"},{"href":"/api/clouds/12345/instances/12345M4HQRAUFTCA5","rel":"current_instance"},{"href":"/api/clouds/12345/instances/12345FT38R7KL","rel":"next_instance"},{"href":"/api/servers/12345/alert_specs","rel":"alert_specs"}],"actions":[{"rel":"terminate"}],"state":"operational"},{"updated_at":"2012/05/25 21:53:21 +0000","description":null,"created_at":"2012/05/01 00:50:00 +0000","name":"CloudStack Management Server Single-Node 2.2.14","links":[{"href":"/api/servers/12345","rel":"self"},{"href":"/api/deployments/12345","rel":"deployment"},{"href":"/api/clouds/12345/instances/F06I85VGOHBH5","rel":"next_instance"},{"href":"/api/servers/12345/alert_specs","rel":"alert_specs"}],"actions":[{"rel":"launch"}],"state":"inactive"}]

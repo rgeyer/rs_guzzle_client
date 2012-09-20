@@ -222,12 +222,23 @@ abstract class ModelBase {
 	
 	/* ----------------------------- Actions ----------------------------- */
 	
-	public function index() {
+	public function index($parentModelOrHref = null) {
 		$params = array();
 		// TODO: This is a bit hacky, it depends upon a child class having the cloud_id set.
 		if($this->_path_requires_cloud_id && array_key_exists('cloud_id', $this->_params)) {
 			$params['cloud_id'] = $this->cloud_id;
 		}
+    if($parentModelOrHref != null) {
+      $parent_path = '';
+
+      if($parentModelOrHref instanceof ModelBase) {
+        $parent_path = str_replace('/api/', '', $parentModelOrHref->href);
+      } else {
+        $parent_path = str_replace('/api/', '', $parentModelOrHref);
+      }
+      $params['path'] = $parent_path . '/' . $this->_path_for_regex . '{output_format}';
+    }
+
 		$results = $this->executeCommand($this->_path_for_regex, $params);
 		
 		if(!is_a($results, 'SimpleXMLElement')) {

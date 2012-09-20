@@ -125,6 +125,15 @@
       <param name="inputs" type="array" required="false" />
     </command>
 
+    <command name="servers" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists all Servers</doc>
+      <param name="path" type="string" default="servers{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="view" type="enum:default,inputs" required="false" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+    </command>
+
     <!-- Start ServerTemplates -->
     <command name="server_templates" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>List all ServerTemplates</doc>

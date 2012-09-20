@@ -3,13 +3,13 @@
 namespace RGeyer\Guzzle\Rs\Tests\Model;
 
 use RGeyer\Guzzle\Rs\Model\ModelBase;
-use \PHPUnit_Framework_TestCase;
 use SimpleXMLElement;
 use \DateTime;
 use stdClass;
 
 class ModelConcreteClass extends ModelBase {
   public $last_request_params;
+  public $last_request_command;
 
 	public function __construct($mixed = null) {
 		$this->_path_for_regex = 'ec2_ssh_keys';
@@ -24,6 +24,7 @@ class ModelConcreteClass extends ModelBase {
 	}
 
   public function executeCommand($command, array $params = array()) {
+    $this->last_request_command = $command;
     $this->last_request_params = $params;
   }
 }
@@ -31,7 +32,7 @@ class ModelConcreteClass extends ModelBase {
 /**
  * ModelBase test case.
  */
-class ModelBaseTest extends PHPUnit_Framework_TestCase {
+class ModelBaseTest extends \Guzzle\Tests\GuzzleTestCase {
 	
 	/**
 	 * @var ModelBase
@@ -188,6 +189,67 @@ EOF;
 
     $this->assertEquals($merged_array, $model->getParameters());
     $this->assertEquals($merged_array, $model->last_request_params);
+  }
+
+  /**
+   * @group unit
+   */
+  public function testChangesPathOnIndexWhenParentHrefSupplied() {
+    $deplHref = '/api/deployments/12345';
+    $model = new \RGeyer\Guzzle\Rs\Model\Mc\Server();
+    $this->setMockResponse(
+      $model->getClient(),
+      array(
+        '1.5/login',
+        '1.5/servers/json/response'
+      )
+    );
+    $model->index($deplHref);
+    $commands = $model->getClient()->getLastCommand();
+    $command = $commands[0];
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/deployments/12345/servers', $request);
+  }
+
+  /**
+   * @group unit
+   */
+  public function testChangesPathOnIndexWhenParentModelSupplied() {
+    $parent = new ModelConcreteClass();
+    $parent->href = '/api/servers/12345';
+    $model = new \RGeyer\Guzzle\Rs\Model\Mc\Server();
+    $this->setMockResponse(
+      $model->getClient(),
+      array(
+        '1.5/login',
+        '1.5/servers/json/response'
+      )
+    );
+    $model->index($parent);
+    $commands = $model->getClient()->getLastCommand();
+    $command = $commands[0];
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/servers/12345/servers', $request);
+  }
+
+  /**
+   * @group unit
+   */
+  public function testPathOnIndexRetainsOutputFormat() {
+    $deplHref = '/api/deployments/12345';
+    $model = new \RGeyer\Guzzle\Rs\Model\Mc\Server();
+    $this->setMockResponse(
+      $model->getClient(),
+      array(
+        '1.5/login',
+        '1.5/servers/json/response'
+      )
+    );
+    $model->index($deplHref);
+    $commands = $model->getClient()->getLastCommand();
+    $command = $commands[0];
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/deployments/12345/servers.json', $request);
   }
 
   public function testSetsEc2VersionHeaderOnEc2Request() {

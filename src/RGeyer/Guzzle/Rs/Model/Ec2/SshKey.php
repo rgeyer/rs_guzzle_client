@@ -34,7 +34,7 @@ class SshKey extends ModelBase {
 		parent::initialize($mixed);
 	}
 	
-	public function index() {
+	public function index($parentOrHref = null) {
 		throw new BadMethodCallException($this->_path . " does not implement a list method");
 	}
 

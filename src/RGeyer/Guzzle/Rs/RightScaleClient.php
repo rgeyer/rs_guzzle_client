@@ -36,6 +36,25 @@ class RightScaleClient extends Client {
 	protected $version;
 	
 	protected $cookieJar;
+
+  /**
+   * @var array The history of commands made by this client
+   */
+  protected $command_history;
+
+  /**
+   * Removes the latest $count commands from the command history using array_pop and returns them
+   *
+   * @param int $count The number of previous commands to return
+   * @return array One or more of the last commands
+   */
+  public function getLastCommand($count = 1) {
+    $retval = array();
+    for($i = 0; $i < $count; $i++) {
+      $retval[] = array_pop($this->command_history);
+    }
+    return $retval;
+  }
 	
 	/**
 	 * Factory method to create a new RightScaleClient
@@ -126,7 +145,9 @@ class RightScaleClient extends Client {
 			$request->send();
 		}
 
-		return parent::getCommand($name, $args);
+    $command = parent::getCommand($name, $args);
+    $this->command_history[] = $command;
+		return $command;
 	}
 
   /**
