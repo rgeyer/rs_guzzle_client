@@ -133,51 +133,6 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 		
 		return $result;
 	}
-	
-	/**
-	 * Returns the object id when given the objects basename and it's href.
-	 * 
-	 * @example $this->getIdFromHref('credentials', 'https://my.rightscale.com/api/acct/12345/credentials/12345');
-	 * 
-	 * @param string $basename The name of the object as it appears in the URL.  I.E. For Credentials it is "credentials" since the URL looks like https://my.rightscale.com//api/acct/12345/credentials/12345
-	 * @param string $href The full API href of the object.  I.E. https://my.rightscale.com/api/acct/12345/credentials/12345
-	 * 
-	 * @return integer The ID of the object
-	 */
-	protected function getIdFromHref($basename, $href) {
-		$regex = ',https://.+/api/acct/[0-9]+/' . $basename . '/([0-9]+),';
-		$matches = array();
-		preg_match($regex, $href, $matches);		
-		
-		return count($matches) > 0 ? $matches[1] : 0;
-	}	
-	
-	/**
-	 * Returns the object id when given the objects relative href.
-	 *
-	 * @example $this->getIdFromRelativeHref('/api/clouds/12345');
-	 *
-	 * @param string $href The relative API href of the object.  I.E. /api/clouds/12345
-	 *
-	 * @return integer The ID of the object
-	 */
-	protected function getIdFromRelativeHref($relative_href) {
-		$regex = ',.+/([0-9A-Z]+)$,';
-		$matches = array();
-		preg_match($regex, $relative_href, $matches);
-	
-		return count($matches) > 0 ? $matches[1] : 0;
-	}
-	
-	protected function convertHrefFrom1to15($href) {
-		return preg_replace(',https://my.rightscale.com,', '',
-				preg_replace(',/acct/[0-9]*,', '', $href)
-		);
-	}
-	
-	protected function convertStHrefFrom1to15($href) {
-		return preg_replace(',ec2_server_templates,', 'server_templates', $this->convertHrefFrom1to15($href));
-	}
 }
 
 ?>

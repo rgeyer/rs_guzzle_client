@@ -18,10 +18,6 @@ class ModelConcreteClass extends ModelBase {
 		$this->_optional_params = array('d' => null, 'e' => null, 'f' => null);
 		parent::__construct($mixed);
 	}
-	
-	public function getId($href) {
-		return $this->getIdFromHref($href);
-	}
 
   public function executeCommand($command, array $params = array()) {
     $this->last_request_command = $command;
@@ -136,7 +132,7 @@ EOF;
 	public function testGetIdFromHref() {
 		$uri = 'https://my.rightscale.com/api/acct/12345/ec2_ssh_keys/12345';
 		
-		$this->assertEquals('12345', $this->_modelBase->getId($uri));
+		$this->assertEquals('12345', \RGeyer\Guzzle\Rs\RightScaleClient::getIdFromHref('ec2_ssh_keys', $uri));
 	}
 	
 	/**

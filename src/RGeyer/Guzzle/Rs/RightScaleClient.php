@@ -174,4 +174,56 @@ class RightScaleClient extends Client {
 
     return new $modelName();
   }
+
+	/**
+	 * Returns the object id when given the objects basename and it's href.
+	 *
+   * @static
+	 * @example RightScaleClient::getIdFromHref('credentials', 'https://my.rightscale.com/api/acct/12345/credentials/12345');
+	 * @param string $basename The name of the object as it appears in the URL.  I.E. For Credentials it is "credentials" since the URL looks like https://my.rightscale.com//api/acct/12345/credentials/12345
+	 * @param string $href The full API href of the object.  I.E. https://my.rightscale.com/api/acct/12345/credentials/12345
+	 *
+	 * @return integer The ID of the object
+	 */
+	public static function getIdFromHref($basename, $href) {
+		$regex = ',https://.+/api/acct/[0-9]+/' . $basename . '/([0-9]+),';
+		$matches = array();
+		preg_match($regex, $href, $matches);
+
+		return count($matches) > 0 ? $matches[1] : 0;
+	}
+
+	/**
+	 * Returns the object id when given the objects relative href.
+	 *
+   * @static
+	 * @example RightScaleClient::getIdFromRelativeHref('/api/clouds/12345');
+	 * @param string $href The relative API href of the object.  I.E. /api/clouds/12345
+	 *
+	 * @return integer The ID of the object
+	 */
+	public static function getIdFromRelativeHref($relative_href) {
+		$regex = ',.+/([0-9A-Z]+)$,';
+		$matches = array();
+		preg_match($regex, $relative_href, $matches);
+
+		return count($matches) > 0 ? $matches[1] : 0;
+	}
+
+  /**
+   * Returns an href in the relative 1.5 format of /api/resource/id rather than the full URI from 1.0 https://my.rightscale.com/api/acct/acct_id/resource/id
+   *
+   * @static
+   * @param $href The full 1.0 resource URI
+   * @return mixed The relative 1.5 API href
+   */
+	public static function convertHrefFrom1to15($href) {
+		return preg_replace(',https://my.rightscale.com,', '',
+				preg_replace(',/acct/[0-9]*,', '', $href)
+		);
+	}
+
+	public static function convertStHrefFrom1to15($href) {
+		return preg_replace(',ec2_server_templates,', 'server_templates', $this->convertHrefFrom1to15($href));
+	}
 }
