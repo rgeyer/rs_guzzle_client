@@ -61,6 +61,14 @@ class Server extends AbstractServer {
   /**
    * {@inheritdoc}
    */
+  public function terminate() {
+    $parameters = array('id' => $this->id);
+    $result = $this->executeCommand($this->_path_for_regex . '_terminate');
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function addTags(array $tags) {
     $this->executeCommand('tags_multi_add',
       array(

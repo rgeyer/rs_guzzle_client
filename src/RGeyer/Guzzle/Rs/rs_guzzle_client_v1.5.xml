@@ -134,6 +134,13 @@
       <param name="filter" type="array" required="false" />
     </command>
 
+    <command name="servers_terminate" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Terminates the current instance of a given server.</doc>
+      <param name="path" type="string" static="servers/{id}/terminate" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="true" location="path" />
+    </command>
+
     <!-- Start ServerTemplates -->
     <command name="server_templates" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>List all ServerTemplates</doc>

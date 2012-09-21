@@ -27,6 +27,8 @@ abstract class AbstractServer extends ModelBase {
    */
   public abstract function launch($inputs = null);
 
+  public abstract function terminate();
+
   /**
    * Adds one or many tags to the server
    *

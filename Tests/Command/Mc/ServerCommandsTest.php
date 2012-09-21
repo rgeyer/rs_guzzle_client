@@ -599,4 +599,62 @@ class ServerCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBas
     $command = $client->getCommand('servers_launch');
     $command->execute();
   }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasTerminateCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_terminate');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testTerminateUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_terminate/response'
+      )
+    );
+
+    $command = $client->getCommand('servers_terminate',array('id' => '1234'));
+    $command->execute();
+
+    $this->assertEquals('POST', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testTerminateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_terminate');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testTerminateRequiresId() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_terminate/response'
+      )
+    );
+
+    $command = $client->getCommand('servers_terminate');
+    $command->execute();
+  }
 }

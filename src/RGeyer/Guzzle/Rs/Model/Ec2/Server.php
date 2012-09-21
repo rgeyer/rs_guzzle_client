@@ -230,11 +230,20 @@ class Server extends AbstractServer {
 		$json_obj = json_decode($json_str);
 		return $json_obj;
 	}
-	
-	/**
+
+  /**
    * {@inheritdoc}
-	 */
-	public function launch($inputs=null) {
+   */
+  public function launch($inputs = null) {
+    $this->start($inputs);
+  }
+	
+  /**
+    * Launches the server
+    *
+    * @param array $params An associative array where the key is the name of the input parameter to change, and the value is a value in the format <type>:<value>. For instance text:foobar
+    */
+	public function start($inputs=null) {
 		$parameters = array('id' => $this->id);		
 		if($inputs) { $parameters['server[parameters]'] = $inputs; }
 		$result = $this->executeCommand($this->_path_for_regex . '_start', $parameters);
@@ -250,6 +259,13 @@ class Server extends AbstractServer {
 		if($params) { $parameters['server[parameters]'] = $params; }
 		$result = $this->executeCommand($this->_path_for_regex . '_start_ebs', $parameters);
 	}
+
+  /**
+   * {@inheritdoc}
+   */
+  public function terminate() {
+    $this->stop();
+  }
 	
 	/**
 	 * Terminates the server
