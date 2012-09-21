@@ -1,0 +1,6 @@
+GET /api/publications.json HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.19.7 PHP/5.3.8 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkNmOgjAARf-lzzShpR2BZB5cRskwbohCeZmUUlkEXAoGMf77YDLv95zknifgwAbVA2ggUcB-glbJG7AJRob50kAjgI0MYmJCyWikgTwZ1rFBqJAGhjrROURIYmiROIYIG8iIdS5NSQdfI_9Zij_e7KAHAXU30f16oWnvNedTnDkmo0t8CejjwHJLubt9Atvve3wcIxfPI1VU4SlSV5mX1-llBNNQ6fO6ywgr09Xk7teCuRlmVsiL37Qomt7zJvWPqI5Zx2bLLox8ZyVu-a7sx8d91cqy3dYHf93NmFosinzH114PCyvh0_CwCLb6GunpJnPys_P1-U7SvZNwIc5t3QxVyPDn9foDKAtfUw==; _session_id=47f0e8becff38decfb4c83fbb44b9dc4
+

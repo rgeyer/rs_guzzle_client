@@ -180,6 +180,33 @@
       <param name="resource_hrefs" type="array" required="true" />
       <param name="tags" type="array" required="true" />
     </command>
+
+    <!-- Start Publications -->
+    <command name="publications" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists all Publications</doc>
+      <param name="path" type="string" default="publications{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="view" type="enum:default" required="false" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+    </command>
+
+    <command name="publication" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Shows the information of a single publication.</doc>
+      <param name="path" type="string" static="publications/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Publication" />-->
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default" required="false" />
+    </command>
+
+    <command name="publications_import" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Imports the specified publication.</doc>
+      <param name="path" type="string" static="publications/{id}/import" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+    </command>
     
   </commands>
 </client>
