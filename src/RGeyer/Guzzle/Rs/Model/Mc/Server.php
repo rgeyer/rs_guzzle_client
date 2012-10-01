@@ -63,7 +63,7 @@ class Server extends AbstractServer {
    */
   public function terminate() {
     $parameters = array('id' => $this->id);
-    $result = $this->executeCommand($this->_path_for_regex . '_terminate');
+    $result = $this->executeCommand($this->_path_for_regex . '_terminate', $parameters);
   }
 
   /**
