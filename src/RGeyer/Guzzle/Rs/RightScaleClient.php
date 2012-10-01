@@ -226,6 +226,6 @@ class RightScaleClient extends Client {
 	}
 
 	public static function convertStHrefFrom1to15($href) {
-		return preg_replace(',ec2_server_templates,', 'server_templates', $this->convertHrefFrom1to15($href));
+		return preg_replace(',ec2_server_templates,', 'server_templates', RightScaleClient::convertHrefFrom1to15($href));
 	}
 }
