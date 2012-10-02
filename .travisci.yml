@@ -3,5 +3,6 @@ php:
   - 5.3
   - 5.4
 before_script:
+  - wget --quiet http://getcomposer.org/composer.phar
   - php compser.phar install
-script: phpunit -c phpunit.xml
+script: phpunit
