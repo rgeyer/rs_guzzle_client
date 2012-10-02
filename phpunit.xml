@@ -7,23 +7,11 @@
         <!-- Change the following value to the path of your Guzzle installation e.g. /Users/michael/projects/guzzle -->
         <server name="GUZZLE" value="/path/to/guzzle" />
         <!-- Change to your RightScale acount # -->
-        <server name="ACCT_NUM" value="" />
+        <server name="ACCT_NUM" value="123" />
         <!-- Change to your RightScale account email -->
-        <server name="EMAIL" value="" />
+        <server name="EMAIL" value="foo@bar.baz" />
         <!-- Change to your RightScale account password -->
-        <server name="PASSWORD" value="" />
-        <!-- Change to the name of a ServerTemplate which can be launched without any input changes (Base ServerTemplate for Linux recommended) -->
-        <server name="ST_NAME" value="Base ServerTemplate for Linux" />
-        <!-- Change to the name of an (EBS backed) ServerTemplate which can be launched without any input changes (Base ServerTemplate for Linux clone with EBS image recommended) -->
-        <server name="ST_EBS_NAME" value="Base ServerTemplate for Linux (EBS)" />
-        <!--
-          Change to the ID of an audit entry in your account.
-          Necessary since I can't see any way to list audit entry ids
-          for a server or other object
-        -->
-        <server name="AUDIT_ID" value="1" />
-        <!-- Change to the ID of a cloud which supports Security Groups -->
-        <server name="SECGRP_CLOUD_ID" value="1999" />
+        <server name="PASSWORD" value="password" />
         <!-- Populate Tests/mock with raw HTTP requests and responses from the tests -->
         <server name="HTTP_TRACE" value="false" />
         <!-- For the mocks created above, strip out sensitive bits like SSH keys, account numbers, and ids -->
