@@ -1,7 +1,7 @@
 Guzzle Rightscale API client for PHP
 ==========================================
 
-[![Build Status](https://travis-ci.org/[rgeyer]/[rs_guzzle_client].png)](https://travis-ci.org/[rgeyer]/[rs_guzzle_client])
+[![Build Status](https://travis-ci.org/rgeyer/rs_guzzle_client.png)](https://travis-ci.org/rgeyer/rs_guzzle_client)
 
 rs_guzzle_client is a PHP Guzzle REST API client library for the RightScale API.
 
