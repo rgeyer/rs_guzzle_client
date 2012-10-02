@@ -153,7 +153,7 @@
       <param name="output_format" type="enum:.js,.xml" default=".js" location="path" />      
     </command>
 
-    <command name="server_template" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+    <command name="ec2_server_template" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Show a ServerTemplate</doc>
       <param name="path" type="string" static="ec2_server_templates/{id}{output_format}" />
       <param name="method" type="string" static="GET" />
