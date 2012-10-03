@@ -1,0 +1,253 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Wed, 03 Oct 2012 23:28:23 GMT
+Content-Type: application/vnd.rightscale.instance+xml;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 1723
+Content-Length: 11816
+X-Request-Uuid: e9b45f7dc3dc4357b4985ed4fb20d5c1
+Set-Cookie: _session_id=4088fe0eb58e2efa4bba4f340c10fa3f; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<instances>
+  <instance>
+    <updated_at>2012/08/19 19:16:09 +0000</updated_at>
+    <public_ip_addresses>
+      <public_ip_address>50.23.97.68</public_ip_address>
+    </public_ip_addresses>
+    <resource_uid>2934a0f4-d4c4-4024-b7e3-51baf08a6784</resource_uid>
+    <private_ip_addresses>
+      <private_ip_address>10.55.73.133</private_ip_address>
+    </private_ip_addresses>
+    <created_at>2012/05/03 00:45:44 +0000</created_at>
+    <name>037bd6b6813ddeb1</name>
+    <links>
+      <link href="/api/clouds/12345/instances/12345KQ2B4EUPQ6GC" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/clouds/12345/instances/12345KQ2B4EUPQ6GC/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/12345KQ2B4EUPQ6GC/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/12345KQ2B4EUPQ6GC/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions>
+      <action rel="run_executable"/>
+    </actions>
+    <state>terminated</state>
+  </instance>
+  <instance>
+    <updated_at>2012/05/31 18:44:22 +0000</updated_at>
+    <public_ip_addresses>
+      <public_ip_address>50.23.97.69</public_ip_address>
+    </public_ip_addresses>
+    <resource_uid>30e424fa-b822-4522-803f-7c9745333e72</resource_uid>
+    <private_ip_addresses>
+      <private_ip_address>10.55.73.134</private_ip_address>
+    </private_ip_addresses>
+    <created_at>2012/05/25 21:48:12 +0000</created_at>
+    <name>CloudStack Management Server Single-Node</name>
+    <links>
+      <link href="/api/clouds/12345/instances/12345M4HQRAUFTCA5" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/12345M4HQRAUFTCA5/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/12345M4HQRAUFTCA5/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/12345M4HQRAUFTCA5/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions>
+      <action rel="terminate"/>
+      <action rel="reboot"/>
+      <action rel="run_executable"/>
+    </actions>
+    <state>operational</state>
+  </instance>
+  <instance>
+    <updated_at>2012/09/24 09:50:47 +0000</updated_at>
+    <public_ip_addresses></public_ip_addresses>
+    <resource_uid>50b3e720-062d-11e2-b8a3-1231390b9591</resource_uid>
+    <private_ip_addresses></private_ip_addresses>
+    <created_at>2012/09/24 09:50:47 +0000</created_at>
+    <name>db1</name>
+    <links>
+      <link href="/api/clouds/12345/instances/D4AFGRGOH5CFQ" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/D4AFGRGOH5CFQ/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/D4AFGRGOH5CFQ/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/D4AFGRGOH5CFQ/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions>
+      <action rel="launch"/>
+    </actions>
+    <state>inactive</state>
+  </instance>
+  <instance>
+    <updated_at>2012/10/02 16:53:25 +0000</updated_at>
+    <public_ip_addresses>
+      <public_ip_address>5.153.1.130</public_ip_address>
+    </public_ip_addresses>
+    <resource_uid>51b34943-633d-4633-a56d-ceb4f55f0cfa</resource_uid>
+    <private_ip_addresses>
+      <private_ip_address>10.70.192.2</private_ip_address>
+    </private_ip_addresses>
+    <created_at>2012/10/02 16:41:33 +0000</created_at>
+    <name>Base ServerTemplate for Linux (v13.0)</name>
+    <links>
+      <link href="/api/clouds/12345/instances/12345R7280UD7RFOP" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/12345R7280UD7RFOP/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/12345R7280UD7RFOP/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/12345R7280UD7RFOP/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions>
+      <action rel="terminate"/>
+      <action rel="reboot"/>
+      <action rel="run_executable"/>
+    </actions>
+    <state>operational</state>
+  </instance>
+  <instance>
+    <updated_at>2012/09/30 04:29:33 +0000</updated_at>
+    <public_ip_addresses></public_ip_addresses>
+    <resource_uid>6f36ba2c-0ab7-11e2-bb32-12313928bb05</resource_uid>
+    <private_ip_addresses></private_ip_addresses>
+    <created_at>2012/09/30 04:29:33 +0000</created_at>
+    <name>Base ServerTemplate for Windows (v13.1)</name>
+    <links>
+      <link href="/api/clouds/12345/instances/FJEUO3M5AARNQ" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/FJEUO3M5AARNQ/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/FJEUO3M5AARNQ/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/FJEUO3M5AARNQ/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions>
+      <action rel="launch"/>
+    </actions>
+    <state>inactive</state>
+  </instance>
+  <instance>
+    <updated_at>2012/05/01 00:50:01 +0000</updated_at>
+    <public_ip_addresses></public_ip_addresses>
+    <resource_uid>94eb55fa-9327-11e1-a9fe-12313b0a090f</resource_uid>
+    <private_ip_addresses></private_ip_addresses>
+    <created_at>2012/05/01 00:50:01 +0000</created_at>
+    <name>CloudStack Management Server Single-Node</name>
+    <links>
+      <link href="/api/clouds/12345/instances/12345FT38R7KL" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/12345FT38R7KL/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/12345FT38R7KL/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/12345FT38R7KL/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions></actions>
+    <state>inactive</state>
+  </instance>
+  <instance>
+    <updated_at>2012/07/16 11:30:24 +0000</updated_at>
+    <public_ip_addresses></public_ip_addresses>
+    <resource_uid>a26b033a-cf39-11e1-a835-12313d060293</resource_uid>
+    <private_ip_addresses></private_ip_addresses>
+    <created_at>2012/07/16 11:30:24 +0000</created_at>
+    <name>Database Manager for MySQL 5.5</name>
+    <links>
+      <link href="/api/clouds/12345/instances/12345DHT5UJ4LV" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/12345DHT5UJ4LV/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/12345DHT5UJ4LV/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/12345DHT5UJ4LV/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions>
+      <action rel="launch"/>
+    </actions>
+    <state>inactive</state>
+  </instance>
+  <instance>
+    <updated_at>2012/09/24 10:14:45 +0000</updated_at>
+    <public_ip_addresses></public_ip_addresses>
+    <resource_uid>a6437ebe-0630-11e2-8bc1-12313928d9a7</resource_uid>
+    <private_ip_addresses></private_ip_addresses>
+    <created_at>2012/09/24 10:14:39 +0000</created_at>
+    <name>db2</name>
+    <links>
+      <link href="/api/clouds/12345/instances/DGGIM1AASP7UU" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/DGGIM1AASP7UU/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/DGGIM1AASP7UU/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/DGGIM1AASP7UU/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions>
+      <action rel="launch"/>
+    </actions>
+    <state>inactive</state>
+  </instance>
+  <instance>
+    <updated_at>2012/09/30 03:49:18 +0000</updated_at>
+    <public_ip_addresses></public_ip_addresses>
+    <resource_uid>ce111426-0ab1-11e2-99dc-12313b08e06f</resource_uid>
+    <private_ip_addresses></private_ip_addresses>
+    <created_at>2012/09/30 03:49:18 +0000</created_at>
+    <name>Base ServerTemplate for Linux (v13.0)</name>
+    <links>
+      <link href="/api/clouds/12345/instances/12345JK8H0NK6DTEE" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/12345JK8H0NK6DTEE/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/12345JK8H0NK6DTEE/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/12345JK8H0NK6DTEE/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions></actions>
+    <state>inactive</state>
+  </instance>
+  <instance>
+    <updated_at>2012/05/23 23:49:32 +0000</updated_at>
+    <public_ip_addresses></public_ip_addresses>
+    <resource_uid>d4e83300-a531-11e1-9e7b-12313b07428a</resource_uid>
+    <private_ip_addresses></private_ip_addresses>
+    <created_at>2012/05/23 23:48:44 +0000</created_at>
+    <name>CloudStack Management Server Single-Node 2.2.14</name>
+    <links>
+      <link href="/api/clouds/12345/instances/F06I85VGOHBH5" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+      <link href="/api/deployments/12345" rel="deployment"/>
+      <link href="/api/server_templates/12345" rel="server_template"/>
+      <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+      <link href="/api/servers/12345" rel="parent"/>
+      <link href="/api/clouds/12345/instances/F06I85VGOHBH5/volume_attachments" rel="volume_attachments"/>
+      <link href="/api/clouds/12345/instances/F06I85VGOHBH5/inputs" rel="inputs"/>
+      <link href="/api/clouds/12345/instances/F06I85VGOHBH5/monitoring_metrics" rel="monitoring_metrics"/>
+    </links>
+    <actions>
+      <action rel="launch"/>
+    </actions>
+    <state>inactive</state>
+  </instance>
+</instances>

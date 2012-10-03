@@ -214,6 +214,28 @@
       <param name="method" type="string" static="POST" />
       <param name="id" type="integer" required="true" location="path" />
     </command>
+
+    <!-- Start Instances -->
+    <command name="instance" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Shows the information of a single instance.</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/instances/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Instance" />-->
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default,extended,full" required="false" />
+    </command>
+
+    <command name="instances" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists all Instances</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/instances{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="view" type="enum:default,inputs" required="false" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+    </command>
     
   </commands>
 </client>

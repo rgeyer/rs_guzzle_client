@@ -1,0 +1,6 @@
+GET /api/clouds/12345/instances.xml HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkNlugkAARf9lnplkNtakDxYRBRxIlTb6YoDBBQTClgLGfy8kfb_nJPe8QAQMUIxAAqIFxgv0bdoAgxFMtbcEugQYmDKdIkVHWAIPMa-RjOhVVxhEIiYQ45RAXSMqxIRiKjBTBCKzr0v_Wczwws56IIZ6Ks-O_DOMGS-F831m_Wrk1j7z9HXI1yQYYd5Wjb3tTw9NVXnjazmj6ib0KaHi94bJcZimGGqVeoujJ4S4dZ6byyUfzZ57qrk3bd8tXT-c2iDoWmszpJl3YNf6sF19ZTWicRxd2d2S7c_TzeK86qNCFrml7Kqda97t3ZFsC7eIWfixJBmWJFGSVH3ZzVXY_Of9_gPoElr1; _session_id=4088fe0eb58e2efa4bba4f340c10fa3f
+
