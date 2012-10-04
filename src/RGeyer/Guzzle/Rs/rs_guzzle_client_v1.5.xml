@@ -218,7 +218,7 @@
     <!-- Start Instances -->
     <command name="instance" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Shows the information of a single instance.</doc>
-      <param name="path" type="string" static="clouds/{cloud_id}/instances/{id}{output_format}" />
+      <param name="path" type="string" default="clouds/{cloud_id}/instances/{id}{output_format}" />
       <param name="method" type="string" static="GET" />
       <param name="id" type="string" required="true" location="path" />
       <param name="cloud_id" type="integer" required="true" location="path" />
