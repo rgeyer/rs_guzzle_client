@@ -1,0 +1,6 @@
+GET /api/security_group_rules/12345.json HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMuOgjAARf-la0gojxZIZoHIEGREBkaqbgi0EBEUh0fHR_x3IZnlTe49yT1PkAETnO9AAKwH5hOMfdEBU5Whor8EMFBgQkU1dEnVMBJAxaY2lTMoQSSLUFZ0EcJCFvMc6XOECoMqYpI88YbifwshnrcTHnCjSVgfpXsfB3qjFdUmRl-0bGz3067TpliPQbTId8bVUbTH-sDJaFf69ccqjh4O066MBk-19zUnW6nMnTR4kBUPOVsd3dgf83NaS9TqDuXWuQV-n59ayohNiYOTTUzrOjrzQKIh8glEHC9tt_Ga1PotW_9-qfDfqV-SXa-Vi641ku-PWcltVpJR2o6XYbKiTn9erze3jF1M; _session_id=d37c040fab7746592e109fc78201101f
+

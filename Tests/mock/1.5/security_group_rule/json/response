@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Tue, 09 Oct 2012 17:42:56 GMT
+Content-Type: application/vnd.rightscale.security_group_rule+json;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 67
+Content-Length: 237
+X-Request-Uuid: 629f0a44e6024a2fa72a6547415c266e
+Set-Cookie: _session_id=d37c040fab7746592e109fc78201101f; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+{"start_port":"22","end_port":"22","protocol":"tcp","cidr_ips":"0.0.0.0/0","links":[{"href":"/api/security_group_rules/12345","rel":"self"},{"href":"/api/clouds/12345/security_groups/ABC123","rel":"security_group"}],"actions":[]}

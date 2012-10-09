@@ -10,6 +10,143 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
    * @group v1_5
    * @group unit
    */
+  public function testHasIndexCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rules');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rules/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rules');
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rules');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testIndexDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rules/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rules');
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/security_group_rules.json', $request);
+	}
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testCanRequestIndexAsJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rules/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rules', array('output_format' => '.json'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/security_group_rules.json', $request);
+	}
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testCanRequestIndexAsXml() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rules/xml/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rules', array('output_format' => '.xml'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/security_group_rules.xml', $request);
+	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexAcceptsFilters() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rules');
+    $args = $command->getApiCommand()->getParams();
+    $filter_param = array_filter(
+      $args,
+      function($arg) {
+        return $arg->getName() == 'filter';
+      }
+    );
+
+    $this->assertNotNull($filter_param);
+    $this->assertEquals(1, count($filter_param));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexAcceptsViews() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rules');
+    $args = $command->getApiCommand()->getParams();
+    $filter_param = array_filter(
+      $args,
+      function($arg) {
+        return $arg->getName() == 'view';
+      }
+    );
+
+    $this->assertNotNull($filter_param);
+    $this->assertEquals(1, count($filter_param));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testHasCreateCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('security_group_rules_create');
@@ -284,5 +421,227 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $this->assertContains(urlencode('security_group_rule[protocol_details][start_port]') . '=' . urlencode('25'), $request);
     $this->assertContains(urlencode('security_group_rule[protocol_details][end_port]') . '=' . urlencode('25'), $request);
 	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasShowCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rule');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rule/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rule',array('id' => '1234'));
+    $command->execute();
+
+    $this->assertEquals('GET', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rule');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testShowRequiresId() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rule/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rule');
+    $command->execute();
+  }
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testShowDefaultsOutputTypeToJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rule/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rule',array('id' => '1234'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/security_group_rules/1234.json', $request);
+	}
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testShowAsJson() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rule/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rule', array('id' => 1234, 'output_format' => '.json'));
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/security_group_rules/1234.json', $request);
+	}
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testShowAsXml() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rule/xml/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'security_group_rule',
+      array(
+        'id' => '1234',
+        'output_format' => '.xml'
+      )
+    );
+    $command->execute();
+
+    $request = (string)$command->getRequest();
+    $this->assertContains('/api/security_group_rules/1234.xml', $request);
+	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowAcceptsViews() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rule');
+    $args = $command->getApiCommand()->getParams();
+    $filter_param = array_filter(
+      $args,
+      function($arg) {
+        return $arg->getName() == 'view';
+      }
+    );
+
+    $this->assertNotNull($filter_param);
+    $this->assertEquals(1, count($filter_param));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testShowCommandReturnsAModel() {
+    $this->markTestSkipped("A model does not yet exist");
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rule/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rule',array('id' => '1234'));
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule', $result);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testHasDestroyCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rules_destroy');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testDestroyUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rules_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rules_destroy',array('id' => '1234'));
+    $command->execute();
+
+    $this->assertEquals('DELETE', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testDestroyCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('security_group_rules_destroy');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testDestroyRequiresId() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/security_group_rules_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rules_destroy');
+    $command->execute();
+  }
 	
 }
