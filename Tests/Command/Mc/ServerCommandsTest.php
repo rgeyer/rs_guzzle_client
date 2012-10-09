@@ -657,4 +657,62 @@ class ServerCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBas
     $command = $client->getCommand('servers_terminate');
     $command->execute();
   }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testHasUpdateCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_update');
+    $this->assertNotNull($command);
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateUsesCorrectVerb() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_update/response'
+      )
+    );
+
+    $command = $client->getCommand('servers_update',array('id' => 1234));
+    $command->execute();
+
+    $this->assertEquals('PUT', $command->getRequest()->getMethod());
+  }
+
+  /**
+   * @group v1_0
+   * @group unit
+   */
+  public function testUpdateCommandExtendsDefaultCommand() {
+    $client = ClientFactory::getClient('1.5');
+    $command = $client->getCommand('servers_update');
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage  id argument be supplied.
+   */
+  public function testUpdateRequiresId() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/login',
+        '1.5/servers_update/response'
+      )
+    );
+
+    $command = $client->getCommand('servers_update');
+    $command->execute();
+  }
 }

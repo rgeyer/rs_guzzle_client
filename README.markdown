@@ -270,7 +270,7 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>update</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>destroy</td>
@@ -285,12 +285,12 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>start</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A (see launch above)</td>
     </tr>
     <tr>
       <td>start_ebs</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A (see launch above)</td>
     </tr>
     <tr>
       <td>terminate</td>
@@ -300,72 +300,72 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>stop</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A (see terminate above)</td>
     </tr>
     <tr>
       <td>stop_ebs</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A (see terminate above)</td>
     </tr>
     <tr>
       <td>reboot</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>run_script</td>
-      <td bgcolor="orange">50%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>run_executable</td>
-      <td bgcolor="orange">50%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>attach_volume</td>
-      <td bgcolor="orange">50%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>settings</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>get_sketchy_data</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>current/show</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>current/update</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>current/settings</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>alert_specs</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>monitoring</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>monitoring/graph-name</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td><b>Model</b></td>

@@ -106,7 +106,7 @@
     <!-- Start Servers -->
     <command name="servers_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Creates a new server, and configures its corresponding "next" instance with the received parameters.</doc>
-      <param name="path" type="string" static="servers" />
+      <param name="path" type="string" default="servers" />
       <param name="method" type="string" static="POST" />
       <param name="server[name]" type="string" required="true" />
       <param name="server[deployment_href]" type="string" required="true" />
@@ -165,6 +165,15 @@
       <param name="path" type="string" static="servers/{id}/terminate" />
       <param name="method" type="string" static="POST" />
       <param name="id" type="string" required="true" location="path" />
+    </command>
+
+    <command name="servers_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates a server</doc>
+      <param name="path" type="string" default="servers/{id}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server[name]" type="string" required="false" />
+      <param name="server[description]" type="string" required="false" />
     </command>
 
     <!-- Start ServerTemplates -->

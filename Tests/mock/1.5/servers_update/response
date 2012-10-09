@@ -1,0 +1,10 @@
+HTTP/1.1 204 No Content
+Server: nginx/1.0.15
+Date: Tue, 09 Oct 2012 20:00:11 GMT
+Connection: keep-alive
+Status: 204 No Content
+X-Runtime: 1513
+X-Request-Uuid: f56f67519fd54e3da915947346f886e1
+Set-Cookie: _session_id=cc4ddb1734ba8984f40da65fee86e51d; path=/; Secure; HttpOnly
+Cache-Control: no-cache
+
