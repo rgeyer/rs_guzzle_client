@@ -23,6 +23,17 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
     $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\ModelBase', $cloud);
   }
 
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testCanParseJsonResponse() {
+		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/cloud/json/response');
+		$cloud = new Cloud();
+		$cloud->find_by_id('12345');
+    $this->assertEquals($cloud->id, '12345');
+	}
+
   /**
    * @group v1_5
    * @group unit
