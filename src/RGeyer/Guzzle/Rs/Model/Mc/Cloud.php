@@ -21,6 +21,9 @@ use \BadMethodCallException;
  * A model for the RightScale Cloud Resource in v1.5 of the API
  * 
  * @author Ryan J. Geyer <me@ryangeyer.com>
+ * @property string $name
+ * @property string $description
+ * @property string $cloud_type
  */
 class Cloud extends ModelBase {
 	
