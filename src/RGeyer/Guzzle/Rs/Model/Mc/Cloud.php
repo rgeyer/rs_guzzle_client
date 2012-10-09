@@ -33,7 +33,11 @@ class Cloud extends ModelBase {
 		$this->_api_version = '1.5';
 		
 		$this->_path = 'cloud';
-		$this->_base_params = array('name' => $this->castToString(), 'description' => $this->castToString(), 'links' => null, 'cloud_type' => $this->castToString());
+		$this->_base_params = array(
+      'name' => $this->castToString(),
+      'description' => $this->castToString(),
+      'cloud_type' => $this->castToString()
+    );
 		
 		parent::__construct($mixed);
 	}

@@ -13,7 +13,60 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
 		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/login');
 		ClientFactory::getClient('1.5')->get('session')->send();
 	}
-	
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCloudModelExtendsModelBase() {
+    $cloud = new Cloud();
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\ModelBase', $cloud);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException BadMethodCallException
+   * @expectedExceptionMessage cloud does not implement a create method
+   */
+  public function testCloudDoesNotImplementCreate() {
+    $cloud = new Cloud();
+    $cloud->create();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException BadMethodCallException
+   * @expectedExceptionMessage cloud does not implement an update method
+   */
+  public function testCloudDoesNotImplementUpdate() {
+    $cloud = new Cloud();
+    $cloud->update();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException BadMethodCallException
+   * @expectedExceptionMessage cloud does not implement a destroy method
+   */
+  public function testCloudDoesNotImplementDestroy() {
+    $cloud = new Cloud();
+    $cloud->destroy();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException BadMethodCallException
+   * @expectedExceptionMessage cloud does not implement a duplicate method
+   */
+  public function testCloudDoesNotImplementDuplidate() {
+    $cloud = new Cloud();
+    $cloud->duplicate();
+  }
+
 	/**
 	 * @group v1_5
 	 * @group unit

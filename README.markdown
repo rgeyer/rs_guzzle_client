@@ -661,7 +661,7 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
     <tr>
       <td><b>Model</b></td>
-      <td bgcolor="orange">50%</td>
+      <td bgcolor="green">100%</td>
       <td bgcolor="orange">50%</td>
     </tr>
   </tbody>
@@ -1230,8 +1230,8 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
     <tr>
       <td><b>Model</b></td>
-      <td bgcolor="red">0%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
     </tr>
   </tbody>
 </table>
