@@ -662,7 +662,7 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td><b>Model</b></td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="orange">50%</td>
+      <td bgcolor="green">100%</td>
     </tr>
   </tbody>
 </table>
@@ -1206,6 +1206,8 @@ Below you will find the current controllers (and their commands) that are suppor
   </tbody>
 </table>
 
+<br/>
+
 <table border="1" width="360px">
   <thead>
     <tr>
@@ -1235,6 +1237,8 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
   </tbody>
 </table>
+
+<br/>
 
 <table border="1" width="360px">
   <thead>
@@ -1270,6 +1274,8 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
   </tbody>
 </table>
+
+<br/>
 
 <table border="1" width="360px">
   <thead>
@@ -1344,4 +1350,5 @@ Below you will find the current controllers (and their commands) that are suppor
 TODO
 ====
 * Allow the user to specify a logger.
-* My tests are testing the wrong thing... The "Integration" tests are making actual requests, which is good but is really only testing the WSAPI rather than the requests I'm making. See Tests/Command/Mc/* for the golden standard.
+* Mc Models should be able to follow links I.E. $cloud->instances() and $deployment->servers()
+* ModelBase "duplicate" and "clone" should both work on either Ec2 or Mc classes.
