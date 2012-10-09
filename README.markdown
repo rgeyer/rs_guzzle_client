@@ -255,17 +255,17 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>show</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>index</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>create</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>update</td>
@@ -275,7 +275,12 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>destroy</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>launch</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>start</td>
@@ -286,6 +291,11 @@ Below you will find the current controllers (and their commands) that are suppor
       <td>start_ebs</td>
       <td bgcolor="green">100%</td>
       <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>terminate</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>stop</td>
@@ -1089,22 +1099,42 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>search</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>set</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>unset</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>taggable_resources</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+    </tr>
+    <tr>
+      <td>tags_by_resource</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>tags_by_tag</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>tags_multi_add</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>tags_multi_delete</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td><b>Model</b></td>
@@ -1159,7 +1189,142 @@ Below you will find the current controllers (and their commands) that are suppor
       <td bgcolor="red">0%</td>
     </tr>
   </tbody>
-</table>    
+</table>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Clouds</th>
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Publications</th>
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>import</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Instances</th>
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">1000%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>launch</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>multi_run_executable</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>multi_terminate</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>reboot</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>run_executable</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>set_custom_lodgement</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td>terminate</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="red">0%</td>
+      <td bgcolor="red">0%</td>
+    </tr>
+  </tbody>
+</table>
 
 TODO
 ====
