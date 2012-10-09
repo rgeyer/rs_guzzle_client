@@ -1352,3 +1352,4 @@ TODO
 * Allow the user to specify a logger.
 * Mc Models should be able to follow links I.E. $cloud->instances() and $deployment->servers()
 * ModelBase "duplicate" and "clone" should both work on either Ec2 or Mc classes.
+* Handle the HTTP 500 seek() null error
