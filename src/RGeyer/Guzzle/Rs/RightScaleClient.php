@@ -92,7 +92,7 @@ class RightScaleClient extends Client {
         $client->getEventDispatcher()->addSubscriber(new CookiePlugin($client->cookieJar));
 		
 		// Retry 50x responses
-        $client->getEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin());
+        //$client->getEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin());
 
 		return $client;
 	}

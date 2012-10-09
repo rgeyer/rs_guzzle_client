@@ -186,6 +186,76 @@
       <param name="filter" type="array" required="false" />
     </command>
 
+    <command name="server_template" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Shows the information of a single server template.</doc>
+      <param name="path" type="string" static="server_templates/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate" />-->
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default,inputs" required="false" />
+    </command>
+
+    <command name="server_templates_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new ServerTemplate with the given parameters</doc>
+      <param name="path" type="string" default="server_templates" />
+      <param name="method" type="string" static="POST" />
+      <param name="server_template[name]" type="string" required="true" />
+      <param name="server_template[description]" type="string" required="false" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate" />-->
+    </command>
+
+    <command name="server_templates_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates a server template</doc>
+      <param name="path" type="string" default="server_templates/{id}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server_template[name]" type="string" required="false" />
+      <param name="server_template[description]" type="string" required="false" />
+    </command>
+
+    <command name="server_templates_clone" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Clones a given ServerTemplate</doc>
+      <param name="path" type="string" default="server_templates/{id}/clone" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server_template[name]" type="string" required="true" />
+      <param name="server_template[description]" type="string" required="false" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate" />-->
+    </command>
+
+    <command name="server_templates_commit" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Commits a given ServerTemplate.  Only HEAD revisions (revision 0) that are owned by the account can be committed.</doc>
+      <param name="path" type="string" default="server_templates/{id}/commit" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="commit_head_dependencies" type="enum:true,false" required="true" />
+      <param name="commit_message" type="string" required="true" />
+      <param name="freeze_repositories" type="enum:true,false" required="true" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate" />-->
+    </command>
+
+    <command name="server_templates_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes a given server template</doc>
+      <param name="path" type="string" static="server_templates/{id}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+    </command>
+
+    <command name="server_templates_publish" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Publishes a given ServerTemplate and its subordinates.</doc>
+      <param name="path" type="string" default="server_templates/{id}/publish" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="account_group_hrefs" type="array" required="true" />
+      <param name="descriptions[long]" type="string" required="true" />
+      <param name="descriptions[short]" type="string" required="true" />
+      <param name="descriptions[notes]" type="string" required="false" />
+      <param name="allow_comments" type="enum:true,false" required="false" />
+      <param name="categories" type="array" required="false" />
+      <param name="email_comments" type="string" required="false" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Publication" />-->
+    </command>
 
     <!-- Start Tags -->
     <command name="tags_by_resource" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">

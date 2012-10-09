@@ -1,0 +1,14 @@
+HTTP/1.1 201 Created
+Server: nginx/1.0.15
+Date: Tue, 09 Oct 2012 20:21:00 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 201 Created
+Location: /api/server_templates/12345
+X-Runtime: 336
+X-Request-Uuid: 4e620f165160461dbcb1e740cde5e37c
+Set-Cookie: _session_id=0aca6cf8ba0e98b17c20d30648ab9c07; path=/; Secure; HttpOnly
+Cache-Control: no-cache
+
+ 

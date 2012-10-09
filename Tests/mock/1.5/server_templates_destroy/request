@@ -1,0 +1,6 @@
+DELETE /api/server_templates/12345 HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMuOgjAYhd-la5v4tyW0JLNQGUerkXgZlNkYobRKQBhAVIzvPpDM8iTnkvO90Ak5KHuiAVIVcl7oVsUlchgByt8DVEfIAcoEB1uAPUAX1bkVYaHWQDAQy8YAMcGc21EnKVBBQpuC6Prq-D9LLOizVT9Uu3WExfSpuF4WYOTZGxfh6iuJN8bd3s30dsTLdJLm6lRufHbes-biSZO1dGFlB2OOIk38AMbflZeM5vreunkY0PHQe_xqf-Ra-FoKWo70UuHZWvFMTYaSNMEqV_dyvpeNiFtLyse6XejiUJmdS2N6fuJPlQT-KpXsZ8eLZpYft0H00SN59EhOUZTfrnVHhXV_3u8_3HpdBw==; _session_id=6148cec05c46b8810d1e1f105b4381f4
+

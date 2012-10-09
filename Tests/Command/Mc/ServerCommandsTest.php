@@ -659,7 +659,7 @@ class ServerCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBas
   }
 
   /**
-   * @group v1_0
+   * @group v1_5
    * @group unit
    */
   public function testHasUpdateCommand() {
@@ -669,7 +669,7 @@ class ServerCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBas
   }
 
   /**
-   * @group v1_0
+   * @group v1_5
    * @group unit
    */
   public function testUpdateUsesCorrectVerb() {
@@ -688,7 +688,7 @@ class ServerCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBas
   }
 
   /**
-   * @group v1_0
+   * @group v1_5
    * @group unit
    */
   public function testUpdateCommandExtendsDefaultCommand() {

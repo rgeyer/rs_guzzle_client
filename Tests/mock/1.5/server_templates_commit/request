@@ -1,0 +1,8 @@
+POST /api/server_templates/12345/commit HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkF1vgjAARf9Ln21CWyqFZA8ycX6kWpklwsuilQlsCEqLqPG_D5M93uTek9zzADvggfIGBuDQAO8BTJNegGdjRNhzALQCHiK2yxBFrjUA-aFvO0wxB6kUIkwRRCjFcMdS1keCyMGyFGV2z9Pp_xZj8tr2eCB-9DJuW7Jf5MrSRzdbbwrYLhwq7qrwv1i4j7Yw68pZwMfTeT6OhrU2t48umQylMCOKcHgKXUnXQ1NG2WfN899UTCq1ooQXcePrc9JAweM99qsg6Vopr5PabM9SlG63CaK5cKCg19lqKkP5rS7Gfq-cJLPcTeAfl-cRx5znJT6GWfz2UtK9lOyUqsxJ91bs_s_z-QeVeFwQ; _session_id=214d93bb9f9c2a5f7e70dc2d3dfce347
+
+commit_head_dependencies=true&commit_message=guzzle%20commit&freeze_repositories=true

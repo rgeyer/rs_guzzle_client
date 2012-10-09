@@ -973,7 +973,7 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>show</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>index</td>
@@ -983,27 +983,42 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>create</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>update</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>destroy</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>executables</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
     </tr>
     <tr>
       <td>alert_specs</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+    </tr>
+    <tr>
+      <td>clone</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>commit</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>publish</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td><b>Model</b></td>

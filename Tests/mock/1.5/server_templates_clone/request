@@ -1,0 +1,8 @@
+POST /api/server_templates/12345/clone HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkF1vgjAYhf9Lr23SFwopJLuYk49EqF-omzemtAw_BlSBCRr_-zDZ5UnOeZLzPJBALip6NEKqRu4DtXV2RS41wGTPEWokcsGkDgNqEzZCRzW0QWWSgbAxGBbBAJmBha3SIZpgOiRlTMLAa7L_rQHstR3waLM4nrYRn8WyIvfxdZ9qur_EyYHmKx_zae9tNv2tBqEJ_7pOvO9bEU6W5YG-01gF_grnH4k-sLXDu7t1spZ6LZOZxokvar_4tALt8J_LjhfVOQpECEm3O89Bz0ulfmkULvxLWIm5PMWB6HQTBvEEe21q8nirj0EGVpmTLmr7Jp-uxuTtpaR7KRFSVm3ZDFbo8Of5_AMDtl0D; _session_id=c6c71bb60c20584aee9cd8281cd3763e
+
+server_template%5Bname%5D=Guzzle%20Cloned
