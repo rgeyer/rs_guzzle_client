@@ -1353,3 +1353,4 @@ TODO
 * Mc Models should be able to follow links I.E. $cloud->instances() and $deployment->servers()
 * ModelBase "duplicate" and "clone" should both work on either Ec2 or Mc classes.
 * Handle the HTTP 500 seek() null error
+* Reduce (or eliminate) the need for the ServiceBuilder and ClientFactory
