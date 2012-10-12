@@ -8,6 +8,7 @@
       <param name="method" type="string" static="GET" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="filter" type="array" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Cloud" />
     </command>
     
     <command name="cloud" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -45,7 +46,8 @@
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="cloud_id" type="integer" required="true" location="path"/>
       <param name="filter" type="array" required="false" />
-      <param name="view" type="enum:default,tiny" required="false" />      
+      <param name="view" type="enum:default,tiny" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup" />
     </command>
     
     <command name="security_group" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -158,6 +160,7 @@
       <param name="view" type="enum:default,inputs" required="false" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="filter" type="array" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup" />
     </command>
 
     <command name="servers_terminate" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">

@@ -132,13 +132,25 @@ class DefaultCommand extends AbstractCommand {
 	 * (non-PHPdoc)
 	 * @see Guzzle\Service\Command.AbstractCommand::getResult()
 	 * 
-	 * @return mixed A Guzzle Response unless a return_class was specified in the XML dynamic commands definition
+	 * @return Guzzle\Http\Message\Response|ModelBase|ModelBase[] A Guzzle Response unless a return_class was specified in the XML dynamic commands definition
 	 */
 	public function getResult() {
 		$result = parent::getResult();
 		if($this->get('return_class')) {
-			$classname = $this->get('return_class'); 
-			$result = new $classname($result);
+      $classname = $this->get('return_class');
+      if((is_array($result) || $result instanceof \SimpleXMLElement) && count($result) > 0) {
+        $iterator = $result;
+        if($result instanceof \SimpleXMLElement) {
+          $iterator = $result->children();
+        }
+        $result_ary = array();
+        foreach($iterator as $single_result) {
+          $result_ary[] = new $classname($single_result);
+        }
+        $result = $result_ary;
+      } else {
+			  $result = new $classname($result);
+      }
 		}
 		return $result;		
 	}
@@ -159,9 +171,11 @@ class DefaultCommand extends AbstractCommand {
 	 */
 	protected function process() {
 		$this->result = $this->getRequest()->getResponse();
+
+    $contentType = $this->result->getContentType();
 		
-		// Is the body an XML document?  If so, set the result to be a SimpleXMLElement
-		if (preg_match('/^\s*(text\/xml|application\/.*xml).*$/', $this->result->getContentType())) {
+		// Does the header indicate an XML payload? If so, set the result to be a SimpleXMLElement
+		if (preg_match('/^\s*(text\/xml|application\/.*xml).*$/', $contentType)) {
 			// If the body is available, then parse the XML
 			$body = trim($this->result->getBody(true));
 			if ($body) {
@@ -169,6 +183,12 @@ class DefaultCommand extends AbstractCommand {
 				$this->result = $xml;
 			}
 		}
+
+    // Does the header indicate a JSON payload? If so, set the result to a json_decoded object
+    if(preg_match('/^\s*(text\/javascript|application\/vnd\.rightscale\..*json).*$/', $contentType)) {
+      $body = trim($this->result->getBody(true));
+      $this->result = json_decode($body);
+    }
 	}
 	
 }

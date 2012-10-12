@@ -77,9 +77,7 @@ class ServerArray extends ModelBase {
 	 */
 	public function instances() {
 		$result = $this->executeCommand($this->_path_for_regex . '_instances', array('id' => $this->id));
-		$json_str = $result->getBody(true);
-		$json_obj = json_decode($json_str);
-		return $json_obj;
+		return $result;
 	}
 	
 	/**
