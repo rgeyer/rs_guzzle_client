@@ -41,10 +41,10 @@
     
     <command name="security_groups" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>List all Security Groups</doc>
-      <param name="path" type="string" static="clouds/{cloud_id}/security_groups{output_format}" />
+      <param name="path" type="string" default="clouds/{cloud_id}/security_groups{output_format}" />
       <param name="method" type="string" static="GET" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
-      <param name="cloud_id" type="integer" required="true" location="path"/>
+      <param name="cloud_id" type="integer" required="false" location="path"/>
       <param name="filter" type="array" required="false" />
       <param name="view" type="enum:default,tiny" required="false" />
       <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup" />

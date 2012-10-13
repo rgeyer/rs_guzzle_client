@@ -41,6 +41,10 @@ class Cloud extends ModelBase {
       'description' => $this->castToString(),
       'cloud_type' => $this->castToString()
     );
+
+    $this->_relationship_handlers = array(
+      'security_groups' => 'security_groups'
+    );
 		
 		parent::__construct($mixed);
 	}
