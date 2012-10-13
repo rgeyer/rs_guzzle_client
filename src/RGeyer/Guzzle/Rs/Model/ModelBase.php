@@ -75,6 +75,11 @@ abstract class ModelBase {
    */
 	protected $_base_params = array();
 
+  /**
+   * @var array
+   */
+  protected $_relationship_handlers = array();
+
   /* ------------ Protected attributes with public accessors ----------- */
 
   /**
@@ -122,6 +127,13 @@ abstract class ModelBase {
 	protected function castToDateTime() {
 		return function($value, $params) { return new DateTime($value); };
 	}
+
+  /* ---------------------- Relationship Closures ---------------------- */
+  protected function relationshipFromApiCall() {
+    return function($name, $params) {
+
+    };
+  }
 	
 	/* ---------------------------- Overrides ---------------------------- */
 	
@@ -188,6 +200,41 @@ abstract class ModelBase {
 	
 		$this->_params[strval($array_idx)] = $value;
 	}
+
+  /**
+   * @param $name
+   * @param $arguments
+   * @return ModelBase|ModelBase[]|stdClass
+   * @throws BadMethodCallException if the resource returned by the API does not have a list of relationships
+   * @throws BadMethodCallException if a relationship is requested but that relationship is not returned by the API
+   * @throws BadMethodCallException if a relationship is requested but this model does not define a handler for that relationship type
+   */
+  public function __call($name, $arguments) {
+    if($name == 'self') {
+      return $this;
+    }
+
+    if(!$this->links) {
+      throw new BadMethodCallException("There is no list of relationships for this model.  Make sure you've done a create or find before trying to access relationships.");
+    }
+
+    foreach($this->links as $link) {
+      if($link->rel == $name) {
+        if(!array_key_exists($name, $this->_relationship_handlers)) {
+          throw new BadMethodCallException("The RightScale API returned a relationship named (" . $name . ") but no handler was specified for this model");
+        } else {
+          $commandName = $this->_relationship_handlers[$name];
+          $params = array('path' => str_replace('/api/', '', $link->href));
+          if(count($arguments) > 0) {
+            $params = array_merge($arguments[0], $params);
+          }
+          return $this->executeCommand($commandName, $params);
+        }
+      }
+    }
+
+    throw new BadMethodCallException("The relationship named (" . $name . ") was not returned by the RightScale API");
+  }
 	
 	/* ---------------------------- Accessors ---------------------------- */
 	
@@ -240,22 +287,8 @@ abstract class ModelBase {
     }
 
 		$results = $this->executeCommand($this->_path_for_regex, $params);
-		
-		if(!is_a($results, 'SimpleXMLElement')) {
-			// Assuming it's a json bodied response
-			$results = json_decode($results->getBody(true));
-		}		
-		
-		$klass = get_called_class();
-		$result_ary = array();
-		
-		if(count($results) > 0) {
-			foreach($results as $result) {
-				$result_ary[] = new $klass($result);
-			}
-		}
-		
-		return $result_ary;
+
+    return $results;
 	}
 	
 	public function find_by_id($id) {
@@ -348,7 +381,7 @@ abstract class ModelBase {
 			$json_obj = json_decode($mixed->getBody(true));
 			if($json_obj) {
 				$this->_castInputParametersWithClosure($json_obj);
-			}			
+			}
 		}
 		
 		if(is_a($mixed, 'SimpleXMLElement')) {			

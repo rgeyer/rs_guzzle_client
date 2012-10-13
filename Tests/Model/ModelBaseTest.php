@@ -12,17 +12,28 @@ class ModelConcreteClass extends ModelBase {
   public $last_request_command;
 
 	public function __construct($mixed = null) {
+    $this->_api_version = '1.5';
+
 		$this->_path_for_regex = 'ec2_ssh_keys';
 		
 		$this->_required_params = array('a' => function($mixed, $params) { return new DateTime($mixed); }, 'b' => null, 'c' => null);
 		$this->_optional_params = array('d' => null, 'e' => null, 'f' => null);
+    $this->_relationship_handlers = array('foo' => 'servers');
 		parent::__construct($mixed);
 	}
+
+  public function setRelationships(array $relationships) {
+    $this->_relationships = $relationships;
+  }
+}
+
+class ModelConcreteClassStubbed extends ModelConcreteClass {
 
   public function executeCommand($command, array $params = array()) {
     $this->last_request_command = $command;
     $this->last_request_params = $params;
   }
+
 }
 
 /**
@@ -42,7 +53,7 @@ class ModelBaseTest extends \Guzzle\Tests\GuzzleTestCase {
 		parent::setUp ();
 		
 
-		$this->_modelBase = new ModelConcreteClass(/* parameters */);
+		$this->_modelBase = new ModelConcreteClassStubbed(/* parameters */);
 	
 	}
 	
@@ -158,7 +169,7 @@ EOF;
     $a = new DateTime();
     $merged_array = array('a' => $a, 'b' => 'bee', 'c' => 'c');
 
-    $model = new ModelConcreteClass();
+    $model = new ModelConcreteClassStubbed();
     $model->a = $a;
     $model->b = 'b';
     $model->c = 'c';
@@ -175,7 +186,7 @@ EOF;
     $a = new DateTime();
     $merged_array = array('a' => $a, 'b' => 'bee', 'c' => 'c', 'id' => 1, 'href' => 'href');
 
-    $model = new ModelConcreteClass();
+    $model = new ModelConcreteClassStubbed();
     $model->id = 1;
     $model->href = 'href';
     $model->a = $a;
@@ -258,6 +269,87 @@ EOF;
 
   public function testPassesFilters() {
     $this->markTestIncomplete('Not yet implemented.');
+  }
+
+  public function testReturnsSelfOnMagicMethod() {
+    $model = new ModelConcreteClass();
+    $this->assertEquals($model, $model->self());
+  }
+
+  /**
+   * @expectedException BadMethodCallException
+   * @expectedExceptionMessage There is no list of relationships for this model.  Make sure you've done a create or find before trying to access relationships.
+   */
+  public function testThrowsExceptionWhenLinksAreNotAvailable() {
+    $model = new ModelConcreteClass();
+    $model->someMagicMethod();
+  }
+
+  /**
+   * @expectedException BadMethodCallException
+   * @expectedExceptionMessage The relationship named (someMagicMethod) was not returned by the RightScale API
+   */
+  public function testThrowsExceptionWhenLinksAreAvailableButRequestedRelationshipIsNot() {
+    $model = new ModelConcreteClass();
+    $link = new stdClass();
+    $link->href = '/api/cloud/123';
+    $link->rel = 'cloud';
+    $model->links = array($link);
+
+    $model->someMagicMethod();
+  }
+
+  /**
+   * @expectedException BadMethodCallException
+   * @expectedExceptionMessage The RightScale API returned a relationship named (cloud) but no handler was specified for this model
+   */
+  public function testThrowsExceptionWhenLinkAvailableButRelationshipHandlerIsNot() {
+    $model = new ModelConcreteClass();
+    $link = new stdClass();
+    $link->href = '/api/cloud/123';
+    $link->rel = 'cloud';
+    $model->links = array($link);
+
+    $model->cloud();
+  }
+
+  public function testCallsRelationshipHandler() {
+    $model = new ModelConcreteClass();
+    $this->setMockResponse(
+      $model->getClient(),
+      array(
+        '1.5/login',
+        '1.5/servers/json/response'
+      )
+    );
+    $link = new stdClass();
+    $link->href = '/api/cloud/123';
+    $link->rel = 'foo';
+    $model->links = array($link);
+    $retval = $model->foo();
+
+    $serverCmd = $model->getLastCommand();
+    $this->assertContains('/api/cloud/123', (string)$serverCmd->getRequest());
+  }
+
+  public function testRelationshipHandlerCanAcceptParameters() {
+    $model = new ModelConcreteClass();
+    $this->setMockResponse(
+      $model->getClient(),
+      array(
+        '1.5/login',
+        '1.5/servers/json/response'
+      )
+    );
+    $link = new stdClass();
+    $link->href = '/api/cloud/123';
+    $link->rel = 'foo';
+    $model->links = array($link);
+    $retval = $model->foo(array('view' => 'inputs'));
+
+    $serverCmd = $model->getLastCommand();
+    $this->assertContains('/api/cloud/123', (string)$serverCmd->getRequest());
+    $this->assertContains('view=inputs', (string)$serverCmd->getRequest());
   }
 }
 
