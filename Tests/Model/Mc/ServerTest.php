@@ -33,4 +33,83 @@ class ServerTest extends \Guzzle\Tests\GuzzleTestCase {
     $server = new Server();
     $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\AbstractServer', $server);
   }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetAlertSpecRelationship() {
+  	$this->markTestSkipped('Alert Spec command(s) not yet implemented');
+  	$this->setMockResponse(
+  		ClientFactory::getClient('1.5'),
+  		array(
+  			'1.5/server/json/response',
+  			'1.5/alert_specs/json/response'
+			)
+  	);
+  	$server = new Server();
+  	$server->find_by_id('12345');
+  	$alert_specs = $server->alert_specs();
+  	$this->assertGreaterThan(0, count($alert_specs));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetNextInstanceRelationship() {
+  	$this->markTestSkipped('Instance command(s) not yet implemented');
+  	$this->setMockResponse(
+  		ClientFactory::getClient('1.5'),
+  		array(
+  			'1.5/server/json/response',
+  			'1.5/instance/json/response'
+			)
+  	);
+  	$server = new Server();
+  	$server->find_by_id('12345');
+  	$current_instance = $server->next_instance();
+  	$this->assertNotNull($next_instance);
+  	$this->assertInstanceOf('stdClass', $next_instance);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetCurrentInstanceRelationship() {
+  	$this->markTestSkipped('Instance command(s) not yet implemented');
+  	$this->setMockResponse(
+  		ClientFactory::getClient('1.5'),
+  		array(
+  			'1.5/server/json/response',
+  			'1.5/instance/json/response'
+			)
+  	);
+  	$server = new Server();
+  	$server->find_by_id('12345');
+  	$current_instance = $server->current_instance();
+  	$this->assertNotNull($current_instance);
+  	$this->assertInstanceOf('stdClass', $current_instance);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetDeploymentRelationship() {
+  	$this->markTestSkipped('Deployment command(s) not yet implemented');
+  	$this->setMockResponse(
+  		ClientFactory::getClient('1.5'),
+  		array(
+  			'1.5/server/json/response',
+  			'1.5/deployment/json/response'
+			)
+  	);
+  	$server = new Server();
+  	$server->find_by_id('12345');
+  	$deployment = $server->deployment();
+  	$this->assertNotNull($deployment);
+  	$this->assertInstanceOf('stdClass', $deployment);
+  }
 }
