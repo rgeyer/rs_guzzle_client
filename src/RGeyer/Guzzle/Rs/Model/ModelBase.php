@@ -224,7 +224,11 @@ abstract class ModelBase {
           throw new BadMethodCallException("The RightScale API returned a relationship named (" . $name . ") but no handler was specified for this model");
         } else {
           $commandName = $this->_relationship_handlers[$name];
-          $params = array('path' => str_replace('/api/', '', $link->href));
+          $params = array(
+            'id' => '1234', # This gets ignored
+            'cloud_id' => '1234', # This gets ignored too
+            'path' => str_replace('/api/', '', $link->href)
+          );
           if(count($arguments) > 0) {
             $params = array_merge($arguments[0], $params);
           }

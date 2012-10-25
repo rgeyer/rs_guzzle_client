@@ -39,6 +39,11 @@ class SecurityGroup extends AbstractSecurityGroup {
     $this->_path_requires_cloud_id = true;
     $this->_id_is_alphanumeric = true;
 
+    $this->_relationship_handlers = array(
+      'cloud' => 'cloud',
+      'security_group_rules' => 'security_group_rules'
+    );
+
 		parent::__construct($mixed);
 	}
 

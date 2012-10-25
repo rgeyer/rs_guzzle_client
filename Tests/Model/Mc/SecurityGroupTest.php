@@ -137,4 +137,42 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
     $lastCommand = $secgrp->getLastCommand();
     $lastCommand->getRequest();
   }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetCloudRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/security_group/json/response',
+        '1.5/cloud/json/response'
+      )
+    );
+		$secGrp = new SecurityGroup();
+    $secGrp->cloud_id = 12345;
+    $secGrp->find_by_id('12345');
+    $cloud = $secGrp->cloud();
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Cloud', $cloud);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetSecurityGroupRuleRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/security_group/json/response',
+        '1.5/security_group_rules/json/response'
+      )
+    );
+		$secGrp = new SecurityGroup();
+    $secGrp->cloud_id = 12345;
+    $secGrp->find_by_id('12345');
+    $secGrpRules = $secGrp->security_group_rules();
+    $this->assertGreaterThan(0, count($secGrpRules));
+  }
 }
