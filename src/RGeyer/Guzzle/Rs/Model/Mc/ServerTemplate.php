@@ -15,7 +15,6 @@
 namespace RGeyer\Guzzle\Rs\Model\Mc;
 
 use RGeyer\Guzzle\Rs\Model\ModelBase;
-use RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate;
 use BadMethodCallException;
 
 /**
