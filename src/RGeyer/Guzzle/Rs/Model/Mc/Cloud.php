@@ -24,6 +24,8 @@ use \BadMethodCallException;
  * @property string $name
  * @property string $description
  * @property string $cloud_type
+ * 
+ * @method RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup security_groups($params = null) A list of SecurityGroups beloging to this cloud
  */
 class Cloud extends ModelBase {
 	
