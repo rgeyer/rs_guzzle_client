@@ -1,0 +1,8 @@
+POST /api/multi_cloud_images HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNolkEtvgkAYAP_LniXZj12eSQ-CIpoq8pYTkYeNCljYlUIN_72Y3mfmMC90RjqqR7RABUP6Cz1Z2SGdikDUaYF4jnQgEoCmakRaoGsx0xSoikHMBShLRQAoRSHDBAQQCZAMgyaLMPd4-e-KWIa3O-dRe8KVYLSh8llWNOTePlJG2Xe-NvHN5Zpxk31660lk7U-td1G-k01SWWOyt-7ZpbbukaYq7sM82KzpSTz8mn3cu1ka-7td0EpE5kagJtVhZQ_dsXfoVa6X2111ZLW5YngZFaHtBlIdp9Y2feLBvAv22qd1M7QZdZhtHdY_TcedRm22kcc-3kuG95Jznj-eDZ-vUCB0mv4A2LVbsQ==; _session_id=deb499a10eee60ec2c2c920150d6e4eb
+
+multi_cloud_image%5Bname%5D=GuzzleTest

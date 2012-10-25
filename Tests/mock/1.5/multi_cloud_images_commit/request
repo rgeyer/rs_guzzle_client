@@ -1,0 +1,8 @@
+POST /api/multi_cloud_images/12345/commit HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNo1kMtugkAARf9l1pLMg9eQdAGBAopKikjtxgzDVKxYTAfkYfx3YdH1vefe5DwAAxa4DmABCgmsB2il-AOWihExnwvQcGAhoiEMoaqTBTgXU7uAKlEZgwoSgikICawwKgwFYYIIhRxzqE17jfhnDX1m5XzUb_o2i8ygOKP1ZT0QXxzqrLMTVMHuaIxGWZd0n025tkvkrhwU-2a7letdOqqE-tnbXT4K_9QErnBCL8zNtBx-DDnQMPHQLXLzoB62sX7v3lfbtuj3V03rv9IVc-O8S5PjncqTfqho_7mUm-C7WvFqjNvliTu1H0XYEVnpbjoyNiU232Yl_ayEcV63v81kRUVEfT5fFHpdTQ==; _session_id=bcbc0e913a38c8ba99a82dc8a0d20892
+
+commit_message=initial%20commit

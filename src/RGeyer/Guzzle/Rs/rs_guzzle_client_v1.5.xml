@@ -345,5 +345,68 @@
       <param name="filter" type="array" required="false" />
     </command>
     
+    <!-- MultiCloudImages -->
+    <command name="multi_cloud_image" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+    	<doc>Show information about a single multi-cloud image. HEAD revisions have a revision of 0</doc>
+      <param name="path" type="string" default="multi_cloud_images/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />    	
+    </command>
+
+    <command name="multi_cloud_images" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists the multi-cloud images available to this account. HEAD revisions have a revision of 0</doc>
+      <param name="path" type="string" default="multi_cloud_images{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage" />
+    </command>
+
+    <command name="multi_cloud_images_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new MultiCloudImage with the given parameters</doc>
+      <param name="path" type="string" default="multi_cloud_images" />
+      <param name="method" type="string" static="POST" />
+      <param name="multi_cloud_image[name]" type="string" required="true" />
+      <param name="multi_cloud_image[description]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage" />
+    </command>
+
+    <command name="multi_cloud_images_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates attributes of a given MultiCloudImage. Only HEAD revisions can be updated (revision 0). Currently, the attributes you can update are only the 'direct' attributes of a server template.</doc>
+      <param name="path" type="string" default="multi_cloud_images/{id}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="multi_cloud_image[name]" type="string" required="false" />
+      <param name="multi_cloud_image[description]" type="string" required="false" />
+    </command>
+
+    <command name="multi_cloud_images_clone" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Clones a given MultiCloudImage</doc>
+      <param name="path" type="string" default="multi_cloud_images/{id}/clone" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="multi_cloud_image[name]" type="string" required="true" />
+      <param name="multi_cloud_image[description]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage" />
+    </command>
+
+    <command name="multi_cloud_images_commit" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Commits a given MultiCloudImage.  Only HEAD revisions can be committed.</doc>
+      <param name="path" type="string" default="multi_cloud_images/{id}/commit" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="commit_message" type="string" required="true" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage" />
+    </command>
+
+    <command name="multi_cloud_images_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes a given MultiCloudImage</doc>
+      <param name="path" type="string" default="multi_cloud_images/{id}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+    </command>
+    
   </commands>
 </client>

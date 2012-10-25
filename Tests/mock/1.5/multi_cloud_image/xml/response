@@ -1,0 +1,28 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Thu, 25 Oct 2012 20:39:27 GMT
+Content-Type: application/vnd.rightscale.multi_cloud_image+xml;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 30
+Content-Length: 485
+X-Request-Uuid: a4259b760cdd4555969f0fc44e37b673
+Set-Cookie: _session_id=1dbca74d0eaa7a0d3461234f618ea5ee; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<multi_cloud_image>
+  <links>
+    <link href="/api/multi_cloud_images/12345" rel="self"/>
+    <link href="/api/multi_cloud_images/12345/settings" rel="settings"/>
+  </links>
+  <description>CentOS 5.8 with 64-bit architecture (x64) and RightLink 5.8.
+
+__Compatible ST Versions__
+* v12.11
+* v12.11.0-LTS
+* v13.0</description>
+  <name>RightImage_CentOS_5.8_x64_v5.8</name>
+  <revision>6</revision>
+  <actions></actions>
+</multi_cloud_image>

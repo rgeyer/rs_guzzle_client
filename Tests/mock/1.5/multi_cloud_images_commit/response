@@ -1,0 +1,14 @@
+HTTP/1.1 201 Created
+Server: nginx/1.0.14
+Date: Thu, 25 Oct 2012 21:27:44 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 201 Created
+Location: /api/multi_cloud_images/12345
+X-Runtime: 279
+X-Request-Uuid: d4d73c7b06004e6a962b2bb203f8795e
+Set-Cookie: _session_id=bcbc0e913a38c8ba99a82dc8a0d20892; path=/; Secure; HttpOnly
+Cache-Control: no-cache
+
+ 

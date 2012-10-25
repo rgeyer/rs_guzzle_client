@@ -1,0 +1,8 @@
+POST /api/multi_cloud_images/12345/clone HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNolkEFvgjAYQP9LzzbhoxVakh3A6SYCmbq5jstSSyeYVQwCCob_Pszu773DuyOJPGQ6NEHZBXl31Fx0hTxqA2HDBNUKeUCmAJy7rjVBRTbSxJY_XDOKQWuOAbSNpdQEg02AcIszoO7Yq_W_a1sOf7hjHnXQf1jdYSnF9DkB_91Jeb4qIY9maaN5n-ZC4YhbqnPE1Yq6ZWzSbUC_zjpZZVl52h1ebm1tdgU7hexbHPPgd0ur1UI1QR9yvI6x0_sLrcx5v49Z0gtJjdP654W9695AF0dCwtfoYFRTFaZqN-FVLGd4HVBm2iwUbumS-fQzKudBw54eS26PJVKpsjnV4xUKhA7DH5B9W_E=; _session_id=94e9136360a4997d461c26c7cd7a4a8c
+
+multi_cloud_image%5Bname%5D=guzzlecloned
