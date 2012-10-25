@@ -223,14 +223,29 @@ abstract class ModelBase {
         if(!array_key_exists($name, $this->_relationship_handlers)) {
           throw new BadMethodCallException("The RightScale API returned a relationship named (" . $name . ") but no handler was specified for this model");
         } else {
-          $commandName = $this->_relationship_handlers[$name];
+          # Set the path parameter, cause thats the one that's always required
           $params = array(
-            'id' => '1234', # This gets ignored
-            'cloud_id' => '1234', # This gets ignored too
             'path' => str_replace('/api/', '', $link->href)
           );
+          $commandName = $this->_relationship_handlers[$name];
+          
+          # Find required path parameters and assign bogus values to them to avoid
+          # Guzzle validation exceptions
+          $command = $this->_client->getCommand($commandName);
+          $args = $command->getApiCommand()->getParams();
+          $filter_param = array_filter(
+             $args,
+             function($arg) {
+               return $arg->getLocation() == 'path' && $arg->getRequired();
+             }
+          );
+          foreach($filter_param as $key => $value) {
+            $params[$key] = $value->getType() == 'array' ? array('foo') : '1234';
+          }         
+          
+          # Merge passed in arguments
           if(count($arguments) > 0) {
-            $params = array_merge($arguments[0], $params);
+            $params = array_merge($params, $arguments[0]);
           }
           return $this->executeCommand($commandName, $params);
         }

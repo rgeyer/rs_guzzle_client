@@ -2,6 +2,12 @@
 
 namespace RGeyer\Guzzle\Rs\Tests\Model;
 
+use Guzzle\Service\Description\ApiCommand;
+
+use Guzzle\Common\Collection;
+
+use Guzzle\Service\Command\AbstractCommand;
+
 use RGeyer\Guzzle\Rs\Model\ModelBase;
 use SimpleXMLElement;
 use \DateTime;
@@ -18,7 +24,7 @@ class ModelConcreteClass extends ModelBase {
 		
 		$this->_required_params = array('a' => function($mixed, $params) { return new DateTime($mixed); }, 'b' => null, 'c' => null);
 		$this->_optional_params = array('d' => null, 'e' => null, 'f' => null);
-    $this->_relationship_handlers = array('foo' => 'servers');
+    $this->_relationship_handlers = array('foo' => 'foo');
 		parent::__construct($mixed);
 	}
 
@@ -34,6 +40,34 @@ class ModelConcreteClassStubbed extends ModelConcreteClass {
     $this->last_request_params = $params;
   }
 
+}
+
+/**
+ * 
+ * @guzzle foo required="true" location="path"
+ * @guzzle bar required="true" location="path"
+ * @guzzle baz required="true" location="path"
+ * @guzzle blitzen required="false" location="header"
+ *
+ */
+class Foo extends AbstractCommand {
+  public function __construct($parameters=null, ApiCommand $apiCommand=null) {
+    parent::__construct($parameters, $apiCommand);
+  }
+  
+  protected function build() {
+    $this->request = $this->client->get('/api/foo');
+  }
+}
+
+class FooCommandFactory implements \Guzzle\Service\Command\Factory\FactoryInterface {
+  /**
+   * {@inheritdoc}
+   */
+  public function factory($name, array $args = array())
+  {
+    return new Foo($args);
+  }  
 }
 
 /**
@@ -314,42 +348,57 @@ EOF;
   }
 
   public function testCallsRelationshipHandler() {
-    $model = new ModelConcreteClass();
-    $this->setMockResponse(
-      $model->getClient(),
-      array(
-        '1.5/login',
-        '1.5/servers/json/response'
-      )
-    );
+    $model = new ModelConcreteClassStubbed();
+    $client = $model->getClient();
+    $client->setCommandFactory(new FooCommandFactory());
+    $link = new stdClass();
+    $link->href = '/api/cloud/123';
+    $link->rel = 'foo';
+    $model->links = array($link);
+    $retval = $model->foo(array('foo' => '1','bar' => '1','baz' => '1'));
+
+    $this->assertEquals('foo', $model->last_request_command);
+    $this->assertArrayHasKey('path', $model->last_request_params);
+    $this->assertEquals('cloud/123', $model->last_request_params['path']);
+  }
+
+  public function testRelationshipHandlerCanAcceptParameters() {
+    $model = new ModelConcreteClassStubbed();
+    $client = $model->getClient();
+    $client->setCommandFactory(new FooCommandFactory());
+    $link = new stdClass();
+    $link->href = '/api/cloud/123';
+    $link->rel = 'foo';
+    $model->links = array($link);
+    $retval = $model->foo(array('foo' => '1','bar' => '1','baz' => '1'));
+
+    $this->assertEquals('foo', $model->last_request_command);
+    $this->assertArrayHasKey('foo', $model->last_request_params);
+    $this->assertEquals('1', $model->last_request_params['foo']);
+    $this->assertArrayHasKey('bar', $model->last_request_params);
+    $this->assertEquals('1', $model->last_request_params['bar']);
+    $this->assertArrayHasKey('baz', $model->last_request_params);
+    $this->assertEquals('1', $model->last_request_params['baz']);
+  }
+  
+  public function testMagicMethodsSatisfyRequiredPathParamsWithBogusValues() {
+    $model = new ModelConcreteClassStubbed();
+    $client = $model->getClient();
+    $client->setCommandFactory(new FooCommandFactory());
     $link = new stdClass();
     $link->href = '/api/cloud/123';
     $link->rel = 'foo';
     $model->links = array($link);
     $retval = $model->foo();
 
-    $serverCmd = $model->getLastCommand();
-    $this->assertContains('/api/cloud/123', (string)$serverCmd->getRequest());
-  }
-
-  public function testRelationshipHandlerCanAcceptParameters() {
-    $model = new ModelConcreteClass();
-    $this->setMockResponse(
-      $model->getClient(),
-      array(
-        '1.5/login',
-        '1.5/servers/json/response'
-      )
-    );
-    $link = new stdClass();
-    $link->href = '/api/cloud/123';
-    $link->rel = 'foo';
-    $model->links = array($link);
-    $retval = $model->foo(array('view' => 'inputs'));
-
-    $serverCmd = $model->getLastCommand();
-    $this->assertContains('/api/cloud/123', (string)$serverCmd->getRequest());
-    $this->assertContains('view=inputs', (string)$serverCmd->getRequest());
+    $this->assertEquals('foo', $model->last_request_command);
+    $this->assertArrayHasKey('foo', $model->last_request_params);
+    $this->assertEquals('1234', $model->last_request_params['foo']);
+    $this->assertArrayHasKey('bar', $model->last_request_params);
+    $this->assertEquals('1234', $model->last_request_params['bar']);
+    $this->assertArrayHasKey('baz', $model->last_request_params);
+    $this->assertEquals('1234', $model->last_request_params['baz']);
+    
   }
 }
 
