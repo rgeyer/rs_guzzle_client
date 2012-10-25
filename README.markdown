@@ -1355,3 +1355,4 @@ TODO
 * Handle the HTTP 500 seek() null error
 * Reduce (or eliminate) the need for the ServiceBuilder and ClientFactory
 * Allow OAuth token authentication
+* ModelBase should assume that the API call for a relationship is the same as the relationship name, unless specified otherwise.  I.E. relationship for 'cloud' would call command 'cloud' with an ID
