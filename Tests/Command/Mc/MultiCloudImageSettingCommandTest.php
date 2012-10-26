@@ -5,7 +5,7 @@ use RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class MultiCloudImageCommandsTest extends ClientCommandsBase {
+class MultiCloudImageSettingCommandsTest extends ClientCommandsBase {
 
   /**
    * @group v1_5
