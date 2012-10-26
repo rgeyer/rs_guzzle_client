@@ -55,4 +55,23 @@ class MultiCloudImageTest extends ClientCommandsBase {
 		$mci = new MultiCloudImage();
 		$mci->duplicate();
 	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetSettingsRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/multi_cloud_image/json/response',
+        '1.5/multi_cloud_image_settings/json/response'
+      )
+    );
+		$mci = new MultiCloudImage();
+    $mci->find_by_id(12345);
+    $settings = $mci->settings();
+    $this->assertGreaterThan(0, count($settings));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImageSetting', $settings[0]);
+  }
 }

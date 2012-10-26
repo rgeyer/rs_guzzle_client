@@ -40,6 +40,10 @@ class MultiCloudImage extends ModelBase {
       'revision' => $this->castToInt()
     );
     
+    $this->_relationship_handlers = array(
+      'settings' => 'multi_cloud_image_settings'
+    );
+    
     parent::__construct($mixed);
   }
 
