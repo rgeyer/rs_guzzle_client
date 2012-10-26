@@ -25,7 +25,23 @@ class MultiCloudImageTest extends ClientCommandsBase {
 		$mci->find_by_id('12345');		
 		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage', $mci);
 		$keys = array_keys($mci->getParameters());		
-		foreach(array('links', 'description', 'actions', 'name', 'revision') as $prop) {
+		foreach(array('links', 'multi_cloud_image[description]', 'actions', 'multi_cloud_image[name]', 'revision') as $prop) {
+			$this->assertContains($prop, $keys);
+		}
+	}
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testCanParseXmlResponse() {
+	  $this->markTestSkipped("Can not parse an XML response. In normal use it will never be required to");
+		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/multi_cloud_image/xml/response');
+		$mci = new MultiCloudImage();
+		$mci->find_by_id('12345');		
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage', $mci);
+		$keys = array_keys($mci->getParameters());		
+		foreach(array('links', 'multi_cloud_image[description]', 'actions', 'multi_cloud_image[name]', 'revision') as $prop) {
 			$this->assertContains($prop, $keys);
 		}
 	}

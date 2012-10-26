@@ -30,9 +30,13 @@ class MultiCloudImage extends ModelBase {
     $this->_api_version = '1.5';
     
     $this->_path = 'multi_cloud_image';
+    $this->_required_params = array(
+      'multi_cloud_image[name]' => $this->castToString()
+    );
+    $this->_optional_params = array(
+      'multi_cloud_image[description]' => $this->castToString()
+    );
     $this->_base_params = array(
-      'description' => $this->castToString(),
-      'name' => $this->castToString(),
       'revision' => $this->castToInt()
     );
     

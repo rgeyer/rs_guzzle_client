@@ -26,7 +26,7 @@ class ServerTemplateTest extends ClientCommandsBase {
 		$st->find_by_id('12345');		
 		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate', $st);
 		$keys = array_keys($st->getParameters());		
-		foreach(array('links', 'description', 'actions', 'name', 'revision') as $prop) {
+		foreach(array('links', 'server_template[description]', 'actions', 'server_template[name]', 'revision') as $prop) {
 			$this->assertContains($prop, $keys);
 		}
 	}
@@ -41,7 +41,38 @@ class ServerTemplateTest extends ClientCommandsBase {
 		$st->find_by_id('12345');		
 		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate', $st);
 		$keys = array_keys($st->getParameters());		
-		foreach(array('links', 'inputs', 'description', 'actions', 'name', 'revision') as $prop) {
+		foreach(array('links', 'inputs', 'server_template[description]', 'actions', 'server_template[name]', 'revision') as $prop) {
+			$this->assertContains($prop, $keys);
+		}
+		$this->assertGreaterThan(0, count($st->inputs));		
+	}
+
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testCanParseXmlResponse() {	  
+		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/server_template/xml/response');
+		$st = new ServerTemplate();
+		$st->find_by_id('12345');		
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate', $st);
+		$keys = array_keys($st->getParameters());		
+		foreach(array('links', 'server_template[description]', 'actions', 'server_template[name]', 'revision') as $prop) {
+			$this->assertContains($prop, $keys);
+		}
+	}
+	
+	/**
+	 * @group v1_5
+	 * @group unit
+	 */
+	public function testCanParseXmlResponseWithInputs() {
+		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/server_template/xml/inputs_view/response');
+		$st = new ServerTemplate();
+		$st->find_by_id('12345');		
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate', $st);
+		$keys = array_keys($st->getParameters());		
+		foreach(array('links', 'inputs', 'server_template[description]', 'actions', 'server_template[name]', 'revision') as $prop) {
 			$this->assertContains($prop, $keys);
 		}
 		$this->assertGreaterThan(0, count($st->inputs));		

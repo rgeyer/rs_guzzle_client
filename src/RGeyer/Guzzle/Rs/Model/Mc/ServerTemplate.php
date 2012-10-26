@@ -33,10 +33,14 @@ class ServerTemplate extends ModelBase {
 		$this->_api_version = '1.5';
 		
 		$this->_path = 'server_template';
+		$this->_required_params = array(
+	    'server_template[name]' => $this->castToString()
+    );
+		$this->_optional_params = array(
+	    'server_template[description]' => $this->castToString()
+    );
 		$this->_base_params = array(
 			'inputs' => null,
-			'description' => $this->castToString(),
-			'name' => $this->castToString(),
 			'revision' => $this->castToInt()
 		);
 		
