@@ -46,6 +46,11 @@ class Server extends AbstractServer {
 			'state' => $this->castToString()
 		);
 		
+		$this->_relationship_handlers = array(
+	    'next_instance' => 'instance',
+	    'current_instance' => 'instance'
+    );
+		
 		parent::__construct($mixed);
 	}
 
@@ -97,21 +102,21 @@ class Server extends AbstractServer {
    *
    * @return stdClass|null A stdClass representing the properties of an Instance Resource or null if there is no current instance
    */
-  public function current_instance() {
-    $retval = null;
-    $instance_href = null;
-    foreach($this->links as $link) {
-      if($link->rel == 'current_instance') {
-        $instance_href = $link->href;
-      }
-    }
-    if($instance_href) {
-      $instance_href = str_replace('/api/', '', $instance_href);
-      $command = $this->_client->getCommand('instance', array('path' => $instance_href, 'id' => 'foo', 'cloud_id' => '123'));
-      $command->execute();
-      $result = $command->getResult();
-      $retval = json_decode($result->getBody(true));
-    }
-    return $retval;
-  }
+//   public function current_instance() {
+//     $retval = null;
+//     $instance_href = null;
+//     foreach($this->links as $link) {
+//       if($link->rel == 'current_instance') {
+//         $instance_href = $link->href;
+//       }
+//     }
+//     if($instance_href) {
+//       $instance_href = str_replace('/api/', '', $instance_href);
+//       $command = $this->_client->getCommand('instance', array('path' => $instance_href, 'id' => 'foo', 'cloud_id' => '123'));
+//       $command->execute();
+//       $result = $command->getResult();
+//       $retval = json_decode($result->getBody(true));
+//     }
+//     return $retval;
+//   }
 }

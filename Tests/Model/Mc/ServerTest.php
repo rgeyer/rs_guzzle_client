@@ -58,7 +58,6 @@ class ServerTest extends \Guzzle\Tests\GuzzleTestCase {
    * @group unit
    */
   public function testCanGetNextInstanceRelationship() {
-  	$this->markTestSkipped('Instance command(s) not yet implemented');
   	$this->setMockResponse(
   		ClientFactory::getClient('1.5'),
   		array(
@@ -68,7 +67,7 @@ class ServerTest extends \Guzzle\Tests\GuzzleTestCase {
   	);
   	$server = new Server();
   	$server->find_by_id('12345');
-  	$current_instance = $server->next_instance();
+  	$next_instance = $server->next_instance();
   	$this->assertNotNull($next_instance);
   	$this->assertInstanceOf('stdClass', $next_instance);
   }
@@ -78,7 +77,6 @@ class ServerTest extends \Guzzle\Tests\GuzzleTestCase {
    * @group unit
    */
   public function testCanGetCurrentInstanceRelationship() {
-  	$this->markTestSkipped('Instance command(s) not yet implemented');
   	$this->setMockResponse(
   		ClientFactory::getClient('1.5'),
   		array(
