@@ -400,5 +400,25 @@ EOF;
     $this->assertEquals('1234', $model->last_request_params['baz']);
     
   }
+  
+  public function testFindByIdAcceptsParameters() {
+    $model = new ModelConcreteClassStubbed();
+    $model->find_by_id('1234', array('foo'=>1,'bar'=>1));
+    $keys = array_keys($model->last_request_params);
+    $this->assertEquals(3, count($model->last_request_params));
+    $this->assertContains('id', $keys);
+    $this->assertContains('foo', $keys);
+    $this->assertContains('bar', $keys);    
+  }
+  
+  public function testFindByHrefAcceptsParameters() {
+    $model = new ModelConcreteClassStubbed();
+    $model->find_by_href('/api/cloud/1234', array('foo'=>1,'bar'=>1));
+    $keys = array_keys($model->last_request_params);
+    $this->assertEquals(3, count($model->last_request_params));
+    $this->assertContains('id', $keys);
+    $this->assertContains('foo', $keys);
+    $this->assertContains('bar', $keys);    
+  }
 }
 

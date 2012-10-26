@@ -310,8 +310,8 @@ abstract class ModelBase {
     return $results;
 	}
 	
-	public function find_by_id($id) {
-    $params = array('id' => $this->_castIdWithClosure($id));
+	public function find_by_id($id, array $params = array()) {
+    $params['id'] = $this->_castIdWithClosure($id);
     if($this->_path_requires_cloud_id && array_key_exists('cloud_id', $this->_params)) {
 			$params['cloud_id'] = $this->cloud_id;
 		}
@@ -320,9 +320,9 @@ abstract class ModelBase {
 		$this->initialize($result);
 	}
 
-	public function find_by_href($href) {
+	public function find_by_href($href, array $params = array()) {
 		$id = $this->getIdFromHref($href);
-		$this->find_by_id($id);
+		$this->find_by_id($id, $params);
 	}
 
   /**
