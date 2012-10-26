@@ -16,7 +16,7 @@
       <param name="path" type="string" default="clouds/{id}{output_format}" />
       <param name="method" type="string" static="GET" />      
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
-      <param name="id" type="integer" required="true" />
+      <param name="id" type="integer" required="true" location="path" />
       <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Cloud" />
     </command>
     
