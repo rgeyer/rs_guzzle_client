@@ -45,7 +45,9 @@ class ServerTemplate extends ModelBase {
 		);
 		
 		$this->_relationship_handlers = array(
-		  'publication' => 'publication'
+	    'multi_cloud_images' => 'multi_cloud_images',
+		  'publication' => 'publication',
+	    'default_multi_cloud_image' => 'multi_cloud_image'
 	  );
 		
 		parent::__construct($mixed);
