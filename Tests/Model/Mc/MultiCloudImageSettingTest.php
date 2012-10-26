@@ -55,5 +55,43 @@ class MultiCloudImageSettingTest extends ClientCommandsBase {
 		$mci = new MultiCloudImageSetting();
 		$mci->duplicate();
 	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetMultiCloudImageRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/multi_cloud_image_setting/json/response',
+        '1.5/multi_cloud_image/json/response'
+      )
+    );
+		$mciset = new MultiCloudImageSetting();
+    $mciset->find_by_id(12345, array('mci_id' => '1234'));
+    $mci = $mciset->multi_cloud_image();
+    $this->assertNotNull($mci);
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage', $mci);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetCloudRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/multi_cloud_image_setting/json/response',
+        '1.5/cloud/json/response'
+      )
+    );
+		$mciset = new MultiCloudImageSetting();
+    $mciset->find_by_id(12345, array('mci_id' => '1234'));
+    $cloud = $mciset->cloud();
+    $this->assertNotNull($cloud);
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Cloud', $cloud);
+  }
 	
 }

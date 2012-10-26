@@ -37,6 +37,11 @@ class MultiCloudImageSetting extends ModelBase {
       'multi_cloud_image_setting[user_data]' => $this->castToString()
     );
     
+    $this->_relationship_handlers = array(
+      'multi_cloud_image' => 'multi_cloud_image',
+      'cloud' => 'cloud'
+    );
+    
     parent::__construct($mixed);
   }
 
