@@ -24,7 +24,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates/json/response'
       )
     );
@@ -53,7 +52,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates/json/response'
       )
     );
@@ -73,7 +71,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates/json/response'
       )
     );
@@ -93,7 +90,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates/xml/response'
       )
     );
@@ -147,6 +143,28 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
    * @group v1_5
    * @group unit
    */
+  public function testIndexCommandReturnsArrayOfModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/server_templates/json/response'
+      )
+    );
+
+    $command = $client->getCommand('server_templates');
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertNotNull($result);
+    $this->assertInternalType('array', $result);
+    $this->assertGreaterThan(0, count($result));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate', $result[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testHasShowCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('server_template');
@@ -161,7 +179,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_template/json/response'
       )
     );
@@ -192,7 +209,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_template/json/response'
       )
     );
@@ -209,7 +225,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_template/json/response'
       )
     );
@@ -229,7 +244,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_template/json/response'
       )
     );
@@ -249,7 +263,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_template/xml/response'
       )
     );
@@ -291,11 +304,9 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
    * @group unit
    */
   public function testShowCommandReturnsAModel() {
-    $this->markTestSkipped("A model does not yet exist");
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_template/json/response'
       )
     );
@@ -325,7 +336,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_destroy/response'
       )
     );
@@ -356,7 +366,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_destroy/response'
       )
     );
@@ -383,7 +392,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_create/response'
       )
     );
@@ -419,7 +427,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_create/response'
       )
     );
@@ -435,12 +442,9 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
    * @group unit
    */
   public function testCreateCommandReturnsAModel() {
-
-    $this->markTestSkipped("A model does not yet exist");
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_create/response'
       )
     );
@@ -475,7 +479,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_update/response'
       )
     );
@@ -506,7 +509,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_update/response'
       )
     );
@@ -533,7 +535,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_clone/response'
       )
     );
@@ -570,7 +571,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_clone/response'
       )
     );
@@ -592,7 +592,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_clone/response'
       )
     );
@@ -609,12 +608,9 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
    * @group unit
    */
   public function testCloneCommandReturnsAModel() {
-
-    $this->markTestSkipped("A model does not yet exist");
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_clone/response'
       )
     );
@@ -650,7 +646,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_commit/response'
       )
     );
@@ -689,7 +684,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_commit/response'
       )
     );
@@ -715,7 +709,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_commit/response'
       )
     );
@@ -741,7 +734,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_commit/response'
       )
     );
@@ -767,7 +759,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_commit/response'
       )
     );
@@ -788,11 +779,9 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
    * @group unit
    */
   public function testCommitCommandReturnsAModel() {
-    $this->markTestSkipped("A model does not yet exist");
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_commit/response'
       )
     );
@@ -832,7 +821,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_publish/response'
       )
     );
@@ -873,7 +861,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_publish/response'
       )
     );
@@ -900,7 +887,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_publish/response'
       )
     );
@@ -927,7 +913,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_publish/response'
       )
     );
@@ -954,7 +939,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_publish/response'
       )
     );
@@ -979,7 +963,6 @@ class ServerTemplateCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCom
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server_templates_publish/response'
       )
     );

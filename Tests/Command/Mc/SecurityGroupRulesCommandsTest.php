@@ -24,7 +24,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules/json/response'
       )
     );
@@ -53,7 +52,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules/json/response'
       )
     );
@@ -73,7 +71,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules/json/response'
       )
     );
@@ -93,7 +90,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules/xml/response'
       )
     );
@@ -161,7 +157,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules_create/response'
       )
     );
@@ -200,7 +195,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules_create/response'
       )
     );
@@ -226,7 +220,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups_create/response'
       )
     );
@@ -253,7 +246,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules_create/response'
       )
     );
@@ -279,7 +271,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules_create/response'
       )
     );
@@ -306,7 +297,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules_create/response'
       )
     );
@@ -332,7 +322,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules_create/response'
       )
     );
@@ -356,7 +345,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups_create/response'
       )
     );
@@ -392,7 +380,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups_create/response'
       )
     );
@@ -440,7 +427,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rule/json/response'
       )
     );
@@ -471,7 +457,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rule/json/response'
       )
     );
@@ -488,7 +473,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rule/json/response'
       )
     );
@@ -508,7 +492,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rule/json/response'
       )
     );
@@ -528,7 +511,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rule/xml/response'
       )
     );
@@ -574,7 +556,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rule/json/response'
       )
     );
@@ -604,7 +585,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules_destroy/response'
       )
     );
@@ -635,7 +615,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_group_rules_destroy/response'
       )
     );

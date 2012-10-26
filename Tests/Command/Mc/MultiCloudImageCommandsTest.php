@@ -25,7 +25,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images/json/response'
       )
     );
@@ -54,7 +53,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images/json/response'
       )
     );
@@ -74,7 +72,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images/json/response'
       )
     );
@@ -94,7 +91,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images/xml/response'
       )
     );
@@ -129,6 +125,28 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
    * @group v1_5
    * @group unit
    */
+  public function testIndexCommandReturnsArrayOfModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/multi_cloud_images/json/response'
+      )
+    );
+
+    $command = $client->getCommand('multi_cloud_images');
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertNotNull($result);
+    $this->assertInternalType('array', $result);
+    $this->assertGreaterThan(0, count($result));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage', $result[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testHasCreateCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('multi_cloud_images_create');
@@ -143,7 +161,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_create/response'
       )
     );
@@ -179,7 +196,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_create/response'
       )
     );
@@ -196,7 +212,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_create/response'
       )
     );
@@ -231,7 +246,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_update/response'
       )
     );
@@ -262,7 +276,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_update/response'
       )
     );
@@ -289,7 +302,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_clone/response'
       )
     );
@@ -326,7 +338,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_clone/response'
       )
     );
@@ -348,7 +359,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_clone/response'
       )
     );
@@ -368,7 +378,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_clone/response'
       )
     );
@@ -404,7 +413,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_commit/response'
       )
     );
@@ -441,7 +449,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_commit/response'
       )
     );
@@ -465,7 +472,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_commit/response'
       )
     );
@@ -487,7 +493,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_commit/response'
       )
     );
@@ -523,7 +528,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_image/json/response'
       )
     );
@@ -554,7 +558,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_image/json/response'
       )
     );
@@ -571,7 +574,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_image/json/response'
       )
     );
@@ -591,7 +593,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_image/json/response'
       )
     );
@@ -611,7 +612,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_image/xml/response'
       )
     );
@@ -637,7 +637,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_image/json/response'
       )
     );
@@ -667,7 +666,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_destroy/response'
       )
     );
@@ -698,7 +696,6 @@ class MultiCloudImageCommandsTest extends ClientCommandsBase {
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/multi_cloud_images_destroy/response'
       )
     );

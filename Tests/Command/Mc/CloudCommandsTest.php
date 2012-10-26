@@ -23,7 +23,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/clouds/json/response'
       )
     );
@@ -52,7 +51,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/clouds/json/response'
       )
     );
@@ -72,7 +70,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/clouds/json/response'
       )
     );
@@ -92,7 +89,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/clouds/xml/response'
       )
     );
@@ -127,6 +123,28 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
    * @group v1_5
    * @group unit
    */
+  public function testIndexCommandReturnsArrayOfModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/clouds/json/with_filter/response'
+      )
+    );
+
+    $command = $client->getCommand('clouds');
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertNotNull($result);
+    $this->assertInternalType('array', $result);
+    $this->assertGreaterThan(0, count($result));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Cloud', $result[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testHasShowCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('cloud');
@@ -141,7 +159,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/cloud/json/response'
       )
     );
@@ -172,7 +189,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/cloud/json/response'
       )
     );
@@ -191,7 +207,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/cloud/json/response'
       )
     );
@@ -213,7 +228,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/cloud/json/response'
       )
     );
@@ -233,7 +247,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/cloud/json/response'
       )
     );
@@ -253,7 +266,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/cloud/json/response'
       )
     );
@@ -273,7 +285,6 @@ class CloudCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/cloud/xml/response'
       )
     );

@@ -23,7 +23,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instances/json/response'
       )
     );
@@ -52,7 +51,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instances/json/response'
       )
     );
@@ -72,7 +70,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instances/json/response'
       )
     );
@@ -92,7 +89,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instances/xml/response'
       )
     );
@@ -160,7 +156,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instance/json/response'
       )
     );
@@ -196,7 +191,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instance/json/response'
       )
     );
@@ -219,7 +213,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/server/json/response'
       )
     );
@@ -240,7 +233,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instance/json/response'
       )
     );
@@ -265,7 +257,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instance/json/response'
       )
     );
@@ -291,7 +282,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instance/xml/response'
       )
     );
@@ -337,7 +327,6 @@ class InstanceCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsB
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/instance/json/response'
       )
     );

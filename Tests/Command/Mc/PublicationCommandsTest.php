@@ -23,7 +23,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publications/json/response'
       )
     );
@@ -52,7 +51,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publications/json/response'
       )
     );
@@ -72,7 +70,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publications/json/response'
       )
     );
@@ -92,7 +89,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publications/xml/response'
       )
     );
@@ -160,7 +156,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publication/json/response'
       )
     );
@@ -191,7 +186,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publication/json/response'
       )
     );
@@ -208,7 +202,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publication/json/response'
       )
     );
@@ -228,7 +221,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publication/json/response'
       )
     );
@@ -248,7 +240,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publication/xml/response'
       )
     );
@@ -294,7 +285,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publication/json/response'
       )
     );
@@ -324,7 +314,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publications_import/response'
       )
     );
@@ -355,7 +344,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/publications_import/response'
       )
     );

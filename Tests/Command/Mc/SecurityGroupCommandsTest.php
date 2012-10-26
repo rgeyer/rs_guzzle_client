@@ -23,7 +23,6 @@ class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComm
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups/json/response'
       )
     );
@@ -54,7 +53,6 @@ class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComm
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups/json/response'
       )
     );
@@ -73,7 +71,6 @@ class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComm
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups/json/response'
       )
     );
@@ -90,7 +87,6 @@ class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComm
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups/json/response'
       )
     );
@@ -110,7 +106,6 @@ class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComm
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups/json/response'
       )
     );
@@ -130,7 +125,6 @@ class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComm
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/login',
         '1.5/security_groups/xml/response'
       )
     );
@@ -178,6 +172,28 @@ class SecurityGroupCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComm
 
     $this->assertNotNull($filter_param);
     $this->assertEquals(1, count($filter_param));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testIndexCommandReturnsArrayOfModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/security_groups/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_groups', array('cloud_id' => '1234'));
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertNotNull($result);
+    $this->assertInternalType('array', $result);
+    $this->assertGreaterThan(0, count($result));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup', $result[0]);
   }
 
   /**
