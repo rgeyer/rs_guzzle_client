@@ -45,6 +45,7 @@ class Cloud extends ModelBase {
     );
 
     $this->_relationship_handlers = array(
+      'instances' => 'instances',
       'security_groups' => 'security_groups'
     );
 		

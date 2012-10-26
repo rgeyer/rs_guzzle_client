@@ -134,5 +134,24 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
     $this->assertGreaterThan(0, count($secGrps));
     $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup', $secGrps[0]);
   }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetInstancesRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/cloud/json/response',
+        '1.5/instances/json/response'
+      )
+    );
+		$cloud = new Cloud();
+    $cloud->find_by_id(12345);
+    $instances = $cloud->instances();
+    $this->assertGreaterThan(0, count($instances));
+    $this->assertInstanceOf('stdClass', $instances[0]);
+  }
 	
 }
