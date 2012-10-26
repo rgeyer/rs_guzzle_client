@@ -1,0 +1,6 @@
+GET /api/multi_cloud_images/12345/settings/12345.json HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNo1kMtygjAARf8la5nJCyTMdGERS0UH6lDEbjohCZVawUJ46fjvxUU3d3XPWZwb4MAB5xHMgGyAcwNto2rgUIyIfZ8BLYCDiIkwQhahM1DI6S0xF7ki1EA5nAYpbDBuQQNhggiDGefKmnxa_bO2_WAnPdC5hOH66s_70pVJmq38yL-U-iu3ft1TtTz0Xrsm2z5KPHbgP_N1sYgpGwKvqDffcuGyItztuvP2RWo3Z8e9d4mTEAaXhB3ew6FYstfN9qMf5WIM3xpvFanxaodCekYGEVVNfhU4gIKNw-bYVcGJprivU9GeupTHnYll-amFP9bPezOqnh5JhkcSLkTVlnqqQhGh9_sfeoReHQ==; _session_id=a53d259ac245217cace4ea8db7d641e7
+

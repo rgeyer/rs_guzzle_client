@@ -408,5 +408,62 @@
       <param name="id" type="string" required="true" location="path" />
     </command>
     
+    <!-- MultiCloudImageSettings -->
+    <command name="multi_cloud_image_setting" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+    	<doc>Show information about a single MultiCloudImage setting.</doc>
+      <param name="path" type="string" default="multi_cloud_images/{mci_id}/settings/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="mci_id" type="integer" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImageSetting" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />    	
+    </command>
+
+    <command name="multi_cloud_image_settings" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists the MultiCloudImage settings</doc>
+      <param name="path" type="string" default="multi_cloud_images/{mci_id}/settings{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+      <param name="mci_id" type="integer" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImageSetting" />
+    </command>
+
+    <command name="multi_cloud_image_settings_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new generic cloud setting for an existing MultiCloudImage</doc>
+      <param name="path" type="string" default="multi_cloud_images/{mci_id}/settings" />
+      <param name="method" type="string" static="POST" />
+      <param name="mci_id" type="integer" required="true" location="path" />
+      <param name="multi_cloud_image_setting[cloud_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[image_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[instance_type_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[kernel_image_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[ramdisk_image_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[user_data]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImageSetting" />
+    </command>
+
+    <command name="multi_cloud_image_settings_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new generic cloud setting</doc>
+      <param name="path" type="string" default="multi_cloud_images/{mci_id}/settings/{id}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="mci_id" type="integer" required="true" location="path" />
+      <param name="multi_cloud_image_setting[cloud_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[image_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[instance_type_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[kernel_image_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[ramdisk_image_href]" type="string" required="false" />
+      <param name="multi_cloud_image_setting[user_data]" type="string" required="false" />
+    </command>
+
+    <command name="multi_cloud_image_settings_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes a MultiCloudImage setting</doc>
+      <param name="path" type="string" default="multi_cloud_images/{mci_id}/settings/{id}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="mci_id" type="integer" required="true" location="path" />
+    </command>
+    
   </commands>
 </client>

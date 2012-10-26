@@ -1,0 +1,8 @@
+POST /api/multi_cloud_images/12345/settings HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNo1kEFvgjAYQP9LzzSxLaX9SHaAqZsuiExMDBeDBQ1DhQHFquG_Dw-7v_cO74lS5KLLHVkoa5H7RLrNG-TalDA5WKhTyCWME0qoYNxCRTbSDs0oB5ZicpwITEhOsczzAyaUEQYTkMQWY6_L_12Alzvm0b3nFLydWIr9pJh5s3PQn3X5W1Qa6jpbhrj1xLY855WeR85qDZU3xddFjRd8-w61SHz6YaeNaddYQGNWIMWnuUXHeq_Mqcr8IOi-5GmzdHaHJIByPvP6KNL6evEflBsRh024kVkcn2ImfyKe0EW0NRAn01XBq1I92tvj21-rVgVKvr2WmNeSVKlKX7vxik2YPQx_5XtbgA==; _session_id=b7f882a18548811470c4a2d35004f1a0
+
+multi_cloud_image_setting%5Bcloud_href%5D=%2Fapi%2Fclouds%2F1868&multi_cloud_image_setting%5Bimage_href%5D=%2Fapi%2Fclouds%2F1868%2Fimages%2F3SDPA9GENAUVH&multi_cloud_image_setting%5Binstance_type_href%5D=%2Fapi%2Fclouds%2F1868%2Finstance_types%2FD5GHRVB1DMVQC

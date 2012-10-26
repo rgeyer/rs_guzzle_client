@@ -1,0 +1,23 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Fri, 26 Oct 2012 00:33:56 GMT
+Content-Type: application/vnd.rightscale.multi_cloud_image_setting+xml;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 200
+Content-Length: 501
+X-Request-Uuid: 7db87111e2714f499571f7a22010d0e8
+Set-Cookie: _session_id=b5d426aa20ba0076668adcda67a1cb0e; path=/; Secure; HttpOnly
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<multi_cloud_image_setting>
+  <links>
+    <link href="/api/multi_cloud_images/12345/settings/12345" rel="self"/>
+    <link href="/api/clouds/12345/images/EGNGGH83NVUOH" rel="image"/>
+    <link href="/api/clouds/12345" rel="cloud"/>
+    <link href="/api/clouds/12345/instance_types/12345HGRS0DE1RA27" rel="instance_type"/>
+    <link href="/api/multi_cloud_images/12345" rel="multi_cloud_image"/>
+  </links>
+  <actions></actions>
+</multi_cloud_image_setting>
