@@ -143,6 +143,28 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
    * @group v1_5
    * @group unit
    */
+  public function testIndexCommandReturnsArrayOfModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/security_group_rules/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rules');
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertNotNull($result);
+    $this->assertInternalType('array', $result);
+    $this->assertGreaterThan(0, count($result));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule', $result[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testHasCreateCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('security_group_rules_create');
@@ -572,28 +594,6 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
 
     $this->assertNotNull($filter_param);
     $this->assertEquals(1, count($filter_param));
-  }
-
-  /**
-   * @group v1_5
-   * @group unit
-   */
-  public function testIndexCommandReturnsArrayOfModel() {
-    $client = ClientFactory::getClient('1.5');
-    $this->setMockResponse($client,
-      array(
-        '1.5/security_group_rules/json/response'
-      )
-    );
-
-    $command = $client->getCommand('security_group_rules');
-    $command->execute();
-    $result = $command->getResult();
-
-    $this->assertNotNull($result);
-    $this->assertInternalType('array', $result);
-    $this->assertGreaterThan(0, count($result));
-    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule', $result[0]);
   }
 
   /**
