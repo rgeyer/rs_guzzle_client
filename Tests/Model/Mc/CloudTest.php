@@ -30,8 +30,12 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
 	public function testCanParseJsonResponse() {
 		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/cloud/json/response');
 		$cloud = new Cloud();
-		$cloud->find_by_id('12345');
-    $this->assertEquals($cloud->id, '12345');
+		$cloud->find_by_id('12345');		
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Cloud', $cloud);
+		$keys = array_keys($cloud->getParameters());		
+		foreach(array('links', 'description', 'name', 'href', 'id') as $prop) {
+			$this->assertContains($prop, $keys);
+		}
 	}
 
   /**

@@ -16,6 +16,15 @@ class ServerTemplateTest extends ClientCommandsBase {
 		ClientFactory::getClient('1.5')->get('session')->send();
 	}
 
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testExtendsModelBase() {
+    $st = new ServerTemplate();
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\ModelBase', $st);
+  }
+
 	/**
 	 * @group v1_5
 	 * @group unit

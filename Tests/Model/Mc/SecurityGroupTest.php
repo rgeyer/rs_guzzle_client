@@ -13,18 +13,31 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
 		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/login');
 		ClientFactory::getClient('1.5')->get('session')->send();
 	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testExtendsModelBase() {
+    $sg = new SecurityGroup();
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\ModelBase', $sg);
+  }
 	
 	/**
 	 * @group v1_5
 	 * @group unit
 	 */
 	public function testCanParseJsonResponse() {
-		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/security_groups/json/response');
+		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/security_group/json/response');
 		// Doing a list rather than a show/find since show does not work
 		$secgrp = new SecurityGroup();
 		$secgrp->cloud_id = 12345;
-		$groups = $secgrp->index();
-    // TODO: Actually test something?
+		$secgrp->find_by_id('12345');		
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup', $secgrp);
+		$keys = array_keys($secgrp->getParameters());		
+		foreach(array('links', 'cloud_id', 'actions', 'security_group[name]', 'resource_uid', 'href', 'id') as $prop) {
+			$this->assertContains($prop, $keys);
+		}
 	}
 	
 	/**

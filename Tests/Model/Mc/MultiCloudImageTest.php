@@ -15,6 +15,15 @@ class MultiCloudImageTest extends ClientCommandsBase {
 		ClientFactory::getClient('1.5')->get('session')->send();
 	}
 
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testExtendsModelBase() {
+    $mci = new MultiCloudImage();
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\ModelBase', $mci);
+  }
+
 	/**
 	 * @group v1_5
 	 * @group unit

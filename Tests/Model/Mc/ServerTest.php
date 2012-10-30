@@ -14,6 +14,15 @@ class ServerTest extends \Guzzle\Tests\GuzzleTestCase {
 		ClientFactory::getClient('1.5')->get('session')->send();
 	}
 
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testExtendsModelBase() {
+    $server = new Server();
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\ModelBase', $server);
+  }
+
 	/**
 	 * @group v1_5
 	 * @group unit
@@ -21,8 +30,12 @@ class ServerTest extends \Guzzle\Tests\GuzzleTestCase {
 	public function testCanParseJsonResponse() {
 		$this->setMockResponse(ClientFactory::getClient('1.5'), '1.5/server/json/response');
 		$server = new Server();
-    $server->find_by_id('12345');
-    $this->assertEquals($server->id, '12345');
+    $server->find_by_id('12345');		
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Server', $server);
+		$keys = array_keys($server->getParameters());		
+		foreach(array('links', 'state', 'server[description]', 'actions', 'updated_at', 'created_at', 'server[name]', 'href', 'id') as $prop) {
+			$this->assertContains($prop, $keys);
+		}
 	}
 
   /**
