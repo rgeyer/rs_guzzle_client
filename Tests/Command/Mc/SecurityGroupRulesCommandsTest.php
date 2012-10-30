@@ -413,6 +413,33 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
    * @group v1_5
    * @group unit
    */
+  public function testCreateCommandReturnsAModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/security_group_rules_create/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'security_group_rules_create',
+      array(
+        'cloud_id' => 1234,
+        'security_group_id' => 'abc',
+        'security_group_rule[protocol]' => 'tcp',
+        'security_group_rule[source_type]' => 'group'
+      )
+    );
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule', $result);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testHasShowCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('security_group_rule');
@@ -551,8 +578,29 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
    * @group v1_5
    * @group unit
    */
+  public function testIndexCommandReturnsArrayOfModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/security_group_rules/json/response'
+      )
+    );
+
+    $command = $client->getCommand('security_group_rules');
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertNotNull($result);
+    $this->assertInternalType('array', $result);
+    $this->assertGreaterThan(0, count($result));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule', $result[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testShowCommandReturnsAModel() {
-    $this->markTestSkipped("A model does not yet exist");
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(

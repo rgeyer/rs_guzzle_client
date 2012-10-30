@@ -69,6 +69,7 @@
       <param name="view" type="enum:default" required="false" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="filter" type="array" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule" />
     </command>
 
     <command name="security_group_rule" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
@@ -76,7 +77,7 @@
       <param name="path" type="string" default="security_group_rules/{id}{output_format}" />
       <param name="method" type="string" static="GET" />
       <param name="id" type="integer" required="true" location="path" />
-      <!-- <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule" />-->
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="view" type="enum:default" required="false" />
     </command>
@@ -96,6 +97,7 @@
       <param name="security_group_rule[protocol_details][end_port]" type="string" required="false" />
       <param name="security_group_rule[protocol_details][icmp_code]" type="string" required="false" />
       <param name="security_group_rule[protocol_details][icmp_type]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupRule" />
     </command>
 
     <command name="security_group_rules_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">

@@ -17,7 +17,24 @@ namespace RGeyer\Guzzle\Rs\Model\Mc;
 use RGeyer\Guzzle\Rs\Model\ModelBase;
 use BadMethodCallException;
 
-
+/**
+ * A model for the RightScale SecurityGroupRule Resource in v1.5 of the API
+ * @see http://reference.rightscale.com/api1.5/media_types/MediaTypeSecurityGroupRule.html 
+ * 
+ * @author Ryan J. Geyer <me@ryangeyer.com>
+ * 
+ * @property string $icmp_type
+ * @property string $group_name
+ * @property string $icmp_code
+ * @property string $protocol
+ * @property string $group_owner
+ * @property string $cidr_ips
+ * @property string $start_port
+ * @property string $end_port
+ * 
+ * @method RGeyer\Guzzle\Rs\Model\SecurityGroup security_group() The SecurityGroup this SecurityGroupRule belongs to
+ *
+ */
 class SecurityGroupRule extends ModelBase {
 
 	public function __construct($mixed = null) {
