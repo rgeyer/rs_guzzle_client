@@ -132,7 +132,7 @@
       <doc>Deletes a given server.</doc>
       <param name="path" type="string" static="servers/{id}" />
       <param name="method" type="string" static="DELETE" />
-      <param name="id" type="string" required="true" location="path" />
+      <param name="id" type="integer" required="true" location="path" />
     </command>    
     
     <command name="server" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
