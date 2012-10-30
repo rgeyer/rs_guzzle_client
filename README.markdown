@@ -1342,7 +1342,7 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td><b>Model</b></td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
   </tbody>
 </table>
@@ -1422,9 +1422,9 @@ Below you will find the current controllers (and their commands) that are suppor
 TODO
 ====
 * Allow the user to specify a logger.
-* Mc Models should be able to follow links I.E. $cloud->instances() and $deployment->servers()
 * ModelBase "duplicate" and "clone" should both work on either Ec2 or Mc classes.
 * Handle the HTTP 500 seek() null error
 * Reduce (or eliminate) the need for the ServiceBuilder and ClientFactory
 * Allow OAuth token authentication
 * ModelBase should assume that the API call for a relationship is the same as the relationship name, unless specified otherwise.  I.E. relationship for 'cloud' would call command 'cloud' with an ID
+* Refactor tagging functionality into ModelBase or an "IsTaggable" mixin class.  See Model\Mc\Server for example of how *not* to do it

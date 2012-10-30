@@ -142,6 +142,28 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
    * @group v1_5
    * @group unit
    */
+  public function testIndexCommandReturnsArrayOfModel() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/publications/json/response'
+      )
+    );
+
+    $command = $client->getCommand('publications');
+    $command->execute();
+    $result = $command->getResult();
+
+    $this->assertNotNull($result);
+    $this->assertInternalType('array', $result);
+    $this->assertGreaterThan(0, count($result));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Publication', $result[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testHasShowCommand() {
     $client = ClientFactory::getClient('1.5');
     $command = $client->getCommand('publication');
@@ -281,7 +303,6 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
    * @group unit
    */
   public function testShowCommandReturnsAModel() {
-    $this->markTestSkipped("A model does not yet exist");
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
@@ -293,7 +314,7 @@ class PublicationCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     $command->execute();
     $result = $command->getResult();
 
-    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Server', $result);
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Publication', $result);
   }
 
   /**

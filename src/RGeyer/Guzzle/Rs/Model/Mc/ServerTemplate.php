@@ -28,7 +28,7 @@ use BadMethodCallException;
  * @property integer $revision
  *
  * @method RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage[] multi_cloud_images()
- * @method stdClass publication() A single publication object from which this ServerTemplate originates
+ * @method RGeyer\Guzzle\Rs\Model\Mc\ServerTemplate publication() A single publication object from which this ServerTemplate originates
  * @method RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage default_multi_cloud_image()
  */
 class ServerTemplate extends ModelBase {
