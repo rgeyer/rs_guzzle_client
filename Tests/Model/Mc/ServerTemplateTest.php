@@ -115,7 +115,7 @@ class ServerTemplateTest extends ClientCommandsBase {
 		$st->find_by_id('12345');
 		$pub = $st->publication();
 		$this->assertNotNull($pub);
-		$this->assertInstanceOf('stdClass', $pub);
+		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Publication', $pub);
 	}
 
 	/**
