@@ -370,7 +370,7 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td><b>Model</b></td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="orange">20%</td>
+      <td bgcolor="orange">20% (Lacks all reference commands/models)</td>
     </tr>
   </tbody>
 </table>
@@ -1095,7 +1095,7 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td><b>Model</b></td>
       <td bgcolor="red">0%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="orange">50% (Lacks all relationship commands/models)</td>
     </tr>
   </tbody>
 </table>
@@ -1341,7 +1341,7 @@ Below you will find the current controllers (and their commands) that are suppor
     </tr>
     <tr>
       <td><b>Model</b></td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
       <td bgcolor="red">0%</td>
     </tr>
   </tbody>

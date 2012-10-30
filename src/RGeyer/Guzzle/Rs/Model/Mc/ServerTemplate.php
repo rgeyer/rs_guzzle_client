@@ -19,13 +19,17 @@ use BadMethodCallException;
 
 /**
  * A model for the RightScale ServerTemplate Resource in v1.5 of the API
+ * @see http://reference.rightscale.com/api1.5/media_types/MediaTypeServerTemplate.html
+ * 
  * @author Ryan J. Geyer <me@ryangeyer.com>
  * @property array $inputs An array of the inputs defined by the scripts associated with this ServerTemplate
  * @property string $description
  * @property string $name
  * @property integer $revision
  *
+ * @method RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage[] multi_cloud_images()
  * @method stdClass publication() A single publication object from which this ServerTemplate originates
+ * @method RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage default_multi_cloud_image()
  */
 class ServerTemplate extends ModelBase {
 
