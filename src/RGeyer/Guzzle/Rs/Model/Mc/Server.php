@@ -46,6 +46,7 @@ class Server extends AbstractServer {
 		);
 		
 		$this->_relationship_handlers = array(
+	    'alert_specs' => 'alert_specs',
 	    'next_instance' => 'instance',
 	    'current_instance' => 'instance'
     );

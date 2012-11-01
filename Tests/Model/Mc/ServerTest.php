@@ -52,7 +52,6 @@ class ServerTest extends \Guzzle\Tests\GuzzleTestCase {
    * @group unit
    */
   public function testCanGetAlertSpecRelationship() {
-  	$this->markTestSkipped('Alert Spec command(s) not yet implemented');
   	$this->setMockResponse(
   		ClientFactory::getClient('1.5'),
   		array(
@@ -62,8 +61,13 @@ class ServerTest extends \Guzzle\Tests\GuzzleTestCase {
   	);
   	$server = new Server();
   	$server->find_by_id('12345');
+  	$alert_spec_link = new \stdClass();
+  	$alert_spec_link->rel = 'alert_specs';
+  	$alert_spec_link->href = '/api/server/1234/alert_specs';
+  	$server->links = array($alert_spec_link);  	
   	$alert_specs = $server->alert_specs();
   	$this->assertGreaterThan(0, count($alert_specs));
+  	$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\AlertSpec', $alert_specs[0]);
   }
 
   /**

@@ -88,6 +88,7 @@ class ServerArray extends ModelBase {
     );
     
     $this->_relationship_handlers = array(
+      'alert_specs' => 'alert_specs',
       'next_instance' => 'instance',
       'current_instances' => 'instances'
     );

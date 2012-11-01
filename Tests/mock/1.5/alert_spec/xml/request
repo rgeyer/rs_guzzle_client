@@ -1,0 +1,6 @@
+GET /api/alert_specs/12345.xml HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMtuglAURf_ljCHh3APlkXTAQ9GKLSkq0AnhcWssAlW5Khr_vZh0urP2Gqw75GBBM4AE1QmsO4gTP4KlMiTjIUFfgoWkoa5qiCTBrhppXua8KBQuM6q4jMiZbDJWycgIqVDwpSI2-nr-_9WeuwSjHta7TTwje-EkNc5VcVsF2hDfcmrSfTqrL_ZFr6jzw-I6kOK3pj9_T9-ayHcGn1DrVottX4us9tJDT9MoiCP32BrnYt84w6WZbL-_luyaDG4csvjjMwxMobeeubE3ne0UyfKnOwdTXRz0tYji3p4ydAzPO7i6EfHMnJhiFs6T8FfBrPHt5eszyfWZJC_LTrT9WEVFUh-PPwdIW9I=
+

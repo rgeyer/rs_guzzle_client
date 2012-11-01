@@ -1,0 +1,10 @@
+PUT /api/alert_specs/12345 HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Expect: 100-Continue
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMtugkAAAP9lz2zCPllIekEUrCg06oInsgUSlYItrBRq-Hcx6X1mDvMACjigHoEBig44D3DvyhY4FCMiJgPoHDiIMGRRQQg3wKWYaV7YWHFbQExKDhEqMRSmzSDCBJHCnE2F5p4u_13G2Mud86AnGdb83NTQV98HFLjnaNRyyzo-ItxZg4rjsdrIxCXUi0Sahnl_LO6ywke9op_WGKy_NquG2Zl7aeJ66coqQ8e2-936ct--X8ywcYMxPSyH9Ueir76gfZglYe7dTtaeHHZSeNe_n53H1SAXDNo2jKNTEu5v7aL3lXlueiupgo1I3Sh_ey0ZXktUnt_ujZ6vUEToND0Bws5aqg==
+Content-Length: 32
+
+alert_spec%5Bcondition%5D=%21%3D

@@ -601,6 +601,69 @@
       <param name="terminate_all" type="enum:true,false" required="false" />
       <param name="filter" type="array" required="false" />      
     </command>
+
+    <!-- Start AlertSpecs -->
+    <command name="alert_specs" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all AlertSpecs</doc>
+      <param name="path" type="string" default="alert_specs{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="view" type="enum:default" required="false" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\AlertSpec" />
+    </command>    
+    
+    <command name="alert_spec" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Shows the information of a single alert spec</doc>
+      <param name="path" type="string" default="alert_specs/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\AlertSpec" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default" required="false" />
+    </command>
+    
+    <command name="alert_specs_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new AlertSpec with the given parameters.</doc>
+      <param name="path" type="string" default="alert_specs" />
+      <param name="method" type="string" static="POST" />
+      <param name="alert_spec[condition]" type="enum:&gt;,&gt;=,&lt;,&lt;=,==,!=" required="true" />
+      <param name="alert_spec[duration]" type="string" required="true" />
+      <param name="alert_spec[file]" type="string" required="true" />
+      <param name="alert_spec[name]" type="string" required="true" />      
+      <param name="alert_spec[threshold]" type="string" required="true" />
+      <param name="alert_spec[variable]" type="string" required="true" />      
+      <param name="alert_spec[description]" type="string" required="false" />
+      <param name="alert_spec[escalation_name]" type="string" required="false" />
+      <param name="alert_spec[subject_href]" type="string" required="false" />
+      <param name="alert_spec[vote_tag]" type="string" required="false" />
+      <param name="alert_spec[vote_type]" type="enum:grow,shrink" required="false" />      
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\AlertSpec" />
+    </command>
+    
+    <command name="alert_specs_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates an AlertSpec with the given parameters.</doc>
+      <param name="path" type="string" default="alert_specs/{id}" />
+      <param name="method" type="string" static="PUT" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="alert_spec[condition]" type="enum:&gt;,&gt;=,&lt;,&lt;=,==,!=" required="false" />
+      <param name="alert_spec[duration]" type="string" required="false" />
+      <param name="alert_spec[file]" type="string" required="false" />
+      <param name="alert_spec[name]" type="string" required="false" />      
+      <param name="alert_spec[threshold]" type="string" required="false" />
+      <param name="alert_spec[variable]" type="string" required="false" />      
+      <param name="alert_spec[description]" type="string" required="false" />
+      <param name="alert_spec[escalation_name]" type="string" required="false" />
+      <param name="alert_spec[vote_tag]" type="string" required="false" />
+      <param name="alert_spec[vote_type]" type="enum:grow,shrink" required="false" />
+    </command>
+
+    <command name="alert_specs_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes a given AlertSpec.</doc>
+      <param name="path" type="string" default="alert_specs/{id}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+    </command>
     
   </commands>
 </client>

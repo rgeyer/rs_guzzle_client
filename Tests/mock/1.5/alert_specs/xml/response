@@ -1,0 +1,151 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Thu, 01 Nov 2012 04:32:22 GMT
+Content-Type: application/vnd.rightscale.alert_spec+xml;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 101
+Content-Length: 5288
+X-Request-Uuid: 1b525f599a53459cb8942755a6929679
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<alert_specs>
+  <alert_spec>
+    <variable>value</variable>
+    <updated_at>2012/09/30 04:27:33 +0000</updated_at>
+    <duration>1</duration>
+    <file>memory/memory-free</file>
+    <threshold>1000000</threshold>
+    <actions></actions>
+    <escalation_name>critical</escalation_name>
+    <condition>&lt;</condition>
+    <created_at>2012/09/30 04:27:33 +0000</created_at>
+    <description>Free memory is low.</description>
+    <name>rs memory low</name>
+    <links>
+      <link href="/api/alert_specs/12345" rel="self"/>
+      <link href="/api/server_templates/12345" rel="subject"/>
+    </links>
+  </alert_spec>
+  <alert_spec>
+    <variable>value</variable>
+    <updated_at>2012/09/30 04:27:34 +0000</updated_at>
+    <duration>3</duration>
+    <file>cpu-0/cpu-idle</file>
+    <threshold>15</threshold>
+    <actions></actions>
+    <escalation_name>warning</escalation_name>
+    <condition>&lt;</condition>
+    <created_at>2012/09/30 04:27:34 +0000</created_at>
+    <description>Raise an alert if the idle time is too low</description>
+    <name>rs cpu busy</name>
+    <links>
+      <link href="/api/alert_specs/12345" rel="self"/>
+      <link href="/api/server_templates/12345" rel="subject"/>
+    </links>
+  </alert_spec>
+  <alert_spec>
+    <variable>value</variable>
+    <updated_at>2012/09/30 04:27:34 +0000</updated_at>
+    <duration>5</duration>
+    <file>cpu-0/cpu-idle</file>
+    <threshold>3</threshold>
+    <actions></actions>
+    <escalation_name>critical</escalation_name>
+    <condition>&lt;</condition>
+    <created_at>2012/09/30 04:27:34 +0000</created_at>
+    <description>Raises an alert when the cpu idle time is too low.</description>
+    <name>rs cpu overloaded</name>
+    <links>
+      <link href="/api/alert_specs/12345" rel="self"/>
+      <link href="/api/server_templates/12345" rel="subject"/>
+    </links>
+  </alert_spec>
+  <alert_spec>
+    <variable>value</variable>
+    <updated_at>2012/09/30 04:27:34 +0000</updated_at>
+    <duration>1</duration>
+    <file>memory/memory-free</file>
+    <threshold>0</threshold>
+    <actions></actions>
+    <escalation_name>critical</escalation_name>
+    <condition>==</condition>
+    <created_at>2012/09/30 04:27:34 +0000</created_at>
+    <description>Raises an alert when the server is out of free memory.</description>
+    <name>rs out of memory</name>
+    <links>
+      <link href="/api/alert_specs/12345" rel="self"/>
+      <link href="/api/server_templates/12345" rel="subject"/>
+    </links>
+  </alert_spec>
+  <alert_spec>
+    <variable>state</variable>
+    <updated_at>2012/09/30 04:27:34 +0000</updated_at>
+    <duration>1</duration>
+    <file>EC2/server</file>
+    <threshold>terminated</threshold>
+    <actions></actions>
+    <escalation_name>critical</escalation_name>
+    <condition>==</condition>
+    <created_at>2012/09/30 04:27:34 +0000</created_at>
+    <description>The instance has been terminated anormally, i.e., not through the RightScale interface or by an elasticity deamon (only for server arrays).</description>
+    <name>rs instance terminated</name>
+    <links>
+      <link href="/api/alert_specs/12345" rel="self"/>
+      <link href="/api/server_templates/12345" rel="subject"/>
+    </links>
+  </alert_spec>
+  <alert_spec>
+    <variable>state</variable>
+    <updated_at>2012/09/30 04:27:34 +0000</updated_at>
+    <duration>1</duration>
+    <file>EC2/server-failure</file>
+    <threshold>stranded</threshold>
+    <actions></actions>
+    <escalation_name>warning</escalation_name>
+    <condition>==</condition>
+    <created_at>2012/09/30 04:27:34 +0000</created_at>
+    <description>Raises an alert if the instance enters the stranded state.</description>
+    <name>rs instance stranded</name>
+    <links>
+      <link href="/api/alert_specs/12345" rel="self"/>
+      <link href="/api/server_templates/12345" rel="subject"/>
+    </links>
+  </alert_spec>
+  <alert_spec>
+    <variable>free</variable>
+    <updated_at>2012/09/30 04:27:34 +0000</updated_at>
+    <duration>5</duration>
+    <file>df/df-drive_C</file>
+    <threshold>1000000000</threshold>
+    <actions></actions>
+    <escalation_name>critical</escalation_name>
+    <condition>&lt;</condition>
+    <created_at>2012/09/30 04:27:34 +0000</created_at>
+    <description>Raises an alert if the available space on the C: drive is too low</description>
+    <name>rs low space on C: drive</name>
+    <links>
+      <link href="/api/alert_specs/12345" rel="self"/>
+      <link href="/api/server_templates/12345" rel="subject"/>
+    </links>
+  </alert_spec>
+  <alert_spec>
+    <variable>value</variable>
+    <updated_at>2012/09/30 04:27:34 +0000</updated_at>
+    <duration>5</duration>
+    <file>cpu-0/cpu-idle</file>
+    <threshold>NaN</threshold>
+    <actions></actions>
+    <escalation_name>critical</escalation_name>
+    <condition>==</condition>
+    <created_at>2012/09/30 04:27:34 +0000</created_at>
+    <description>It raises an alert if the instance fials to send monitoring information for 5 minutes.</description>
+    <name>rs instance not responding</name>
+    <links>
+      <link href="/api/alert_specs/12345" rel="self"/>
+      <link href="/api/server_templates/12345" rel="subject"/>
+    </links>
+  </alert_spec>
+</alert_specs>

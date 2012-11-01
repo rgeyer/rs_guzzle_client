@@ -157,4 +157,23 @@ class ServerTemplateTest extends ClientCommandsBase {
 		$this->assertNotNull($mci);
 		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\MultiCloudImage', $mci);
 	}
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetAlertSpecRelationship() {
+  	$this->setMockResponse(
+  		ClientFactory::getClient('1.5'),
+  		array(
+  			'1.5/server_template/json/response',
+  			'1.5/alert_specs/json/response'
+			)
+  	);
+  	$serverTemp = new ServerTemplate();
+  	$serverTemp->find_by_id('12345');
+  	$alert_specs = $serverTemp->alert_specs();
+  	$this->assertGreaterThan(0, count($alert_specs));
+  	$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\AlertSpec', $alert_specs[0]);
+  }
 }
