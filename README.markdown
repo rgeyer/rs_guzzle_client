@@ -726,52 +726,67 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>show</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>index</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>create</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>update</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>destroy</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>terminate_all</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+    </tr>
+    <tr>
+      <td>multi_terminate</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>launch</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>run_script_on_all</td>
       <td bgcolor="orange">50%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+    </tr>
+    <tr>
+      <td>multi_run_executable</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>instances</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A</td>
+    </tr>
+    <tr>
+      <td>current_instances</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td><b>Model</b></td>
       <td bgcolor="orange">50%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
   </tbody>
 </table>

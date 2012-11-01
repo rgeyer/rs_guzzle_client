@@ -1,0 +1,6 @@
+GET /api/server_arrays/12345/current_instances.xml HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNo1kMuOgjAARf-la5vQFuSRzAI1xoyvCALixtRSBhQq0MIohn8fXMz25p6zOG9AgQPKF5iARALnDVrJG-DoGBFrmADFgIOIgabjYOAJyJPxTXDCNW7oEGOeQoQ4hrbJbYgwQSTRRpKi0af4P2uTDzvqAd3Ncu-Sem0F7yfGn65eqG32iiyrPltRyAIRUiEzs0vX-BDKvonNuD7fEqswxPqqhVbww7KaLqAv0F6uyv42z2rvZJbk2a8CtvSnSt4MtSzSadftrvFhnx-30CsEOWX3nq7d2N3co-_fmc0qUUauxvILSn1lyg2udvqiux7ztqnmx8f265Pk-UlCGXu0Qo1VdET0YfgDq2Nekw==
+

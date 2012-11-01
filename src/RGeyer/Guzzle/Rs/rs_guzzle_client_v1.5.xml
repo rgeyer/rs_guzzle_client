@@ -260,7 +260,7 @@
       <param name="allow_comments" type="enum:true,false" required="false" />
       <param name="categories" type="array" required="false" />
       <param name="email_comments" type="string" required="false" />
-      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Publication" />-->
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Publication" />
     </command>
 
     <!-- Start Tags -->
@@ -467,6 +467,139 @@
       <param name="method" type="string" static="DELETE" />
       <param name="id" type="string" required="true" location="path" />
       <param name="mci_id" type="integer" required="true" location="path" />
+    </command>
+
+    <!-- Start ServerArrays -->
+    <command name="server_arrays" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>List all Server Arrays</doc>
+      <param name="path" type="string" default="server_arrays{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="view" type="enum:default,instance_detail" required="false" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\ServerArray" />
+    </command>    
+    
+    <command name="server_array" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Shows the information of a single server array.</doc>
+      <param name="path" type="string" default="server_arrays/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />      
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\ServerArray" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default,instance_detail" required="false" />
+    </command>
+    
+    <command name="server_arrays_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new server array, and configures its corresponding "next" instance with the received parameters.</doc>
+      <param name="path" type="string" default="server_arrays" />
+      <param name="method" type="string" static="POST" />
+      <param name="server_array[array_type]" type="enum:alert,queue" required="true" />
+      <param name="server_array[name]" type="string" required="true" />
+      <param name="server_array[state]" type="enum:enabled,disabled" required="true" />
+      <param name="server_array[instance][cloud_href]" type="string" required="true" />      
+      <param name="server_array[instance][server_template_href]" type="string" required="true" />
+      <param name="server_array[elasticity_params][bounds][max_count]" type="string" required="true" />
+      <param name="server_array[elasticity_params][bounds][min_count]" type="string" required="true" />
+      <param name="server_array[elasticity_params][pacing][resize_calm_time]" type="string" required="true" />
+      <param name="server_array[elasticity_params][pacing][resize_down_by]" type="string" required="true" />
+      <param name="server_array[elasticity_params][pacing][resize_up_by]" type="string" required="true" />      
+      <param name="server_array[datacenter_policy]" type="array" required="false" doc="An array containing one or many associative arrays with the keys ['datacenter_href', 'max', 'weight']" />
+      <param name="server_array[deployment_href]" type="string" required="false" />
+      <param name="server_array[description]" type="string" required="false" />
+      <param name="server_array[elasticity_params][alert_specific_params][decision_threshold]" type="string" required="false" />
+      <param name="server_array[elasticity_params][alert_specific_params][voters_tag_predicate]" type="string" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][collect_audit_entries]" type="string" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][item_age][algorithm]" type="enum:max_10,avg_10" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][item_age][max_age]" type="string" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][item_age][regexp]" type="string" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][queue_size][items_per_instance]" type="string" required="false" />
+      <param name="server_array[elasticity_params][schedule]" type="array" required="false" doc="An array containing one or many associative arrays with the keys ['day', 'max_count', 'min_count', 'time']" />
+      <param name="server_array[instance][datacenter_href]" type="string" required="false" />
+      <param name="server_array[instance][image_href]" type="string" required="false" />
+      <param name="server_array[instance][inputs]" type="array" required="false" doc="An array containing one or many associative arrays with the keys ['name', 'value']" />
+      <param name="server_array[instance][instance_type_href]" type="string" required="false" />
+      <param name="server_array[instance][kernel_image_href]" type="string" required="false" />
+      <param name="server_array[instance][multi_cloud_image_href]" type="string" required="false" />
+      <param name="server_array[instance][ramdisk_image_href]" type="string" required="false" />
+      <param name="server_array[instance][security_group_hrefs]" type="array" required="false" />
+      <param name="server_array[instance][ssh_key_href]" type="string" required="false" />
+      <param name="server_array[instance][user_data]" type="string" required="false" />      
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\ServerArray" />
+    </command>
+    
+    <command name="server_arrays_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new server array, and configures its corresponding "next" instance with the received parameters.</doc>
+      <param name="path" type="string" default="server_arrays/{id}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="server_array[array_type]" type="enum:alert,queue" required="false" />
+      <param name="server_array[name]" type="string" required="false" />
+      <param name="server_array[state]" type="enum:enabled,disabled" required="false" />
+      <param name="server_array[instance][cloud_href]" type="string" required="false" />      
+      <param name="server_array[instance][server_template_href]" type="string" required="false" />
+      <param name="server_array[elasticity_params][bounds][max_count]" type="string" required="false" />
+      <param name="server_array[elasticity_params][bounds][min_count]" type="string" required="false" />
+      <param name="server_array[elasticity_params][pacing][resize_calm_time]" type="string" required="false" />
+      <param name="server_array[elasticity_params][pacing][resize_down_by]" type="string" required="false" />
+      <param name="server_array[elasticity_params][pacing][resize_up_by]" type="string" required="false" />
+      <param name="server_array[elasticity_params][alert_specific_params][decision_threshold]" type="string" required="false" />
+      <param name="server_array[datacenter_policy]" type="array" required="false" doc="An array containing one or many associative arrays with the keys ['datacenter_href', 'max', 'weight']" />
+      <param name="server_array[deployment_href]" type="string" required="false" />
+      <param name="server_array[description]" type="string" required="false" />
+      <param name="server_array[elasticity_params][alert_specific_params][voters_tag_predicate]" type="string" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][collect_audit_entries]" type="string" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][item_age][algorithm]" type="enum:max_10,avg_10" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][item_age][max_age]" type="string" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][item_age][regexp]" type="string" required="false" />
+      <param name="server_array[elasticity_params][queue_specific_params][queue_size][items_per_instance]" type="string" required="false" />
+      <param name="server_array[elasticity_params][schedule]" type="array" required="false" doc="An array containing one or many associative arrays with the keys ['day', 'max_count', 'min_count', 'time']" />
+    </command>
+
+    <command name="server_arrays_current_instances" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists all Current Instances and the Next Instance</doc>
+      <param name="path" type="string" default="server_arrays/{id}/current_instances{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="view" type="enum:default,extended,full" required="false" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+    </command>
+
+    <command name="server_arrays_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes a server array</doc>
+      <param name="path" type="string" default="server_arrays/{id}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+    </command>
+    
+    <command name="server_arrays_launch" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Launches the "next" instance of this server. This function is equivalent to invoking the launch action on the URL of this server arrays next_instance. See Instances#launch for details.</doc>
+      <param name="path" type="string" static="server_arrays/{id}/launch" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="inputs" type="array" required="false" />
+    </command>
+    
+    <command name="server_arrays_multi_run_executable" class="Rgeyer.Guzzle.Rs.Command.DefaultCommand">
+    	<doc>Run an executable on all instances of this array. This function is equivalent to invoking the "multi_run_executable" action on the instances resource (Instances#multi_run_executable with the filter "parent_href == /api/server_arrays/XX"). To run an executable on a subset of the instances of the array, provide additional filters. To run an executable a single instance, invoke the action "run_executable" directly on the instance (see Instances#run_executable)</doc>
+    	<param name="path" type="string" default="server_arrays/{id}/multi_run_executable" />
+    	<param name="method" type="string" static="POST" />
+    	<param name="id" type="integer" required="true" />
+      <param name="inputs" type="array" required="false" />
+      <param name="ignore_lock" type="enum:true,false" required="false" />
+      <param name="recipe_name" type="string" required="false" />
+      <param name="right_script_href" type="string" required="false" />
+      <param name="filter" type="array" required="false" />
+    </command>
+    
+    <command name="server_arrays_multi_terminate" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Terminates running instances. Either a filter or the parameter 'terminate_all' must be provided.</doc>
+      <param name="path" type="string" static="server_arrays/{id}/multi_terminate" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" />
+      <param name="terminate_all" type="enum:true,false" required="false" />
+      <param name="filter" type="array" required="false" />      
     </command>
     
   </commands>

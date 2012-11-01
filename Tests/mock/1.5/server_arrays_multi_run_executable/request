@@ -1,0 +1,8 @@
+POST /api/server_arrays/12345/multi_run_executable HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkEtvgkAYAP_LniXh212okPRAF9QiPqBIqRcDK1RZQVSeGv97Mel9Zg7zQBHSUd6jEdrfkP5A9S25Ip1iIOPnCFUc6UAUUOkbyHiEjvuBjjWV71PgEsZpJAEkWIploBJgAkSTZS1K4qFXJf-uQsnLHfJIOPgn6BwrC-UNa3bC7n4dN3dZmlBn5jbjdmKuwkxRd9P6TBcf13XbF6yxy0NgzzVLc7-Xl7tghaKt4nI7t_z5iVnldHPPPdYuF4R8ntdfvK76gPiT8piZuDKyRRolYhWyU2WYHvhbyLzDxRORuNL8duiatPN7SZnJ3smo23Fh5oHN-UW8v5Z0ryUR5-e6qIYrFAh9Pv8AaPheOA==
+
+id=214057001&recipe_name=sys_firewall%3A%3Ado_list_rules

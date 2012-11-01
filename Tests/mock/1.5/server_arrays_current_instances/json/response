@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Wed, 31 Oct 2012 00:08:11 GMT
+Content-Type: application/vnd.rightscale.instance+json;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 995
+Content-Length: 2
+X-Request-Uuid: 275ec72b87d84fd0869a4755f4c44b3e
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+[]

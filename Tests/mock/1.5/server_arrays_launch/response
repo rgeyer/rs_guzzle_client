@@ -1,0 +1,14 @@
+HTTP/1.1 201 Created
+Server: nginx/1.0.15
+Date: Wed, 31 Oct 2012 00:47:35 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 201 Created
+Location: /api/clouds/12345/instances/FKF4CS4HR2RPA
+X-Runtime: 22088
+X-Request-Uuid: c7e6493f6abc4e3f9710400dba02000f
+Set-Cookie:
+Cache-Control: no-cache
+
+ 

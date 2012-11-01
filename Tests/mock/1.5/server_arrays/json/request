@@ -1,0 +1,6 @@
+GET /api/server_arrays.json HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNo1kM1ygjAURt8lazPDzUWCzHRRFbWFWitjQTcOBvAHxQYJkjq8e3HR3bf4zlmcB4mJQy6a9EhyI86DqFtaEsdkgHbbI5UgDmAfLDQMbvfIMeneYPEd36GgjCVIAVJG7XRgU2AImEC3wex8VfrPcvZkOz1xdTW5z1UuAnmMDLX1YrTf6lqz8cENr-VsOkxDrUby8zD30uFiK_e-m8fv_VMiMhivLjIU9JyJ8OeyDrJiHweeT3WzEbQJQhV-4eK-2vkF01Y-6RtyGZlRBcZrreajcn3iJq_Ls4cZtfyPwzGfTXnhZhEaXqM3uPiWy-XgV4ok3wfDOn95JmmeSWIhrqqouiomoNm2f1_pXak=
+
