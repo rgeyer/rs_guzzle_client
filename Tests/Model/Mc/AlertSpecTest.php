@@ -76,13 +76,12 @@ class AlertSpecTest extends GuzzleTestCase {
   	$this->setMockResponse(
   		ClientFactory::getClient('1.5'),
   		array(
-  			'1.5/alert_spec/json/response',
+  			'1.5/alert_spec/json/no_relationships/response',
   			'1.5/server/json/response'
 			)
   	);
   	$spec = new AlertSpec();
   	$spec->find_by_id('12345');
-  	$spec->links = array();
   	$spec->subject();  		  
 	}
 	
@@ -96,13 +95,12 @@ class AlertSpecTest extends GuzzleTestCase {
   	$this->setMockResponse(
   		ClientFactory::getClient('1.5'),
   		array(
-  			'1.5/alert_spec/json/response',
+  			'1.5/alert_spec/json/invalid_relationship/response',
   			'1.5/server/json/response'
 			)
   	);
   	$spec = new AlertSpec();
   	$spec->find_by_id('12345');
-  	$spec->links[1]->href = '/api/123_something/12345';
   	$spec->subject();  		  
 	}
 
@@ -114,13 +112,12 @@ class AlertSpecTest extends GuzzleTestCase {
   	$this->setMockResponse(
   		ClientFactory::getClient('1.5'),
   		array(
-  			'1.5/alert_spec/json/response',
+  			'1.5/alert_spec/json/server_relationship/response',
   			'1.5/server/json/response'
 			)
   	);
   	$spec = new AlertSpec();
   	$spec->find_by_id('12345');
-  	$spec->links[1]->href = '/api/servers/12345';
   	$server = $spec->subject();
   	$command = $spec->getLastCommand();
   	$request = (string)$command->getRequest();
@@ -138,13 +135,12 @@ class AlertSpecTest extends GuzzleTestCase {
   	$this->setMockResponse(
   		ClientFactory::getClient('1.5'),
   		array(
-  			'1.5/alert_spec/json/response',
+  			'1.5/alert_spec/json/server_array_relationship/response',
   			'1.5/server_array/json/response'
 			)
   	);
   	$spec = new AlertSpec();
   	$spec->find_by_id('12345');
-  	$spec->links[1]->href = '/api/server_arrays/12345';
   	$serverAry = $spec->subject();
   	$command = $spec->getLastCommand();
   	$request = (string)$command->getRequest();
@@ -162,13 +158,12 @@ class AlertSpecTest extends GuzzleTestCase {
   	$this->setMockResponse(
   		ClientFactory::getClient('1.5'),
   		array(
-  			'1.5/alert_spec/json/response',
+  			'1.5/alert_spec/json/server_template_relationship/response',
   			'1.5/server_template/json/response'
 			)
   	);
   	$spec = new AlertSpec();
   	$spec->find_by_id('12345');
-  	$spec->links[1]->href = '/api/server_templates/12345';
   	$serverTemp = $spec->subject();
   	$command = $spec->getLastCommand();
   	$request = (string)$command->getRequest();

@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.15
+Date: Thu, 01 Nov 2012 04:45:15 GMT
+Content-Type: application/vnd.rightscale.alert_spec+json;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 97
+Content-Length: 443
+X-Request-Uuid: 8ff56f54f2eb47e6b40e94cbdc532686
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+{"variable":"running","updated_at":"2011/08/12 20:47:00 +0000","duration":5,"file":"mysql/mysql_threads","threshold":"NaN","actions":[],"escalation_name":"critical","condition":"==","created_at":"2011/08/12 20:47:00 +0000","description":"Raise an alert if the mysqld process is not running.","name":"rs mysql not running (NaN)","links":[{"href":"/api/alert_specs/12345","rel":"self"},{"href":"/api/123_something/12345","rel":"subject"}]}
