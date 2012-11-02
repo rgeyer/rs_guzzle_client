@@ -80,7 +80,7 @@ class AlertSpec extends ModelBase {
       throw new \UnexpectedValueException(sprintf("The href for subject (%s) did not match the regex (%s)", $subjectHref, $regex));
     }
     # TODO: Maybe validate that the match is one of (server, server_array, server_template)?
-    $this->links[$subjectLinkIdx]->rel = $matches[1];
+    $this->_params['links'][$subjectLinkIdx]->rel = $matches[1];
     return $this->{$matches[1]}();    
   }
   
