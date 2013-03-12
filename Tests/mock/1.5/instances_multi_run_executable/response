@@ -1,0 +1,14 @@
+HTTP/1.1 202 Accepted
+Server: nginx/1.0.14
+Date: Thu, 17 Jan 2013 18:24:32 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Status: 202 Accepted
+Location: /api/clouds/12345/instances/12345M5DU65Q1L218/live/tasks/ae-000000000000
+X-Runtime: 887
+X-Request-Uuid: a2bf944c522346659dfe3d2df2472b72
+Set-Cookie:
+Cache-Control: no-cache
+
+ 

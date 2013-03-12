@@ -24,24 +24,28 @@ Guzzle\Tests\GuzzleTestCase::setServiceBuilder(\Guzzle\Service\Builder\ServiceBu
     'test.guzzle-rs-1_0' => array(
         'class' 	=> 'RGeyer\Guzzle\Rs\RightScaleClient',
     		'params' 	=> array(
-	    		'acct_num' 	=> $_SERVER['ACCT_NUM'],
-    			'email'			=> $_SERVER['EMAIL'],
-    			'password'	=> $_SERVER['PASSWORD'],
-    			'version'		=> '1.0'
+	    		'acct_num' 	=> $_ENV['ACCT_NUM'],
+    			'email'			=> $_ENV['EMAIL'],
+    			'password'	=> $_ENV['PASSWORD'],
+    			'version'		=> '1.0',
+          'curl.CURLOPT_SSL_VERIFYHOST' => false,
+          'curl.CURLOPT_SSL_VERIFYPEER' => false
     		)
     ),
 		'test.guzzle-rs-1_5' => array(
         'class' 	=> 'RGeyer\Guzzle\Rs\RightScaleClient',
     		'params' 	=> array(
-	    		'acct_num' 	=> $_SERVER['ACCT_NUM'],
-    			'email'			=> $_SERVER['EMAIL'],
-    			'password'	=> $_SERVER['PASSWORD'],
-    			'version'		=> '1.5'
+	    		'acct_num' 	=> $_ENV['ACCT_NUM'],
+    			'email'			=> $_ENV['EMAIL'],
+    			'password'	=> $_ENV['PASSWORD'],
+    			'version'		=> '1.5',
+          'curl.CURLOPT_SSL_VERIFYHOST' => false,
+          'curl.CURLOPT_SSL_VERIFYPEER' => false
     		)
     )
 )));
 
-RGeyer\Guzzle\Rs\Common\ClientFactory::setCredentials($_SERVER['ACCT_NUM'], $_SERVER['EMAIL'], $_SERVER['PASSWORD']);
+RGeyer\Guzzle\Rs\Common\ClientFactory::setCredentials($_ENV['ACCT_NUM'], $_ENV['EMAIL'], $_ENV['PASSWORD']);
 # This is added to compensate for a broken curl implementation in Zend Studio when debugging or running PHP unit
 RGeyer\Guzzle\Rs\Common\ClientFactory::setAdditionalParams(array('curl.CURLOPT_SSL_VERIFYPEER' => false));
 

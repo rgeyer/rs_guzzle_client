@@ -1,0 +1,2739 @@
+{
+    "description": "RightScale API 1.0 Client",
+    "operations": {
+        "deployments": {
+            "summary": "Get a list of all deployments in the account",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "deployments{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Deployment",
+            "parameters": {
+                "filter": {
+                    "doc": "An array of filters in the form 'attribute_name=|<>attribute_value'",
+                    "required": false
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "deployment": {
+            "summary": "Get a deployment by it's id",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "deployments\/{id}{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Deployment",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "deployments_create": {
+            "summary": "Create a new deployment",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "deployments",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Deployment",
+            "parameters": {
+                "deployment[nickname]": {
+                    "type": "string",
+                    "required": true
+                },
+                "deployment[description]": {
+                    "type": "string",
+                    "required": true
+                },
+                "deployment[default_vpc_subnet_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "deployment[default_ec2_availability_zone]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "deployments_destroy": {
+            "summary": "Delete a deployment by it's id",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "deployments\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "deployments_update": {
+            "summary": "Update an existing deployment by it's id",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "deployments\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "deployment[nickname]": {
+                    "type": "string",
+                    "required": false
+                },
+                "deployment[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "deployment[default_vpc_subnet_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "deployment[default_ec2_availability_zone]": {
+                    "type": "string",
+                    "required": false
+                },
+                "deployment[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "deployments_duplicate": {
+            "summary": "Duplicate\/clone a deployment by it's id",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "deployments\/{id}\/duplicate",
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "deployments_start_all": {
+            "summary": "Start all servers in a deployment",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "deployments\/{id}\/start_all",
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "deployments_stop_all": {
+            "summary": "Start all servers in a deployment",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "deployments\/{id}\/stop_all",
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_ssh_keys_create": {
+            "summary": "Create a new SSH Key",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ssh_keys",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\SshKey",
+            "parameters": {
+                "ec2_ssh_key[aws_key_name]": {
+                    "type": "string",
+                    "required": true
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false
+                }
+            }
+        },
+        "ec2_ssh_keys_destroy": {
+            "summary": "Destroy an SSH Key",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ssh_keys\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_ssh_key": {
+            "summary": "Show an SSH Key",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ssh_keys\/{id}{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\SshKey",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_security_groups_create": {
+            "summary": "Create a new security group",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_security_groups",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\SecurityGroup",
+            "parameters": {
+                "ec2_security_group[aws_group_name]": {
+                    "type": "string",
+                    "required": true
+                },
+                "ec2_security_group[aws_description]": {
+                    "type": "string",
+                    "required": true
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false
+                }
+            }
+        },
+        "ec2_security_groups_destroy": {
+            "summary": "Show a Security Group",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_security_groups\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_security_group": {
+            "summary": "Destroy a Security Group",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_security_groups\/{id}{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\SecurityGroup",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_security_groups": {
+            "summary": "List all Security Groups",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_security_groups{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false
+                }
+            }
+        },
+        "ec2_security_groups_update": {
+            "summary": "Updates a Security Group by adding permissions",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_security_groups\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "ec2_security_group[owner]": {
+                    "type": "string",
+                    "required": false
+                },
+                "ec2_security_group[group]": {
+                    "type": "string",
+                    "required": false
+                },
+                "ec2_security_group[cidr_ips]": {
+                    "type": "string",
+                    "required": false
+                },
+                "ec2_security_group[protocol]": {
+                    "type": "string",
+                    "required": false
+                },
+                "ec2_security_group[from_port]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "ec2_security_group[to_port]": {
+                    "type": "integer",
+                    "required": false
+                }
+            }
+        },
+        "ec2_server_templates": {
+            "summary": "List all ServerTemplates",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_server_templates{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_server_template": {
+            "summary": "Show a ServerTemplate",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_server_templates\/{id}{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\ServerTemplate",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_server_templates_create": {
+            "summary": "Create a new ServerTemplate",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_templates",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\ServerTemplate",
+            "parameters": {
+                "server_template[nickname]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server_template[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_template[multi_cloud_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_template[ec2_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_template[aki_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_template[ari_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_template[instance_type]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_template[ec2_user_data]": {
+                    "type": "string",
+                    "required": false
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false
+                }
+            }
+        },
+        "ec2_server_templates_destroy": {
+            "summary": "Destroy a ServerTemplate",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_templates\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_server_templates_update": {
+            "summary": "Update a ServerTemplate",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_templates\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "server_template[nickname]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_template[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_template[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "ec2_server_templates_executables": {
+            "summary": "Show a ServerTemplates Executables",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_server_templates\/{id}\/executables{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "phase": {
+                    "type": "string",
+                    "required": false
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_server_templates_alert_specs": {
+            "summary": "Show a ServerTemplates Alert Specs",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_server_templates\/{id}\/alert_specs{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "multi_cloud_images": {
+            "summary": "List all MultiCloudImages",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "multi_cloud_images{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "multi_cloud_image": {
+            "summary": "Show a MultiCloudImage",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "multi_cloud_images\/{id}{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\MultiCloudImage",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "tags_taggable_resources": {
+            "summary": "Lists all taggable resources",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "tags\/taggable_resources{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "tags_set": {
+            "summary": "Sets tags",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "tags\/set",
+            "httpMethod": "PUT",
+            "parameters": {
+                "resource_href": {
+                    "type": "string",
+                    "required": true
+                },
+                "tags": {
+                    "type": "array",
+                    "required": true
+                }
+            }
+        },
+        "tags_unset": {
+            "summary": "Unsets tags",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "tags\/unset",
+            "httpMethod": "PUT",
+            "parameters": {
+                "resource_href": {
+                    "type": "string",
+                    "required": true
+                },
+                "tags": {
+                    "type": "array",
+                    "required": true
+                }
+            }
+        },
+        "tags_search": {
+            "summary": "Finds objects by their tag",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "tags\/search{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "resource_href": {
+                    "type": "string",
+                    "required": false
+                },
+                "resource_type": {
+                    "type": "string",
+                    "required": false
+                },
+                "match_all": {
+                    "type": "string",
+                    "required": false
+                },
+                "tags": {
+                    "type": "array",
+                    "required": false
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "servers_create": {
+            "summary": "Create a new server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "server[nickname]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server[ec2_ssh_key_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_security_groups_href]": {
+                    "type": "array",
+                    "required": false
+                },
+                "server[server_template_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[deployment_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[instance_type]": {
+                    "enum": [
+                        "t1.micro",
+                        "m1.small",
+                        "m1.medium",
+                        "m1.large",
+                        "m1.xlarge",
+                        "m2.xlarge",
+                        "m2.2xlarge",
+                        "m2.4xlarge",
+                        "c1.medium",
+                        "c1.xlarge",
+                        "cc1.4xlarge",
+                        "cc2.8xlarge",
+                        "cg1.4xlarge"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server[pricing]": {
+                    "enum": [
+                        "on_demand",
+                        "spot"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server[aki_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ari_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[multi_cloud_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[vpc_subnet_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_user_data]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_elastic_ip_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[associate_eip_at_launch]": {
+                    "type": "boolean",
+                    "required": false
+                },
+                "server[ec2_availability_zone]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[max_spot_price]": {
+                    "type": "float",
+                    "required": false
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false
+                }
+            }
+        },
+        "servers_update": {
+            "summary": "Updates a server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}",
+            "httpMethod": "PUT",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "server[nickname]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_ssh_key_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_security_groups_href]": {
+                    "type": "array",
+                    "required": false
+                },
+                "server[server_template_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[deployment_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[instance_type]": {
+                    "enum": [
+                        "t1.micro",
+                        "m1.small",
+                        "m1.medium",
+                        "m1.large",
+                        "m1.xlarge",
+                        "m2.xlarge",
+                        "m2.2xlarge",
+                        "m2.4xlarge",
+                        "c1.medium",
+                        "c1.xlarge",
+                        "cc1.4xlarge",
+                        "cc2.8xlarge",
+                        "cg1.4xlarge"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server[pricing]": {
+                    "enum": [
+                        "on_demand",
+                        "spot"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server[aki_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ari_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[multi_cloud_image_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[vpc_subnet_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_user_data]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[ec2_elastic_ip_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[associate_eip_at_launch]": {
+                    "type": "boolean",
+                    "required": false
+                },
+                "server[ec2_availability_zone]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[max_spot_price]": {
+                    "type": "float",
+                    "required": false
+                },
+                "server[lock]": {
+                    "enum": [
+                        "true",
+                        "false"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "servers_destroy": {
+            "summary": "Destroy a Server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "servers": {
+            "summary": "List all Servers",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "filter": {
+                    "doc": "An array of filters in the form 'attribute_name=|<>attribute_value'",
+                    "required": false
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "server": {
+            "summary": "Get a server by it's id",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "servers_start": {
+            "summary": "Launches the server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/start",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "server[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "servers_stop_ebs": {
+            "summary": "'stops' a running server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/stop_ebs",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "server[ignore_lock]": {
+                    "type": "boolean",
+                    "required": false
+                }
+            }
+        },
+        "servers_start_ebs": {
+            "summary": "'starts' a server which is 'stopped'",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/start_ebs",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "server[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "servers_stop": {
+            "summary": "Terminates the running server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/stop",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "server[ignore_lock]": {
+                    "type": "boolean",
+                    "required": false
+                }
+            }
+        },
+        "servers_reboot": {
+            "summary": "Reboots the running server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/reboot",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "server[ignore_lock]": {
+                    "type": "boolean",
+                    "required": false
+                }
+            }
+        },
+        "servers_run_script": {
+            "summary": "Runs a RightScript on the server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/run_script",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "server[right_script_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server[parameters]": {
+                    "type": "array",
+                    "required": false
+                },
+                "server[ignore_lock]": {
+                    "type": "boolean",
+                    "required": false
+                }
+            }
+        },
+        "servers_run_executable": {
+            "summary": "Runs a RightScript or Chef recipe on the server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/run_executable",
+            "httpMethod": "POST",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\Server",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "server[right_script_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[recipe]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server[parameters]": {
+                    "type": "array",
+                    "required": false
+                },
+                "server[ignore_lock]": {
+                    "type": "boolean",
+                    "required": false
+                }
+            }
+        },
+        "servers_attach_volume": {
+            "summary": "Attaches an EBS volume to the server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/attach_volume",
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "server[ec2_ebs_volume_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server[device]": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "servers_settings": {
+            "summary": "Gets detailed settings of the server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/settings{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "servers_get_sketchy_data": {
+            "summary": "Retrieve the monitoring raw data of a certain time period",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/get_sketchy_data{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true
+                },
+                "start": {
+                    "type": "integer",
+                    "required": true,
+                    "doc": "The number of seconds in the past"
+                },
+                "end": {
+                    "type": "integer",
+                    "required": true,
+                    "doc": "The number of seconds in the past"
+                },
+                "plugin_name": {
+                    "type": "string",
+                    "required": true,
+                    "doc": "The name of the collectd plugin (e.g. mysql, cpu-0)"
+                },
+                "plugin_type": {
+                    "type": "string",
+                    "required": true,
+                    "doc": "The type of the instance of the plugin (e.g. cpu-idle, cpu-wait, count)"
+                },
+                "variable": {
+                    "type": "string",
+                    "required": false,
+                    "doc": "The name of the collectd metric variable, example disk_ops"
+                },
+                "resolution": {
+                    "type": "string",
+                    "required": false,
+                    "doc": "The RRA resolution, maybe an integer rather than a string"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "servers_current_show": {
+            "summary": "Get a current running server by it's id",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/current{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "servers_current_update": {
+            "summary": "Updates the parameters of a running server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/current",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "server[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "servers_current_settings": {
+            "summary": "Gets detailed settings of the running server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/current\/settings{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "servers_alert_specs": {
+            "summary": "Gets the alert specs for a server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/alert_specs{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "servers_monitoring": {
+            "summary": "Gets the list of monitors for a server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/monitoring{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "servers_monitoring_graph_name": {
+            "summary": "Gets details for a specific monitor for a server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "servers\/{id}\/monitoring\/{graph_name}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "graph_name": {
+                    "type": "string",
+                    "required": true,
+                    "location": "uri"
+                },
+                "size": {
+                    "enum": [
+                        "tiny",
+                        "small",
+                        "large",
+                        "xlarge"
+                    ],
+                    "type": "string",
+                    "required": true
+                },
+                "period": {
+                    "enum": [
+                        "now",
+                        "day",
+                        "yday",
+                        "week",
+                        "lweek",
+                        "month",
+                        "quarter",
+                        "year"
+                    ],
+                    "type": "string",
+                    "required": true
+                },
+                "tz": {
+                    "type": "string",
+                    "required": false
+                },
+                "title": {
+                    "type": "string",
+                    "required": false
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "alert_specs": {
+            "summary": "List all Alert Specs",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "alert_specs{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "alert_spec": {
+            "summary": "Get an alert_spec by it's id",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "alert_specs\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "alert_specs_destroy": {
+            "summary": "Delete an Alert Spec",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "alert_specs\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "alert_specs_create": {
+            "summary": "Create an Alert Spec",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "alert_specs",
+            "httpMethod": "POST",
+            "parameters": {
+                "alert_spec[name]": {
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec[file]": {
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec[variable]": {
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec[condition]": {
+                    "enum": [
+                        ">",
+                        ">=",
+                        "<",
+                        "<=",
+                        "==",
+                        "!="
+                    ],
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec[threshold]": {
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec[escalation_name]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[duration]": {
+                    "type": "integer",
+                    "required": true
+                },
+                "alert_spec[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[subject_type]": {
+                    "enum": [
+                        "Server",
+                        "ServerTemplate"
+                    ],
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec[subject_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec[action]": {
+                    "enum": [
+                        "escalate",
+                        "vote"
+                    ],
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec[vote_tag]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[vote_type]": {
+                    "enum": [
+                        "grow",
+                        "shrink"
+                    ],
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "alert_specs_update": {
+            "summary": "Create an Alert Spec",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "alert_specs\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "alert_spec[name]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[file]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[variable]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[condition]": {
+                    "enum": [
+                        ">",
+                        ">=",
+                        "<",
+                        "<=",
+                        "==",
+                        "!="
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[threshold]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[escalation_name]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[duration]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "alert_spec[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[action]": {
+                    "enum": [
+                        "escalate",
+                        "vote"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[vote_tag]": {
+                    "type": "string",
+                    "required": false
+                },
+                "alert_spec[vote_type]": {
+                    "enum": [
+                        "grow",
+                        "shrink"
+                    ],
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "alert_spec_subjects_create": {
+            "summary": "Create an Alert Spec Subject",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "alert_spec_subjects",
+            "httpMethod": "POST",
+            "parameters": {
+                "alert_spec_subject[alert_spec_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec_subject[subject_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "alert_spec_subject[subject_type]": {
+                    "enum": [
+                        "Server",
+                        "ServerTemplate"
+                    ],
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "audit_entry": {
+            "summary": "Get an alert_spec by it's id",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "audit_entries\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_ebs_volumes_create": {
+            "summary": "Create an EBS Volume",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_volumes",
+            "httpMethod": "POST",
+            "parameters": {
+                "ec2_ebs_volume[nickname]": {
+                    "type": "string",
+                    "required": true
+                },
+                "ec2_ebs_volume[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "ec2_ebs_volume[ec2_availability_zone]": {
+                    "type": "string",
+                    "required": true
+                },
+                "ec2_ebs_volume[aws_size]": {
+                    "type": "integer",
+                    "required": true
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false,
+                    "default": "1"
+                }
+            }
+        },
+        "ec2_ebs_volumes_destroy": {
+            "summary": "Delete an EBS Volume",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_volumes\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_ebs_volumes": {
+            "summary": "List all EBS Volumes",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_volumes{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false,
+                    "default": "1"
+                }
+            }
+        },
+        "ec2_ebs_volume": {
+            "summary": "Shows one EBS Volume",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_volumes\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_ebs_volumes_update": {
+            "summary": "Updates an EBS Volume",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_volumes\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "ec2_ebs_volume[nickname]": {
+                    "type": "string",
+                    "required": false
+                },
+                "ec2_ebs_volume[description]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "component_ec2_ebs_volumes_create": {
+            "summary": "Create an EBS Volume Mapping to a Server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "component_ec2_ebs_volumes",
+            "httpMethod": "POST",
+            "parameters": {
+                "component_ec2_ebs_volume[component_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "component_ec2_ebs_volume[ec2_ebs_volume_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "component_ec2_ebs_volume[device]": {
+                    "type": "string",
+                    "required": true
+                },
+                "component_ec2_ebs_volume[mount]": {
+                    "type": "string",
+                    "static": "boot"
+                }
+            }
+        },
+        "component_ec2_ebs_volumes_destroy": {
+            "summary": "Delete an EBS Volume Mapping to a Server",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "component_ec2_ebs_volumes\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_ebs_snapshots_create": {
+            "summary": "Create an EBS Volume Snapshot",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_snapshots",
+            "httpMethod": "POST",
+            "parameters": {
+                "ec2_ebs_snapshot[nickname]": {
+                    "type": "string",
+                    "required": true
+                },
+                "ec2_ebs_snapshot[ec2_ebs_volume_id]": {
+                    "type": "string",
+                    "required": true
+                },
+                "ec2_ebs_snapshot[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "ec2_ebs_snapshot[commit]": {
+                    "enum": [
+                        "explicit",
+                        "implicit"
+                    ],
+                    "type": "string",
+                    "default": "implicit"
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false
+                }
+            }
+        },
+        "ec2_ebs_snapshots_destroy": {
+            "summary": "Delete an EBS Volume Snapshots",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_snapshots\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_ebs_snapshots": {
+            "summary": "List all EBS Volume Snapshots",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_snapshots{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false,
+                    "default": "1"
+                }
+            }
+        },
+        "ec2_ebs_snapshot": {
+            "summary": "Shows one EBS Volume Snapshot",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_snapshots\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_ebs_snapshots_update": {
+            "summary": "Updates an EBS Volume Snapshot commit state",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_ebs_snapshots\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "ec2_ebs_snapshot[commit_state]": {
+                    "enum": [
+                        "committed",
+                        "uncommitted"
+                    ],
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "credentials_create": {
+            "summary": "Create a Credential",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "credentials",
+            "httpMethod": "POST",
+            "parameters": {
+                "credential[name]": {
+                    "type": "string",
+                    "required": true
+                },
+                "credential[value]": {
+                    "type": "string",
+                    "required": true
+                },
+                "credential[description]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "credentials_destroy": {
+            "summary": "Delete a Credential",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "credentials\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "credentials": {
+            "summary": "List all Credentials",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "credentials{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "credential": {
+            "summary": "Show one Credential",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "credentials\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "credentials_update": {
+            "summary": "Create a Credential",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "credentials\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "credential[name]": {
+                    "type": "string",
+                    "required": false
+                },
+                "credential[value]": {
+                    "type": "string",
+                    "required": false
+                },
+                "credential[description]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "ec2_elastic_ips_create": {
+            "summary": "Create an AWS Elastic IP",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_elastic_ips",
+            "httpMethod": "POST",
+            "parameters": {
+                "ec2_elastic_ip[nickname]": {
+                    "type": "string",
+                    "required": true
+                },
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false,
+                    "default": "1"
+                }
+            }
+        },
+        "ec2_elastic_ips_destroy": {
+            "summary": "Delete an AWS Elastic IP",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_elastic_ips\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_elastic_ips": {
+            "summary": "List all Elastic IPs",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_elastic_ips{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "ec2_elastic_ip": {
+            "summary": "Show one Elastic IP",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "ec2_elastic_ips\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "server_arrays_create": {
+            "summary": "Create a Server Array",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays",
+            "httpMethod": "POST",
+            "parameters": {
+                "cloud_id": {
+                    "type": "integer",
+                    "required": false,
+                    "default": "1"
+                },
+                "server_array[nickname]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server_array[deployment_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server_array[array_type]": {
+                    "enum": [
+                        "alert",
+                        "queue"
+                    ],
+                    "type": "string",
+                    "required": true
+                },
+                "server_array[ec2_security_groups_href]": {
+                    "type": "array",
+                    "required": true
+                },
+                "server_array[server_template_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server_array[ec2_ssh_key_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server_array[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[ec2_availability_zone]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[indicator_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[audit_queue_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[collect_audit_entries]": {
+                    "type": "integer",
+                    "default": "1"
+                },
+                "server_array[voters_tag]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[elasticity][max_count]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity][min_count]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity][resize_up_by]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity][resize_down_by]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity][resize_calm_time]": {
+                    "type": "integer",
+                    "required": false,
+                    "doc": "Time in minutes"
+                },
+                "server_array[elasticity][decision_threshold]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity_function]": {
+                    "enum": [
+                        "sqs_queue_size",
+                        "sqs_item_age"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[elasticity_params][items_per_instance]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity_params][max_age]": {
+                    "type": "integer",
+                    "required": false,
+                    "doc": "Age in seconds"
+                },
+                "server_array[elasticity_params][algorithm]": {
+                    "enum": [
+                        "avg_10",
+                        "max_10"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[elasticity_params][regexp]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[active]": {
+                    "enum": [
+                        "true",
+                        "false"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "server_arrays_destroy": {
+            "summary": "Delete a Server Array",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "server_arrays": {
+            "summary": "List all Server Arrays",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\ServerArray",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "server_array": {
+            "summary": "Show one Server Array",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays\/{id}{output_format}",
+            "httpMethod": "GET",
+            "responseClass": "RGeyer\\Guzzle\\Rs\\Model\\Ec2\\ServerArray",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "server_arrays_update": {
+            "summary": "Update a Server Array",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "server_array[nickname]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[deployment_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[array_type]": {
+                    "enum": [
+                        "alert",
+                        "queue"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[ec2_security_groups_href]": {
+                    "type": "array",
+                    "required": false
+                },
+                "server_array[server_template_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[ec2_ssh_key_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[indicator_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[audit_queue_href]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[collect_audit_entries]": {
+                    "type": "integer",
+                    "default": "1"
+                },
+                "server_array[voters_tag]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[elasticity][max_count]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity][min_count]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity][resize_up_by]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity][resize_down_by]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity][resize_calm_time]": {
+                    "type": "integer",
+                    "required": false,
+                    "doc": "Time in minutes"
+                },
+                "server_array[elasticity][decision_threshold]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity_function]": {
+                    "enum": [
+                        "sqs_queue_size",
+                        "sqs_item_age"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[elasticity_params][items_per_instance]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "server_array[elasticity_params][max_age]": {
+                    "type": "integer",
+                    "required": false,
+                    "doc": "Age in seconds"
+                },
+                "server_array[elasticity_params][algorithm]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[elasticity_params][regexp]": {
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[active]": {
+                    "enum": [
+                        "true",
+                        "false"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "server_array[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "server_arrays_terminate_all": {
+            "summary": "Terminate all running instance in a Server Array",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays\/{id}\/terminate_all",
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "server_arrays_launch": {
+            "summary": "Launches a server into a Server Array",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays\/{id}\/launch",
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "server_arrays_instances": {
+            "summary": "List all Server Array instances",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays\/{id}\/instances{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "server_arrays_run_script_on_all": {
+            "summary": "Runs a script on all instances in a Server Array",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "server_arrays\/{id}\/run_script_on_all",
+            "httpMethod": "POST",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "server_array[right_script_href]": {
+                    "type": "string",
+                    "required": true
+                },
+                "server_array[server_template_hrefs]": {
+                    "type": "array",
+                    "required": false
+                },
+                "server_array[parameters]": {
+                    "type": "array",
+                    "required": false
+                }
+            }
+        },
+        "macros_create": {
+            "summary": "Create a Macro",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "macros",
+            "httpMethod": "POST",
+            "parameters": {
+                "macro[source_type]": {
+                    "enum": [
+                        "deployment",
+                        "array",
+                        "server",
+                        "macro",
+                        "blank"
+                    ],
+                    "type": "string",
+                    "required": true
+                },
+                "macro[object_id]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "macro[nickname]": {
+                    "type": "string",
+                    "required": false
+                },
+                "macro[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "macro[commands]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "macros_destroy": {
+            "summary": "Delete a Macro",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "macros\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "macros": {
+            "summary": "List all Macros",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "macros{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "macro": {
+            "summary": "Show one Macro",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "macros\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "macros_update": {
+            "summary": "Update a Macro",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "macros\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "macro[nickname]": {
+                    "type": "string",
+                    "required": false
+                },
+                "macro[description]": {
+                    "type": "string",
+                    "required": false
+                },
+                "macro[commands]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "right_scripts": {
+            "summary": "List all RightScripts",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "right_scripts{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "right_script": {
+            "summary": "Show one RightScript",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "right_scripts\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "s3_buckets_create": {
+            "summary": "Create an S3 Bucket",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "s3_buckets",
+            "httpMethod": "POST",
+            "parameters": {
+                "s3_bucket[name]": {
+                    "type": "string",
+                    "required": true
+                }
+            }
+        },
+        "s3_buckets_destroy": {
+            "summary": "Delete an S3 Bucket",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "s3_buckets\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "sqs_queues_create": {
+            "summary": "Create an SQS Queue",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "sqs_queues",
+            "httpMethod": "POST",
+            "parameters": {
+                "sqs_queue[name]": {
+                    "type": "string",
+                    "required": true
+                },
+                "sqs_queue[api_generation]": {
+                    "type": "integer",
+                    "required": false
+                },
+                "sqs_queue[description]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "sqs_queues_destroy": {
+            "summary": "Delete an SQS Queue",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "sqs_queues\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "sqs_queues": {
+            "summary": "List all SQS Queues",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "sqs_queues{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "sqs_queue": {
+            "summary": "Show one SQS Queue",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "sqs_queues\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "statuses": {
+            "summary": "Show one Status",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "statuses\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "vpc_dhcp_options_create": {
+            "summary": "Create VPC DHCP Options",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "vpc_dhcp_options",
+            "httpMethod": "POST",
+            "parameters": {
+                "vpc_dhcp_options[name]": {
+                    "type": "string",
+                    "required": true
+                },
+                "vpc_dhcp_options[domain_name]": {
+                    "type": "string",
+                    "required": false
+                },
+                "vpc_dhcp_options[domain_name_server]": {
+                    "type": "string",
+                    "required": false
+                },
+                "vpc_dhcp_options[ntp_servers]": {
+                    "type": "string",
+                    "required": false
+                },
+                "vpc_dhcp_options[netbios_name_servers]": {
+                    "type": "string",
+                    "required": false
+                },
+                "vpc_dhcp_options[netbios_node_type]": {
+                    "enum": [
+                        "1",
+                        "2",
+                        "4",
+                        "8"
+                    ],
+                    "type": "string",
+                    "required": false
+                },
+                "vpc_dhcp_options[description]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        },
+        "vpc_dhcp_options_destroy": {
+            "summary": "Delete a VPC DHCP Option",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "vpc_dhcp_options\/{id}",
+            "httpMethod": "DELETE",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                }
+            }
+        },
+        "vpc_dhcp_options": {
+            "summary": "List all VPC DHCP Options",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "vpc_dhcp_options{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "vpc_dhcp_option": {
+            "summary": "Show one VPC DHCP Option",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "vpc_dhcp_options\/{id}{output_format}",
+            "httpMethod": "GET",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "output_format": {
+                    "enum": [
+                        ".js",
+                        ".xml"
+                    ],
+                    "type": "string",
+                    "default": ".js",
+                    "location": "uri"
+                }
+            }
+        },
+        "vpc_dhcp_options_update": {
+            "summary": "Update a VPC DHCP Options",
+            "class": "RGeyer\\Guzzle\\Rs\\Command\\DefaultCommand",
+            "uri": "vpc_dhcp_options\/{id}",
+            "httpMethod": "PUT",
+            "parameters": {
+                "id": {
+                    "type": "integer",
+                    "required": true,
+                    "location": "uri"
+                },
+                "vpc_dhcp_option[nickname]": {
+                    "type": "string",
+                    "required": false
+                },
+                "vpc_dhcp_option[description]": {
+                    "type": "string",
+                    "required": false
+                }
+            }
+        }
+    },
+    "models": [
+
+    ]
+}

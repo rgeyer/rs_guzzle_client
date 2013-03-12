@@ -71,7 +71,12 @@ class RightScaleClient extends Client {
 	 * @TODO update factory method and docblock for parameters
 	 */
 	public static function factory($config = array()) {
-		$default = array ('base_url' => 'https://my.rightscale.com/', 'version' => '1.0');
+		$default = array(
+      'base_url' => 'https://my.rightscale.com/',
+      'version' => '1.0',
+      'curl.CURLOPT_FOLLOWLOCATION' => false,
+      'curl.CURLOPT_RETURNTRANSFER' => true
+    );
 		$required = array ('acct_num', 'base_url', 'version');
 		$config = Inspector::prepareConfig ( $config, $default, $required );
 		
@@ -96,22 +101,30 @@ class RightScaleClient extends Client {
 
 		return $client;
 	}
-	
-	/**
-     * @param string $baseUrl
-     * @param string $acctNum
-     * @param string $email
-     * @param string $password
-     * @param string $version
-	 */
-    public function __construct($baseUrl, $acctNum, $email, $password, $version)
-    {
-        parent::__construct($baseUrl);
-        $this->acct_num = $acctNum;
-		$this->email 		= $email;
-		$this->password = $password;
-		$this->version 	= $version;
-	}
+
+  /**
+   * Instantiates a new RightScaleClient.
+   *
+   * WARNING: Certain functionality (like the service description, shard awareness, auto
+   * authentication, retries on error, etc) will not be available if you simply instantiate
+   * using this constructor.
+   *
+   * Best practice is to use RightScaleClient::factory to instantiate a new RightScaleClient
+   *
+   * @param string $baseUrl
+   * @param string $acctNum
+   * @param string $email
+   * @param string $password
+   * @param string $version
+   */
+  public function __construct($baseUrl, $acctNum, $email, $password, $version)
+  {
+    parent::__construct($baseUrl);
+    $this->acct_num = $acctNum;
+    $this->email 		= $email;
+    $this->password = $password;
+    $this->version 	= $version;
+  }
 	
 	public function getVersion() {
 		return $this->version;

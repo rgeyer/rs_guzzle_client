@@ -348,6 +348,118 @@
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
       <param name="filter" type="array" required="false" />
     </command>
+
+    <command name="instances_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates attributes of a single instance.</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/instances/{id}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="instance[datacenter_href]" type="string" required="false" />
+      <param name="instance[image_href]" type="string" required="false" />
+      <param name="instance[inputs]" type="array" required="false" />
+      <param name="instance[instance_type_href]" type="string" required="false" />
+      <param name="instance[kernel_image_href]" type="string" required="false" />
+      <param name="instance[multi_cloud_image_href]" type="string" required="false" />
+      <param name="instance[ramdisk_image_href]" type="string" required="false" />
+      <param name="instance[security_group_hrefs]" type="array" required="false" />
+      <param name="instance[ssh_key_href]" type="string" required="false" />
+      <param name="instance[user_data]" type="string" required="false" />
+    </command>
+
+    <command name="instances_launch" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Launches an instance using the parameters that this instance has been configured with.
+
+Note that this action can only be performed in "next" instances, and not on instances that are already running.</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/instances/{id}/launch" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="false" location="path" />
+      <param name="cloud_id" type="integer" required="false" location="path" />
+      <param name="inputs" type="array" required="false" />
+    </command>
+
+    <command name="instances_multi_run_executable" class="Rgeyer.Guzzle.Rs.Command.DefaultCommand">
+    	<doc>Runs a script or a recipe in the running instances.
+
+This is an asynchronous function, which returns immediately after queuing the executable for execution. Status of the execution can be tracked at the URL returned in the "Location" header.</doc>
+    	<param name="path" type="string" default="clouds/{cloud_id}/instances/multi_run_executable" />
+    	<param name="method" type="string" static="POST" />
+    	<param name="cloud_id" type="integer" required="false" location="path" />
+      <param name="inputs" type="array" required="false" />
+      <param name="ignore_lock" type="enum:true,false" required="false" />
+      <param name="recipe_name" type="string" required="false" />
+      <param name="right_script_href" type="string" required="false" />
+      <param name="filter" type="array" required="false" />
+    </command>
+
+    <command name="instances_multi_terminate" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Terminates running instances. Either a filter or the parameter 'terminate_all' must be provided.</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/instances/multi_terminate" />
+      <param name="method" type="string" static="POST" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="terminate_all" type="enum:true,false" required="false" />
+      <param name="filter" type="array" required="false" />
+    </command>
+
+    <command name="instances_reboot" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Reboot a running instance.
+
+Note that this action can only succeed if the instance is running. One cannot reboot instances of type "next".</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/instances/{id}/reboot" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="true" location="path" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+    </command>
+
+    <command name="instances_run_executable" class="Rgeyer.Guzzle.Rs.Command.DefaultCommand">
+    	<doc>Runs a script or a recipe in the running instance.
+
+This is an asynchronous function, which returns immediately after queuing the executable for execution. Status of the execution can be tracked at the URL returned in the "Location" header. Note that this can only be performed on running instances.
+
+FUTURE: we plan to support flexible callbacks for this action, where the client can be notified upon completion (success or error)</doc>
+    	<param name="path" type="string" static="clouds/{cloud_id}/instances/{id}/run_executable" />
+    	<param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="true" location="path" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="inputs" type="array" required="false" />
+      <param name="ignore_lock" type="enum:true,false" required="false" />
+      <param name="recipe_name" type="string" required="false" />
+      <param name="right_script_href" type="string" required="false" />
+    </command>
+
+    <command name="instances_start" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Starts an instance that has been stopped, resuming it to its previously saved volume state.
+
+After an instance is started, the reference to your instance will have a different id.
+
+The new id can be found by performing an index query with the appropriate filters on the Instances resource, performing a show action on the Server resource for Server Instances, or performing a current_instances action on the ServerArray resource for ServerArray Instances.</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/instances/{id}/start" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="true" location="path" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+    </command>
+
+    <command name="instances_stop" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Stores the instance's current volume state to resume later using the 'start' action.
+
+After an instance is stopped, the reference to your instance will have a different id.
+
+The new id can be found by performing an index query with the appropriate filters on the Instances resource, performing a show action on the Server resource for Server Instances, or performing a current_instances action on the ServerArray resource for ServerArray Instances.</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/instances/{id}/stop" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="true" location="path" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+    </command>
+
+    <command name="instances_terminate" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Terminates a running instance.
+
+Note that this action can succeed only if the instance is running. One cannot terminate instances of type "next".</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/instances/{id}/terminate" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="string" required="false" location="path" />
+    	<param name="cloud_id" type="integer" required="false" location="path" />
+    </command>
     
     <!-- MultiCloudImages -->
     <command name="multi_cloud_image" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">

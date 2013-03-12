@@ -5,17 +5,17 @@
          stopOnFailure="false">
     <php>
         <!-- Change the following value to the path of your Guzzle installation e.g. /Users/michael/projects/guzzle -->
-        <server name="GUZZLE" value="/path/to/guzzle" />
+        <env name="GUZZLE" value="/path/to/guzzle" />
         <!-- Change to your RightScale acount # -->
-        <server name="ACCT_NUM" value="123" />
+        <env name="ACCT_NUM" value="123" />
         <!-- Change to your RightScale account email -->
-        <server name="EMAIL" value="foo@bar.baz" />
+        <env name="EMAIL" value="foo@bar.baz" />
         <!-- Change to your RightScale account password -->
-        <server name="PASSWORD" value="password" />
+        <env name="PASSWORD" value="password" />
         <!-- Populate Tests/mock with raw HTTP requests and responses from the tests -->
-        <server name="HTTP_TRACE" value="false" />
+        <env name="HTTP_TRACE" value="false" />
         <!-- For the mocks created above, strip out sensitive bits like SSH keys, account numbers, and ids -->
-        <server name="OBFUSCATE_IDS" value="false" />
+        <env name="OBFUSCATE_IDS" value="false" />
     </php>
     <logging>
       <log type="coverage-html" target="test_reports/coverage" charset="UTF-8"

@@ -1,0 +1,7 @@
+POST /api/clouds/12345/instances/DDH4PN4ITP2NQ/reboot HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkE1vgjAAQP9LzzRpKQUk2WGg4irTTDYULqRA3Yp8LBRRNP73YbL7e-_w7oADB9Qj0EChgHMHZyU64Bg6JvZDA30OHExMggixKNGALCaampauHymHNrc5xFjocIZIBnVkYGGTLBPUmHq9-HcNNHu6Ux50YZr5r1FS1lUT10uvicORrQ9qy0uKikjsw8vGyyzbd8OC74d4GX_PvZsp19aiHeHBX7h11tinNavegoiiCkqTzmFcHhX3-wSdug2U1S-L-9NlF5hDpFhBVOP-4KhNvj68cOsPgrhns2RoVegUBUzuGE3dsQ3yq5RptxqIekefos9fnkuuzyU8z9tz009XDEyMx-MP1J1ciw==; _session_id=deadbeef0badf00dfeedfacec0ffee24
+Content-Length: 0
+

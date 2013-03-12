@@ -1,0 +1,8 @@
+POST /api/clouds/12345/instances/multi_run_executable HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMuOgjAAAP-lZ0kobaGS7AE3vESjyapZvZiWloeIKJSHa_h3Mdn7zBzmBRiwQfkEMyAaYL9A28ga2NiAiI4zoGJgQ0QoxpZuzmcgFxNtQEYNJphm6gJpEEpDowkXGmMW4SRmAko69ZT8dwk2Pu6UB0N7W9znChdnP-Ld37ahfLsoLa9HB18JsguS4RxcD_XlkfHnEIWbsCfVI_o9FYdzirjjejrC69rLLSd0rXLeyhJJ33VramQFvaReWmnm41il3dAsGV8tVlWW_Jh8TfxA7eFmpzle0e0r3jubNUxqGvYsv3dWfj16QfIt1XKVnQSPSqf4-iwZPktYHFftTU1XMER4HN9n_17Q; _session_id=deadbeef0badf00dfeedfacec0ffee24
+
+cloud_id=1869&recipe_name=sys_firewall%3A%3Ado_list_rules

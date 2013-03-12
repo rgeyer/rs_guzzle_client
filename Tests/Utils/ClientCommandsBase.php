@@ -102,8 +102,8 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 		$command = $client->getCommand($commandName, $params);
 		$command->execute();
 		$result = $command->getResult();
-		
-		if($_SERVER['HTTP_TRACE'] == 'true') {
+
+		if($_ENV['HTTP_TRACE'] == 'true') {
 			$dir = __DIR__ . '/../' . 'mock/' . $client->getConfig('version') . '/' . $commandName;			
 			$command_params = $command->getAll();			
 			if(array_key_exists('output_format', $command_params)) {
@@ -117,7 +117,7 @@ class ClientCommandsBase extends \Guzzle\Tests\GuzzleTestCase {
 			}
 			$request_str = $command->getRequest();
 			$response_str = $command->getResponse();
-			if($_SERVER['OBFUSCATE_IDS'] == 'true') {
+			if($_ENV['OBFUSCATE_IDS'] == 'true') {
 				// TODO handle GET params?
 				// TODO Kill them SSH keys				
 				$rs_acct_regex = ',(?<!PHP|HTTP|Guzzle|nginx|[0-9]{4}|[0-9]{2}|\.[0-9]{1}|\.[0-9]{2}|\.[0-9]{3})/[0-9]+,';

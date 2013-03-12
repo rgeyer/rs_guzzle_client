@@ -1,0 +1,7 @@
+POST /api/clouds/6/instances/ABC123/stop HTTP/1.1
+Host: us-3.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/7.24.0 PHP/5.3.17 openssl/OpenSSL/0.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkN1ugjAARt-l1zahLQVKsgs2CLNEcQORcEMq1J8JOCw4wfjuYrLLL_nOuTh3IIANegUJmIFSAfs-DXkBto4RsR4z0BXARsQgSKOE6jNwLKe_VmhbwkwLWluCIEISQ8aQBREmiDBNWLoUk6-T_yzC9MVOenC4-tHYji5XH6drqy-77Hi-OVTtheOtHU0Kg1VRMGzezWqFknkTLmIJg_RnH542l03GAlcpVGbxcmXw1OceI39tHMso9HNX8gVtw_VXvVwwbzeoA1Yy0T8T2X_zNOcQzwdR_648zJ2ods18B5Omp1m3p0NSMGfM6TgYa3PkaSXTUXt7Jbm9koiiOPdNB2wDM8t8PJ7VyVxm; _session_id=deadbeef0badf00dfeedfacec0ffee24
+Content-Length: 0
+

@@ -1,0 +1,10 @@
+PUT /api/clouds/12345/instances/12345JL7K9TVQMR31 HTTP/1.1
+Host: my.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Expect: 100-Continue
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkEFvgjAYQP9Lz5LY9itFkh2mDjY2RhQcymUpBaQiaApE0fjfh8nu773DuyOBbFQPaIKyFtl31Le5RjYQTK3HBHUS2ZgyCwA4ZxOkspGWQhRMUGKYU5kZGOfESFk2NTChmM4Ip6nEY6_L_12GZ093zKMIMg8c53hTiac-6aI-xeE2iILKga_48lr6lnFd1VGp1Vzxs7e0WCAu6XK7gbAIVkVPpGeeS6hXlSTnIt99-8QaSs0Pct7Dvqu68MjMHbAkUck11Yu4deN90zpvunBPKo1_tlX07q59MOmHI4bazJpNw8P1Os9_uT9olRbxUhPXOuxenkuuzyVCylPfdOMVwBQejz8sp11L; _session_id=deadbeef0badf00dfeedfacec0ffee24
+Content-Length: 27
+
+instance%5Buser_data%5D=foo

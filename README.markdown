@@ -1379,7 +1379,7 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>show</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="green">1000%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>index</td>
@@ -1389,42 +1389,42 @@ Below you will find the current controllers (and their commands) that are suppor
     <tr>
       <td>update</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>launch</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>multi_run_executable</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>multi_terminate</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>reboot</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>run_executable</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>set_custom_lodgement</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">N/A Deprecated for InstanceCustomLodgments#create</td>
     </tr>
     <tr>
       <td>terminate</td>
       <td bgcolor="green">N/A</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td><b>Model</b></td>
