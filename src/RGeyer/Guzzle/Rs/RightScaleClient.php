@@ -141,8 +141,15 @@ class RightScaleClient extends Client {
 			} else {
 				$request = $this->post('/api/session', null, array('email' => $this->email, 'password' => $this->password, 'account_href' => '/api/accounts/' . $this->acct_num));
 			}
+			$request->setHeader('Accept', '*/*');
 			$request->setHeader('X-API-VERSION', $this->version);
 			$request->send();
+			if($request->getResponse()->getStatusCode() == 302) {
+			  $location = $request->getResponse()->getHeader('Location');
+			  $this->setBaseUrl(str_replace('api/session/', '', $location));
+			  $request->setUrl($location);
+			  $request->send();
+			}
 		}
 
     $command = parent::getCommand($name, $args);
