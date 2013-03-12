@@ -1,5 +1,5 @@
 <?php
-// Copyright 2011 Ryan J. Geyer
+// Copyright 2011-2013 Ryan J. Geyer
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -22,6 +22,7 @@ use Guzzle\Service\Inspector;
 use Guzzle\Http\Message\RequestInterface;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
+use Guzzle\Http\QueryString;
 
 use RGeyer\Guzzle\Rs\IndiscriminateArrayCookieJar;
 
@@ -144,26 +145,7 @@ class RightScaleClient extends Client {
 	 * @return CommandInterface
 	 */
 	public function getCommand($name, array $args = array()) {
-		$cookies = $this->cookieJar->all();
-		
-		// No login cookies, or they're expired
-		if(count($cookies) == 0) {
-			if($this->version == "1.0") {
-				$request = $this->get('/api/acct/{acct_num}/login');
-				$request->setAuth($this->email, $this->password);
-			} else {
-				$request = $this->post('/api/session', null, array('email' => $this->email, 'password' => $this->password, 'account_href' => '/api/accounts/' . $this->acct_num));
-			}
-			$request->setHeader('Accept', '*/*');
-			$request->setHeader('X-API-VERSION', $this->version);
-			$request->send();
-			if($request->getResponse()->getStatusCode() == 302) {
-			  $location = $request->getResponse()->getHeader('Location');
-			  $this->setBaseUrl(str_replace('api/session/', '', $location));
-			  $request->setUrl($location);
-			  $request->send();
-			}
-		}
+		$this->checkAuth();
 
     $command = parent::getCommand($name, $args);
     $this->command_history[] = $command;
@@ -248,4 +230,92 @@ class RightScaleClient extends Client {
 	public static function convertStHrefFrom1to15($href) {
 		return preg_replace(',ec2_server_templates,', 'server_templates', RightScaleClient::convertHrefFrom1to15($href));
 	}
+
+  public function __call($method, $params) {
+    $this->checkAuth();
+    return new \RGeyer\Guzzle\Rs\Command\DynamicCommandAdapter($method, $params, $this);
+  }
+
+  protected function checkAuth() {
+    $cookies = $this->cookieJar->all();
+
+		// No login cookies, or they're expired
+		if(count($cookies) == 0) {
+			if($this->version == "1.0") {
+				$request = $this->get('/api/acct/{acct_num}/login');
+				$request->setAuth($this->email, $this->password);
+			} else {
+				$request = $this->post('/api/session', null, array('email' => $this->email, 'password' => $this->password, 'account_href' => '/api/accounts/' . $this->acct_num));
+			}
+			$request->setHeader('Accept', '*/*');
+			$request->setHeader('X-API-VERSION', $this->version);
+			$request->send();
+			if($request->getResponse()->getStatusCode() == 302) {
+			  $location = strval($request->getResponse()->getHeader('Location'));
+        $baseUrl = str_replace('api/session', '', $location);
+			  $this->setBaseUrl($baseUrl);
+			  $request->setUrl($location);
+			  $request->send();
+			}
+		}
+  }
+
+  public function decorateRequest($method, $uri, $params, &$request) {
+    $version_uri_prefix = $this->getConfig('version') == '1.0' ? '/api/acct/{acct_num}/' : '/api/';
+    $full_uri = $version_uri_prefix . $uri;
+
+    $formatted_params = array();
+
+    foreach($params as $key => $value) {
+      if(empty($value)) {continue;}
+      if(is_array($value)) {
+        foreach($value as $ary_key => $ary_value) {
+          if(is_int($ary_key)) {
+            $formatted_params[$key.'[]'] = $ary_value;
+          } else {
+            $formatted_params[$key."[$ary_key]"] = $ary_value;
+          }
+        }
+      } else {
+        $formatted_params[$key] = $value;
+      }
+    }
+
+    $query_str = new QueryString();
+    $query_str->merge($formatted_params);
+
+    switch ($method) {
+      case 'GET':
+        $query_str->setEncodeFields(false);
+        $query_str->setAggregateFunction(
+          function($key, $values, $encodeFields = false, $encodeValues = false) {
+            $retval = array();
+            foreach($values as $value) {
+              if(count($retval) == 0) {
+                $retval[] = ($encodeValues ? rawurlencode($value) : $value);
+              } else {
+                $retval[] = ($encodeFields ? rawurlencode($key) : $key) . "=" . ($encodeValues ? rawurlencode($value) : $value);
+              }
+            }
+            return array(($encodeFields ? rawurlencode($key) : $key) => implode('&', $retval));
+          }
+        );
+        $request = $this->get($full_uri);
+        $request->setPath($full_uri . $query_str);
+        break;
+      case 'POST':
+        $request = $this->post($full_uri, null, $formatted_params);
+        break;
+      case 'DELETE':
+        $request = $this->delete($full_uri);
+        break;
+      case 'PUT':
+        $query_str->setPrefix('');
+        $request = $this->put($full_uri, null, $query_str);
+        $request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
+        break;
+    }
+
+    $request->setHeader('X-API-VERSION', $this->getVersion());
+  }
 }

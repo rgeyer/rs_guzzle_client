@@ -1,5 +1,17 @@
 <?php
 
+if(!isset($_ENV['ACCT_NUM'])) {
+  $_ENV['ACCT_NUM'] = getenv('ACCT_NUM');
+}
+
+if(!isset($_ENV['EMAIL'])) {
+  $_ENV['EMAIL'] = getenv('EMAIL');
+}
+
+if(!isset($_ENV['PASSWORD'])) {
+  $_ENV['PASSWORD'] = getenv('PASSWORD');
+}
+
 require_once 'vendor/autoload.php';
 
 // Autoload classes for guzzle-rs

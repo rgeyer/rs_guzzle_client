@@ -66,8 +66,15 @@ class DefaultCommand extends AbstractCommand {
 		$remainder = array_diff_key($this->getAll(), $this->_disposable_parameters);
     // TODO: Maybe limit this to only params which are defined in the *.xml file?
     // Maybe with an overridable "strict" mode?
+
+    $this->getClient()->decorateRequest(
+      $this->get('method'),
+      $this->get('path'),
+      $remainder,
+      $this->request
+    );
 		
-		$path_prefix = $this->getClient()->getConfig('version') == '1.0' ? '/api/acct/{acct_num}/' : '/api/';
+		/*$path_prefix = $this->getClient()->getConfig('version') == '1.0' ? '/api/acct/{acct_num}/' : '/api/';
 		
 		$path = $this->get('path');
 		$query_str = new QueryString();
@@ -124,7 +131,7 @@ class DefaultCommand extends AbstractCommand {
 				break; 
 		}
 		
-		$this->request->setHeader('X-API-VERSION', $this->client->getVersion());
+		$this->request->setHeader('X-API-VERSION', $this->client->getVersion());*/
 	}
 	
 	/**
