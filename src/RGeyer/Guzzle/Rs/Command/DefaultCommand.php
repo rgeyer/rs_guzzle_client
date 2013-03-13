@@ -73,65 +73,6 @@ class DefaultCommand extends AbstractCommand {
       $remainder,
       $this->request
     );
-		
-		/*$path_prefix = $this->getClient()->getConfig('version') == '1.0' ? '/api/acct/{acct_num}/' : '/api/';
-		
-		$path = $this->get('path');
-		$query_str = new QueryString();
-		$post_fields = array();
-
-		foreach($remainder as $key => $value) {
-			if(empty($value)) { continue; }
-			if(is_array($value)) {
-				foreach($value as $ary_key => $ary_value) {												
-					$query_str->add($key . "[]", $ary_value);
-					if(is_int($ary_key)) {
-						$post_fields[$key . "[]"] = $ary_value;
-					} else {
-						$post_fields[$key . "[$ary_key]"] = $ary_value;
-					}
-				}
-			} else {
-				$query_str->add($key, $value);
-				$post_fields[$key] = $value;
-			}
-		}
-		
-		switch ($this->get('method')) {
-			case 'GET':
-				$query_str->setEncodeFields(false);
-				$query_str->setAggregateFunction(
-					function($key, $values, $encodeFields = false, $encodeValues = false) {
-						$retval = array();
-						foreach($values as $value) {
-							if(count($retval) == 0) {
-								$retval[] = ($encodeValues ? rawurlencode($value) : $value);
-							} else {
-								$retval[] = ($encodeFields ? rawurlencode($key) : $key) . "=" . ($encodeValues ? rawurlencode($value) : $value);
-							}
-						}
-						return array(($encodeFields ? rawurlencode($key) : $key) => implode('&', $retval));
-					}
-				);				
-				$this->request = $this->client->get($path_prefix);
-				$this->request->setPath($this->request->getPath() . $path . $query_str);
-				break;
-			case 'POST':
-				$this->request = $this->client->post($path_prefix . $path, null, $post_fields);
-				break;
-			case 'DELETE':
-				$this->request = $this->client->delete($path_prefix . $path);
-				break;
-			case 'PUT':
-				$body = new QueryString();
-				$body->merge($post_fields);
-				$body->setPrefix('');				
-				$this->request = $this->client->put($path_prefix . $path, null, $body);
-				$this->request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
-				break; 
-		}
-		
-		$this->request->setHeader('X-API-VERSION', $this->client->getVersion());*/
 	}
 	
 	/**
