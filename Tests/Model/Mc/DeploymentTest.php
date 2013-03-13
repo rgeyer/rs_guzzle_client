@@ -33,7 +33,7 @@ class DeploymentTest extends \Guzzle\Tests\GuzzleTestCase {
 		$cloud->find_by_id('12345');		
 		$this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\Deployment', $cloud);
 		$keys = array_keys($cloud->getParameters());
-		foreach(array('links', 'description', 'name', 'href', 'id', 'server_tag_scope') as $prop) {
+		foreach(array('links', 'deployment[description]', 'deployment[name]', 'href', 'id', 'deployment[server_tag_scope]') as $prop) {
 			$this->assertContains($prop, $keys);
 		}
 	}

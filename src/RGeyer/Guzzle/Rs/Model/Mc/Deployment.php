@@ -36,10 +36,16 @@ class Deployment extends ModelBase {
     $this->_api_version = '1.5';
 
     $this->_path = 'deployment';
+    $this->_required_params = array(
+      'deployment[name]' => $this->castToString()
+    );
+
+    $this->_optional_params = array(
+      'deployment[description]' => $this->castToString(),
+      'deployment[server_tag_scope]' => $this->castToString()
+    );
+
     $this->_base_params = array(
-      'name' => $this->castToString(),
-      'description' => $this->castToString(),
-      'server_tag_scope' => $this->castToString(),
       'inputs' => null
     );
 

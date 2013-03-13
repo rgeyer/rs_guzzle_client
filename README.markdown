@@ -1448,3 +1448,4 @@ TODO
 * Allow OAuth token authentication
 * ModelBase should assume that the API call for a relationship is the same as the relationship name, unless specified otherwise.  I.E. relationship for 'cloud' would call command 'cloud' with an ID
 * Refactor tagging functionality into ModelBase or an "IsTaggable" mixin class.  See Model\Mc\Server for example of how *not* to do it
+* Test optional/required parameters on concrete models.  I.E. deployment[name] is an invalid parameter on create unless defined as required or optional, base is not sufficient.
