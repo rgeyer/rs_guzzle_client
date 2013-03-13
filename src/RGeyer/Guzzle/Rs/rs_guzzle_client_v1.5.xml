@@ -840,6 +840,46 @@ The 'inputs20' view is for retrieving inputs in 2.0 serialization (for more deta
       <param name="method" type="string" static="DELETE" />
       <param name="id" type="string" required="true" location="path" />
     </command>
+
+    <!-- SshKeys -->
+    <command name="ssh_key" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+    	<doc>Displays information about a single ssh key.</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/ssh_keys/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SshKey" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default" required="false" />
+    </command>
+
+    <command name="ssh_keys" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists ssh keys.</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/ssh_keys{output_format}" />
+      <param name="method" type="string" static="GET" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+      <param name="view" type="enum:default" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SshKey" />
+    </command>
+
+    <command name="ssh_keys_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new ssh key.</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/ssh_keys" />
+      <param name="method" type="string" static="POST" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="ssh_key[name]" type="string" required="true" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\SshKey" />
+    </command>
+
+    <command name="ssh_keys_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes a given ssh key.</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/ssh_keys/{id}" />
+      <param name="method" type="string" static="DELETE" />
+    	<param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="id" type="string" required="true" location="path" />
+    </command>
     
   </commands>
 </client>

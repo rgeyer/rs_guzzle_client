@@ -1,0 +1,127 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Wed, 13 Mar 2013 21:58:07 GMT
+Content-Type: application/vnd.rightscale.ssh_key+xml;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 296
+Content-Length: 3426
+X-Request-Uuid: d47e91eb98984aa3933151df22cfe485
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<ssh_keys>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>Anil SSH Key</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/D0NKGETHDJIEU" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>Anil SSH Key 3 Tier Demo</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345CSOP7MTCCJ8A" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>Anil's 3 Tier Demo SSH Key</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/EUUO3LIAVD9OM" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>CG_Deployment_0211</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345A1640DUFGME9" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>JF</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/BEVV2F5D2J8LD" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>RightGrid_Demo_App_0000000000004</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/ON3D6UHKTUMS" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>anilwpSSH</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345K4P31BCAAHGT" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>default</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345U72A0CLQ0LJI" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>jf2</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345AC02J16ILQTK" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>jf3</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345P1H0OVH0CAC" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>uge-cluster-keypair</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/C7SKUKBP9A583" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>uge-cluster-keypair Test1</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345E8R0K9PK3RLT" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>uge-cluster-keypair Test2</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345SNGIOFN5F3" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+  <ssh_key>
+    <actions></actions>
+    <resource_uid>uge-cluster-keypair Test3</resource_uid>
+    <links>
+      <link href="/api/clouds/12345/ssh_keys/12345M0U0FG11G95R" rel="self"/>
+      <link href="/api/clouds/12345" rel="cloud"/>
+    </links>
+  </ssh_key>
+</ssh_keys>

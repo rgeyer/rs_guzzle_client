@@ -801,7 +801,7 @@ Below you will find the current controllers (and their commands) that are suppor
 <table border="1" width="360px">
   <thead>
     <tr>
-      <th colspan="3">EC2 SSH Keys</th>      
+      <th colspan="3">EC2/Generic SSH Keys</th>
     </tr>
     <tr>
       <th width="120px">Command</th>
@@ -811,24 +811,29 @@ Below you will find the current controllers (and their commands) that are suppor
   </thead>
   <tbody>
     <tr>
+      <td>index</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
       <td>show</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>create</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td>destroy</td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
     <tr>
       <td><b>Model</b></td>
       <td bgcolor="green">100%</td>
-      <td bgcolor="red">0%</td>
+      <td bgcolor="green">100%</td>
     </tr>
   </tbody>
 </table>

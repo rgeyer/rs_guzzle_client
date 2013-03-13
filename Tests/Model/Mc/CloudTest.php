@@ -157,5 +157,38 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
     $this->assertGreaterThan(0, count($instances));
     $this->assertInstanceOf('stdClass', $instances[0]);
   }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testSupportsCloudFeatureReturnsTrueWhenCloudHasFeature() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/clouds/json/with_different_ids/response'
+      )
+    );
+		$cloud = new Cloud();
+    $clouds = $cloud->index();
+    $this->assertTrue($clouds[0]->supportsCloudFeature('security_groups'));
+    $this->assertTrue($clouds[0]->supportsCloudFeature('volumes'));
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testSupportsCloudFeatureReturnsFalseWhenCloudDoesNotHaveFeature() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/clouds/json/with_different_ids/response'
+      )
+    );
+		$cloud = new Cloud();
+    $clouds = $cloud->index();
+    $this->assertFalse($clouds[0]->supportsCloudFeature('no_feature'));
+  }
 	
 }

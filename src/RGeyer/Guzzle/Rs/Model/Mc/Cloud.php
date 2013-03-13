@@ -216,15 +216,17 @@ Array
 	}
 	
 	/**
-	 * Indicates whether the cloud supports security groups, determined by the presence or absence of a 
-	 * security group href in the 'links' list for the cloud.
-	 * 
-	 * @return boolean A boolean indicating if this cloud supports security groups
+	 * Indicates whether the cloud supports a specified cloud feature,
+   * determined by the presence or absence of an href in the 'links' list for the cloud.
+	 *
+   * @param string $feature The relationship href to interrogate the cloud for.
+   *
+	 * @return boolean A boolean indicating if this cloud supports the specified cloud feature
 	 */
-	public function supportsSecurityGroups() {
+	public function supportsCloudFeature($feature) {
 		$retval = false;
 		foreach($this->links as $link) {
-			if($link->rel == 'security_groups') {
+			if($link->rel == $feature) {
 				$retval = true;
 				break;
 			}

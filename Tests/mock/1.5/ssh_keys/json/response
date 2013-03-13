@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Wed, 13 Mar 2013 21:56:49 GMT
+Content-Type: application/vnd.rightscale.ssh_key+json;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 584
+Content-Length: 2231
+X-Request-Uuid: c3c51762c8054269a7359d6cf295233a
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+[{"actions":[],"resource_uid":"Anil SSH Key","links":[{"href":"/api/clouds/12345/ssh_keys/D0NKGETHDJIEU","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"Anil SSH Key 3 Tier Demo","links":[{"href":"/api/clouds/12345/ssh_keys/12345CSOP7MTCCJ8A","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"Anil's 3 Tier Demo SSH Key","links":[{"href":"/api/clouds/12345/ssh_keys/EUUO3LIAVD9OM","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"CG_Deployment_0211","links":[{"href":"/api/clouds/12345/ssh_keys/12345A1640DUFGME9","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"JF","links":[{"href":"/api/clouds/12345/ssh_keys/BEVV2F5D2J8LD","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"RightGrid_Demo_App_0000000000004","links":[{"href":"/api/clouds/12345/ssh_keys/ON3D6UHKTUMS","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"anilwpSSH","links":[{"href":"/api/clouds/12345/ssh_keys/12345K4P31BCAAHGT","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"default","links":[{"href":"/api/clouds/12345/ssh_keys/12345U72A0CLQ0LJI","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"jf2","links":[{"href":"/api/clouds/12345/ssh_keys/12345AC02J16ILQTK","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"jf3","links":[{"href":"/api/clouds/12345/ssh_keys/12345P1H0OVH0CAC","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"uge-cluster-keypair","links":[{"href":"/api/clouds/12345/ssh_keys/C7SKUKBP9A583","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"uge-cluster-keypair Test1","links":[{"href":"/api/clouds/12345/ssh_keys/12345E8R0K9PK3RLT","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"uge-cluster-keypair Test2","links":[{"href":"/api/clouds/12345/ssh_keys/12345SNGIOFN5F3","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]},{"actions":[],"resource_uid":"uge-cluster-keypair Test3","links":[{"href":"/api/clouds/12345/ssh_keys/12345M0U0FG11G95R","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}]}]
