@@ -61,7 +61,7 @@ class AlertSpecTest extends GuzzleTestCase {
    * @expectedException BadMethodCallException
    * @expectedExceptionMessage alert_spec does not implement a duplicate method
    */
-  public function testAlertSpecDoesNotImplementDuplidate() {
+  public function testAlertSpecDoesNotImplementDuplicate() {
     $spec = new AlertSpec();
     $spec->duplicate();
   }

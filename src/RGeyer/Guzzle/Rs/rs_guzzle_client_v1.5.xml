@@ -776,6 +776,70 @@ Note that this action can succeed only if the instance is running. One cannot te
       <param name="method" type="string" static="DELETE" />
       <param name="id" type="string" required="true" location="path" />
     </command>
+
+    <!-- Start Deployments -->
+    <command name="deployments" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists deployments of the account.
+
+Using the available filters, one can select or group which deployments to retrieve. The 'inputs20' view is for retrieving inputs in 2.0 serialization (for more details please see Inputs#index.)</doc>
+      <param name="path" type="string" static="deployments{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="view" type="enum:default,inputs,inputs_2_0" required="false" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Deployment" />
+    </command>
+
+    <command name="deployment" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists the attributes of a given deployment.
+
+The 'inputs20' view is for retrieving inputs in 2.0 serialization (for more details please see Inputs#index.)</doc>
+      <param name="path" type="string" static="deployments/{id}{output_format}" />
+      <param name="method" type="string" static="GET" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Deployment" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:default,inputs,inputs_2_0" required="false" />
+    </command>
+
+    <command name="deployments_create" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Creates a new deployment with the given parameters.</doc>
+      <param name="path" type="string" static="deployments" />
+      <param name="method" type="string" static="POST" />
+      <param name="deployment[name]" type="string" required="true" />
+      <param name="deployment[description]" type="string" required="false" />
+      <param name="deployment[server_tag_scope]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Deployment" />
+    </command>
+
+    <command name="deployments_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates attributes of a given deployment.</doc>
+      <param name="path" type="string" static="deployments/{id}" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="deployment[name]" type="string" required="false" />
+      <param name="deployment[description]" type="string" required="false" />
+      <param name="deployment[server_tag_scope]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Deployment" />
+    </command>
+
+    <command name="deployments_clone" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Clones a given deployment.</doc>
+      <param name="path" type="string" static="deployments/{id}/clone" />
+      <param name="method" type="string" static="POST" />
+      <param name="id" type="integer" required="true" location="path" />
+      <param name="deployment[name]" type="string" required="false" />
+      <param name="deployment[description]" type="string" required="false" />
+      <param name="deployment[server_tag_scope]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Deployment" />
+    </command>
+
+    <command name="deployments_destroy" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Deletes a given deployment.</doc>
+      <param name="path" type="string" default="deployments/{id}" />
+      <param name="method" type="string" static="DELETE" />
+      <param name="id" type="string" required="true" location="path" />
+    </command>
     
   </commands>
 </client>

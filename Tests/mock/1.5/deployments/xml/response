@@ -1,0 +1,85 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Wed, 13 Mar 2013 18:11:49 GMT
+Content-Type: application/vnd.rightscale.deployment+xml;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 43
+Content-Length: 2657
+X-Request-Uuid: 1c5edcbec289443d896ee9ffa6a44d43
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<deployments>
+  <deployment>
+    <server_tag_scope>deployment</server_tag_scope>
+    <actions>
+      <action rel="clone"/>
+    </actions>
+    <links>
+      <link href="/api/deployments/12345" rel="self"/>
+      <link href="/api/deployments/12345/servers" rel="servers"/>
+      <link href="/api/deployments/12345/server_arrays" rel="server_arrays"/>
+      <link href="/api/deployments/12345/inputs" rel="inputs"/>
+    </links>
+    <description>General deployment for testing and debugging, and to run individual servers.</description>
+    <name>Default</name>
+  </deployment>
+  <deployment>
+    <server_tag_scope>deployment</server_tag_scope>
+    <actions>
+      <action rel="clone"/>
+    </actions>
+    <links>
+      <link href="/api/deployments/12345" rel="self"/>
+      <link href="/api/deployments/12345/servers" rel="servers"/>
+      <link href="/api/deployments/12345/server_arrays" rel="server_arrays"/>
+      <link href="/api/deployments/12345/inputs" rel="inputs"/>
+    </links>
+    <description></description>
+    <name>NBD Hold</name>
+  </deployment>
+  <deployment>
+    <server_tag_scope>deployment</server_tag_scope>
+    <actions>
+      <action rel="clone"/>
+    </actions>
+    <links>
+      <link href="/api/deployments/12345" rel="self"/>
+      <link href="/api/deployments/12345/servers" rel="servers"/>
+      <link href="/api/deployments/12345/server_arrays" rel="server_arrays"/>
+      <link href="/api/deployments/12345/inputs" rel="inputs"/>
+    </links>
+    <description></description>
+    <name>PCR</name>
+  </deployment>
+  <deployment>
+    <server_tag_scope>deployment</server_tag_scope>
+    <actions>
+      <action rel="clone"/>
+    </actions>
+    <links>
+      <link href="/api/deployments/12345" rel="self"/>
+      <link href="/api/deployments/12345/servers" rel="servers"/>
+      <link href="/api/deployments/12345/server_arrays" rel="server_arrays"/>
+      <link href="/api/deployments/12345/inputs" rel="inputs"/>
+    </links>
+    <description></description>
+    <name>Errors Holding Tank</name>
+  </deployment>
+  <deployment>
+    <server_tag_scope>deployment</server_tag_scope>
+    <actions>
+      <action rel="clone"/>
+    </actions>
+    <links>
+      <link href="/api/deployments/12345" rel="self"/>
+      <link href="/api/deployments/12345/servers" rel="servers"/>
+      <link href="/api/deployments/12345/server_arrays" rel="server_arrays"/>
+      <link href="/api/deployments/12345/inputs" rel="inputs"/>
+    </links>
+    <description></description>
+    <name>ST Dev</name>
+  </deployment>
+</deployments>

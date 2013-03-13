@@ -1,0 +1,10 @@
+PUT /api/deployments/12345 HTTP/1.1
+Host: us-3.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Expect: 100-Continue
+Content-Type: application/x-www-form-urlencoded
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkMtugkAYRt9l1pDwz3AZSLpAWyijpV4IFTYNDBQIRVEGFQzvXky6_JLvnMV5oARZqO9kgiSUdch6zCO_IEvFQOgkIcGRBUQnWFFNChKqsvmvYJIRMLlMOZgyQI7lNFNSGTABkmGDJ0Yy-0T-zwKGJzvrkaOdb7dDsKla0ZbF4JXOemSe232PcuwU-cZ7W5XCgzbQltcE63UcfVaLKF1FP0HzvsqutGalVm5YouUM4zG2h_ue2EXhx6J2L9CMQq1Snbi_DRza5Z5_scJYiHEXmn7QKmzLsS3ut3zQw7CFI6UQ94PjfnTn7rjWdvqpdF99tm6as2e_PJPcn0kSzk_9USBLxyY1pukP44Rd7A==; _session_id=deadbeef0badf00dfeedfacec0ffee24
+Content-Length: 31
+
+deployment%5Bdescription%5D=foo

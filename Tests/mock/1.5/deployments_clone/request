@@ -1,0 +1,7 @@
+POST /api/deployments/12345/clone HTTP/1.1
+Host: us-3.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNotkF1vgjAYhf9Lr21C-5ZSSHbBZAN0GoOIwI2pLW5i5uTDgRj_-zDZ3TnJeZ6Lc0cSOejaYEATpBvk3MdS1MhhlIB4TFCrkEOAAzVM2-QTdNTjnlkWSM4kForsMSEFxcLQY6JAwAaQTNDR1xb_LAHyZEc9kuy08BfhLCDL1FvVxqzY77sozevLYbp0v8xYR3oeLFtd6IMBVRh_VsD73bubNsGu99SapoOFs85Pt5vK0NxKg4_y1x2-I69UDFQo581bud7U_dq9XgQewiq2V20_VKfFeUjiXPq-p2t9q3U53VIc5a86k3nmJZ1h9W6yOR55zsRlSLqX5yX98xKp1M_13CKHU1tYj8cf8cFdOw==; _session_id=deadbeef0badf00dfeedfacec0ffee24
+Content-Length: 0
+
