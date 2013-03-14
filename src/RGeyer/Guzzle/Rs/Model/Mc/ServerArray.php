@@ -16,6 +16,21 @@ namespace RGeyer\Guzzle\Rs\Model\Mc;
 
 use RGeyer\Guzzle\Rs\Model\ModelBase;
 
+/**
+ * @property array $elasticity_params
+ * @property string $state
+ * @property array $datacenter_policy
+ * @property string $description
+ * @property string $optimized
+ * @property string $name
+ * @property string $array_type
+ * @property array $instance
+ * @property int $instances_count
+ *
+ * @method RGeyer\Guzzle\Rs\Model\Mc\AlertSpec[] alert_specs() The alert specs for the array.
+ * @method RGeyer\Guzzle\Rs\Model\Mc\Instance next_instance() The next instance to be launched into the array, the home of the "current" instance settings
+ * @method RGeyer\Guzzle\Rs\Model\Mc\Instance[] current_instances() The current running instances
+ */
 class ServerArray extends ModelBase {
 
   public function __construct($mixed = null) {
