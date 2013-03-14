@@ -231,7 +231,8 @@ class RightScaleClient extends Client {
 		return preg_replace(',ec2_server_templates,', 'server_templates', RightScaleClient::convertHrefFrom1to15($href));
 	}
 
-  public function __call($method, $params) {
+  public function __call($method, $params=null) {
+    # TODO: Guzzle\Service\Client implements this as well, possibly pass through?
     $this->checkAuth();
     return new \RGeyer\Guzzle\Rs\Command\DynamicCommandAdapter($method, $params, $this);
   }

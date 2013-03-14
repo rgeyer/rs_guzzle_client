@@ -373,6 +373,7 @@ abstract class ModelBase {
 	}
 	
 	public function destroy() {
+    # TODO: Need to accept params here for cloud_id, or derive the cloud_id from the href.
 		$params = array('id' => $this->id);
     if($this->_path_requires_cloud_id && array_key_exists('cloud_id', $this->_params)) {
 			$params['cloud_id'] = $this->cloud_id;

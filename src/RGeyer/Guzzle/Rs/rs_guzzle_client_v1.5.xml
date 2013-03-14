@@ -838,7 +838,7 @@ The 'inputs20' view is for retrieving inputs in 2.0 serialization (for more deta
       <doc>Deletes a given deployment.</doc>
       <param name="path" type="string" default="deployments/{id}" />
       <param name="method" type="string" static="DELETE" />
-      <param name="id" type="string" required="true" location="path" />
+      <param name="id" type="integer" required="true" location="path" />
     </command>
 
     <!-- SshKeys -->
