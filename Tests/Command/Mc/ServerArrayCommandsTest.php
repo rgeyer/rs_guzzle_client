@@ -320,6 +320,29 @@ class ServerArrayCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
   /**
    * @group v1_5
    * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testShowRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/server_array/json/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'server_array',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
    */
   public function testHasCreateCommand() {
     $client = ClientFactory::getClient('1.5');
@@ -782,6 +805,29 @@ class ServerArrayCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
   /**
    * @group v1_5
    * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testUpdateRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/server_array/json/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'server_arrays_update',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
    */
   public function testHasCurrentInstancesCommand() {    
     $client = ClientFactory::getClient('1.5');
@@ -938,6 +984,29 @@ class ServerArrayCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
   /**
    * @group v1_5
    * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testCurrentInstancesRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/server_arrays_current_instances/json/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'server_arrays_current_instances',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
    */
   public function testHasDestroyCommand() {
     $client = ClientFactory::getClient('1.5');
@@ -988,6 +1057,29 @@ class ServerArrayCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComman
     );
 
     $command = $client->getCommand('server_arrays_destroy');
+    $command->execute();
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testDestroyRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/server_arrays_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'server_arrays_destroy',
+      array(
+        'id' => 'abc'
+      )
+    );
     $command->execute();
   }
 

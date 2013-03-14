@@ -682,7 +682,7 @@ Note that this action can succeed only if the instance is running. One cannot te
       <doc>Deletes a server array</doc>
       <param name="path" type="string" default="server_arrays/{id}" />
       <param name="method" type="string" static="DELETE" />
-      <param name="id" type="string" required="true" location="path" />
+      <param name="id" type="integer" required="true" location="path" />
     </command>
     
     <command name="server_arrays_launch" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
