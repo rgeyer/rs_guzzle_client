@@ -670,5 +670,28 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
     $command = $client->getCommand('security_group_rules_destroy');
     $command->execute();
   }
+
+  /**
+   * @group v1_5
+   * @group unit
+   * @expectedException Guzzle\Service\Exception\ValidationException
+   * @expectedExceptionMessage id: Value must be numeric
+   */
+  public function testDestroyRequiresIdToBeAnInt() {
+    $client = ClientFactory::getClient('1.5');
+    $this->setMockResponse($client,
+      array(
+        '1.5/security_group_rules_destroy/response'
+      )
+    );
+
+    $command = $client->getCommand(
+      'security_group_rules_destroy',
+      array(
+        'id' => 'abc'
+      )
+    );
+    $command->execute();
+  }
 	
 }

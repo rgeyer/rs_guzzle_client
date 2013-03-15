@@ -24,7 +24,7 @@ use BadMethodCallException;
  * @property string $resource_uid A unique identifier within the cloud provider
  * 
  * @method RGeyer\Guzzle\Rs\Model\Mc\Cloud cloud() The cloud the SecurityGroup belongs to
- * @method RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupeRule security_group_rules($params = null) A list of SecurityGroup rules
+ * @method RGeyer\Guzzle\Rs\Model\Mc\SecurityGroupeRule[] security_group_rules($params = null) A list of SecurityGroup rules
  */
 class SecurityGroup extends AbstractSecurityGroup {
 

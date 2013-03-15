@@ -104,7 +104,7 @@
       <doc>Deletes a given security group rule.</doc>
       <param name="path" type="string" default="security_group_rules/{id}" />
       <param name="method" type="string" static="DELETE" />
-      <param name="id" type="string" required="true" location="path" />
+      <param name="id" type="integer" required="true" location="path" />
     </command>
     
     <!-- Start Servers -->
