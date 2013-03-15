@@ -235,6 +235,23 @@ EOF;
   /**
    * @group unit
    */
+  public function testMergesParamsOnDestroy() {
+    $a = new DateTime();
+    $merged_array = array('a' => $a, 'b' => 'bee', 'c' => 'c');
+
+    $model = new ModelConcreteClassStubbed();
+    $model->a = $a;
+    $model->b = 'b';
+    $model->c = 'c';
+    $model->destroy(array('b' => 'bee'));
+
+    $this->assertEquals($merged_array, $model->getParameters());
+    $this->assertEquals($merged_array, $model->last_request_params);
+  }
+
+  /**
+   * @group unit
+   */
   public function testChangesPathOnIndexWhenParentHrefSupplied() {
     $deplHref = '/api/deployments/12345';
     $model = new \RGeyer\Guzzle\Rs\Model\Mc\Server();

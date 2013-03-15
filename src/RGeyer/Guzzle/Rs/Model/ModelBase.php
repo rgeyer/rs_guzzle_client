@@ -372,13 +372,10 @@ abstract class ModelBase {
 		$result = $this->executeCommand($this->_path_for_regex . "_update", $this->_params);
 	}
 	
-	public function destroy() {
-    # TODO: Need to accept params here for cloud_id, or derive the cloud_id from the href.
-		$params = array('id' => $this->id);
-    if($this->_path_requires_cloud_id && array_key_exists('cloud_id', $this->_params)) {
-			$params['cloud_id'] = $this->cloud_id;
-		}
-		$result = $this->executeCommand($this->_path_for_regex . '_destroy', $params);
+	public function destroy($params = null) {
+    if($params) { $this->_params = array_merge($this->_params, $params); }
+
+		$result = $this->executeCommand($this->_path_for_regex . '_destroy', $this->_params);
 		return $result;		
 	}
 	
