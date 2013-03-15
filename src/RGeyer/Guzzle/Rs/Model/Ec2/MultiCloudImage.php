@@ -34,7 +34,7 @@ class MultiCloudImage extends ModelBase {
 		throw new BadMethodCallException($this->_path . " does not implement an update method");
 	}
 	
-	public function destroy() {
+	public function destroy($params = null) {
 		throw new BadMethodCallException($this->_path . " does not implement a destroy method");
 	}
 	
