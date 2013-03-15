@@ -53,7 +53,7 @@ class Publication extends ModelBase {
 		throw new BadMethodCallException($this->_path . " does not implement a destroy method");
 	}
 
-	public function duplicate($params = null) {
+	public function duplicate() {
 		throw new BadMethodCallException($this->_path . " does not implement an duplicate method");
 	}
 }
