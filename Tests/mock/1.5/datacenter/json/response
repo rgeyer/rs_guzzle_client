@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Thu, 21 Mar 2013 21:21:17 GMT
+Content-Type: application/vnd.rightscale.datacenter+json;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 512
+Content-Length: 227
+X-Request-Uuid: 9ebc2723e8fc47ecaaf62307b28bfe9e
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+{"actions":[],"resource_uid":"us-east-1a","description":"us-east-1a zone in us-east-1 region","links":[{"href":"/api/clouds/12345/datacenters/DBHME7BQV63MI","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}],"name":"us-east-1a"}

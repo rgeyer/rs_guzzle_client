@@ -1,0 +1,6 @@
+GET /api/clouds/12345/datacenters/DBHME7BQV63MI.xml HTTP/1.1
+Host: us-3.rightscale.com
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+X-API-VERSION: 1.5
+Cookie: rs_gbl=eNo1kLtugzAARf_FcyyBMcZG6gCB0DZN3KakpWyAIUCQoWBCHsq_lwwdr3TPGc4NJMAG4wANsABiAPZtHnkPbIx0g94XQGXA1g1iME2jFl2ASsx_jAuGKEaQISKgrucIUkoZ1PKcEpToyELF7FP5P0u1BzvrgY-4dSQq3VnMSb3tJNp-XK7b0nTq1oskot-h2ewkLwq8kfsBZ907ObAYvlynqI98tXYcUXQnY5MEjffWnCQfuroZ5Vf827Uy5GT5TESygXUVqNdD0HUk_gi97Xl1NKoIBp8X88zDFY5TcW1-iCtQHeyLUuxYnChXLwPicu74clpf_KdHkvMjSZJl7SgVsAli1Lrf_wAbrV0Q; _session_id=deadbeef0badf00dfeedfacec0ffee24
+

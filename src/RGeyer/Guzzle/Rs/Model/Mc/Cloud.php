@@ -45,6 +45,7 @@ class Cloud extends ModelBase {
     );
 
     $this->_relationship_handlers = array(
+      'datacenters' => 'datacenters',
       'instances' => 'instances',
       'instance_types' => 'instance_types',
       'ssh_keys' => 'ssh_keys',

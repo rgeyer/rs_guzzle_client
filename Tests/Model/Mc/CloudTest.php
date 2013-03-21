@@ -200,6 +200,25 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
    * @group v1_5
    * @group unit
    */
+  public function testCanGetDataCentersRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/cloud/json/response',
+        '1.5/datacenters/json/response'
+      )
+    );
+		$cloud = new Cloud();
+    $cloud->find_by_id(12345);
+    $dcs = $cloud->datacenters();
+    $this->assertEquals(5, count($dcs));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\DataCenter', $dcs[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testSupportsCloudFeatureReturnsTrueWhenCloudHasFeature() {
 		$this->setMockResponse(
       ClientFactory::getClient('1.5'),

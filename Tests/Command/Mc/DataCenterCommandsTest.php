@@ -3,7 +3,7 @@ namespace RGeyer\Guzzle\Rs\Tests\Command\Mc;
 
 use RGeyer\Guzzle\Rs\Common\ClientFactory;
 
-class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase {
+class DataCenterCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientCommandsBase {
 
   /**
    * @group v1_5
@@ -11,7 +11,7 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
    */
   public function testHasIndexCommand() {
     $client = ClientFactory::getClient('1.5');
-    $command = $client->getCommand('instance_types');
+    $command = $client->getCommand('datacenters');
     $this->assertNotNull($command);
   }
 
@@ -23,11 +23,11 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_types/json/response'
+        '1.5/datacenters/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_types', array('cloud_id' => '12345'));
+    $command = $client->getCommand('datacenters', array('cloud_id' => '12345'));
     $command->execute();
 
     $this->assertEquals('GET', $command->getRequest()->getMethod());
@@ -39,7 +39,7 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
    */
   public function testIndexCommandExtendsDefaultCommand() {
     $client = ClientFactory::getClient('1.5');
-    $command = $client->getCommand('instance_types');
+    $command = $client->getCommand('datacenters');
     $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
   }
 
@@ -53,11 +53,11 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_types/json/response'
+        '1.5/datacenters/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_types');
+    $command = $client->getCommand('datacenters');
     $command->execute();
   }
 
@@ -71,11 +71,11 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_types/json/response'
+        '1.5/datacenters/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_types', array('cloud_id' => 'abc'));
+    $command = $client->getCommand('datacenters', array('cloud_id' => 'abc'));
     $command->execute();
   }
 
@@ -87,15 +87,15 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_types/json/response'
+        '1.5/datacenters/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_types', array('cloud_id' => '12345'));
+    $command = $client->getCommand('datacenters', array('cloud_id' => '12345'));
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertContains('/api/clouds/12345/instance_types.json', $request);
+    $this->assertContains('/api/clouds/12345/datacenters.json', $request);
 	}
 	
 	/**
@@ -106,15 +106,15 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_types/json/response'
+        '1.5/datacenters/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_types', array('cloud_id' => '12345', 'output_format' => '.json'));
+    $command = $client->getCommand('datacenters', array('cloud_id' => '12345', 'output_format' => '.json'));
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertContains('/api/clouds/12345/instance_types.json', $request);
+    $this->assertContains('/api/clouds/12345/datacenters.json', $request);
 	}
 	
 	/**
@@ -125,15 +125,15 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_types/xml/response'
+        '1.5/datacenters/xml/response'
       )
     );
 
-    $command = $client->getCommand('instance_types', array('cloud_id' => '12345', 'output_format' => '.xml'));
+    $command = $client->getCommand('datacenters', array('cloud_id' => '12345', 'output_format' => '.xml'));
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertContains('/api/clouds/12345/instance_types.xml', $request);
+    $this->assertContains('/api/clouds/12345/datacenters.xml', $request);
 	}
 
   /**
@@ -142,7 +142,7 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
    */
   public function testIndexAcceptsFilters() {
     $client = ClientFactory::getClient('1.5');
-    $command = $client->getCommand('instance_types');
+    $command = $client->getCommand('datacenters');
     $args = $command->getApiCommand()->getParams();
     $filter_param = array_filter(
       $args,
@@ -161,7 +161,7 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
    */
   public function testIndexAcceptsViews() {
     $client = ClientFactory::getClient('1.5');
-    $command = $client->getCommand('instance_types');
+    $command = $client->getCommand('datacenters');
     $args = $command->getApiCommand()->getParams();
     $filter_param = array_filter(
       $args,
@@ -182,18 +182,18 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_types/json/response'
+        '1.5/datacenters/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_types', array('cloud_id' => 12345));
+    $command = $client->getCommand('datacenters', array('cloud_id' => 12345));
     $command->execute();
     $result = $command->getResult();
 
     $this->assertNotNull($result);
     $this->assertInternalType('array', $result);
     $this->assertGreaterThan(0, count($result));
-    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\InstanceType', $result[0]);
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\DataCenter', $result[0]);
   }
 
   /**
@@ -202,7 +202,7 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
    */
   public function testHasShowCommand() {
     $client = ClientFactory::getClient('1.5');
-    $command = $client->getCommand('instance_type');
+    $command = $client->getCommand('datacenter');
     $this->assertNotNull($command);
   }
 
@@ -214,11 +214,11 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/json/response'
+        '1.5/datacenter/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_type', array('cloud_id' => '12345', 'id' => 'abc123'));
+    $command = $client->getCommand('datacenter', array('cloud_id' => '12345', 'id' => 'abc123'));
     $command->execute();
 
     $this->assertEquals('GET', $command->getRequest()->getMethod());
@@ -230,7 +230,7 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
    */
   public function testShowCommandExtendsDefaultCommand() {
     $client = ClientFactory::getClient('1.5');
-    $command = $client->getCommand('instance_type');
+    $command = $client->getCommand('datacenter');
     $this->assertInstanceOf('RGeyer\Guzzle\Rs\Command\DefaultCommand', $command);
   }
 
@@ -244,11 +244,11 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/json/response'
+        '1.5/datacenter/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_type', array('id' => 'abc123'));
+    $command = $client->getCommand('datacenter', array('id' => 'abc123'));
     $command->execute();
   }
 
@@ -262,11 +262,11 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/json/response'
+        '1.5/datacenter/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_type', array('id' => 'abc123', 'cloud_id' => 'abc'));
+    $command = $client->getCommand('datacenter', array('id' => 'abc123', 'cloud_id' => 'abc'));
     $command->execute();
   }
 
@@ -280,11 +280,11 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/json/response'
+        '1.5/datacenter/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_type', array('cloud_id' => '12345'));
+    $command = $client->getCommand('datacenter', array('cloud_id' => '12345'));
     $command->execute();
   }
 
@@ -298,12 +298,12 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/json/response'
+        '1.5/datacenter/json/response'
       )
     );
 
     $command = $client->getCommand(
-      'instance_type',
+      'datacenter',
       array(
         'id' => 12345,
         'cloud_id' => '12345'
@@ -320,15 +320,15 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/json/response'
+        '1.5/datacenter/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_type', array('cloud_id' => '12345', 'id' => 'abc123'));
+    $command = $client->getCommand('datacenter', array('cloud_id' => '12345', 'id' => 'abc123'));
     $command->execute();
     $result = $command->getResult();
 
-    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\InstanceType', $result);
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\DataCenter', $result);
   }
 
 	/**
@@ -339,15 +339,15 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/json/response'
+        '1.5/datacenter/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_type', array('cloud_id' => '12345', 'id' => 'abc123'));
+    $command = $client->getCommand('datacenter', array('cloud_id' => '12345', 'id' => 'abc123'));
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertContains('/api/clouds/12345/instance_types/abc123.json', $request);
+    $this->assertContains('/api/clouds/12345/datacenters/abc123.json', $request);
 	}
 	
 	/**
@@ -358,15 +358,15 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/json/response'
+        '1.5/datacenter/json/response'
       )
     );
 
-    $command = $client->getCommand('instance_type', array('cloud_id' => '12345', 'id' => 'abc123', 'output_format' => '.json'));
+    $command = $client->getCommand('datacenter', array('cloud_id' => '12345', 'id' => 'abc123', 'output_format' => '.json'));
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertContains('/api/clouds/12345/instance_types/abc123.json', $request);
+    $this->assertContains('/api/clouds/12345/datacenters/abc123.json', $request);
 	}
 	
 	/**
@@ -377,14 +377,14 @@ class InstanceTypeCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\ClientComma
     $client = ClientFactory::getClient('1.5');
     $this->setMockResponse($client,
       array(
-        '1.5/instance_type/xml/response'
+        '1.5/datacenter/xml/response'
       )
     );
 
-    $command = $client->getCommand('instance_type', array('cloud_id' => '12345', 'id' => 'abc123', 'output_format' => '.xml'));
+    $command = $client->getCommand('datacenter', array('cloud_id' => '12345', 'id' => 'abc123', 'output_format' => '.xml'));
     $command->execute();
 
     $request = (string)$command->getRequest();
-    $this->assertContains('/api/clouds/12345/instance_types/abc123.xml', $request);
+    $this->assertContains('/api/clouds/12345/datacenters/abc123.xml', $request);
 	}
 }
