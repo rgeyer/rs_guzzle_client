@@ -162,6 +162,44 @@ class CloudTest extends \Guzzle\Tests\GuzzleTestCase {
    * @group v1_5
    * @group unit
    */
+  public function testCanGetInstanceTypesRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/cloud/json/response',
+        '1.5/instance_types/json/response'
+      )
+    );
+		$cloud = new Cloud();
+    $cloud->find_by_id(12345);
+    $instances = $cloud->instance_types();
+    $this->assertEquals(16, count($instances));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\InstanceType', $instances[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
+  public function testCanGetSshKeysRelationship() {
+		$this->setMockResponse(
+      ClientFactory::getClient('1.5'),
+      array(
+        '1.5/cloud/json/response',
+        '1.5/security_groups/json/response'
+      )
+    );
+		$cloud = new Cloud();
+    $cloud->find_by_id(12345);
+    $grps = $cloud->security_groups();
+    $this->assertGreaterThan(0, count($grps));
+    $this->assertInstanceOf('RGeyer\Guzzle\Rs\Model\Mc\SecurityGroup', $grps[0]);
+  }
+
+  /**
+   * @group v1_5
+   * @group unit
+   */
   public function testSupportsCloudFeatureReturnsTrueWhenCloudHasFeature() {
 		$this->setMockResponse(
       ClientFactory::getClient('1.5'),

@@ -880,6 +880,28 @@ The 'inputs20' view is for retrieving inputs in 2.0 serialization (for more deta
     	<param name="cloud_id" type="integer" required="true" location="path" />
       <param name="id" type="string" required="true" location="path" />
     </command>
+
+    <!-- Start InstanceTypes -->
+    <command name="instance_types" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists instance types.</doc>
+      <param name="path" type="string" static="clouds/{cloud_id}/instance_types{output_format}" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+      <param name="view" type="enum:default" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\InstanceType" />
+    </command>
+
+    <command name="instance_type" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Displays information about a single Instance type.</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/instance_types/{id}{output_format}" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\InstanceType" />
+    </command>
     
   </commands>
 </client>

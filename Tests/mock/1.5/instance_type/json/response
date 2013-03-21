@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Thu, 21 Mar 2013 20:40:40 GMT
+Content-Type: application/vnd.rightscale.instance_type+json;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 283
+Content-Length: 312
+X-Request-Uuid: 7e4b3936578d4c8f91680aced8dc981e
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+{"actions":[],"cpu_count":null,"local_disks":null,"cpu_architecture":null,"resource_uid":"c1.medium","cpu_speed":null,"memory":"1.7 GB","description":null,"links":[{"href":"/api/clouds/12345/instance_types/12345U7NRRI3I0UM","rel":"self"},{"href":"/api/clouds/12345","rel":"cloud"}],"name":"c1.medium","local_disk_size":null}

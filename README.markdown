@@ -1444,6 +1444,38 @@ Below you will find the current controllers (and their commands) that are suppor
   </tbody>
 </table>
 
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">InstanceTypes</th>
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+  </tbody>
+</table>
+
 TODO
 ====
 * Allow the user to specify a logger.
