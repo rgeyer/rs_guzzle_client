@@ -884,7 +884,7 @@ The 'inputs20' view is for retrieving inputs in 2.0 serialization (for more deta
     <!-- Start InstanceTypes -->
     <command name="instance_types" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Lists instance types.</doc>
-      <param name="path" type="string" static="clouds/{cloud_id}/instance_types{output_format}" />
+      <param name="path" type="string" default="clouds/{cloud_id}/instance_types{output_format}" />
       <param name="cloud_id" type="integer" required="true" location="path" />
       <param name="method" type="string" static="GET" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
@@ -906,7 +906,7 @@ The 'inputs20' view is for retrieving inputs in 2.0 serialization (for more deta
     <!-- Start DataCenters -->
     <command name="datacenters" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
       <doc>Lists all Datacenters for a particular cloud.</doc>
-      <param name="path" type="string" static="clouds/{cloud_id}/datacenters{output_format}" />
+      <param name="path" type="string" default="clouds/{cloud_id}/datacenters{output_format}" />
       <param name="cloud_id" type="integer" required="true" location="path" />
       <param name="method" type="string" static="GET" />
       <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
