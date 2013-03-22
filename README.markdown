@@ -1520,3 +1520,4 @@ TODO
 * Test optional/required parameters on concrete models.  I.E. deployment[name] is an invalid parameter on create unless defined as required or optional, base is not sufficient.
 * Something seems to be wrong with API 1.0 calls not properly setting acct_num
 * tags_multi_add does not properly convert the tags array
+* Tests should make sure that models which make command requests for relationships correctly overwrite the path for the command.
