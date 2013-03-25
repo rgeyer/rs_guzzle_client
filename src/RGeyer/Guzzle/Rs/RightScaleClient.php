@@ -176,7 +176,7 @@ class RightScaleClient extends Client {
     $model = new $modelName($mixed);
     $model->setClient($this);
 
-    return new $modelName();
+    return $model;
   }
 
 	/**
