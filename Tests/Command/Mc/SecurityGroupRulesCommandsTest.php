@@ -387,11 +387,11 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
 
     $this->assertEquals('POST', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds/1234/security_groups/ABC123/security_group_rules', $request);
-    $this->assertContains(urlencode('security_group_rule[cidr_ips]') . '=' . urlencode('0.0.0.0/0'), $request);
-    $this->assertContains(urlencode('security_group_rule[protocol]') . '=' . urlencode('tcp'), $request);
-    $this->assertContains(urlencode('security_group_rule[source_type]') . '=' . urlencode('cidr_ips'), $request);
-    $this->assertContains(urlencode('security_group_rule[protocol_details][start_port]') . '=' . urlencode('25'), $request);
-    $this->assertContains(urlencode('security_group_rule[protocol_details][end_port]') . '=' . urlencode('25'), $request);
+    $this->assertContains('security_group_rule[cidr_ips]' . '=' . urlencode('0.0.0.0/0'), $request);
+    $this->assertContains('security_group_rule[protocol]' . '=' . urlencode('tcp'), $request);
+    $this->assertContains('security_group_rule[source_type]' . '=' . urlencode('cidr_ips'), $request);
+    $this->assertContains('security_group_rule[protocol_details][start_port]' . '=' . urlencode('25'), $request);
+    $this->assertContains('security_group_rule[protocol_details][end_port]' . '=' . urlencode('25'), $request);
 	}
 
 	/**
@@ -423,12 +423,12 @@ class SecurityGroupRulesCommandsTest extends \RGeyer\Guzzle\Rs\Tests\Utils\Clien
 
     $this->assertEquals('POST', $command->getRequest()->getMethod());
     $this->assertContains('/api/clouds/1234/security_groups/ABC123/security_group_rules', $request);
-    $this->assertContains(urlencode('security_group_rule[group_owner]') . '=' . urlencode('ABC123'), $request);
-    $this->assertContains(urlencode('security_group_rule[group_name]') . '=' . urlencode('foobarbaz'), $request);
-    $this->assertContains(urlencode('security_group_rule[protocol]') . '=' . urlencode('tcp'), $request);
-    $this->assertContains(urlencode('security_group_rule[source_type]') . '=' . urlencode('cidr_ips'), $request);
-    $this->assertContains(urlencode('security_group_rule[protocol_details][start_port]') . '=' . urlencode('25'), $request);
-    $this->assertContains(urlencode('security_group_rule[protocol_details][end_port]') . '=' . urlencode('25'), $request);
+    $this->assertContains('security_group_rule[group_owner]' . '=' . urlencode('ABC123'), $request);
+    $this->assertContains('security_group_rule[group_name]' . '=' . urlencode('foobarbaz'), $request);
+    $this->assertContains('security_group_rule[protocol]' . '=' . urlencode('tcp'), $request);
+    $this->assertContains('security_group_rule[source_type]' . '=' . urlencode('cidr_ips'), $request);
+    $this->assertContains('security_group_rule[protocol_details][start_port]' . '=' . urlencode('25'), $request);
+    $this->assertContains('security_group_rule[protocol_details][end_port]' . '=' . urlencode('25'), $request);
 	}
 
   /**

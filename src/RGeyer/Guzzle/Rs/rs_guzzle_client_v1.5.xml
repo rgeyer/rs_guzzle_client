@@ -924,6 +924,31 @@ The 'inputs20' view is for retrieving inputs in 2.0 serialization (for more deta
       <param name="id" type="string" required="true" location="path" />
       <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\DataCenter" />
     </command>
+
+    <!-- Start Inputs -->
+    <command name="inputs" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Retrieves the full list of existing inputs of the specified resource.</doc>
+      <param name="path" type="string" default="" />
+      <param name="method" type="string" static="GET" />
+      <!-- TODO: This is ignored since inputs are only accessed as relationships. Need to handle params better in ModelBase -->
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="view" type="enum:inputs_2_0" default="inputs_2_0" required="false" />
+      <!--<param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\DataCenter" />-->
+    </command>
+
+    <command name="inputs_multi_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Performs a bulk update of inputs on the specified resource.
+
+If an input already exists with the same name, its value will be updated. Inputs will be created if there is no existing input that has the same.
+
+Input values are represented as strings.
+
+        Explicitly using Inputs 2.0 Format. See http://reference.rightscale.com/api1.5/resources/ResourceInputs.html#multi_update for more info.
+      </doc>
+      <param name="path" type="string" default="" />
+      <param name="method" type="string" static="PUT" />
+      <param name="inputs" type="array" required="true" />
+    </command>
     
   </commands>
 </client>

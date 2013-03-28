@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Thu, 28 Mar 2013 20:29:30 GMT
+Content-Type: application/vnd.rightscale.input+json;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 698
+Content-Length: 726
+X-Request-Uuid: d51e455f579b4442a053e54d75be9422
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+[{"value":"text:any","name":"sys_firewall/rule/ip_address"},{"value":"ignore","name":"rightscale/process_match_list"},{"value":"text:tcp","name":"sys_firewall/rule/protocol"},{"value":"ignore","name":"logging/remote_server"},{"value":"ignore","name":"rightscale/process_list"},{"value":"text:time.rightscale.com, ec2-us-east.time.rightscale.com, ec2-us-west.time.rightscale.com","name":"sys_ntp/servers"},{"value":"text:enable","name":"sys_firewall/rule/enable"},{"value":"blank","name":"sys_firewall/rule/port"},{"value":"text:UTC","name":"rightscale/timezone"},{"value":"text:enabled","name":"sys_firewall/enabled"},{"value":"text:/mnt/ephemeral/swapfile","name":"sys/swap_file"},{"value":"text:0.5","name":"sys/swap_size"}]

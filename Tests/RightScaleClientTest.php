@@ -84,8 +84,7 @@ class RightScaleClientTest extends \PHPUnit_Framework_TestCase {
     $this->assertContains('/api/bar/baz?foo=bar&filter[]=name%3D%3DAWS%2A&server[instance]=name', strval($request));
   }
 
-  public function testDecorateRequestAllowsMultipleValuesForTheSameKey() {
-
+  public function testDecorateRequestAllowsMultipleValuesForTheSameKeyOnGET() {
     $client = RightScaleClient::factory(
       array(
         'version' => '1.5',
@@ -105,6 +104,88 @@ class RightScaleClientTest extends \PHPUnit_Framework_TestCase {
       $request
     );
     $this->assertContains('resource_hrefs[]=%2Fapi%2Fhref%2F1&resource_hrefs[]=%2Fapi%2Fhref%2F2&tags[]=foo&tags[]=bar&tags[]=baz', strval($request));
+  }
+
+  public function testDecorateRequestAllowsMultipleValuesForTheSameKeyOnPOST() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'POST',
+      'bar/baz',
+      array(
+        'resource_hrefs' => array('/api/href/1', '/api/href/2'),
+        'tags' => array('foo', 'bar', 'baz')
+      ),
+      $request
+    );
+    $this->assertContains('resource_hrefs[]=%2Fapi%2Fhref%2F1&resource_hrefs[]=%2Fapi%2Fhref%2F2&tags[]=foo&tags[]=bar&tags[]=baz', strval($request));
+  }
+
+  public function testDecorateRequestAllowsMultipleValuesForTheSameKeyOnPUT() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'PUT',
+      'bar/baz',
+      array(
+        'resource_hrefs' => array('/api/href/1', '/api/href/2'),
+        'tags' => array('foo', 'bar', 'baz')
+      ),
+      $request
+    );
+    $this->assertContains('resource_hrefs[]=%2Fapi%2Fhref%2F1&resource_hrefs[]=%2Fapi%2Fhref%2F2&tags[]=foo&tags[]=bar&tags[]=baz', strval($request));
+  }
+
+  public function testDecorateRequestSetsBodyTypeOnPOST() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'POST',
+      'bar/baz',
+      array(),
+      $request
+    );
+    $this->assertContains('Content-Type: application/x-www-form-urlencoded', strval($request));
+  }
+
+  public function testDecorateRequestSetsBodyTypeOnPUT() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'PUT',
+      'bar/baz',
+      array(),
+      $request
+    );
+    $this->assertContains('Content-Type: application/x-www-form-urlencoded', strval($request));
   }
 
 }

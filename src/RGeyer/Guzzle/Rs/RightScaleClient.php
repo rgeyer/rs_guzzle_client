@@ -284,35 +284,37 @@ class RightScaleClient extends Client {
 
     $query_str = new QueryString();
     $query_str->merge($formatted_params);
+    $query_str->setEncodeFields(false);
+    $query_str->setAggregateFunction(
+      function($key, $values, $encodeFields = false, $encodeValues = false) {
+        $retval = array();
+        foreach($values as $value) {
+          if(count($retval) == 0) {
+            $retval[] = ($encodeValues ? rawurlencode($value) : $value);
+          } else {
+            $retval[] = ($encodeFields ? rawurlencode($key) : $key) . "=" . ($encodeValues ? rawurlencode($value) : $value);
+          }
+        }
+        return array(($encodeFields ? rawurlencode($key) : $key) => implode('&', $retval));
+      }
+    );
 
     switch ($method) {
       case 'GET':
-        $query_str->setEncodeFields(false);
-        $query_str->setAggregateFunction(
-          function($key, $values, $encodeFields = false, $encodeValues = false) {
-            $retval = array();
-            foreach($values as $value) {
-              if(count($retval) == 0) {
-                $retval[] = ($encodeValues ? rawurlencode($value) : $value);
-              } else {
-                $retval[] = ($encodeFields ? rawurlencode($key) : $key) . "=" . ($encodeValues ? rawurlencode($value) : $value);
-              }
-            }
-            return array(($encodeFields ? rawurlencode($key) : $key) => implode('&', $retval));
-          }
-        );
         $request = $this->get($full_uri);
         $request->setPath($full_uri . $query_str);
         break;
       case 'POST':
-        $request = $this->post($full_uri, null, $formatted_params);
+        $query_str->setPrefix('');
+        $request = $this->post($full_uri, null, strval($query_str));
+        $request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
         break;
       case 'DELETE':
         $request = $this->delete($full_uri);
         break;
       case 'PUT':
         $query_str->setPrefix('');
-        $request = $this->put($full_uri, null, $query_str);
+        $request = $this->put($full_uri, null, strval($query_str));
         $request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
         break;
     }

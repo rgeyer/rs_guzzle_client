@@ -152,9 +152,9 @@ class ServerArrayTest extends GuzzleTestCase {
     $request = (string)$command->getRequest();
     $this->assertContains('id=6', $request);
     $this->assertContains('ignore_lock=true', $request);
-    $this->assertContains('inputs%5Bname%5D=%2Ffoo%2Fbar%2Fbaz', $request);
-    $this->assertContains('inputs%5Bvalue%5D=text%3Afoobar', $request);
-    $this->assertContains('filters%5B%5D=state%3D%3Doperational', $request);
+    $this->assertContains('inputs[name]=%2Ffoo%2Fbar%2Fbaz', $request);
+    $this->assertContains('inputs[value]=text%3Afoobar', $request);
+    $this->assertContains('filters[]=state%3D%3Doperational', $request);
 	}
 	
 	/**
@@ -213,7 +213,7 @@ class ServerArrayTest extends GuzzleTestCase {
     $request = (string)$command->getRequest();
     $this->assertContains('id=6', $request);
     $this->assertContains('terminate_all=true', $request);
-    $this->assertContains('filters%5B%5D=state%3D%3Doperational', $request);
+    $this->assertContains('filters[]=state%3D%3Doperational', $request);
 	}
 	
 	/**
@@ -267,8 +267,8 @@ class ServerArrayTest extends GuzzleTestCase {
     
     $command = $serverAry->getLastCommand();
     $request = (string)$command->getRequest();
-    $this->assertContains('inputs%5Bname%5D=%2Ffoo%2Fbar%2Fbaz', $request);
-    $this->assertContains('inputs%5Bvalue%5D=text%3Afoobar', $request);
+    $this->assertContains('inputs[name]=%2Ffoo%2Fbar%2Fbaz', $request);
+    $this->assertContains('inputs[value]=text%3Afoobar', $request);
 	}
 
   /**

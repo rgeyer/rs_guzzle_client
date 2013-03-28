@@ -1,0 +1,63 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Thu, 28 Mar 2013 20:29:31 GMT
+Content-Type: application/vnd.rightscale.input+xml;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 776
+Content-Length: 1215
+X-Request-Uuid: 367180a3ea874dcdbceb8e5f8391dee2
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<inputs>
+  <input>
+    <value>text:any</value>
+    <name>sys_firewall/rule/ip_address</name>
+  </input>
+  <input>
+    <value>ignore</value>
+    <name>rightscale/process_match_list</name>
+  </input>
+  <input>
+    <value>text:tcp</value>
+    <name>sys_firewall/rule/protocol</name>
+  </input>
+  <input>
+    <value>ignore</value>
+    <name>logging/remote_server</name>
+  </input>
+  <input>
+    <value>ignore</value>
+    <name>rightscale/process_list</name>
+  </input>
+  <input>
+    <value>text:time.rightscale.com, ec2-us-east.time.rightscale.com, ec2-us-west.time.rightscale.com</value>
+    <name>sys_ntp/servers</name>
+  </input>
+  <input>
+    <value>text:enable</value>
+    <name>sys_firewall/rule/enable</name>
+  </input>
+  <input>
+    <value>blank</value>
+    <name>sys_firewall/rule/port</name>
+  </input>
+  <input>
+    <value>text:UTC</value>
+    <name>rightscale/timezone</name>
+  </input>
+  <input>
+    <value>text:enabled</value>
+    <name>sys_firewall/enabled</name>
+  </input>
+  <input>
+    <value>text:/mnt/ephemeral/swapfile</value>
+    <name>sys/swap_file</name>
+  </input>
+  <input>
+    <value>text:0.5</value>
+    <name>sys/swap_size</name>
+  </input>
+</inputs>

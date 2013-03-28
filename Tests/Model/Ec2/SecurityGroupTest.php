@@ -39,10 +39,10 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
     $lastCommand = $secgrp->getLastCommand();
     $request = (string)$lastCommand->getRequest();
 
-    $this->assertContains('ec2_security_group%5Bprotocol%5D=tcp', $request);
-    $this->assertContains('ec2_security_group%5Bfrom_port%5D=22', $request);
-    $this->assertContains('ec2_security_group%5Bto_port%5D=22', $request);
-    $this->assertContains('ec2_security_group%5Bcidr_ips%5D=0.0.0.0%2F0', $request);
+    $this->assertContains('ec2_security_group[protocol]=tcp', $request);
+    $this->assertContains('ec2_security_group[from_port]=22', $request);
+    $this->assertContains('ec2_security_group[to_port]=22', $request);
+    $this->assertContains('ec2_security_group[cidr_ips]=0.0.0.0%2F0', $request);
   }
 
 	/**
@@ -60,10 +60,10 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
     $lastCommand = $secgrp->getLastCommand();
     $request = (string)$lastCommand->getRequest();
 
-    $this->assertContains('ec2_security_group%5Bprotocol%5D=tcp', $request);
-    $this->assertContains('ec2_security_group%5Bfrom_port%5D=22', $request);
-    $this->assertContains('ec2_security_group%5Bto_port%5D=22', $request);
-    $this->assertContains('ec2_security_group%5Bcidr_ips%5D=0.0.0.0%2F0', $request);
+    $this->assertContains('ec2_security_group[protocol]=tcp', $request);
+    $this->assertContains('ec2_security_group[from_port]=22', $request);
+    $this->assertContains('ec2_security_group[to_port]=22', $request);
+    $this->assertContains('ec2_security_group[cidr_ips]=0.0.0.0%2F0', $request);
 	}
 
 	/**
@@ -82,11 +82,11 @@ class SecurityGroupTest extends \Guzzle\Tests\GuzzleTestCase {
     $lastCommand = $secgrp->getLastCommand();
     $request = (string)$lastCommand->getRequest();
 
-    $this->assertContains('ec2_security_group%5Bowner%5D=0000000000', $request);
-    $this->assertContains('ec2_security_group%5Bgroup%5D=foobarbaz', $request);
-    $this->assertContains('ec2_security_group%5Bprotocol%5D=tcp', $request);
-    $this->assertContains('ec2_security_group%5Bfrom_port%5D=22', $request);
-    $this->assertContains('ec2_security_group%5Bto_port%5D=22', $request);
+    $this->assertContains('ec2_security_group[owner]=0000000000', $request);
+    $this->assertContains('ec2_security_group[group]=foobarbaz', $request);
+    $this->assertContains('ec2_security_group[protocol]=tcp', $request);
+    $this->assertContains('ec2_security_group[from_port]=22', $request);
+    $this->assertContains('ec2_security_group[to_port]=22', $request);
 	}
 	
 }
