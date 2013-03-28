@@ -272,7 +272,7 @@ class RightScaleClient extends Client {
       if(is_array($value)) {
         foreach($value as $ary_key => $ary_value) {
           if(is_int($ary_key)) {
-            $formatted_params[$key.'[]'] = $ary_value;
+            $formatted_params[$key."[]"] = $value;
           } else {
             $formatted_params[$key."[$ary_key]"] = $ary_value;
           }

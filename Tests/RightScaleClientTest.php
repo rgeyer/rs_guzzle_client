@@ -84,4 +84,27 @@ class RightScaleClientTest extends \PHPUnit_Framework_TestCase {
     $this->assertContains('/api/bar/baz?foo=bar&filter[]=name%3D%3DAWS%2A&server[instance]=name', strval($request));
   }
 
+  public function testDecorateRequestAllowsMultipleValuesForTheSameKey() {
+
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'GET',
+      'bar/baz',
+      array(
+        'resource_hrefs' => array('/api/href/1', '/api/href/2'),
+        'tags' => array('foo', 'bar', 'baz')
+      ),
+      $request
+    );
+    $this->assertContains('resource_hrefs[]=%2Fapi%2Fhref%2F1&resource_hrefs[]=%2Fapi%2Fhref%2F2&tags[]=foo&tags[]=bar&tags[]=baz', strval($request));
+  }
+
 }
