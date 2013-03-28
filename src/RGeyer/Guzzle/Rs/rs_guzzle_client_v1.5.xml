@@ -740,7 +740,7 @@ Note that this action can succeed only if the instance is running. One cannot te
       <param name="path" type="string" default="alert_specs" />
       <param name="method" type="string" static="POST" />
       <param name="alert_spec[condition]" type="enum:&gt;,&gt;=,&lt;,&lt;=,==,!=" required="true" />
-      <param name="alert_spec[duration]" type="string" required="true" />
+      <param name="alert_spec[duration]" type="integer" required="true" />
       <param name="alert_spec[file]" type="string" required="true" />
       <param name="alert_spec[name]" type="string" required="true" />      
       <param name="alert_spec[threshold]" type="string" required="true" />
