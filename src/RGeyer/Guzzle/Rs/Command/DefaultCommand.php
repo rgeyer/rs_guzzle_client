@@ -133,7 +133,7 @@ class DefaultCommand extends AbstractCommand {
 		}
 
     // Does the header indicate a JSON payload? If so, set the result to a json_decoded object
-    if(preg_match('/^\s*(text\/javascript|application\/vnd\.rightscale\..*json).*$/', $contentType)) {
+    if(preg_match('/^\s*(text\/javascript|application\/json|application\/vnd\.rightscale\..*json).*$/', $contentType)) {
       $body = trim($this->result->getBody(true));
       $this->result = json_decode($body);
     }

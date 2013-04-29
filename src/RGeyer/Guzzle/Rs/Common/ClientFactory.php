@@ -110,7 +110,7 @@ class ClientFactory {
 	 * 
 	 * @throws \InvalidArgumentException When the version is not 1.0 or 1.5, or when no credentials are set.
 	 * 
-	 * @return RightScaleClient
+	 * @return \RGeyer\Guzzle\Rs\RightScaleClient
 	 */
 	public static function getClient($version = "1.0") {
 		$acceptable_versions = array('1.0', '1.5');

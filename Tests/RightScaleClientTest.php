@@ -16,7 +16,7 @@ class RightScaleClientTest extends \PHPUnit_Framework_TestCase {
     );
     $request = null;
     $client->decorateRequest('GET', 'bar/baz', array(), $request);
-    $this->assertContains('/api/acct/{acct_num}/bar/baz', strval($request));
+    $this->assertContains('/api/acct/1234/bar/baz', strval($request));
   }
 
   public function testDecorateRequestPrefixesFor1_5() {
@@ -186,6 +186,45 @@ class RightScaleClientTest extends \PHPUnit_Framework_TestCase {
       $request
     );
     $this->assertContains('Content-Type: application/x-www-form-urlencoded', strval($request));
+  }
+
+  public function testGetAuthenticationDetailsReturnsEmailPasswordWhenOnlyEmailPasswordSupplied() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $authDeetz = $client->getAuthenticationDetails();
+    $this->assertEquals(array('acct_num', 'email', 'password'), array_keys($authDeetz));
+  }
+
+  public function testGetAuthenticationDetailsReturnsOauthTokenWhenOnlyOauthTokenSupplied() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'oauth_refresh_token' => 'abc123',
+        'acct_num' => '1234'
+      )
+    );
+    $authDeetz = $client->getAuthenticationDetails();
+    $this->assertEquals(array('acct_num', 'oauth_refresh_token'), array_keys($authDeetz));
+  }
+
+  public function testGetAuthenticationDetailsReturnsOauthTokenWhenBothAreSupplied() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'oauth_refresh_token' => 'abc123',
+        'acct_num' => '1234'
+      )
+    );
+    $authDeetz = $client->getAuthenticationDetails();
+    $this->assertEquals(array('acct_num', 'oauth_refresh_token'), array_keys($authDeetz));
   }
 
 }

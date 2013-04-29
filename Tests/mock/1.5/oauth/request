@@ -1,0 +1,9 @@
+POST /api/oauth2 HTTP/1.1
+Host: my.rightscale.com
+X-API-VERSION: 1.5
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8r
+Expect: 100-Continue
+Content-Length: 79
+Content-Type: application/x-www-form-urlencoded
+
+refresh_token=abc123&grant_type=refresh_token

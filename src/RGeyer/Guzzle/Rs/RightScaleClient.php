@@ -27,15 +27,36 @@ use Guzzle\Http\QueryString;
 use RGeyer\Guzzle\Rs\IndiscriminateArrayCookieJar;
 
 class RightScaleClient extends Client {
-	
+
+  /**
+   * @var string RightScale Account Number
+   */
 	protected $acct_num;
-	
+
+  /**
+   * @var string RightScale user email address for authentication
+   */
 	protected $email;
-	
+
+  /**
+   * @var string RightScale user password for authentication
+   */
 	protected $password;
-	
+
+  /**
+   * @see http://support.rightscale.com/12-Guides/03-RightScale_API/OAuth
+   * @var string RightScale OAuth refresh token
+   */
+  protected $oauth_refresh_token;
+
+  /**
+   * @var string The version of the RightScale API to use.  One of ["1.0", "1.5"]
+   */
 	protected $version;
-	
+
+  /**
+   * @var IndiscriminateArrayCookieJar
+   */
 	protected $cookieJar;
 
   /**
@@ -56,20 +77,39 @@ class RightScaleClient extends Client {
     }
     return $retval;
   }
+
+  /**
+   * @return array An associative array (hash) with authentication details.
+   * If oauth_refresh_token is set for the client, the hash will only contain
+   * the oauth_refresh_token.  Otherwise it will contain the email address and password.
+   */
+  public function getAuthenticationDetails() {
+    $retval = array('acct_num' => $this->acct_num);
+
+    if($this->oauth_refresh_token) {
+      $retval['oauth_refresh_token'] = $this->oauth_refresh_token;
+    } else {
+      $retval['email'] = $this->email;
+      $retval['password'] = $this->password;
+    }
+    return $retval;
+  }
 	
 	/**
 	 * Factory method to create a new RightScaleClient
+   *
+   * Either an oauth_refresh_token or an email/password pair must be supplied for authentication.
+   * If both are supplied the oauth token is preferred
 	 *
 	 * @param array|Collection $config Configuration data. Array keys:
-     *     base_url - * Base URL of web service
-     *     acct_num - * RightScale account number
-     *     email - Email
-     *     password - RS password
-     *     version - * API version
+   *     base_url - * Base URL of RightScale API defaults to 'https://my.rightscale.com'
+   *     acct_num - * RightScale account number
+   *     oauth_refresh_token - RightScale OAuth API Token for authentication
+   *     email - RightScale user email address for authentication
+   *     password - RightScale user password for authentication
+   *     version - * The version of the RightScale API to use.  One of ["1.0", "1.5"], defaults to "1.0"
 	 *
 	 * @return RightScaleClient
-	 *
-	 * @TODO update factory method and docblock for parameters
 	 */
 	public static function factory($config = array()) {
 		$default = array(
@@ -83,6 +123,7 @@ class RightScaleClient extends Client {
 		
 		$client = new self ( $config->get( 'base_url' ),
 			$config->get('acct_num'),
+      $config->get('oauth_refresh_token'),
 			$config->get('email'),
 			$config->get('password'),
 			$config->get('version')
@@ -94,11 +135,9 @@ class RightScaleClient extends Client {
     $client->setDescription(ServiceDescription::factory($path));
 
 		// Keep them cookies
-		$client->cookieJar = new IndiscriminateArrayCookieJar(); 
-        $client->getEventDispatcher()->addSubscriber(new CookiePlugin($client->cookieJar));
-		
-		// Retry 50x responses
-        //$client->getEventDispatcher()->addSubscriber(new ExponentialBackoffPlugin());
+		$client->cookieJar = new IndiscriminateArrayCookieJar();
+    $client->getEventDispatcher()->addSubscriber(new CookiePlugin($client->cookieJar));
+    $client->getEventDispatcher()->addSubscriber(new HttpAuthenticationPlugin($client));
 
 		return $client;
 	}
@@ -112,21 +151,27 @@ class RightScaleClient extends Client {
    *
    * Best practice is to use RightScaleClient::factory to instantiate a new RightScaleClient
    *
-   * @param string $baseUrl
-   * @param string $acctNum
-   * @param string $email
-   * @param string $password
-   * @param string $version
+   * @param string base_url Base URL of RightScale API
+   * @param string acct_num RightScale account number
+   * @param string oauth_refresh_token RightScale OAuth API Token for authentication
+   * @param string email RightScale user email address for authentication
+   * @param string password RightScale user password for authentication
+   * @param string version The version of the RightScale API to use.  One of ["1.0", "1.5"]
    */
-  public function __construct($baseUrl, $acctNum, $email, $password, $version)
+  public function __construct($baseUrl, $acctNum, $oauth_refresh_token, $email, $password, $version)
   {
     parent::__construct($baseUrl);
-    $this->acct_num = $acctNum;
-    $this->email 		= $email;
-    $this->password = $password;
-    $this->version 	= $version;
+    $this->acct_num             = $acctNum;
+    $this->oauth_refresh_token  = $oauth_refresh_token;
+    $this->email 		            = $email;
+    $this->password             = $password;
+    $this->version 	            = $version;
+    $this->getDefaultHeaders()->add('X-API-VERSION', $version);
   }
-	
+
+  /**
+   * @return string The version of this instantiated RightScaleClient
+   */
 	public function getVersion() {
 		return $this->version;
 	}
@@ -142,10 +187,12 @@ class RightScaleClient extends Client {
 	 * (non-PHPdoc)
 	 * @see Guzzle\Service.Client::getCommand()
 	 * 
-	 * @return CommandInterface
+	 * @return \Guzzle\Service\Command\CommandInterface
 	 */
 	public function getCommand($name, array $args = array()) {
-		$this->checkAuth();
+    /*if($name != 'oauth') {
+		  $this->checkAuth();
+    }*/
 
     $command = parent::getCommand($name, $args);
     $this->command_history[] = $command;
@@ -156,7 +203,7 @@ class RightScaleClient extends Client {
    * Returns a new model of the specified type, which will use this client for making API calls
    *
    * @throws \InvalidArgumentException If a namespace is specified, or if the model does not exist
-   * @param $modelName The classname of the model you want to instantiate.  Do NOT include the fully qualified class name with namespace.  E.G. Cloud
+   * @param $modelName The classname of the model you want to instantiate.  Do NOT include the fully qualified class name with namespace.  E.G. Cloud not \RGeyer\Guzzle\Rs\Model\1.5\Cloud
    * @param mixed $mixed Any of the acceptable parameter types for ModelBase::__construct
    * @return \RGeyer\Guzzle\Rs\ModelBase A model object of the type specified in $modelName
    */
@@ -233,7 +280,7 @@ class RightScaleClient extends Client {
 
   public function __call($method, $params=null) {
     # TODO: Guzzle\Service\Client implements this as well, possibly pass through?
-    $this->checkAuth();
+    //$this->checkAuth();
     return new \RGeyer\Guzzle\Rs\Command\DynamicCommandAdapter($method, $params, $this);
   }
 
@@ -243,13 +290,12 @@ class RightScaleClient extends Client {
 		// No login cookies, or they're expired
 		if(count($cookies) == 0) {
 			if($this->version == "1.0") {
-				$request = $this->get('/api/acct/{acct_num}/login');
-				$request->setAuth($this->email, $this->password);
+				$request = $this->get('/api/acct/'.$this->acct_num.'/login');
+        $request->setAuth($this->email, $this->password);
 			} else {
 				$request = $this->post('/api/session', null, array('email' => $this->email, 'password' => $this->password, 'account_href' => '/api/accounts/' . $this->acct_num));
 			}
 			$request->setHeader('Accept', '*/*');
-			$request->setHeader('X-API-VERSION', $this->version);
 			$request->send();
 			if($request->getResponse()->getStatusCode() == 302) {
 			  $location = strval($request->getResponse()->getHeader('Location'));
@@ -262,7 +308,7 @@ class RightScaleClient extends Client {
   }
 
   public function decorateRequest($method, $uri, $params, &$request) {
-    $version_uri_prefix = $this->getConfig('version') == '1.0' ? '/api/acct/{acct_num}/' : '/api/';
+    $version_uri_prefix = $this->getConfig('version') == '1.0' ? '/api/acct/'.$this->acct_num.'/' : '/api/';
     $full_uri = $version_uri_prefix . $uri;
 
     $formatted_params = array();
@@ -318,7 +364,5 @@ class RightScaleClient extends Client {
         $request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
         break;
     }
-
-    $request->setHeader('X-API-VERSION', $this->getVersion());
   }
 }

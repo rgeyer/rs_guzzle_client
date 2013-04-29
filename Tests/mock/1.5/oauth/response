@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Mon, 29 Apr 2013 21:30:26 GMT
+Content-Type: application/json; charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 1038
+Pragma: no-cache
+Content-Length: 415
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+{"token_type":"bearer","access_token":"token","expires_in":7200}

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <client>
   <commands>
+
+    <!-- Start OAuth -->
+    <command name="oauth" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Authenticates with the API using an oauth refresh token</doc>
+      <param name="path" type="string" static="oauth2" />
+      <param name="refresh_token" type="string" required="true" />
+      <param name="grant_type" type="string" static="refresh_token" />
+      <param name="method" type="string" static="POST" />
+    </command>
   
     <!-- Start Deployments -->    
     <command name="deployments" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
