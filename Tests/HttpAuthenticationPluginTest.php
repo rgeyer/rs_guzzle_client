@@ -30,7 +30,7 @@ class HttpAuthenticationPluginTest extends \PHPUnit_Framework_TestCase {
     $plugin->onRequestSent($event);
   }
 
-public function testDoesNotRetryMoreThanOnce() {
+  public function testDoesNotRetryMoreThanOnce() {
     $client = $this->getMockBuilder('RGeyer\Guzzle\Rs\RightScaleClient')
       ->disableOriginalConstructor()
       ->getMock();

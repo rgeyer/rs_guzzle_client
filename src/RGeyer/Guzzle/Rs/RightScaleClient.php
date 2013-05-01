@@ -137,7 +137,9 @@ class RightScaleClient extends Client {
 		// Keep them cookies
 		$client->cookieJar = new IndiscriminateArrayCookieJar();
     $client->getEventDispatcher()->addSubscriber(new CookiePlugin($client->cookieJar));
+
     $client->getEventDispatcher()->addSubscriber(new HttpAuthenticationPlugin($client));
+    $client->getEventDispatcher()->addSubscriber(new ShardAwarenessPlugin($client));
 
 		return $client;
 	}

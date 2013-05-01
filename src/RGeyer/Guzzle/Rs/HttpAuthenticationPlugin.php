@@ -64,7 +64,6 @@ class HttpAuthenticationPlugin implements EventSubscriberInterface {
     $request = $event['request'];
     $response = $event['response'];
     $exception = $event['exception'];
-
     if($response && $response->getStatusCode() == 403) {
       $params = $request->getParams();
       if($params->get('plugins.http_authentication.retry_count') < 1) {
@@ -112,6 +111,9 @@ class HttpAuthenticationPlugin implements EventSubscriberInterface {
     $params = $request->getParams();
     $retries = intval($params->get('plugins.http_authentication.retry_count')) + 1;
     $params->set('plugins.http_authentication.retry_count', $retries);
+    $url = $request->getUrl();
+    $newurl = preg_replace(',https://[a-z\.\-]*/,', $this->client->getBaseUrl(), $url);
+    $request->setUrl($newurl);
     $request->send();
   }
 }
