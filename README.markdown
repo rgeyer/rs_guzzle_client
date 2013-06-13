@@ -5,7 +5,7 @@ Guzzle Rightscale API client for PHP
 
 rs_guzzle_client is a PHP Guzzle REST API client library for the RightScale API.
 
-Support is available for v1.0 of the API and v1.5 support is coming soon!
+Support is available for v1.0 and v1.5 of the API.  Not all API calls are covered, a table of supported calls can be found below.
 
 ## Installation
 Add rs_guzzle_client to the src/Guzzle/Rs directory of your Guzzle
@@ -1550,3 +1550,4 @@ TODO
 * Refactor tagging functionality into ModelBase or an "IsTaggable" mixin class.  See Model\Mc\Server for example of how *not* to do it
 * Test optional/required parameters on concrete models.  I.E. deployment[name] is an invalid parameter on create unless defined as required or optional, base is not sufficient.
 * Tests should make sure that models which make command requests for relationships correctly overwrite the path for the command.
+* Handle associative arrays (hashes) embedded in numeric arrays (collections) as in server_array[datacenter_policy][][max|weight|datacenter_href]
