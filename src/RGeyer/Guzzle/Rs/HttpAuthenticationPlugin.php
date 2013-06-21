@@ -114,6 +114,9 @@ class HttpAuthenticationPlugin implements EventSubscriberInterface {
     $url = $request->getUrl();
     $newurl = preg_replace(',https://[a-z\.\-]*/,', $this->client->getBaseUrl(), $url);
     $request->setUrl($newurl);
+    # TODO: This is a damn dirty hack and I don't understand why it's needed but when
+    # I don't just read the request, curl complains that the server response was empty.
+    strval($request);
     $request->send();
   }
 }
