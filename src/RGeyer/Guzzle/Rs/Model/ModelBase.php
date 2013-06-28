@@ -165,20 +165,15 @@ abstract class ModelBase {
 	/**
 	 * Returns parameters from the parameter array for this object when requested as a property
 	 * 
-	 * @param string $name The name of the parameter 
-	 * @throws InvalidArgumentException If the parameter is not defined for the concrete object.
+	 * @param string $name The name of the parameter
 	 * 
 	 * @return mixed The requested parameter (if it exists).
 	 */
 	public function __get($name) {
-		$allowed_params = array_keys($this->_getAllowedParams());
 		$array_idx = $name;
-		$found = false;
-		$found |= $this->_valueInArray($name, $allowed_params, $array_idx);
-		$found |= $this->_valueInArray($this->_path . "[" . $name . "]", $allowed_params, $array_idx);
 	
-		if(!$found) {
-			throw new InvalidArgumentException("Can not get property $name, it is not defined for this object. Type: " . get_class($this));
+		if(!in_array($array_idx, array_keys($this->_params))) {
+      $array_idx = $this->_path . "[" . $name . "]";
 		}
 	
 		return in_array($array_idx, array_keys($this->_params)) ? $this->_params[$array_idx] : '';
@@ -194,17 +189,13 @@ abstract class ModelBase {
 		$found |= $this->_valueInArray(str_replace('-', '_', $name), $allowed_params, $array_idx);
 		$found |= $this->_valueInArray($this->_path . "[" . str_replace('-', '_', $name) . "]", $allowed_params, $array_idx);
 	
-		if(!$found) {
-			throw new InvalidArgumentException("Can not set property $name, it is not defined for this object. Type: " . get_class($this));
-		}
-	
 		$this->_params[strval($array_idx)] = $value;
 	}
 
   /**
    * @param $name
    * @param $arguments
-   * @return ModelBase|ModelBase[]|stdClass
+   * @return ModelBase|ModelBase[]|\stdClass
    * @throws BadMethodCallException if the resource returned by the API does not have a list of relationships
    * @throws BadMethodCallException if a relationship is requested but that relationship is not returned by the API
    * @throws BadMethodCallException if a relationship is requested but this model does not define a handler for that relationship type
@@ -339,11 +330,6 @@ abstract class ModelBase {
 			throw new InvalidArgumentException("The following required param(s) were not supplied -- " . join(',', array_diff(array_keys($this->_required_params), array_keys($this->_params))));
 		}
 		
-		$allowed_params = array_keys($this->_getAllowedParams());
-		if(count(array_diff(array_keys($this->_params), $allowed_params)) > 0) {
-			throw new InvalidArgumentException("The following parameters are invalid -- " . join(',', array_diff(array_keys($this->_params), $allowed_params)));
-		}
-		
 		$result = $this->executeCommand($this->_path_for_regex . "_create", $this->_params);
 		$this->initialize($result);
 	}
@@ -362,12 +348,6 @@ abstract class ModelBase {
 		}
 
     $this->_params['id'] = $this->_castIdWithClosure();
-		
-		$allowed_params = $this->_getAllowedParams();
-		$allowed_keys = array_keys($allowed_params);
-		if(count(array_diff(array_keys($this->_params), $allowed_keys)) > 0) {
-			throw new InvalidArgumentException("The following parameters are invalid -- " . join(',', array_diff(array_keys($this->_params), $allowed_keys)));
-		}
 		
 		$result = $this->executeCommand($this->_path_for_regex . "_update", $this->_params);
 	}

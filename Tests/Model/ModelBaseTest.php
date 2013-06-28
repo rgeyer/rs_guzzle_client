@@ -184,16 +184,16 @@ EOF;
 	 * @group unit
 	 * @expectedException InvalidArgumentException
 	 */
-	public function testThrowsExceptionWhenRequiredParamsAreMissing() {
+	public function testCreateThrowsExceptionWhenRequiredParamsAreMissing() {
 		$this->_modelBase->create(array('a' => null));
 	}
 	
 	/**
 	 * @group unit
-	 * @expectedException InvalidArgumentException
 	 */
-	public function testThrowsExceptionWhenInvalidParamsAreProvided() {
+	public function testCreateAllowUndefinedParamsAndPassesThemOn() {
 		$this->_modelBase->create(array('a' => null, 'b' => null, 'c' => null, 'foo' => null));
+    $this->assertEquals(null, $this->_modelBase->a);
 	}
 
   /**
@@ -230,6 +230,16 @@ EOF;
 
     $this->assertEquals($merged_array, $model->getParameters());
     $this->assertEquals($merged_array, $model->last_request_params);
+  }
+
+  /**
+   * @group unit
+   */
+  public function testUpdateAcceptsUndefinedParams() {
+    $this->_modelBase->id = 1;
+    $this->_modelBase->href = 'href';
+    $this->_modelBase->update(array('a' => 'foobar'));
+    $this->assertEquals('foobar', $this->_modelBase->a);
   }
 
   /**
@@ -310,25 +320,38 @@ EOF;
     $this->assertContains('/api/deployments/12345/servers.json', $request);
   }
 
+  /**
+   * @group unit
+   */
   public function testSetsEc2VersionHeaderOnEc2Request() {
     $this->markTestIncomplete('Not yet implemented.');
   }
 
+  /**
+   * @group unit
+   */
   public function testSetsMcVersionHeaderOnMcRequest() {
     $this->markTestIncomplete('Not yet implemented.');
   }
 
+  /**
+   * @group unit
+   */
   public function testPassesFilters() {
     $this->markTestIncomplete('Not yet implemented.');
   }
 
+  /**
+   * @group unit
+   */
   public function testReturnsSelfOnMagicMethod() {
     $model = new ModelConcreteClass();
     $this->assertEquals($model, $model->self());
   }
 
   /**
-   * @expectedException BadMethodCallException
+   * @group unit
+   * @expectedException \BadMethodCallException
    * @expectedExceptionMessage There is no list of relationships for this model.  Make sure you've done a create or find before trying to access relationships.
    */
   public function testThrowsExceptionWhenLinksAreNotAvailable() {
@@ -337,7 +360,8 @@ EOF;
   }
 
   /**
-   * @expectedException BadMethodCallException
+   * @group unit
+   * @expectedException \BadMethodCallException
    * @expectedExceptionMessage The relationship named (someMagicMethod) was not returned by the RightScale API
    */
   public function testThrowsExceptionWhenLinksAreAvailableButRequestedRelationshipIsNot() {
@@ -351,7 +375,8 @@ EOF;
   }
 
   /**
-   * @expectedException BadMethodCallException
+   * @group unit
+   * @expectedException \BadMethodCallException
    * @expectedExceptionMessage The RightScale API returned a relationship named (cloud) but no handler was specified for this model
    */
   public function testThrowsExceptionWhenLinkAvailableButRelationshipHandlerIsNot() {
@@ -364,6 +389,9 @@ EOF;
     $model->cloud();
   }
 
+  /**
+   * @group unit
+   */
   public function testCallsRelationshipHandler() {
     $model = new ModelConcreteClassStubbed();
     $client = $model->getClient();
@@ -379,6 +407,9 @@ EOF;
     $this->assertEquals('cloud/123', $model->last_request_params['path']);
   }
 
+  /**
+   * @group unit
+   */
   public function testRelationshipHandlerCanAcceptParameters() {
     $model = new ModelConcreteClassStubbed();
     $client = $model->getClient();
@@ -397,7 +428,10 @@ EOF;
     $this->assertArrayHasKey('baz', $model->last_request_params);
     $this->assertEquals('1', $model->last_request_params['baz']);
   }
-  
+
+  /**
+   * @group unit
+   */
   public function testMagicMethodsSatisfyRequiredPathParamsWithBogusValues() {
     $model = new ModelConcreteClassStubbed();
     $client = $model->getClient();
@@ -417,7 +451,10 @@ EOF;
     $this->assertEquals('1234', $model->last_request_params['baz']);
     
   }
-  
+
+  /**
+   * @group unit
+   */
   public function testFindByIdAcceptsParameters() {
     $model = new ModelConcreteClassStubbed();
     $model->find_by_id('1234', array('foo'=>1,'bar'=>1));
@@ -427,7 +464,10 @@ EOF;
     $this->assertContains('foo', $keys);
     $this->assertContains('bar', $keys);    
   }
-  
+
+  /**
+   * @group unit
+   */
   public function testFindByHrefAcceptsParameters() {
     $model = new ModelConcreteClassStubbed();
     $model->find_by_href('/api/cloud/1234', array('foo'=>1,'bar'=>1));
@@ -436,6 +476,25 @@ EOF;
     $this->assertContains('id', $keys);
     $this->assertContains('foo', $keys);
     $this->assertContains('bar', $keys);    
+  }
+
+  /**
+   * @group unit
+   */
+  public function testCanSetUndefinedParameter() {
+    $model = new ModelConcreteClass();
+    $model->foobar = "baz";
+    $params = $model->getParameters();
+    $this->assertArrayHasKey('foobar', $params);
+  }
+
+  /**
+   * @group unit
+   */
+  public function testCanGetUndefinedParameter() {
+    $model = new ModelConcreteClass();
+    $model->foobar = "baz";
+    $this->assertEquals('baz', $model->foobar);
   }
 }
 
