@@ -150,6 +150,39 @@ class RightScaleClientTest extends \PHPUnit_Framework_TestCase {
     $this->assertContains('resource_hrefs[]=%2Fapi%2Fhref%2F1&resource_hrefs[]=%2Fapi%2Fhref%2F2&tags[]=foo&tags[]=bar&tags[]=baz', strval($request));
   }
 
+  public function testDecorateRequestAllowsMultipleValuesForTheSameKeyWhenValuesAreHashes() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'POST',
+      'bar/baz',
+      array(
+        'server_array[datacenter_policy]' => array(
+          array(
+            'datacenter_href' => '/api/dc/href1',
+            'max' => 0,
+            'weight' => 40
+          ),
+          array(
+            'datacenter_href' => '/api/dc/href2',
+            'max' => 0,
+            'weight' => 40
+          )
+        ),
+      ),
+      $request
+    );
+    $this->assertContains('server_array[datacenter_policy][][datacenter_href]=%2Fapi%2Fdc%2Fhref1', strval($request));
+    $this->assertContains('server_array[datacenter_policy][][datacenter_href]=%2Fapi%2Fdc%2Fhref2', strval($request));
+  }
+
   public function testDecorateRequestSetsBodyTypeOnPOST() {
     $client = RightScaleClient::factory(
       array(

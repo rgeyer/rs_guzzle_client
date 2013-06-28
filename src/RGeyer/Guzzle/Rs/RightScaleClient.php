@@ -310,17 +310,26 @@ class RightScaleClient extends Client {
   }
 
   public function decorateRequest($method, $uri, $params, &$request) {
+    $query_str = new QueryString();
     $version_uri_prefix = $this->getConfig('version') == '1.0' ? '/api/acct/'.$this->acct_num.'/' : '/api/';
     $full_uri = $version_uri_prefix . $uri;
 
     $formatted_params = array();
+    $duplicate_array_params = '';
 
     foreach($params as $key => $value) {
       if($value === null || (!is_int($value) & !is_bool($value) & empty($value))) {continue;}
       if(is_array($value)) {
         foreach($value as $ary_key => $ary_value) {
           if(is_int($ary_key)) {
-            $formatted_params[$key."[]"] = $value;
+            if(is_array($ary_value)) {
+              foreach($ary_value as $multikey => $multival) {
+                $duplicate_array_params .= sprintf('&%s[][%s]=%s', $key, $multikey, rawurlencode($multival));
+              }
+            } else {
+              $formatted_params[$key."[]"] = $value;
+              break;
+            }
           } else {
             $formatted_params[$key."[$ary_key]"] = $ary_value;
           }
@@ -333,8 +342,6 @@ class RightScaleClient extends Client {
         }
       }
     }
-
-    $query_str = new QueryString();
     $query_str->merge($formatted_params);
     $query_str->setEncodeFields(false);
     $query_str->setAggregateFunction(
@@ -354,11 +361,11 @@ class RightScaleClient extends Client {
     switch ($method) {
       case 'GET':
         $request = $this->get($full_uri);
-        $request->setPath($full_uri . $query_str);
+        $request->setPath($full_uri . $query_str . $duplicate_array_params);
         break;
       case 'POST':
         $query_str->setPrefix('');
-        $request = $this->post($full_uri, null, strval($query_str));
+        $request = $this->post($full_uri, null, strval($query_str).$duplicate_array_params);
         $request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
         break;
       case 'DELETE':
@@ -366,7 +373,7 @@ class RightScaleClient extends Client {
         break;
       case 'PUT':
         $query_str->setPrefix('');
-        $request = $this->put($full_uri, null, strval($query_str));
+        $request = $this->put($full_uri, null, strval($query_str).$duplicate_array_params);
         $request->setHeader('Content-Type', 'application/x-www-form-urlencoded');
         break;
     }
