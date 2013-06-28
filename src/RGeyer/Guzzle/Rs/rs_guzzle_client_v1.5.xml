@@ -123,10 +123,11 @@
       <param name="path" type="string" default="servers" />
       <param name="method" type="string" static="POST" />
       <param name="server[name]" type="string" required="true" />
+      <param name="server[description]" type="string" required="false" />
       <param name="server[deployment_href]" type="string" required="true" />
+      <param name="server[optimized]" type="enum:enabled,disabled" required="false"/>
       <param name="server[instance][cloud_href]" type="string" required="true" />
       <param name="server[instance][server_template_href]" type="string" required="true" />
-      <param name="server[description]" type="string" required="false" />
       <param name="server[instance][datacenter_href]" type="string" required="false" />
       <param name="server[instance][image_href]" type="string" required="false" />
       <param name="server[instance][inputs]" type="array" required="false" />
@@ -618,6 +619,7 @@ Note that this action can succeed only if the instance is running. One cannot te
       <param name="method" type="string" static="POST" />
       <param name="server_array[array_type]" type="enum:alert,queue" required="true" />
       <param name="server_array[name]" type="string" required="true" />
+      <param name="server_array[optimized]" type="enum:enabled,disabled" required="false" />
       <param name="server_array[state]" type="enum:enabled,disabled" required="true" />
       <param name="server_array[instance][cloud_href]" type="string" required="true" />      
       <param name="server_array[instance][server_template_href]" type="string" required="true" />
