@@ -316,7 +316,7 @@ class RightScaleClient extends Client {
     $formatted_params = array();
 
     foreach($params as $key => $value) {
-      if(!isset($value) || $value == "") {continue;}
+      if($value === null || (!is_int($value) & !is_bool($value) & empty($value))) {continue;}
       if(is_array($value)) {
         foreach($value as $ary_key => $ary_value) {
           if(is_int($ary_key)) {
@@ -326,7 +326,11 @@ class RightScaleClient extends Client {
           }
         }
       } else {
-        $formatted_params[$key] = $value;
+        if(is_bool($value)) {
+          $formatted_params[$key] = $value ? 'true' : 'false';
+        } else {
+          $formatted_params[$key] = $value;
+        }
       }
     }
 

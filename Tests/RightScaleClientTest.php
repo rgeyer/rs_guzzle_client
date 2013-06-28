@@ -188,6 +188,82 @@ class RightScaleClientTest extends \PHPUnit_Framework_TestCase {
     $this->assertContains('Content-Type: application/x-www-form-urlencoded', strval($request));
   }
 
+  public function testDecorateRequestIgnoresNullValueParams() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'POST',
+      'bar/baz',
+      array('a' => null),
+      $request
+    );
+    $this->assertNotContains('a=', strval($request));
+  }
+
+  public function testDecorateRequestIgnoresEmptyStringValueParams() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'POST',
+      'bar/baz',
+      array('a' => ""),
+      $request
+    );
+    $this->assertNotContains('a=', strval($request));
+  }
+
+  public function testDecorateRequestDoesNotIgnoreZeroIntegerValueParams() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'POST',
+      'bar/baz',
+      array('a' => 0),
+      $request
+    );
+    $this->assertContains('a=0', strval($request));
+  }
+
+  public function testDecorateRequestDoesNotIgnoreFalseBooleanValueParams() {
+    $client = RightScaleClient::factory(
+      array(
+        'version' => '1.5',
+        'email' => 'foo@bar.baz',
+        'password' => 'password',
+        'acct_num' => '1234'
+      )
+    );
+    $request = null;
+    $client->decorateRequest(
+      'POST',
+      'bar/baz',
+      array('a' => false),
+      $request
+    );
+    $this->assertContains('a=false', strval($request));
+  }
+
   public function testGetAuthenticationDetailsReturnsEmailPasswordWhenOnlyEmailPasswordSupplied() {
     $client = RightScaleClient::factory(
       array(
