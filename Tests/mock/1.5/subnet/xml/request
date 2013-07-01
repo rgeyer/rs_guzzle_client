@@ -1,0 +1,6 @@
+GET /api/clouds/12345/subnets/EDRBD9G19S63T.xml HTTP/1.1
+Host: us-3.rightscale.com
+X-API-VERSION: 1.5
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8x
+Cookie: rs_gbl=eNotkN1ugjAARt-l15D0Ry0l2YUMcWNjVpnTeGO6UhCLdVocgvHdh8muv5zvJOcGBPDBxboEOCCzwL-B0thaGKmAby5V5fSjOgN_gBHx7g6oJfARoZjCAfU8B5RZz1NPKKSYdBWmuYuQwi5DZOQiTBBhUDKBUf9fq38WIfZgex2QZUWyMNO_ex62XB2g7aLFKw-2w9DAwNQGVqmO4Vmt0DTwksGJHRrSBMXnPIy9EvJxzWdodV0vw13Bm9lRpukuIdY2Imnn72hkdBcVUbyc6K6luWYfRa7jQE_NW7Jd0GFRPeeLltjZj1vKl2bzvT18nYb70pI1jPJ0o1MquituuB5Pnh6Jro9EQsrjxdTAH2Hm0fv9D4_DY5E=; _session_id=deadbeef0badf00dfeedfacec0ffee24
+

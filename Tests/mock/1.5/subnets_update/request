@@ -1,0 +1,10 @@
+PUT /api/clouds/12345/subnets/EDRBD9G19S63T HTTP/1.1
+Host: us-3.rightscale.com
+X-API-VERSION: 1.5
+User-Agent: Guzzle/2.7.1 curl/12345.24.0 PHP/5.3.17 openssl/OpenSSL/12345.9.8x
+Expect: 100-Continue
+Content-Type: application/x-www-form-urlencoded
+Cookie: rs_gbl=eNot0FtvgjAABeD_0mdIeuE2kj0oczilMjdB9kRqWy5D26DgBeN_HyZ7PvnOSc4dMOCD_mQSYABxAv4d1OrUMcUl8FW_3xtjKI_AtzAi3sMAHQc-Ii52oW0TbIBajJ6QwoMFtEyJPWQiJLHJBOEmwgQRAaFA0hr7O_lvEXafdpwDiwl3kl8pKJtU4VS1mV1ly-YztdyJM83ULia2HgR7W1KSHiu5tlZ2ksVlrfMmhltMLvjK-Wp-0yPT4bfIyo8BsWSXDpEa2npBz_MyafKmhzhgwa0LKXHSr3Yb73-ccx8hVx_O0YZGlzQoclps2sNlVh2FyDWN-gMKBFuTUN7eZyV9fV50fV7EONe96oDv4BfPfTz-AFyOY68=; _session_id=deadbeef0badf00dfeedfacec0ffee24
+Content-Length: 16
+
+subnet[name]=vpc

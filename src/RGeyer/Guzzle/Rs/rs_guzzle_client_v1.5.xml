@@ -961,6 +961,40 @@ Input values are represented as strings.
       <param name="method" type="string" static="PUT" />
       <param name="inputs" type="array" required="true" />
     </command>
+
+    <!-- Start Subnets -->
+    <command name="subnets" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Lists subnets of a given cloud.
+
+To see the subnets on a particular instance, use the URL "/api/clouds/:cloud_id/instances/:instance_id/subnets"</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/subnets{output_format}" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="filter" type="array" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Subnet" />
+    </command>
+
+    <command name="subnet" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Shows attributes of a single subnet.</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/subnets/{id}{output_format}" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="method" type="string" static="GET" />
+      <param name="output_format" type="enum:.json,.xml" default=".json" location="path" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Subnet" />
+    </command>
+
+    <command name="subnets_update" class="RGeyer.Guzzle.Rs.Command.DefaultCommand">
+      <doc>Updates name and description for the current subnet.</doc>
+      <param name="path" type="string" default="clouds/{cloud_id}/subnets/{id}" />
+      <param name="cloud_id" type="integer" required="true" location="path" />
+      <param name="method" type="string" static="PUT" />
+      <param name="id" type="string" required="true" location="path" />
+      <param name="subnet[name]" type="string" required="false" />
+      <param name="subnet[description]" type="string" required="false" />
+      <param name="return_class" type="string" static="RGeyer\Guzzle\Rs\Model\Mc\Subnet" />
+    </command>
     
   </commands>
 </client>

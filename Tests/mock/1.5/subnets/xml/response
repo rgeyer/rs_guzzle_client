@@ -1,0 +1,93 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Mon, 01 Jul 2013 18:44:47 GMT
+Content-Type: application/vnd.rightscale.subnet+xml;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 376
+Content-Length: 2947
+X-Request-Uuid: 5310773e81424365a2534e0126b4ad76
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<subnets>
+  <subnet>
+    <links>
+      <link href="/api/clouds/12345/subnets/EDRBD9G19S63T" rel="self"/>
+      <link href="/api/clouds/12345/datacenters/DBHME7BQV63MI" rel="datacenter"/>
+      <link href="/api/networks/F3JEDHRGVOS4O" rel="network"/>
+    </links>
+    <visibility>private</visibility>
+    <state>available</state>
+    <description></description>
+    <cidr_block>0.0.0.0/0</cidr_block>
+    <name>default for us-east-1a</name>
+    <resource_uid>subnet-2d78655ep</resource_uid>
+  </subnet>
+  <subnet>
+    <links>
+      <link href="/api/clouds/12345/subnets/12345NLFT147RQMK7" rel="self"/>
+      <link href="/api/clouds/12345/datacenters/A7V425724OQDM" rel="datacenter"/>
+      <link href="/api/networks/F3JEDHRGVOS4O" rel="network"/>
+    </links>
+    <visibility>private</visibility>
+    <state>available</state>
+    <description></description>
+    <cidr_block>0.0.0.0/0</cidr_block>
+    <name>default for us-east-1d</name>
+    <resource_uid>subnet-719e4718p</resource_uid>
+  </subnet>
+  <subnet>
+    <links>
+      <link href="/api/clouds/12345/subnets/FFCFR6BP6JN49" rel="self"/>
+      <link href="/api/clouds/12345/datacenters/12345F8AT46B08LN" rel="datacenter"/>
+      <link href="/api/networks/F3JEDHRGVOS4O" rel="network"/>
+    </links>
+    <visibility>private</visibility>
+    <state>available</state>
+    <description></description>
+    <cidr_block>0.0.0.0/0</cidr_block>
+    <name>default for us-east-1b</name>
+    <resource_uid>subnet-ab3c71b3p</resource_uid>
+  </subnet>
+  <subnet>
+    <links>
+      <link href="/api/clouds/12345/subnets/12345AQTH7B3MH81M" rel="self"/>
+      <link href="/api/clouds/12345/datacenters/BM5CQVB5DLC67" rel="datacenter"/>
+      <link href="/api/networks/F3JEDHRGVOS4O" rel="network"/>
+    </links>
+    <visibility>private</visibility>
+    <state>available</state>
+    <description></description>
+    <cidr_block>0.0.0.0/0</cidr_block>
+    <name>default for us-east-1e</name>
+    <resource_uid>subnet-f126555bp</resource_uid>
+  </subnet>
+  <subnet>
+    <links>
+      <link href="/api/clouds/12345/subnets/12345FR6NK6KTEQP8" rel="self"/>
+      <link href="/api/clouds/12345/datacenters/12345BFHL6M8K8FHH" rel="datacenter"/>
+      <link href="/api/networks/F3JEDHRGVOS4O" rel="network"/>
+    </links>
+    <visibility>private</visibility>
+    <state>available</state>
+    <description></description>
+    <cidr_block>0.0.0.0/0</cidr_block>
+    <name>default for us-east-1c</name>
+    <resource_uid>subnet-f8a621ccp</resource_uid>
+  </subnet>
+  <subnet>
+    <links>
+      <link href="/api/clouds/12345/subnets/12345M56IDN4T7CBC" rel="self"/>
+      <link href="/api/clouds/12345/datacenters/DBHME7BQV63MI" rel="datacenter"/>
+      <link href="/api/networks/12345I13TONMGBVL" rel="network"/>
+    </links>
+    <visibility>private</visibility>
+    <state>available</state>
+    <description></description>
+    <cidr_block>192.168.10.0/24</cidr_block>
+    <name></name>
+    <resource_uid>subnet-f953d190</resource_uid>
+  </subnet>
+</subnets>

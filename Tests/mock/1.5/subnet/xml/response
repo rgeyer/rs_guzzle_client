@@ -1,0 +1,26 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Mon, 01 Jul 2013 18:53:11 GMT
+Content-Type: application/vnd.rightscale.subnet+xml;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 321
+Content-Length: 497
+X-Request-Uuid: ff9bfe56b04c4e6baa71420dfba78d2b
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+<?xml version="1.0" encoding="UTF-8"?>
+<subnet>
+  <links>
+    <link href="/api/clouds/12345/subnets/EDRBD9G19S63T" rel="self"/>
+    <link href="/api/clouds/12345/datacenters/DBHME7BQV63MI" rel="datacenter"/>
+    <link href="/api/networks/F3JEDHRGVOS4O" rel="network"/>
+  </links>
+  <visibility>private</visibility>
+  <state>available</state>
+  <description></description>
+  <cidr_block>0.0.0.0/0</cidr_block>
+  <name>default for us-east-1a</name>
+  <resource_uid>subnet-2d78655ep</resource_uid>
+</subnet>

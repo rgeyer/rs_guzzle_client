@@ -1540,6 +1540,43 @@ Below you will find the current controllers (and their commands) that are suppor
   </tbody>
 </table>
 
+<br/>
+
+<table border="1" width="360px">
+  <thead>
+    <tr>
+      <th colspan="3">Subnets</th>
+    </tr>
+    <tr>
+      <th width="120px">Command</th>
+      <th width="120px">v1.0</th>
+      <th width="120px">v1.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td>update</td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+    <tr>
+      <td><b>Model</b></td>
+      <td bgcolor="green">N/A</td>
+      <td bgcolor="green">100%</td>
+    </tr>
+  </tbody>
+</table>
+
 TODO
 ====
 * Allow the user to specify a logger.
@@ -1550,4 +1587,3 @@ TODO
 * Refactor tagging functionality into ModelBase or an "IsTaggable" mixin class.  See Model\Mc\Server for example of how *not* to do it
 * Test optional/required parameters on concrete models.  I.E. deployment[name] is an invalid parameter on create unless defined as required or optional, base is not sufficient.
 * Tests should make sure that models which make command requests for relationships correctly overwrite the path for the command.
-* Handle associative arrays (hashes) embedded in numeric arrays (collections) as in server_array[datacenter_policy][][max|weight|datacenter_href]

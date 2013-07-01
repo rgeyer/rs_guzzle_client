@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Mon, 01 Jul 2013 18:52:49 GMT
+Content-Type: application/vnd.rightscale.subnet+json;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 264
+Content-Length: 349
+X-Request-Uuid: 1cd4f374d9784a14b4cca43676273649
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+{"links":[{"href":"/api/clouds/12345/subnets/EDRBD9G19S63T","rel":"self"},{"href":"/api/clouds/12345/datacenters/DBHME7BQV63MI","rel":"datacenter"},{"href":"/api/networks/F3JEDHRGVOS4O","rel":"network"}],"visibility":"private","state":"available","description":null,"cidr_block":"0.0.0.0/0","name":"default for us-east-1a","resource_uid":"subnet-2d78655ep"}

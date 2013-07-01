@@ -88,12 +88,12 @@ abstract class ModelBase {
 	protected $_params = array();
 
   /**
-   * @var RGeyer\Guzzle\Rs\RightScaleClient
+   * @var \RGeyer\Guzzle\Rs\RightScaleClient
    */
 	protected $_client;
 
   /**
-   * @var Guzzle\Http\Service\Command\CommandInterface The last command object created by the current client.
+   * @var \Guzzle\Http\Service\Command\CommandInterface The last command object created by the current client.
    */
 	protected $_last_command;
 

@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Server: nginx/1.0.14
+Date: Mon, 01 Jul 2013 18:41:40 GMT
+Content-Type: application/vnd.rightscale.subnet+json;type=collection;charset=utf-8
+Connection: keep-alive
+Status: 200 OK
+X-Runtime: 345
+Content-Length: 2086
+X-Request-Uuid: 06f392e3b35d4f0690f60979a5a917b0
+Set-Cookie:
+Cache-Control: private, max-age=0, must-revalidate
+
+[{"links":[{"href":"/api/clouds/12345/subnets/EDRBD9G19S63T","rel":"self"},{"href":"/api/clouds/12345/datacenters/DBHME7BQV63MI","rel":"datacenter"},{"href":"/api/networks/F3JEDHRGVOS4O","rel":"network"}],"visibility":"private","state":"available","description":null,"cidr_block":"0.0.0.0/0","name":"default for us-east-1a","resource_uid":"subnet-2d78655ep"},{"links":[{"href":"/api/clouds/12345/subnets/12345NLFT147RQMK7","rel":"self"},{"href":"/api/clouds/12345/datacenters/A7V425724OQDM","rel":"datacenter"},{"href":"/api/networks/F3JEDHRGVOS4O","rel":"network"}],"visibility":"private","state":"available","description":null,"cidr_block":"0.0.0.0/0","name":"default for us-east-1d","resource_uid":"subnet-719e4718p"},{"links":[{"href":"/api/clouds/12345/subnets/FFCFR6BP6JN49","rel":"self"},{"href":"/api/clouds/12345/datacenters/12345F8AT46B08LN","rel":"datacenter"},{"href":"/api/networks/F3JEDHRGVOS4O","rel":"network"}],"visibility":"private","state":"available","description":null,"cidr_block":"0.0.0.0/0","name":"default for us-east-1b","resource_uid":"subnet-ab3c71b3p"},{"links":[{"href":"/api/clouds/12345/subnets/12345AQTH7B3MH81M","rel":"self"},{"href":"/api/clouds/12345/datacenters/BM5CQVB5DLC67","rel":"datacenter"},{"href":"/api/networks/F3JEDHRGVOS4O","rel":"network"}],"visibility":"private","state":"available","description":null,"cidr_block":"0.0.0.0/0","name":"default for us-east-1e","resource_uid":"subnet-f126555bp"},{"links":[{"href":"/api/clouds/12345/subnets/12345FR6NK6KTEQP8","rel":"self"},{"href":"/api/clouds/12345/datacenters/12345BFHL6M8K8FHH","rel":"datacenter"},{"href":"/api/networks/F3JEDHRGVOS4O","rel":"network"}],"visibility":"private","state":"available","description":null,"cidr_block":"0.0.0.0/0","name":"default for us-east-1c","resource_uid":"subnet-f8a621ccp"},{"links":[{"href":"/api/clouds/12345/subnets/12345M56IDN4T7CBC","rel":"self"},{"href":"/api/clouds/12345/datacenters/DBHME7BQV63MI","rel":"datacenter"},{"href":"/api/networks/12345I13TONMGBVL","rel":"network"}],"visibility":"private","state":"available","description":null,"cidr_block":"192.168.10.0/24","name":null,"resource_uid":"subnet-f953d190"}]
