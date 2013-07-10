@@ -60,7 +60,7 @@ class RightScaleClient extends Client {
 	protected $cookieJar;
 
   /**
-   * @var array The history of commands made by this client
+   * @var \Guzzle\Service\Command\CommandInterface[] The history of commands made by this client
    */
   protected $command_history;
 
@@ -68,7 +68,7 @@ class RightScaleClient extends Client {
    * Removes the latest $count commands from the command history using array_pop and returns them
    *
    * @param int $count The number of previous commands to return
-   * @return array One or more of the last commands
+   * @return \Guzzle\Service\Command\CommandInterface[] One or more of the last commands
    */
   public function getLastCommand($count = 1) {
     $retval = array();
